@@ -1,0 +1,76 @@
+.nav-center .nav-link {
+  margin: 0 1.5rem;
+  color: black
+}
+
+.donate-button {
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+}
+
+.donate-heart-icon {
+  color: white;
+  font-size: 0.7rem;
+  margin-right: 0.5rem;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: #6c757d;
+  white-space: nowrap;
+  margin-top: -2px;
+}
+
+/* Dropdown menu style */
+.profile-dropdown .dropdown-menu {
+  width: 280px;
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Profile card layout */
+.profile-card {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.profile-card-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dee2e6;
+  margin-bottom: 0.5rem;
+}
+
+.profile-card-info strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.profile-card-info .text-muted {
+  font-size: 0.85rem;
+}
+
+
+/* Menu items */
+.profile-dropdown .dropdown-item {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+.profile-dropdown .dropdown-item:hover {
+  background-color: #e9ecef;
+}

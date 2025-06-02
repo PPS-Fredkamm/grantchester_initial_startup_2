@@ -1,0 +1,27 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.register-wrapper {
+  width: 100%;
+  max-width: 500px;
+}
+
+.register-card {
+  border: none;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.auth-link {
+  color: #4d6fe5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}

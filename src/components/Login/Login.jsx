@@ -1,7 +1,7 @@
 import { useUser } from '../../Data/UserContext';
 import { useNavigate, Link } from 'react-router-dom';
 
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Container, Card } from 'react-bootstrap';
 import './Login.css';
 
 export default function Login() {
@@ -21,9 +21,13 @@ export default function Login() {
           <Card.Body>
             <h3 className="text-center mb-4">Sign In</h3>
             <Form onSubmit={handleLogin}>
-              <Form.Group controlId="formEmail" className="mb-3">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" required />
+              <Form.Group controlId="formUsername" className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter username"
+                  required
+                />
               </Form.Group>
 
               <Form.Group controlId="formPassword" className="mb-3">

@@ -17,11 +17,10 @@ function NavMenu() {
       <Nav.Link href="/link">For Universities</Nav.Link>
       <Nav.Link href="/link">Partners</Nav.Link>
       <Nav.Link href="/link">Resources</Nav.Link>
-      <Nav.Link href="/link">Partners</Nav.Link>
 
       {!isAuthenticated && (
         <>
-          <Nav.Link href="/signup">Sign In</Nav.Link>
+          <Nav.Link href="/login">Sign In</Nav.Link>
           <OverlayTrigger
             placement="bottom"
             overlay={<Tooltip id="donate-tooltip">Donate</Tooltip>}

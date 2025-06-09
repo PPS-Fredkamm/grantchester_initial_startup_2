@@ -11,7 +11,7 @@ function NavMenu() {
   const { isAuthenticated } = useUser();
 
   return (
-    <Nav className="nav-center">
+    <Nav className="nav-menu">
       <Nav.Link href="/link">Why Donate Stock</Nav.Link>
       <Nav.Link href="/link">For Donors</Nav.Link>
       <Nav.Link href="/link">For Universities</Nav.Link>
@@ -25,7 +25,7 @@ function NavMenu() {
             placement="bottom"
             overlay={<Tooltip id="donate-tooltip">Donate</Tooltip>}
           >
-            <Button href="/donate" variant="primary" className="donate-button">
+            <Button href="/donate" className="donate-button">
               <FaHeart className="donate-heart-icon" />
               Donate Shares
             </Button>

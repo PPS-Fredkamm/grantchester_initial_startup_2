@@ -1,6 +1,5 @@
 import './Home.css';
 import BannerCarousel from '../Carousel/BannerCarousel';
-import Footer from '../Footer/Footer';
 import SubBanner from '../SubBanner/SubBanner';
 import WebBanner from '../WebBanner/WebBanner';
 import SecondaryBanner from '../SecondaryBanner/SecondaryBanner';
@@ -15,7 +14,7 @@ const logoList = [dartmouth, yale, USC, drexel];
 
 function Home() {
   return (
-    <>       
+    <>
       <SubBanner />
       <WebBanner />
       <LogoScroller logos={logoList} speed={25} height={50} />           
@@ -26,7 +25,6 @@ function Home() {
       </div>
 
       <BannerCarousel />
-      <Footer />
     </>
   );
 }

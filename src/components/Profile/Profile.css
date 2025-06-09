@@ -1,0 +1,21 @@
+/* The parent of the donor dashboard */
+.donor-dashboard {
+  background-color: #f7fafc;
+}
+
+.profile-container {
+  padding: 1rem 7rem;
+}
+
+.profile-content {
+  padding-top: 1.5rem;
+}
+
+/* Profile NavBar */
+.profile-navbar {
+  border-bottom: solid 2px #dee2e6;
+}
+
+.profile-navbar .nav-link {
+  color: black;
+}

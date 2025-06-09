@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import ErrorPage from './components/ErrorPage';
 import ProtectedRoute from './Data/ProtectedRoutes';
+import Profile from './components/Profile/Profile';
 
 import { UserProvider } from './Data/UserContext';
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: 'signup',
         element: <Signup />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
       {
         element: <ProtectedRoute />,

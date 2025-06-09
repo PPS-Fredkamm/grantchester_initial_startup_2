@@ -41,7 +41,7 @@ export default function Login() {
                 </Link>
               </Form.Text>
 
-              <Button variant="primary" type="submit" className="w-100">
+              <Button variant="primary" type="submit" className="login-button w-100">
                 Sign In
               </Button>
             </Form>

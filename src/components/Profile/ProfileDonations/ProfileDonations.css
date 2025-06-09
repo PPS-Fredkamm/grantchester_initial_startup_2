@@ -1,0 +1,38 @@
+/* Remove bottom border from the final row */
+.donations-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* General formatting for spans inside table cells */
+.donations-table td span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Pill-style badge for status values */
+.status-pill {
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Yellow style for 'Waiting approval' */
+.status-waiting {
+  background-color: #e4bb2a;
+  color: #ffffff;
+}
+
+/* Blue style for 'Verification by university' */
+.status-verifying {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+/* Green style for 'Completed' */
+.status-completed {
+  background-color: #8dc843;
+  color: #ffffff;
+}

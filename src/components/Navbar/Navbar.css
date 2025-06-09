@@ -1,10 +1,23 @@
-.nav-center .nav-link {
-  margin: 0 1.5rem;
-  color: black
+/* The parent to the navbar component */
+.navbar-container {
+  background-color: #ffffff;
 }
 
+.nav-menu .nav-link {
+  margin: 0 1.5rem;
+  color: black;
+}
+
+/* Blue donate button */
 .donate-button {
   font-weight: 600;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  border: none !important;
   padding: 0.5rem 1rem;
 }
 
@@ -14,6 +27,7 @@
   margin-right: 0.5rem;
 }
 
+/* User information when signed in */
 .user-email {
   font-size: 0.9rem;
   font-weight: 500;
@@ -63,7 +77,6 @@
 .profile-card-info .text-muted {
   font-size: 0.85rem;
 }
-
 
 /* Menu items */
 .profile-dropdown .dropdown-item {

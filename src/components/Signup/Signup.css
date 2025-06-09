@@ -25,3 +25,13 @@
 .auth-link:hover {
   text-decoration: underline;
 }
+
+.signup-button {
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  border: none !important;
+}

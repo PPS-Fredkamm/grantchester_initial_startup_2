@@ -52,7 +52,7 @@ export default function Signup() {
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit" className="w-100">
+              <Button type="submit" className="signup-button w-100">
                 Register
               </Button>
             </Form>

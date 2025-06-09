@@ -15,3 +15,9 @@
   border-radius: 12px;
   padding: 30px;
 }
+
+.login-button{
+  background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+  color: white;
+  border: none !important;
+}

@@ -1,7 +1,11 @@
+/* global variables */
+:root {
+  --primary-blue: #4B9BE7;
+  --secondary-blue: #4bc8e7;
+}
+
 .outlet-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background-color: #f0f0f0;
+  background-color: #F7FAFC;
 }
-

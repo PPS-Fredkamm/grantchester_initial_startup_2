@@ -1,43 +1,46 @@
+import { useState } from 'react';
 import { Card, Table } from 'react-bootstrap';
-import { GoDotFill } from 'react-icons/go';
 
+import DonationsDropdown from './DonationsDropdown';
 import './ProfileDonations.css';
 
 export default function ProfileDonations() {
+  const [filter, setFilter] = useState('All');
+
   const donations = [
     {
-      donationId: '202509',
-      stock: 'University of Pennsylvania',
+      donationId: '402509',
+      university: 'University of Pennsylvania',
       amount: '$2,000',
       status: 'Waiting approval',
     },
     {
-      donationId: '20240701',
-      stock: 'Clemson University',
+      donationId: '252407',
+      university: 'Clemson University',
       amount: '$1,500',
       status: 'Donation verification by university',
     },
     {
-      donationId: '20250915',
-      stock: 'Penn State University',
+      donationId: '207509',
+      university: 'Penn State University',
       amount: '$2,000',
       status: 'Completed',
     },
     {
-      donationId: '20240701',
-      stock: 'Clemson University',
+      donationId: '302587',
+      university: 'Clemson University',
       amount: '$1,500',
       status: 'Completed',
     },
     {
-      donationId: '20240701',
-      stock: 'Clemson University',
+      donationId: '702509',
+      university: 'Louisiana State University',
       amount: '$1,500',
       status: 'Completed',
     },
     {
-      donationId: '20240701',
-      stock: 'Clemson University',
+      donationId: '202406',
+      university: 'University of California, Berkley',
       amount: '$1,500',
       status: 'Completed',
     },
@@ -51,29 +54,42 @@ export default function ProfileDonations() {
     return '';
   }
 
+  const filteredDonations = donations.filter((d) => {
+    if (filter === 'All') return true;
+    if (filter === 'Completed') return d.status.toLowerCase() === 'completed';
+    if (filter === 'Waiting Approval')
+      return d.status.toLowerCase().includes('waiting');
+    if (filter === 'Verifying')
+      return d.status.toLowerCase().includes('verification');
+    return true;
+  });
+
   return (
     <Card className="shadow mb-4">
       <Card.Body>
-        <Card.Title>My Donations</Card.Title>
-        <Table responsive striped className="donations-table">
+        <div className="donations-header">
+          <Card.Title>My Donations</Card.Title>
+          <DonationsDropdown value={filter} onChange={setFilter} />
+        </div>
+
+        <Table responsive="lg" striped className="donations-table">
           <thead>
-            <tr>
-              <th>Donation ID</th>
-              <th>University</th>
-              <th>Amount</th>
-              <th>Status</th>
+            <tr className='text-nowrap'>
+              <th className="w-20">Donation ID</th>
+              <th className="w-50">University</th>
+              <th className="w-20">Amount</th>
+              <th className="w-10">Status</th>
             </tr>
           </thead>
+
           <tbody>
-            {donations.map((d, idx) => (
-              <tr key={idx}>
+            {filteredDonations.map((d, idx) => (
+              <tr className='text-nowrap' key={idx}>
                 <td>
-                  <span>
-                    <GoDotFill color="#4B9DE7" />#{d.donationId}
-                  </span>
+                  <span>#{d.donationId}</span>
                 </td>
                 <td>
-                  <span>{d.stock}</span>
+                  <span>{d.university}</span>
                 </td>
                 <td>
                   <span>{d.amount}</span>
@@ -85,6 +101,13 @@ export default function ProfileDonations() {
                 </td>
               </tr>
             ))}
+            {filteredDonations.length === 0 && (
+              <tr>
+                <td colSpan="4" className="text-center">
+                  No donations match this filter.
+                </td>
+              </tr>
+            )}
           </tbody>
         </Table>
       </Card.Body>

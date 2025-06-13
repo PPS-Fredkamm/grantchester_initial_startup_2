@@ -1,0 +1,23 @@
+/* Clean up the last row — no bottom border, thinner top border */
+.pending-table tbody tr:last-child td {
+  border-top: 0.5px solid #dee2e6;
+  border-bottom: none;
+}
+
+/* Line up the dot icon and text nicely with a little spacing */
+.pending-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* General pill style for the status labels */
+.reason-pill {
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background-color: #E2E8F0;
+
+}

@@ -4,6 +4,10 @@
   --secondary-blue: #4bc8e7;
 }
 
+.app-container {
+  overflow-x: clip;
+}
+
 .outlet-container {
   display: flex;
   flex-direction: column;

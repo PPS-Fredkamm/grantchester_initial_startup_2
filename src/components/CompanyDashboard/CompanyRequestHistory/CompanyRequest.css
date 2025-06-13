@@ -17,10 +17,6 @@
   border: #dee2e6 1px solid;
 }
 
-.donations-table.table-striped > tbody > tr:nth-of-type(odd) > td {
-  background-color: #F3F8FD !important;
-}
-
 
 /* Remove bottom border from the final row */
 .donations-table tbody tr:last-child td {
@@ -33,30 +29,13 @@
   align-items: center;
 }
 
-/* Pill-style badge for status values */
-.status-pill {
+/* Pill-style badge for reason values */
+.reason-pill {
   padding: 0.3rem 0.75rem;
   border-radius: 0.4rem;
   font-size: 0.85rem;
   font-weight: 500;
-}
-
-/* Yellow style for 'Waiting approval' */
-.status-waiting {
-  background-color: #e4bb2a;
-  color: #ffffff;
-}
-
-/* Blue style for 'Verification by university' */
-.status-verifying {
-  background-color: var(--primary-blue);
-  color: #ffffff;
-}
-
-/* Green style for 'Completed' */
-.status-completed {
-  background-color: #8dc843;
-  color: #ffffff;
+  background-color: #dee2e6;
 }
 
 @media (max-width: 500px) {

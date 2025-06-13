@@ -1,0 +1,33 @@
+.new-request-banner {
+  background-color: #EBF8FF !important;
+  border: 1px solid #BAE0F9 !important;
+  margin-top: 1.5rem;
+}
+
+.new-request-banner .card-body {
+  padding: 0.5rem 1rem; 
+}
+
+.new-request-banner p {
+  font-size: 0.9rem;
+  margin: 0; 
+}
+
+.request-icon {
+  color: var(--primary-blue);
+  font-size: 1.3rem;
+  margin-left: 1rem;
+}
+
+.req-review-button {
+  background-color: #3182CE !important;
+  border: none !important;
+  padding: 0.4rem 1rem !important;
+  font-size: 0.875rem;
+  font-weight: 600 !important;
+}
+
+
+.req-review-button:hover {
+  background-color: #2B6CB0 !important;
+}

@@ -29,7 +29,7 @@ export default function ProfilePendingDonations() {
   return (
     <Card className="shadow mb-4">
       <Card.Body>
-        <Table responsive className="pending-table">
+        <Table responsive="lg" className="pending-table">
           <thead>
             <tr>
               <th>Donation in process</th>
@@ -46,10 +46,10 @@ export default function ProfilePendingDonations() {
                     <GoDotFill color="#4B9DE7" />#{d.donationId}
                   </span>
                 </td>
-                <td>
+                <td className="text-nowrap">
                   <span className="pending-cell">{d.university}</span>
                 </td>
-                <td>
+                <td className="text-nowrap">
                   <span
                     className={`pending-cell status-pill ${getStatusClass(
                       d.status

@@ -1,11 +1,11 @@
-/* Profile information card  */
-.profile-title {
+/* Company information card  */
+.company-title {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2rem;
 }
 
-.profile-menu-icon {
+.company-menu-icon {
   font-size: 1.5rem;
   color: #6c757d;
   cursor: pointer;
@@ -19,11 +19,12 @@
   border-radius: 6px;
   overflow: hidden;
   background-color: #fff;
+  opacity: 60%;
 }
 
 .field-row span {
-  background-color: var(--primary-blue);
-  color: white;
+  background-color: #F3F8FD;
+  color: rgb(4, 4, 4);
   width: 44px;
   display: flex;
   align-items: center;
@@ -39,16 +40,3 @@
   padding-left: 0.75rem;
 }
 
-.profile-donate-button {
-  background: linear-gradient(
-    to right,
-    var(--primary-blue),
-    var(--secondary-blue)
-  );
-  border: none !important;
-}
-
-.profile-donate-button span {
-  margin-right: 0.5rem;
-  font-weight: 500;
-}

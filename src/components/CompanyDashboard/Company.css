@@ -3,31 +3,27 @@
   background-color: #f7fafc;
 }
 
-.profile-container {
+.company-container {
   padding: 1rem 7rem;
 }
 
-.profile-content {
-  padding-top: 1.5rem;
-}
-
 /* Profile NavBar */
-.profile-navbar {
+.company-navbar {
   border-bottom: solid 2px #dee2e6;
 }
 
-.profile-navbar .nav-link {
+.company-navbar .nav-link {
   color: black;
 }
 
 @media (max-width: 1200px) {
-  .profile-container {
+  .company-container {
     padding: 1rem 4rem;
   }
 }
 
 @media (max-width: 768px) {
-  .profile-container {
+  .company-container {
     margin: 0 auto;
     padding: 1rem 1rem;
   }

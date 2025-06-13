@@ -3,7 +3,15 @@ import { FiUser, FiMail, FiMoreHorizontal, FiArrowRight } from 'react-icons/fi';
 import { PiPulse } from 'react-icons/pi';
 import { MdSmartphone } from 'react-icons/md';
 
-import './ProfileInfoCard.css'; // Assuming you have a CSS file for styles
+import './ProfileInfoCard.css';
+
+// Placeholder user object — replace this with data from context or fetch
+const user = {
+  name: 'John Doe',
+  role: 'Donor',
+  email: 'johndoe@gmail.com',
+  phone: '(908)-000-0111',
+};
 
 function ProfileInfoCard() {
   return (
@@ -18,25 +26,25 @@ function ProfileInfoCard() {
             <span>
               <FiUser />
             </span>
-            <Form.Control type="text" value="John Doe" readOnly />
+            <Form.Control type="text" value={user.name} readOnly />
           </div>
           <div className="field-row">
             <span>
               <PiPulse />
             </span>
-            <Form.Control type="text" value="Donor" readOnly />
+            <Form.Control type="text" value={user.role} readOnly />
           </div>
           <div className="field-row">
             <span>
               <FiMail />
             </span>
-            <Form.Control type="email" value="johndoe@gmail.com" readOnly />
+            <Form.Control type="email" value={user.email} readOnly />
           </div>
           <div className="field-row mb-4">
             <span>
               <MdSmartphone />
             </span>
-            <Form.Control type="text" value="(908)-000-0111" readOnly />
+            <Form.Control type="text" value={user.phone} readOnly />
           </div>
           <Button className="profile-donate-button">
             <span>Donate Now</span>

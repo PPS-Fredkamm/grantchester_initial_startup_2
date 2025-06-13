@@ -1,0 +1,17 @@
+const data = [
+  {
+    type: 'candlestick',
+    x: ['2025-06-01', '2025-06-02', '2025-06-03'],
+    open: [100, 102, 101],
+    high: [105, 106, 104],
+    low: [99, 100, 98],
+    close: [104, 103, 102]
+  }
+];
+
+const layout = {
+  title: 'Stock Prices',
+  xaxis: { rangeslider: { visible: false } }
+};
+
+Plotly.newPlot('myDiv', data, layout);

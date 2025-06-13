@@ -1,0 +1,14 @@
+.donation-tabs-wrapper {
+  border: 1px solid #dee2e6;
+  margin-top: 2rem;
+  border-radius: 0.5rem;
+}
+
+.card-header .nav-link {
+  font-weight: 600;
+}
+
+.card-header .nav-link.active {
+  color: #0d6efd;
+  border-bottom: 2px solid #0d6efd;
+}

@@ -1,0 +1,20 @@
+/* PriceHistory.css */
+
+.card {
+  border-radius: 12px;
+}
+
+.card-header {
+  border-bottom: none;
+  font-size: 1.1rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.price-history-row {
+  border-top: 1px solid #dee2e6;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}

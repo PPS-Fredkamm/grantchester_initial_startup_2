@@ -11,6 +11,7 @@ import ProtectedRoute from './Data/ProtectedRoutes';
 import Profile from './components/Profile/Profile';
 import Company from './components/CompanyDashboard/Company';
 
+import University from './components/University/University';
 import { UserProvider } from './Data/UserContext';
 
 import './App.css';
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
         path: 'profile',
         element: <Profile />,
       },
+      {path: 'university',
+        element: <University />
+      },
+    
+      
       {
         path: 'company',
         element: <Company />,
@@ -45,6 +51,7 @@ const router = createBrowserRouter([
             path: '/',
             element: <Home />,
           },
+        
           // Add more protected routes here
         ],
       },

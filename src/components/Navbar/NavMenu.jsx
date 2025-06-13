@@ -14,7 +14,7 @@ function NavMenu() {
     <Nav className="nav-menu">
       <Nav.Link href="/link">Why Donate Stock</Nav.Link>
       <Nav.Link href="/link">For Donors</Nav.Link>
-      <Nav.Link href="/link">For Universities</Nav.Link>
+      <Nav.Link href="/university">For Universities</Nav.Link>
       <Nav.Link href="/link">Partners</Nav.Link>
       <Nav.Link href="/link">Resources</Nav.Link>
 

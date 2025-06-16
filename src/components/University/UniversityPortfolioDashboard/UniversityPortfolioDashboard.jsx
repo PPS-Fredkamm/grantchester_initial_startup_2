@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import './UniversityPortfolioDashboard.css';
 import DonationTabs from '../DonationTabs/DonationTabs';
 import UniversityPriceHistory from '../UniversityPriceHistory/UniversityPriceHistory'; // ⬅️ Make sure to import it
-
+import UniversityStockPlot from '../UniversityStockPlot/UniversityStockPlot';
 // Example data
 const portfolio = [
   { company: 'Apple', shares: 50, price: 180 },
@@ -46,6 +46,7 @@ function UniversityPortfolioDashboard() {
 
         {/* Price History Section */}
         <Col xs={12} md={4} lg={5} xl={6}>
+        <UniversityStockPlot />
           <UniversityPriceHistory />
         </Col>
       </Row>

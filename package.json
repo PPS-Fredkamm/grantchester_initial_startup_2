@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-    "scripts": {
+  "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.6",
+    "d3": "^7.9.0",
+    "plotly.js": "^3.0.1",
+    "plotly.js-dist-min": "^3.0.1",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.0",

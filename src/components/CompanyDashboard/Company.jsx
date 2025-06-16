@@ -4,7 +4,7 @@ import CompanyBanner from './CompanyBanner/CompanyBanner';
 import CompanyNav from './CompanyNav/CompanyNav';
 import NewReqBanner from './NewReqBanner/NewReqBanner';
 import CompanyInfoCard from './CompanyInfo/CompanyInfoCard';
-import ProfileCTA from '../Profile/ProfileCTA/ProfileCTA'
+import ProfileCTA from '../Profile/ProfileCTA/ProfileCTA';
 import CompanyNewRequest from './CompanyNewRequest/CompanyNewRequest';
 import CompanyRequest from './CompanyRequestHistory/CompanyRequest';
 
@@ -14,9 +14,11 @@ export default function Company() {
   return (
     <>
       <CompanyBanner />
-      <Container fluid className="donor-dashboard">
+      <Container fluid className="company-dashboard">
         <div className="company-container">
-          <CompanyNav />
+          <div className="company-nav">
+            <CompanyNav />
+          </div>
           <NewReqBanner />
           <Row className="company-content">
             {/* Left Column */}
@@ -26,7 +28,6 @@ export default function Company() {
             </Col>
             {/* Right Column */}
             <Col xs={12} lg={12} xl={9}>
-              {/* <ProfileStats /> */}
               <CompanyNewRequest />
               <CompanyRequest />
             </Col>

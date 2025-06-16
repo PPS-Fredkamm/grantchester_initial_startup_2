@@ -1,19 +1,18 @@
 /* The parent of the donor dashboard */
-.donor-dashboard {
+.company-dashboard {
   background-color: #f7fafc;
 }
 
 .company-container {
-  padding: 1rem 7rem;
+  padding: 0 7rem;
 }
 
-/* Profile NavBar */
-.company-navbar {
+.company-nav {
   border-bottom: solid 2px #dee2e6;
 }
 
-.company-navbar .nav-link {
-  color: black;
+.company-content {
+  padding-top: .3rem;
 }
 
 @media (max-width: 1200px) {

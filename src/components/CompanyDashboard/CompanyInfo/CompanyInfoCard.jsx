@@ -24,31 +24,31 @@ function CompanyInfoCard() {
           <FiMoreHorizontal className="company-menu-icon" />
         </div>
         <Form>
-          <div className="field-row">
+          <div className="company-field-row">
             <span>
               <PiPulse />
             </span>
             <Form.Control type="text" value={company.companyName} readOnly />
           </div>
-          <div className="field-row">
+          <div className="company-field-row">
             <span>
               <FiUser />
             </span>
             <Form.Control type="text" value={company.name} readOnly />
           </div>
-          <div className="field-row">
+          <div className="company-field-row">
             <span>
               <LuBuilding />
             </span>
             <Form.Control type="text" value={company.location} readOnly />
           </div>
-          <div className="field-row">
+          <div className="company-field-row">
             <span>
               <FiMail />
             </span>
             <Form.Control type="email" value={company.email} readOnly />
           </div>
-          <div className="field-row mb-4">
+          <div className="company-field-row mb-4">
             <span>
               <MdSmartphone />
             </span>

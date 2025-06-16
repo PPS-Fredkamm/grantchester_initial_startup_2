@@ -4,20 +4,12 @@
 }
 
 .profile-container {
-  padding: 1rem 7rem;
+  padding: 0 7rem;
 }
 
 .profile-content {
   padding-top: 1.5rem;
-}
-
-/* Profile NavBar */
-.profile-navbar {
-  border-bottom: solid 2px #dee2e6;
-}
-
-.profile-navbar .nav-link {
-  color: black;
+  border-top: solid 2px #dee2e6;
 }
 
 @media (max-width: 1200px) {

@@ -1,7 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap';
 
 import ProfileBanner from './ProfileBanner/ProfileBanner';
-import ProfileNav from './ProfileNav';
+import ProfileNav from './ProfileNav/ProfileNav';
 import ProfileInfoCard from './ProfileInfo/ProfileInfoCard';
 import ProfileCTA from './ProfileCTA/ProfileCTA';
 import ProfileStats from './ProfileStats/ProfileStats';

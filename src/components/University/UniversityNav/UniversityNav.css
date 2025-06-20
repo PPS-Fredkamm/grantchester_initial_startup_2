@@ -1,0 +1,19 @@
+/* University NavBar */
+.university-navbar-wrapper {
+  padding-top: 20px;
+      padding-left: 20px;
+}
+.dashboard-divider {
+  border-bottom: 2.5px solid #dee2e6;
+margin-left: 50px; /* Adjust margins as needed to align with layout */
+margin-right: 50px;
+}
+
+.university-navbar .nav-link {
+  color: black;
+  font-weight: 500; 
+    margin-left:10px;
+    align-items: left;
+    font-size: 16px;
+}
+

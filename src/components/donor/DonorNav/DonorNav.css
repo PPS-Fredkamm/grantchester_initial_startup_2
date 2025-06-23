@@ -1,0 +1,9 @@
+/* donor NavBar */
+.donor-navbar .nav-link {
+  color: black;
+}
+
+.donor-navbar .nav-link.active {
+  color: #3182CE !important;
+  font-weight: 500; 
+}

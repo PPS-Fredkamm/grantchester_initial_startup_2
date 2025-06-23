@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card, Nav, Tab, Row, Col } from 'react-bootstrap';
 import './DonationTabs.css';
 

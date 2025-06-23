@@ -5,17 +5,16 @@ import Image from 'react-bootstrap/Image';
 
 import ProfilePlaceholder from '../../assets/Images/profilePlaceholder.jpg';
 
-import { useUser } from '../../Data/UserContext';
+import { useAuthContext } from '../../context/AuthProvider';
+// import { useNavigate } from 'react-router-dom';
 
 function UserIcon() {
-  const { isAuthenticated, logout } = useUser();
+  const authCtx = useAuthContext();
+  // const navigate = useNavigate();
 
-  // Placeholder data — eventually pulled from real user object
-  const user = {
-    name: 'username',
-    email: 'username@example.com',
-    profileImg: ProfilePlaceholder,
-    role: 'Admin',
+  const handleLogout = () => {
+    authCtx.logout();
+    // navigate('/login');
   };
 
   return (
@@ -23,17 +22,17 @@ function UserIcon() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav>
-          {isAuthenticated && (
+          {authCtx.ctx.isAuthenticated && (
             <div className="d-flex align-items-center gap-2">
               <div className="d-flex flex-column text-end">
-                <span className="user-email">{user.email}</span>
-                <span className="user-role">{user.role}</span>
+                <span className="user-email">{authCtx.ctx.identityName}@example.com</span>
+                <span className="user-role">Member</span>
               </div>
               <NavDropdown
                 align="end"
                 title={
                   <Image
-                    src={user.profileImg}
+                    src={ProfilePlaceholder}
                     roundedCircle
                     width={40}
                     height={40}
@@ -46,17 +45,22 @@ function UserIcon() {
               >
                 <div className="profile-card">
                   <Image
-                    src={user.profileImg}
+                    src={ProfilePlaceholder}
                     className="profile-card-img"
                     alt="Profile"
                   />
                   <div className="profile-card-info">
-                    <strong>{user.name}</strong>
-                    <div className="text-muted">{user.email}</div>
+                    <strong>{authCtx.ctx.identityName}</strong>
+                    <div className="text-muted">{authCtx.ctx.identityName}@example.com</div>
                   </div>
                 </div>
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item onClick={logout}>Sign Out</NavDropdown.Item>
+                <NavDropdown.Item href="/donor">Donor Dashboard</NavDropdown.Item>
+                <NavDropdown.Item href="/company">Company Dashboard</NavDropdown.Item>
+                <NavDropdown.Item href="/university">University Dashboard</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>
+                  Sign Out
+                </NavDropdown.Item>
               </NavDropdown>
             </div>
           )}

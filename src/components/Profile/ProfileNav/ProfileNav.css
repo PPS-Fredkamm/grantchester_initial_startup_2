@@ -1,9 +1,0 @@
-/* Profile NavBar */
-.profile-navbar .nav-link {
-  color: black;
-}
-
-.profile-navbar .nav-link.active {
-  color: #3182CE !important;
-  font-weight: 500; 
-}

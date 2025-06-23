@@ -1,0 +1,9 @@
+/* The parent of the donor dashboard */
+.company-dashboard {
+  background-color: #f7fafc;
+}
+
+.company-content {
+  padding-top: .3rem;
+}
+

@@ -1,0 +1,30 @@
+.member-layout {
+  padding: 0 7rem;;
+}
+
+/* member NavBar */
+.member-nav{
+  border-bottom: solid 2px #dee2e6;
+}
+
+.member-nav .nav-link {
+  color: black;
+}
+
+.member-nav .nav-link.active {
+  color: #3182CE !important;
+  font-weight: 500; 
+}
+
+
+@media (max-width: 1200px) {
+  .member-layout {
+    padding: 1rem 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .member-layout {
+    padding: 1rem;
+  }
+}

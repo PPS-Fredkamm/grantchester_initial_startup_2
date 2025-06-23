@@ -1,0 +1,21 @@
+
+Notes
+=====
+
+
+https://www.w3.org/2005/10/howto-favicon
+https://favicon.io/favicon-generator/
+
+
+<link rel="icon" href="/src/images/react.svg" type="image/svg+xml" />
+<link rel="icon" href="data:;base64,iVBORw0KGgo="> blank favicon.ico resource
+
+
+https://stackoverflow.com/questions/43605434/what-is-the-correct-way-to-define-global-variable-in-es6-modules
+
+
+https://react-bootstrap.netlify.app/docs/components/overlays
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Basic_concepts_of_grid_layout
+
+

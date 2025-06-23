@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image';
 import UserIcon from './UserIcon';
 import NavMenu from './NavMenu';
 
-import GrantchesterImage from '../../assets/Images/grantchester.png';
+import GrantchesterImage from '../../assets/images/grantchester.png';
 
 import './Navbar.css';
 

@@ -1,0 +1,9 @@
+/* The parent of the donor dashboard */
+.donor-dashboard {
+  background-color: #f7fafc;
+}
+
+
+.donor-content {
+  padding-top: 1.5rem;
+}

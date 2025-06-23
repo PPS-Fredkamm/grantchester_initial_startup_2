@@ -1,0 +1,9 @@
+/* company NavBar */
+.company-navbar .nav-link {
+  color: black;
+}
+
+.company-navbar .nav-link.active {
+  color: #3182CE !important;
+  font-weight: 500; 
+}

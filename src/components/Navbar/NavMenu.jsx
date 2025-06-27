@@ -12,11 +12,11 @@ function NavMenu() {
 
   return (
     <Nav className="nav-menu">
-      <Nav.Link href="/link">Why Donate Stock</Nav.Link>
-      <Nav.Link href="/donor">For Donors</Nav.Link>
-      <Nav.Link href="/university">For Universities</Nav.Link>
-      <Nav.Link href="/link">Partners</Nav.Link>
-      <Nav.Link href="/link">Resources</Nav.Link>
+      <Nav.Link href="/why-donate">Why Donate</Nav.Link>
+      <Nav.Link href="/for-donors">For Donors</Nav.Link>
+      <Nav.Link href="/for-universities">For Universities</Nav.Link>
+      <Nav.Link href="/partners">Partners</Nav.Link>
+      <Nav.Link href="/resources">Resources</Nav.Link>
 
       {!authCtx.ctx.isAuthenticated && (
         <>
@@ -27,7 +27,7 @@ function NavMenu() {
           >
             <Button href="/donate" className="donate-button">
               <FaHeart className="donate-heart-icon" />
-              Donate Shares
+              Donate Now
             </Button>
           </OverlayTrigger>
         </>

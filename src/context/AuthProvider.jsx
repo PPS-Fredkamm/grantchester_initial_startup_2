@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from "react";
-import * as AM from "../managers/AuthManager";
+import { createContext, useContext, useState } from 'react';
+import * as AM from '../managers/AuthManager';
 
-import ctxConfig from "./AuthContext.json";
+import ctxConfig from './AuthContext.json';
 
 // ========================================
 // Create a context object
@@ -23,11 +23,14 @@ export default function AuthProvider({ children }) {
   const [ctx, setCtx] = useState(() => ctxInitializer());
 
   function getDefaultContext() {
-    let c = ctxConfig;
-    return c;
+    return { ...ctxConfig };
   }
 
   function ctxInitializer() {
+    const stored = sessionStorage.getItem('authContext');
+    if (stored) {
+      return JSON.parse(stored);
+    }
     let c = getDefaultContext();
     c.sequence += 1;
     return c;
@@ -48,19 +51,22 @@ export default function AuthProvider({ children }) {
   // ========================================
 
   async function login(username, password) {
-    var flag = false;
+    let flag = false;
     try {
-      ctx.sequence += 1;
-      ctx.isAuthenticated = false;
+      const updatedCtx = {
+        ...ctx,
+        sequence: ctx.sequence + 1,
+        isAuthenticated: false,
+      };
       flag = await AM.Login(username, password);
       if (flag) {
-        ctx.isAuthenticated = true;
-        ctx.identityName = username;
+        updatedCtx.isAuthenticated = true;
+        updatedCtx.identityName = username;
+        sessionStorage.setItem('authContext', JSON.stringify(updatedCtx));
       }
+      setCtx(updatedCtx);
     } catch (ex) {
-      console.error("Error: ", ex);
-    } finally {
-      setCtx({ ...ctx });
+      console.error('Login error:', ex);
     }
     return flag;
   }
@@ -70,18 +76,21 @@ export default function AuthProvider({ children }) {
   // ========================================
 
   function logout() {
-    var flag = false;
+    let flag = false;
     try {
-      ctx.sequence += 1;
-      flag = AM.Logout();
-      ctx.isAuthenticated = false;
+      const updatedCtx = {
+        ...ctx,
+        sequence: ctx.sequence + 1,
+        isAuthenticated: false,
+      };
+      AM.Logout(); // backend logout if needed
+      sessionStorage.removeItem('authContext');
       flag = true;
+      setCtx(updatedCtx);
     } catch (ex) {
-      console.error("Error: ", ex);
-    } finally {
-      setCtx({ ...ctx });
+      console.error('Logout error:', ex);
     }
-    return flag;   
+    return flag;
   }
 
   // ========================================
@@ -112,7 +121,17 @@ export default function AuthProvider({ children }) {
   // ========================================
 
   return (
-    <AuthContext.Provider value={{ ctx, init, register, login, logout, resetPassword, refreshToken }}>
+    <AuthContext.Provider
+      value={{
+        ctx,
+        init,
+        register,
+        login,
+        logout,
+        resetPassword,
+        refreshToken,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -1,32 +1,37 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { Form, Button, Container, Card } from "react-bootstrap";
+import { useState, useRef, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Form, Button, Container, Card } from 'react-bootstrap';
 
-import { useAuthContext } from "../../context/AuthProvider";
+import { useAuthContext } from '../../context/AuthProvider';
 
-import "./Login.css";
+import './Login.css';
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const usernameRef = useRef(null);
 
   const authCtx = useAuthContext();
   const navigate = useNavigate();
 
-async function handleLogin(e) {
-  e.preventDefault();
+  useEffect(() => {
+    if (usernameRef.current) {
+      usernameRef.current.focus();
+    }
+  }, []);
 
-  const success = await authCtx.login(username, password);
+  async function handleLogin(e) {
+    e.preventDefault();
 
-  if (success) {
-    navigate("/university");
-  } else {
-    console.error("Login failed");
+    const success = await authCtx.login(username, password);
+
+    if (success) {
+      navigate('/donor');
+    } else {
+      console.error('Login failed');
+    }
   }
-}
-
-  // ========================================
-  // ========================================
 
   return (
     <Container className="login-container">
@@ -38,6 +43,7 @@ async function handleLogin(e) {
               <Form.Group controlId="formUsername" className="mb-3">
                 <Form.Label>Username</Form.Label>
                 <Form.Control
+                  ref={usernameRef}
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}

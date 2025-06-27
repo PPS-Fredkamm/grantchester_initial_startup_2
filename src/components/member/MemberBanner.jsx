@@ -1,7 +1,11 @@
 import { useParams } from 'react-router-dom';
+
+import { useAuthContext } from '../../context/AuthProvider';
+
 import './MemberBanner.css'
 
 export default function MemberBanner() {
+  const authCtx = useAuthContext();
   const { type } = useParams();
 
   const role = type?.toLowerCase();
@@ -23,7 +27,7 @@ export default function MemberBanner() {
   }
 
   // Placeholder for future dynamic user info
-  const username = '<Username>';
+  const username = authCtx.ctx.identityName;
 
   return (
     <div className="banner-container">

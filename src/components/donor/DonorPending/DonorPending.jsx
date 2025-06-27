@@ -1,4 +1,4 @@
-import { Card, Table } from 'react-bootstrap';
+import { Card, Table, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { GoDotFill } from 'react-icons/go';
 import { FiMoreHorizontal } from 'react-icons/fi';
 
@@ -59,7 +59,14 @@ export default function DonorPendingDonations() {
                   </span>
                 </td>
                 <td>
-                  <FiMoreHorizontal className="pending-icon" />
+                  <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip>View Donation Details</Tooltip>}
+                  >
+                    <span className="pending-icon-wrapper">
+                      <FiMoreHorizontal className="pending-icon" />
+                    </span>
+                  </OverlayTrigger>
                 </td>
               </tr>
             ))}

@@ -8,7 +8,26 @@
   color: black;
 }
 
+/* ========================= */
+/* Content inside the nav-bar */
+/* ========================= */
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 3rem
+}
+
+.nav-image{
+  display: inline-block;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+/* ========================= */
 /* Blue donate button */
+/* ========================= */
 .donate-button {
   font-weight: 600;
   background: linear-gradient(
@@ -26,8 +45,9 @@
   font-size: 0.7rem;
   margin-right: 0.5rem;
 }
-
+/* ========================= */
 /* User information when signed in */
+/* ========================= */
 .user-email {
   font-size: 0.9rem;
   font-weight: 500;
@@ -41,8 +61,9 @@
   white-space: nowrap;
   margin-top: -2px;
 }
-
+/* ========================= */
 /* Dropdown menu style */
+/* ========================= */
 .profile-dropdown .dropdown-menu {
   width: 280px;
   padding: 0;
@@ -52,7 +73,9 @@
   overflow: hidden;
 }
 
+/* ========================= */
 /* Profile card layout */
+/* ========================= */
 .profile-card {
   padding: 1rem;
   background-color: #f8f9fa;
@@ -78,7 +101,9 @@
   font-size: 0.85rem;
 }
 
+/* ========================= */
 /* Menu items */
+/* ========================= */
 .profile-dropdown .dropdown-item {
   padding: 0.75rem 1rem;
   font-size: 0.95rem;
@@ -86,4 +111,69 @@
 
 .profile-dropdown .dropdown-item:hover {
   background-color: #e9ecef;
+}
+
+/* ========================= */
+/* Mobile toggle */
+/* ========================= */
+.mobile-toggle-button {
+  /* background: transparent; */
+  border: none;
+  font-size: 1.8rem;
+  padding: 0;
+}
+
+.mobile-user-dropdown {
+  border-top: 1px solid #dee2e6;
+  padding-top: 1rem;
+}
+
+.mobile-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.mobile-user-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #000;
+  flex-grow: 1;
+}
+
+.mobile-user-menu {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-user-menu .dropdown-item {
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #000;
+  text-decoration: none;
+  /* cursor: 'pointer' */
+}
+
+.mobile-user-menu .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.mobile-user-dropdown .chevron {
+  transition: transform 0.2s ease;
+}
+
+.mobile-user-dropdown .chevron.open {
+  transform: rotate(180deg);
+}
+
+/* ========================= */
+/* Responsiveness */
+/* ========================= */
+
+@media (max-width: 1360px) {
+  .nav-menu .nav-link {
+    margin: .8rem;
+  }
 }

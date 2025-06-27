@@ -1,14 +1,21 @@
 import { useParams } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
 import UnderConstruction from '../../pages/placeholder/UnderConstruction';
 import MemberBanner from '../../components/member/memberBanner';
 import MemberNav from '../../components/member/MemberNav';
-
-import DonorDashboard from '../../pages/member/donor/DonorDashboard';
-import CompanyDashboard from '../../pages/member/company/CompanyDashboard';
-import UniversityDashboard from '../../pages/member/university/UniversityDashboard';
-
 import NotFound from '../notFound/NotFound';
+
+// Lazy-loaded dashboards
+const DonorDashboard = lazy(() =>
+  import('../../pages/member/donor/DonorDashboard')
+);
+const CompanyDashboard = lazy(() =>
+  import('../../pages/member/company/CompanyDashboard')
+);
+const UniversityDashboard = lazy(() =>
+  import('../../pages/member/university/UniversityDashboard')
+);
 
 import './MemberLayout.css';
 
@@ -69,6 +76,9 @@ export default function MemberLayout() {
         case '':
           content = <UniversityDashboard />;
           break;
+        case 'certificates':
+          content = <UnderConstruction title="University Certificates" />;
+          break;
         case 'donations':
           content = <UnderConstruction title="University Donations" />;
           break;
@@ -87,6 +97,14 @@ export default function MemberLayout() {
       }
       break;
 
+    case 'profile':
+      switch (resolvedOption) {
+        case '':
+          content = <UnderConstruction title="Profile Page" />;
+          break;
+      }
+      break;
+
     default:
       content = <NotFound />;
       break;
@@ -97,7 +115,21 @@ export default function MemberLayout() {
       <MemberBanner />
       <div className="member-layout">
         <MemberNav />
-        {content}
+        <Suspense
+          fallback={
+            <div className="d-flex justify-content-center align-items-center vh-100">
+              <div className="text-center">
+                <div
+                  className="spinner-border text-primary mb-3"
+                  role="status"
+                />
+                <div>Loading...</div>
+              </div>
+            </div>
+          }
+        >
+          {content}
+        </Suspense>
       </div>
     </>
   );

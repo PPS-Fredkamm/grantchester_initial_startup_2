@@ -40,7 +40,7 @@ export default function CompanyNewRequest() {
               <th>From</th>
               <th>Reason</th>
               <th>To</th>
-              <th># of Shares</th>
+              <th># of Units</th>
               <th></th>
             </tr>
           </thead>

@@ -9,7 +9,7 @@ import './DonorStats.css';
 export default function DonorStats() {
   const stats = {
     studentsImpacted: 5,
-    sharesDonated: 0,
+    unitsDonated: 0,
     totalValue: '$25,000',
   };
 
@@ -37,14 +37,14 @@ export default function DonorStats() {
           <div className="stat-divider"></div>
 
           <div className="stat-block">
-            <div className="stat-value">{stats.sharesDonated}</div>
+            <div className="stat-value">{stats.unitsDonated}</div>
             <div className="stat-label">
-              <span>Donated Shares</span>
+              <span>Units Donated</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
                   <Tooltip id="tooltip-affected">
-                    This is the number of shares the donor has contributed.
+                    This is the number of units the donor has contributed.
                   </Tooltip>
                 }
               >
@@ -63,7 +63,7 @@ export default function DonorStats() {
                 placement="right"
                 overlay={
                   <Tooltip id="tooltip-affected">
-                    This reflects the total dollar value of the donated shares.
+                    This reflects the total dollar value of the units donated.
                   </Tooltip>
                 }
               >

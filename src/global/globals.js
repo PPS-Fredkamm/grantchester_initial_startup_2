@@ -4,5 +4,9 @@ export default {
   localStorage: {
     accessTokenKey: "accessToken",
     refreshTokenKey: "refreshToken"
+  },
+  userInfo: {
+    userID: 0,
+    memberID: 0
   }
 };

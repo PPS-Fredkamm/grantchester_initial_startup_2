@@ -27,6 +27,12 @@ export default function MemberNav() {
       { path: 'settings', label: 'Settings' },
       { path: '/donor', label: 'Donor Dashboard' },
     ],
+    profile: [
+      { path: '', label: 'Profile' },
+      { path: '/company', label: 'Company Dashboard' },
+      { path: '/university', label: 'University Dashboard' },
+      { path: '/donor', label: 'Donor Dashboard' },
+    ],
   };
 
   const { pathname } = useLocation();
@@ -37,7 +43,7 @@ export default function MemberNav() {
 
   return (
     <>
-      <Navbar expand="sm" className="member-nav" collapseOnSelect>
+      <Navbar expand="md" className="member-nav" collapseOnSelect>
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav>

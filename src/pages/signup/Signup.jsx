@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Form, Button, Container, Card } from 'react-bootstrap';
 
@@ -9,9 +9,16 @@ import './Signup.css';
 export default function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const usernameRef = useRef(null);
 
   const authCtx = useAuthContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (usernameRef.current) {
+      usernameRef.current.focus();
+    }
+  }, []);
 
   async function handleSignup(e) {
     e.preventDefault();
@@ -36,6 +43,7 @@ export default function Signup() {
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   type="text"
+                  ref={usernameRef}
                   placeholder="Enter username"
                   onChange={(e) => setUsername(e.target.value)}
                   required

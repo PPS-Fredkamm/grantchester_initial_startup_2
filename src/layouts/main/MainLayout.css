@@ -1,0 +1,7 @@
+.outlet-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7fafc;
+  min-height: 100vh;
+  padding-top: 6.3rem;
+}

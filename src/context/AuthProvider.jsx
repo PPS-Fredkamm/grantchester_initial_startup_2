@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from 'react';
-import * as AM from '../managers/AuthManager';
+import { createContext, useContext, useState } from "react";
+import * as AM from "../managers/AuthManager";
 
-import ctxConfig from './AuthContext.json';
+import ctxConfig from "./AuthContext.json";
 
 // ========================================
 // Create a context object
@@ -27,7 +27,7 @@ export default function AuthProvider({ children }) {
   }
 
   function ctxInitializer() {
-    const stored = sessionStorage.getItem('authContext');
+    const stored = sessionStorage.getItem("authContext");
     if (stored) {
       return JSON.parse(stored);
     }
@@ -55,18 +55,17 @@ export default function AuthProvider({ children }) {
     try {
       const updatedCtx = {
         ...ctx,
-        sequence: ctx.sequence + 1,
         isAuthenticated: false,
+        sequence: ctx.sequence + 1,
       };
       flag = await AM.Login(username, password);
       if (flag) {
         updatedCtx.isAuthenticated = true;
-        updatedCtx.identityName = username;
-        sessionStorage.setItem('authContext', JSON.stringify(updatedCtx));
+        updatedCtx.sequence + 1;
       }
       setCtx(updatedCtx);
     } catch (ex) {
-      console.error('Login error:', ex);
+      console.error("Login error:", ex);
     }
     return flag;
   }
@@ -75,20 +74,18 @@ export default function AuthProvider({ children }) {
   //  logout
   // ========================================
 
-  function logout() {
+  async function logout() {
     let flag = false;
     try {
       const updatedCtx = {
         ...ctx,
-        sequence: ctx.sequence + 1,
         isAuthenticated: false,
+        sequence: ctx.sequence + 1,
       };
-      AM.Logout(); // backend logout if needed
-      sessionStorage.removeItem('authContext');
-      flag = true;
+      flag = await AM.Logout(); // backend logout if needed
       setCtx(updatedCtx);
     } catch (ex) {
-      console.error('Logout error:', ex);
+      console.error("Logout error:", ex);
     }
     return flag;
   }
@@ -105,7 +102,7 @@ export default function AuthProvider({ children }) {
   //  register
   // ========================================
 
-  function register(username, password) {
+  async function register(username, password) {
     return false;
   }
 

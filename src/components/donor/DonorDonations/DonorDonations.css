@@ -12,7 +12,7 @@
   align-items: center;
   padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
-  width: 10rem; /* Adjust as needed */
+  width: 10rem;
   opacity: 0.8;
   border: #dee2e6 1px solid;
 }
@@ -20,7 +20,6 @@
 .donations-table.table-striped > tbody > tr:nth-of-type(odd) > td {
   background-color: #F3F8FD !important;
 }
-
 
 /* Remove bottom border from the final row */
 .donations-table tbody tr:last-child td {

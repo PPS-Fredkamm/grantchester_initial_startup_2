@@ -5,6 +5,7 @@ import UnderConstruction from '../../pages/placeholder/UnderConstruction';
 import MemberBanner from '../../components/member/memberBanner';
 import MemberNav from '../../components/member/MemberNav';
 import NotFound from '../notFound/NotFound';
+import NavBar from "../../components/navbar/Navbar";
 
 // Lazy-loaded dashboards
 const DonorDashboard = lazy(() =>
@@ -15,6 +16,9 @@ const CompanyDashboard = lazy(() =>
 );
 const UniversityDashboard = lazy(() =>
   import('../../pages/member/university/UniversityDashboard')
+);
+const ProfilePage = lazy(() =>
+  import('../../pages/member/profile/Profile')
 );
 
 import './MemberLayout.css';
@@ -100,7 +104,10 @@ export default function MemberLayout() {
     case 'profile':
       switch (resolvedOption) {
         case '':
-          content = <UnderConstruction title="Profile Page" />;
+          content = <ProfilePage />;
+          break;
+        case 'profile-setup':
+          content = <UnderConstruction title="Profile Setup Page" />;
           break;
       }
       break;
@@ -112,6 +119,7 @@ export default function MemberLayout() {
 
   return (
     <>
+      <NavBar />
       <MemberBanner />
       <div className="member-layout">
         <MemberNav />

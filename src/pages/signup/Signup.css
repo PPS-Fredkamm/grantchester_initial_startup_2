@@ -1,5 +1,4 @@
 .register-container {
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   padding: 2rem;
@@ -35,3 +34,53 @@
   color: white;
   border: none !important;
 }
+
+.profile-info-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.profile-info-wrapper form label {
+  text-align: left;
+  display: block;
+}
+
+.profile-card {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+/* Apply blur effect to backdrop */
+.modal-backdrop.show {
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Remove default white background from Modal */
+.custom-modal-content {
+  background: transparent;
+  border: none;
+  padding: 0 7rem;
+}
+
+/* .modal-close-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-close-icon {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+}
+
+.modal-close-icon:hover {
+  opacity: 0.75;
+} */

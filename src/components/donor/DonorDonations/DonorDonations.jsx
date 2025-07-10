@@ -13,36 +13,42 @@ export default function DonorDonations() {
       university: 'University of Pennsylvania',
       amount: '$2,000',
       status: 'Waiting approval',
+      date: '2024-03-15',
     },
     {
       donationId: '252407',
       university: 'Clemson University',
       amount: '$1,500',
       status: 'Donation verification by university',
+      date: '2024-03-12',
     },
     {
       donationId: '207509',
       university: 'Penn State University',
       amount: '$2,000',
       status: 'Completed',
+      date: '2024-02-28',
     },
     {
       donationId: '302587',
       university: 'Clemson University',
       amount: '$1,500',
       status: 'Completed',
+      date: '2024-02-18',
     },
     {
       donationId: '702509',
       university: 'Louisiana State University',
       amount: '$1,500',
       status: 'Completed',
+      date: '2024-01-20',
     },
     {
       donationId: '202406',
       university: 'University of California, Berkley',
       amount: '$1,500',
       status: 'Completed',
+      date: '2024-01-10',
     },
   ];
 
@@ -74,9 +80,10 @@ export default function DonorDonations() {
 
         <Table responsive="lg" striped className="donations-table">
           <thead>
-            <tr className='text-nowrap'>
+            <tr className="text-nowrap">
               <th className="w-20">Donation ID</th>
-              <th className="w-50">University</th>
+              <th className="w-20">Date</th>
+              <th className="w-40">University</th>
               <th className="w-20">Amount</th>
               <th className="w-10">Status</th>
             </tr>
@@ -84,9 +91,12 @@ export default function DonorDonations() {
 
           <tbody>
             {filteredDonations.map((d, idx) => (
-              <tr className='text-nowrap' key={idx}>
+              <tr className="text-nowrap" key={idx}>
                 <td>
                   <span>#{d.donationId}</span>
+                </td>
+                <td>
+                  <span>{d.date}</span>
                 </td>
                 <td>
                   <span>{d.university}</span>
@@ -101,6 +111,7 @@ export default function DonorDonations() {
                 </td>
               </tr>
             ))}
+
             {filteredDonations.length === 0 && (
               <tr>
                 <td colSpan="4" className="text-center">

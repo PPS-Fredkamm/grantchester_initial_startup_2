@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthProvider';
 
 import './MemberBanner.css'
+import Globals from "../../global/globals";
 
 export default function MemberBanner() {
   const authCtx = useAuthContext();
@@ -13,13 +14,16 @@ export default function MemberBanner() {
   let greeting = '';
   switch (role) {
     case 'donor':
-      greeting = 'Welcome Donor';
+      greeting = 'Donor Dashboard';
       break;
     case 'company':
-      greeting = 'Welcome Company Representative';
+      greeting = 'Compony Dashboard';
       break;
     case 'university':
-      greeting = 'Welcome University Admin';
+      greeting = 'University Dashboard';
+      break;
+    case 'profile':
+      greeting = 'Profile';
       break;
     default:
       greeting = 'Welcome Member';
@@ -27,12 +31,12 @@ export default function MemberBanner() {
   }
 
   // Placeholder for future dynamic user info
-  const username = authCtx.ctx.identityName;
+  const username = Globals.userInfo.username;
 
   return (
     <div className="banner-container">
       <p>
-        {greeting}, {username}
+        {username}'s {greeting}
       </p>
     </div>
   );

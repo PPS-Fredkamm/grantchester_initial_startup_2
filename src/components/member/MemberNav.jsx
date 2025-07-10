@@ -23,15 +23,14 @@ export default function MemberNav() {
       { path: '', label: 'Dashboard' },
       { path: 'certificates', label: 'Certificates' },
       { path: 'donations', label: 'Donations' },
-      { path: '/profile', label: 'Public Profile' },
       { path: 'settings', label: 'Settings' },
       { path: '/donor', label: 'Donor Dashboard' },
     ],
     profile: [
       { path: '', label: 'Profile' },
+      { path: '/donor', label: 'Donor Dashboard' },
       { path: '/company', label: 'Company Dashboard' },
       { path: '/university', label: 'University Dashboard' },
-      { path: '/donor', label: 'Donor Dashboard' },
     ],
   };
 

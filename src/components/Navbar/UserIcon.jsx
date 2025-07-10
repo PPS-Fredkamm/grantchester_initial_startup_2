@@ -6,6 +6,8 @@ import ProfilePlaceholder from '../../assets/Images/profilePlaceholder.jpg';
 
 import { useAuthContext } from '../../context/AuthProvider';
 
+import Globals from "../../global/globals";
+
 function UserIcon() {
   const authCtx = useAuthContext();
   // console.log('UserIcon rendered', authCtx.ctx);
@@ -20,9 +22,9 @@ function UserIcon() {
         <div className="d-flex align-items-center gap-2">
           <div className="d-flex flex-column text-end">
             <span className="user-email">
-              {authCtx.ctx.identityName}@example.com
+              {Globals.profileInfo.email}
             </span>
-            <span className="user-role">{authCtx.ctx.roles}</span>
+            <span className="user-role">{Globals.roleInfo.role}</span>
           </div>
           <NavDropdown
             align="end"
@@ -46,9 +48,9 @@ function UserIcon() {
                 alt="Profile"
               />
               <div className="profile-card-info">
-                <strong>{authCtx.ctx.identityName}</strong>
+                <strong>{Globals.userInfo.username}</strong>
                 <div className="text-muted">
-                  {authCtx.ctx.identityName}@example.com
+                  {Globals.profileInfo.email}
                 </div>
               </div>
             </div>

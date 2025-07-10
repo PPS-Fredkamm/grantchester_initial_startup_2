@@ -7,14 +7,16 @@ import ProfilePlaceholder from '../../assets/Images/profilePlaceholder.jpg';
 
 import { useAuthContext } from '../../context/AuthProvider';
 
+import Globals from "../../global/globals";
+
 function MobileUserDropdown({ onClose }) {
   const authCtx = useAuthContext();
   const [isOpen, setIsOpen] = useState(false);
 
   if (!authCtx.ctx.isAuthenticated) return null;
 
-  const handleLogout = () => {
-    authCtx.logout();
+  async function handleLogout() {
+    await authCtx.logout();
     if (onClose) onClose();
   };
 
@@ -29,7 +31,7 @@ function MobileUserDropdown({ onClose }) {
           alt="Profile"
         />
         <span className="mobile-user-name">
-          {authCtx.ctx.identityName}@example.com
+          {Globals.userInfo.username}@example.com
         </span>
         <FiChevronDown className={`chevron ${isOpen ? 'open' : ''}`} />
       </div>

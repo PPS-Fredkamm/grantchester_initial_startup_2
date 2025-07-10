@@ -1,10 +1,4 @@
 {
-  "authenticationType": "none",
-  "bearerToken": null,
-  "identityName": "guest",
   "isAuthenticated": false,
-  "firstName": "Guest",
-  "lastName": "User",
-  "roles": ["guest"],
   "sequence": 0
 }

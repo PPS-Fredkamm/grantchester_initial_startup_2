@@ -16,8 +16,20 @@
   padding: 30px;
 }
 
-.login-button{
+.login-button {
   background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
   color: white;
   border: none !important;
+}
+
+.password-toggle-button {
+  background-color: #f1f1f1; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+}
+
+.password-toggle-button:hover {
+  background-color: #e2e2e2;
 }

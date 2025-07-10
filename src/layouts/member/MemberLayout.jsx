@@ -6,6 +6,11 @@ import MemberBanner from '../../components/member/memberBanner';
 import MemberNav from '../../components/member/MemberNav';
 import NotFound from '../notFound/NotFound';
 
+// Imports for the University Sub pages //
+import UniversityCertificates from '../../pages/member/university/UniversityCertificates/UniversityCertificates';
+import UniversitySettings from '../../pages/member/university/UniversitySettings/UniversitySettings';
+import UniversityDonations from '../../pages/member/university/UniversityDonations/UniversityDonations';
+
 // Lazy-loaded dashboards
 const DonorDashboard = lazy(() =>
   import('../../pages/member/donor/DonorDashboard')
@@ -18,6 +23,7 @@ const UniversityDashboard = lazy(() =>
 );
 
 import './MemberLayout.css';
+
 
 export default function MemberLayout() {
   const { type, option = '' } = useParams();
@@ -77,10 +83,10 @@ export default function MemberLayout() {
           content = <UniversityDashboard />;
           break;
         case 'certificates':
-          content = <UnderConstruction title="University Certificates" />;
+          content = <UniversityCertificates title="University Certificates" />;
           break;
         case 'donations':
-          content = <UnderConstruction title="University Donations" />;
+          content = <UniversityDonations title="University Donations" />;
           break;
         case 'documents':
           content = <UnderConstruction title="University Documents" />;
@@ -89,7 +95,7 @@ export default function MemberLayout() {
           content = <UnderConstruction title="University Mailing" />;
           break;
         case 'settings':
-          content = <UnderConstruction title="University Settings" />;
+          content = <UniversitySettings title="University Settings" />;
           break;
         default:
           content = <NotFound />;

@@ -17,6 +17,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Home = lazy(() => import('./pages/home/Home.jsx'));
 const Login = lazy(() => import('./pages/login/Login.jsx'));
 const Signup = lazy(() => import('./pages/signup/Signup.jsx'));
+const PublicProfile = lazy(() => import('./components/University/PublicProfile/PublicProfile.jsx'));
 const UnderConstruction = lazy(() =>
   import('./pages/placeholder/UnderConstruction.jsx')
 );

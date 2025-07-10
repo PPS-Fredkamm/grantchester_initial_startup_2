@@ -10,6 +10,8 @@ import ErrorHandler from './pages/ErrorHandler/ErrorHandler.jsx';
 import MainLayout from './layouts/main/MainLayout.jsx';
 import MemberLayout from './layouts/member/MemberLayout.jsx';
 
+import Globals from "./global/globals.js";
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -26,6 +28,9 @@ export default function App() {
   const applCtx = useApplContext();
       
   useEffect(() => {
+    Globals.initUserInfo();
+    Globals.initProfileInfo();
+    Globals.initRoleInfo();
     document.title = applCtx.ctx.documentTitle;
   }, [applCtx]);
 

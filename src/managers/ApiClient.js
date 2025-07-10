@@ -1,459 +1,412 @@
-import Globals from "../global/globals";
+import * as ACM from './ApiClientMethods';
 
 // ========================================
-//  generateFetchUrl
+// ========================================
+//  Data Controller endpoints
+// ========================================
 // ========================================
 
-function generateFetchUrl(path, params) {
-  var env = undefined;
-  var baseUri = undefined;
-  var fetchUri, fetchUrl;
-  var searchParams;
-  var key, value;
+// ----------------------------------------
+//  GetDatetimeAsync
+// ----------------------------------------
 
+export async function GetDatetimeAsync() {
   // ----------------------------------------
-
-  env = Globals.apiEnvironment;
-  if (env === undefined || env === null) {
-    throw new Error("Global apiEnvironment is not defined");
-  }
-
-  switch (env) {
-    case "azure": {
-      baseUri = "https://customdataservicesapi20240309210451.azurewebsites.net/api/";
-      break;
-    }
-    case "dev": {
-      baseUri = "https://localhost:7201/api/";
-      break;
-    }
-    default: {
-      alert("api environment is not defined");
-    }
-  }
-
-  if (baseUri !== undefined) {
-    if (!baseUri.endsWith("/")) baseUri += "/";
-    if (path.startsWith("/")) path = path.slice(1);
-    fetchUri = baseUri + path;
-  }
-
-  // ----------------------------------------
-
-  if (params !== undefined && params !== null) {
-    searchParams = new URLSearchParams();
-    for (key in params) {
-      value = params[key];
-      searchParams.append(key, value);
-    }
-
-    fetchUri += "?";
-    fetchUri += searchParams.toString();
-  }
-
-  // ----------------------------------------
-
-  fetchUrl = new URL(fetchUri);
-  return fetchUrl;
-}
-
-// ========================================
-//  generateFetchOptions
-// ========================================
-
-function generateFetchOptions(httpMethod) {
-  var options = null;
-  var headers;
-  // ----------------------------------------
-  headers = new Headers();
-  appendAuthenticationHeader(headers);
-  // ----------------------------------------
-  let method = httpMethod.toUpperCase();
-  switch (method) {
-    case "GET": {
-      // ----------------------------------------
-      headers.append("Accept", "application/json");
-      headers.append("Accept", "text/plain");
-      headers.append("Accept", "*/*");
-      headers.append("Accept-Encoding", "gzip");
-      headers.append("Accept-Encoding", "deflate");
-      // ----------------------------------------
-      options = {};
-      options["method"] = method;
-      // ----------------------------------------
-      break;
-    }
-    case "POST": {
-      // ----------------------------------------
-      headers.append("Content-Type", "application/json");
-      headers.append("Access-Control-Allow-Origin", "*");
-      // ----------------------------------------
-      options = {};
-      options["method"] = method;
-      options["mode"] = "cors";
-      options["credentials"] = "include";
-      // ----------------------------------------
-      break;
-    }
-    case "PUT": {
-      break;
-    }
-    case "PATCH": {
-      break;
-    }
-    case "DELETE": {
-      break;
-    }
-    case "OPTIONS": {
-      break;
-    }
-    case "HEAD": {
-      break;
-    }
-    case "TRACE": {
-      break;
-    }
-    default: {
-      alert("httpMethod not supported");
-    }
-  }
-
-  if (headers.entries.length !== 0) {
-    options["headers"] = headers;
-  }
-
-  return options;
-}
-
-// ========================================
-//  appendAuthenticationHeader
-// ========================================
-
-function appendAuthenticationHeader(headers) {
-  var key, token, bearer;
-  // ----------------------------------------
-  if (headers === undefined || headers === null) return;
-  // ----------------------------------------
-  key = Globals.localStorage.accessTokenKey;
-  token = localStorage.getItem(key);
-  if (token === undefined || token === null) return;
-  bearer = "Bearer " + token;
-  // ----------------------------------------
-  headers.append("Authorization", bearer);
-}
-
-// ========================================
-//  getApiResponseData
-// ========================================
-
-function getApiResponseData(item) {
-  let flag, tag, val;
-  let data = null;
-  // ----------------------------------------
-  flag = true;
-  // ----------------------------------------
-  if (flag) {
-    tag = "statusCode";
-    if (item.hasOwnProperty(tag)) {
-      val = item[tag];
-      console.log("Response statusCode: ", val);
-      if (val !== 200) {
-        flag = false;
-      }
-    }
-  }
-  // ----------------------------------------
-  if (flag) {
-    tag = "data";
-    if (item.hasOwnProperty(tag)) {
-      data = item[tag];
-    }
-  }
-  // ----------------------------------------
-  console.log("Response data: ", data);
-  return data;
-}
-
-// ========================================
-//  GenerateGuid
-// ========================================
-
-export async function GenerateGuid() {
-  const apiRoute = "security/generate-guid";
-  const apiMethod = "GET";
+  const apiRoute = 'data/get-datetime';
+  const apiMethod = 'GET';
   // ----------------------------------------
   var url, options, params;
-  var response, promise, data;
+  var response, result;
+  // ----------------------------------------
   try {
-    // ----------------------------------------
-    url = generateFetchUrl(apiRoute, params);
-    options = generateFetchOptions(apiMethod);
-    // ----------------------------------------
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
     response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    promise = await response.json();
-    data = getApiResponseData(promise);
-  } catch (ex) {
-    console.log(`Api ${apiRoute} error`, ex);
-  } finally {
-    return data;
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
   }
+  return result;
 }
 
-// ========================================
-//  GetDatetime
-// ========================================
+// ----------------------------------------
+//  GetDatetimeBearerAsync
+// ----------------------------------------
 
-export async function GetDatetime() {
-  const apiRoute = "data/get-datetime";
-  const apiMethod = "GET";
+export async function GetDatetimeBearerAsync() {
+  // ----------------------------------------
+  const apiRoute = 'data/get-datetime-bearer';
+  const apiMethod = 'GET';
   // ----------------------------------------
   var url, options, params;
-  var response, promise, data;
+  var response, result;
+  // ----------------------------------------
   try {
-    // ----------------------------------------
-    url = generateFetchUrl(apiRoute, params);
-    options = generateFetchOptions(apiMethod);
-    // ----------------------------------------
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
     response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    promise = await response.json();
-    data = getApiResponseData(promise);
-  } catch (ex) {
-    console.log(`Api ${apiRoute} error`, ex);
-  } finally {
-    return data;
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
   }
+  return result;
 }
 
 // ========================================
-//  GetDatetimeBearer
+// ========================================
+//  Info Controller endpoints
+// ========================================
 // ========================================
 
-export async function GetDatetimeBearer() {
-  const apiRoute = "data/get-datetime-bearer";
-  const apiMethod = "GET";
+// ----------------------------------------
+//  DivideByZeroAsync
+// ----------------------------------------
+
+export async function DivideByZeroAsync() {
+  // ----------------------------------------
+  const apiRoute = 'info/divide-by-zero';
+  const apiMethod = 'GET';
   // ----------------------------------------
   var url, options, params;
-  var response, promise, data;
+  var response, result;
+  // ----------------------------------------
   try {
-    // ----------------------------------------
-    url = generateFetchUrl(apiRoute, params);
-    options = generateFetchOptions(apiMethod);
-    // ----------------------------------------
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
     response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-    promise = await response.json();
-    data = getApiResponseData(promise);
-  } catch (ex) {
-    console.log(`Api ${apiRoute} error`, ex);
-  } finally {
-    return data;
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
   }
+  return result;
 }
+
+// ----------------------------------------
+//  NoSuchRouteAsync
+// ----------------------------------------
+
+export async function NoSuchRouteAsync() {
+  // ----------------------------------------
+  const apiRoute = 'info/no-such-route';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+// ========================================
+//  Profile Controller endpoints
+// ========================================
+// ========================================
+
+// ========================================
+//  GetProfileByUserID
+// ========================================
+
+export async function GetProfileByUserIDAsync(userID) {
+  const apiRoute = 'member/profile/user';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['userID'] = userID;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+// ========================================
+//  Security Controller endpoints
+// ========================================
+// ========================================
+
+// ----------------------------------------
+//  GenerateGuidAsync
+// ----------------------------------------
+
+export async function GenerateGuidAsync() {
+  // ----------------------------------------
+  const apiRoute = 'security/generate-guid';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+// ========================================
+//  User Controller endpoints
+// ========================================
+// ========================================
 
 // ========================================
 //  AcquireToken
 // ========================================
 
-export function AcquireToken(username, password) {
-  const apiRoute = "user/acquire-token";
-  const apiMethod = "GET";
-  // ----------------------------------------
-  var url, options, params;
-  var data;
-  // ----------------------------------------
-  params = {};
-  params["username"] = username;
-  params["password"] = password;
-  url = generateFetchUrl(apiRoute, params);
-  options = generateFetchOptions(apiMethod);
-  // ----------------------------------------
-  fetch(url, options)
-    .then((response) => {
-      if (!response.ok) {
-        return response.text().then((text) => {
-          throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
-        });
-      }
-      return response.json();
-    })
-    .then((promise) => {
-      data = getApiResponseData(promise);
-      return data;
-    })
-    .catch((error) => {
-      console.error("Fetch error:", error.message);
-    });
-}
+// export function AcquireToken(username, password) {
+//   const apiRoute = "member/user/acquire-token";
+//   const apiMethod = "GET";
+//   // ----------------------------------------
+//   var url, options, params;
+//   var data;
+//   // ----------------------------------------
+//   params = {};
+//   params["username"] = username;
+//   params["password"] = password;
+//   url = generateFetchUrl(apiRoute, params);
+//   options = generateFetchOptions(apiMethod);
+//   // ----------------------------------------
+//   fetch(url, options)
+//     .then((response) => {
+//       if (!response.ok) {
+//         return response.text().then((text) => {
+//           throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+//         });
+//       }
+//       return response.json();
+//     })
+//     .then((promise) => {
+//       data = ACM.getApiResultData(promise);
+//       return data;
+//     })
+//     .catch((error) => {
+//       console.error("Fetch error:", error.message);
+//     });
+// }
 
 // ========================================
 //  AcquireTokenAsync
 // ========================================
 
 export async function AcquireTokenAsync(username, password) {
-  const apiRoute = "user/acquire-token";
-  const apiMethod = "GET";
+  // ----------------------------------------
+  const apiRoute = 'member/user/acquire-token';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['username'] = username;
+    params['password'] = password;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+//  CreateUser
+// ========================================
+
+export async function CreateUserAsync() {
+  const apiRoute = 'member/user';
+  const apiMethod = 'POST';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+//  DeleteUser
+// ========================================
+
+export async function DeleteUserAsync(id) {
+  const apiRoute = 'member/user';
+  const apiMethod = 'DELETE';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['id'] = id;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+//  GetUser
+// ========================================
+
+export async function GetUserAsync(id) {
+  const apiRoute = 'member/user';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['id'] = id;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+//  GetUserByUsername
+// ========================================
+
+export async function GetUserByUsernameAsync(username) {
+  const apiRoute = 'member/user/username';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['username'] = username;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+// ========================================
+// ========================================
+// ========================================
+
+export async function GetDataFile(id) {
+  const apiRoute = 'data/get=data=file';
+  const apiMethod = 'GET';
   // ----------------------------------------
   var url, options, params;
   var response, promise, data;
+  // ----------------------------------------
   try {
-    data = null;
+    // let url = new URL("https://localhost:7201/api/Data/get-data-file");
+    // url.search = new URLSearchParams("id=1");
+    // let options = {
+    //   method: "GET",
+    //   mode: "cors",
+    //   credentials: "include",
+    //   headers: {
+    //     "Content-Type": "application/octet-stream",
+    //     "Access-Control-Allow-Origin": "*"
+    //   }
+    // };
     params = {};
-    params["username"] = username;
-    params["password"] = password;
+    params['id'] = id;
     url = generateFetchUrl(apiRoute, params);
     options = generateFetchOptions(apiMethod);
     // ----------------------------------------
     response = await fetch(url, options);
     if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
+      let msg = 'Response error' + resp.status;
+      throw new Error(msg);
     }
-    promise = await response.json();
-    data = getApiResponseData(promise);
-    return data;
-  } catch (ex) {
-    console.log(`Api ${apiRoute} error`, ex);
-    throw ex;
+    // ----------------------------------------
+    let arrBuf = await resp.arrayBuffer();
+    let arrDbl = new Float64Array(arrBuf);
+
+    let cnt = arrDbl.length / 2;
+    let ofs = cnt;
+
+    let xData = arrDbl.slice(0, cnt);
+    let yData = arrDbl.slice(ofs);
+
+    console.log('arrBuf length ' + arrBuf.byteLength);
+    console.log('xData length ' + xData.byteLength);
+    console.log('yData length ' + yData.byteLength);
+  } catch (err) {
+    console.log('Error ' + err);
   }
 }
 
 // ========================================
 // ========================================
 
-// export function fetchDataSync(url) {
-//   fetch(url)
-//     .then((response) => {
-//       if (!response.ok) {
-//         throw new Error("Network response was not ok");
-//       }
-//       return response.json(); // or response.text() for plain text response
-//     })
-//     .then((data) => {
-//       // Process the response data
-//       console.log(data);
-//     })
-//     .catch((error) => {
-//       // Handle any errors that occurred during the request
-//       console.error("Error:", error);
-//     });
-// }
+export async function GetWeatherForecast() {
+  try {
+    let url = new URL('https://localhost:7201/api/WeatherForecast');
+    // url.search = new URLSearchParams("id=1");
 
-// ========================================
-// ========================================
+    let options = {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': '*',
+        'Content-Type': 'application/json',
+      },
+    };
 
-// export async function fetchDataAsync(url) {
-//   try {
-//     const response = await fetch(url);
+    let resp = await fetch(url, options);
 
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
+    // if (!resp.ok) {
+    //   let msg = "Response error " + resp.status;
+    //   throw new Error(msg);
+    // }
 
-//     const data = await response.json(); // or response.text() for plain text response
+    let json = await resp.json();
 
-//     // Process the response data
-//     console.log(data);
-//   } catch (error) {
-//     // Handle any errors that occurred during the request
-//     console.error("Error:", error);
-//   }
-// }
-
-// ========================================
-// const tmpCtx = useContext(UserContext);
-// const [userCtx, setUserCtx] = useState("");
-
-// useEffect(() => {
-//   // const url = new URL("https://localhost:7201/api/user/get-user-profile");
-
-//   // const opt = {
-//   //   method: "GET",
-//   //   mode: "cors",
-//   //   credentials: "include",
-//   //   headers: {
-//   //     "Content-Type": "application/json",
-//   //     "Access-Control-Allow-Origin": "*",
-//   //   },
-//   // };
-
-//   async function getUserCtx() {
-//     try {
-//       // const resp = await fetch(url, opt);
-//       // const json = await resp.json();
-//       tmpCtx.sequence += 1;
-//       setUserCtx(tmpCtx);
-//     } catch (ex) {
-//       alert("getUserCtx error " + ex);
-//     }
-//   }
-
-//   getUserCtx();
-// }, [tmpCtx]);
-// ========================================
-
-// ========================================
-// const response = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-// const data = await response.json();
-// console.log(data);
-// ========================================
-
-// ========================================
-// ========================================
-
-// export function GetDefaultProfile() {
-//   try {
-//     const url = new URL(baseApiUserUrl + "get-default-profile");
-
-//     const opt = {
-//       method: "GET",
-//       mode: "cors",
-//       credentials: "include",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "Access-Control-Allow-Origin": "*",
-//       },
-//     };
-
-//     const resp = fetch(url, opt);
-//     const json = resp.json();
-//     return json;
-//   } catch (ex) {
-//     console.log("GetDefaultProfile error", ex);
-//   }
-
-//   return null;
-// }
-
-// ========================================
-// ========================================
-
-// export async function GetUserProfile() {
-//   try {
-//     const url = new URL(baseApiUserUrl + "get-user-profile");
-
-//     const options = {
-//       method: "GET",
-//       mode: "cors",
-//       credentials: "include",
-//       headers: {
-//         "Content-Type": "application/json",
-//         "Access-Control-Allow-Origin": "*",
-//       },
-//     };
-
-//     const resp = await fetch(url, options);
-//     const json = await resp.json();
-//     return json;
-//   } catch (ex) {
-//     console.log("GetUserProfile error", ex);
-//   }
-
-//   return null;
-// }
+    console.log(JSON.stringify(json));
+  } catch (err) {
+    console.log('Error ' + err);
+  }
+}

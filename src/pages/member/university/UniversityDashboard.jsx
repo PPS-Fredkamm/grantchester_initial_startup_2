@@ -9,24 +9,22 @@ import './UniversityDashboard.css';
 
 export default function UniversityDashboard() {
   return (
-    <>
-      <Container fluid className="university-dashboard">
-        <div className="university-container">
-          <Row className="university-content">
-            {/* Left Column */}
-            <Col xs={12} lg={12} xl={6}>
-              <UniversityPortfolioDashboard />
-              <DonationTabs />
-            </Col>
+    <Container fluid className="university-dashboard">
+      <div className="university-container">
+        <Row className="university-content">
+          {/* Left Column - Back to 50% width */}
+          <Col xs={12} lg={12} xl={6}>
+            <UniversityPortfolioDashboard />
+            <DonationTabs />
+          </Col>
 
-            {/* Right Column */}
-            <Col xs={12} lg={12} xl={6}>
-              <UniversityStockPlot />
-              <UniversityPriceHistory />
-            </Col>
-          </Row>
-        </div>
-      </Container>
-    </>
+          {/* Right Column - Back to 50% width */}
+          <Col xs={12} lg={12} xl={6}>
+            <UniversityStockPlot />
+            <UniversityPriceHistory />
+          </Col>
+        </Row>
+      </div>
+    </Container>
   );
 }

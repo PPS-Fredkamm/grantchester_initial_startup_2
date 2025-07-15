@@ -1,20 +1,10 @@
-.dashboard-container {
-  background-color: #f6fafd;
-  min-height: 100vh;
-  margin-left: 100px;
-   /* border-top: 2px solid black; */
-}
-.dashboard-top-row {
-  border-top: 2px #dee2e5;
-  padding-top: 1rem; /* Optional spacing */
-}
-
 .dashboard-wrapper {
   background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
-  padding: 1.5rem;
+  padding: 2rem;
   margin-left: 25px;
+  min-height: 500px; /* Helps it fill space on the left column */
 }
 
 .dashboard-row {
@@ -23,4 +13,13 @@
 
 .dashboard-title {
   font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.dashboard-header {
+  margin-bottom: 1.5rem;
+}
+
+.card-body .row > .col {
+  padding: 0.5rem 0.25rem;
 }

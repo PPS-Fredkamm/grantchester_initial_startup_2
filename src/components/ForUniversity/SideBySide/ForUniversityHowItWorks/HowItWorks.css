@@ -1,0 +1,43 @@
+.how-it-works-section {
+  background-color: #f8f9fa;
+   padding-top: 10rem;  /* Increase top padding inside the section */
+  padding-bottom: 10rem;
+  margin-top: 10rem;   /* Space above this section */
+}
+
+
+.section-title {
+  font-size: 5rem;
+  font-weight: 600;
+  padding-bottom: 2rem;
+}
+
+.how-it-works-step {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.step-text {
+  font-size: 2rem;
+  color: #333;
+}
+
+.step-image {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+/* Formatting for the images in how it works Section*/
+
+@media (min-width: 768px) {
+  .step-image {
+    max-width: 150px;
+  }
+}
+
+@media (min-width: 992px) {
+  .step-image {
+    max-width: 180px;
+  }
+}

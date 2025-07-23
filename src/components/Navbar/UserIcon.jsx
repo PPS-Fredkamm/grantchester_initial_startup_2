@@ -32,7 +32,7 @@ function UserIcon() {
         <div className="d-flex align-items-center gap-2">
           <div className="d-flex flex-column text-end">
             <span className="user-email">{Globals.profileInfo.email}</span>
-            {/* <span className="user-role">{Globals.roleInfo.roles.join(", ")}</span> */}
+            <span className="user-role">{Globals.roleInfo.roles.join(", ")}</span>
           </div>
           <NavDropdown
             align="end"

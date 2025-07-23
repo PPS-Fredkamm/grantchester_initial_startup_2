@@ -12,6 +12,7 @@ import './Home.css';
 
 export default function Home() {
   const logoList = [Dartmouth, Yale, USC, Drexel];
+  
   return (
     <>
       <SubBanner />

@@ -1,19 +1,21 @@
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Form, Button, Container, Card, InputGroup } from 'react-bootstrap';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useState, useRef, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { Form, Button, Container, Card, InputGroup } from "react-bootstrap";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { useAuthContext } from '../../context/AuthProvider';
-import AlertToast from '../../components/userInterface/AlertToast';
+import { useAuthContext } from "../../context/AuthProvider";
+import AlertToast from "../../components/userInterface/AlertToast";
+import ForgotPasswordModal from "./ForgotPassword";
 
-import './Login.css';
+import "./Login.css";
 
 export default function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const usernameRef = useRef(null);
   const authCtx = useAuthContext();
@@ -31,9 +33,9 @@ export default function Login() {
     const success = await authCtx.login(username, password);
 
     if (success) {
-      navigate('/profile');
+      navigate("/profile");
     } else {
-      setError('Username or password is invalid.');
+      setError("Username or password is invalid.");
       setShowToast(true);
       if (usernameRef.current) {
         usernameRef.current.focus();
@@ -48,6 +50,12 @@ export default function Login() {
         show={showToast}
         onClose={() => setShowToast(false)}
         message={error}
+      />
+
+      {/* Forgot Password Modal */}
+      <ForgotPasswordModal
+        show={showForgotPassword}
+        onClose={() => setShowForgotPassword(false)}
       />
 
       <Container className="login-container">
@@ -72,7 +80,7 @@ export default function Login() {
                   <Form.Label>Password</Form.Label>
                   <InputGroup>
                     <Form.Control
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="Password"
@@ -90,9 +98,13 @@ export default function Login() {
                 </Form.Group>
 
                 <Form.Text className="text-center d-block m-3">
-                  <Link to="/forgot-password" className="auth-link me-3">
+                  <span
+                    role="button"
+                    className="forgot-password-link"
+                    onClick={() => setShowForgotPassword(true)}
+                  >
                     Forgot password?
-                  </Link>
+                  </span>
                 </Form.Text>
 
                 <Button

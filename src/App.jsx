@@ -1,33 +1,34 @@
-import { useEffect, lazy, Suspense } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import { useApplContext } from './context/ApplProvider.jsx';
+import { useApplContext } from "./context/ApplProvider.jsx";
 
-import RequireAuthentication from './components/auth/RequireAuthentication.jsx';
+import RequireAuthentication from "./components/auth/RequireAuthentication.jsx";
 
-import NotFound from './layouts/notFound/NotFound.jsx';
-import ErrorHandler from './pages/ErrorHandler/ErrorHandler.jsx';
-import MainLayout from './layouts/main/MainLayout.jsx';
-import MemberLayout from './layouts/member/MemberLayout.jsx';
+import NotFound from "./layouts/notFound/NotFound.jsx";
+import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
+import MainLayout from "./layouts/main/MainLayout.jsx";
+import MemberLayout from "./layouts/member/MemberLayout.jsx";
 
-import WhyDonateLayout from './pages/WhyDonate/WhyDonateLayout.jsx';
-// import Globals from "./global/globals.js";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ForUniversitiesLayout from './pages/ForUniversities/ForUniversitiesLayout.jsx';
-import ForDonorsLayout from './pages/ForDonors/ForDonorsLayout.jsx';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Lazy-loaded route components
-const Home = lazy(() => import('./pages/home/Home.jsx'));
-const Login = lazy(() => import('./pages/login/Login.jsx'));
-const Signup = lazy(() => import('./pages/signup/Signup.jsx'));
+const Home = lazy(() => import("./pages/home/Home.jsx"));
+const Login = lazy(() => import("./pages/login/Login.jsx"));
+const Signup = lazy(() => import("./pages/signup/Signup.jsx"));
 const UnderConstruction = lazy(() =>
-  import('./pages/placeholder/UnderConstruction.jsx')
+  import("./pages/placeholder/UnderConstruction.jsx")
+);
+const WhyDonate = lazy(() => import("./pages/whyDonate/WhyDonate.jsx"));
+const ForDonors = lazy(() => import("./pages/forDonors/ForDonors.jsx"));
+const ForUniversities = lazy(() =>
+  import("./pages/forUniversities/ForUniversities.jsx")
 );
 
 export default function App() {
   const applCtx = useApplContext();
-      
+
   useEffect(() => {
     document.title = applCtx.ctx.documentTitle;
   }, [applCtx]);
@@ -52,17 +53,11 @@ export default function App() {
             errorElement={<ErrorHandler />}
           >
             <Route index element={<Home />} />
-            <Route
-              path="why-donate"
-              element={<WhyDonateLayout title="Why Donate Page" />}
-            />
-            <Route
-              path="for-donors"
-              element={<ForDonorsLayout title="For Donors Page" />}
-            />
+            <Route path="why-donate" element={<WhyDonate />} />
+            <Route path="for-donors" element={<ForDonors />} />
             <Route
               path="for-universities"
-              element={<ForUniversitiesLayout title="For Universities Page" />}
+              element={<ForUniversities />}
             />
             <Route
               path="partners"

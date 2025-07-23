@@ -1,7 +1,6 @@
-import React from 'react';
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import './SideBySide.css';
-import UniversityStock from '../../assets/images/SideBySideImage/UniversityStock.png';
+import UniversityStock from '../../assets/images/SideBySideImages/UniversityStock.png';
 
 export default function SideBySide({ 
   headline = "Unlock new stock options for your university",

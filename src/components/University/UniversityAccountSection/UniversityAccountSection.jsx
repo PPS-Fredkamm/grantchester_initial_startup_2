@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
-import { FaPencilAlt } from 'react-icons/fa';
-
+import { useState } from "react";
+import { Form, Row, Col, Button } from "react-bootstrap";
+import { FaPencilAlt } from "react-icons/fa";
 
 const UniversityAccountSection = () => {
   // Original saved data
   const [originalData, setOriginalData] = useState({
-    fullName: 'Drew Senour',
-    email: 'drew@example.com',
-    address: '123 University Blvd, Boston, MA',
+    fullName: "Drew Senour",
+    email: "drew@example.com",
+    address: "123 University Blvd, Boston, MA",
   });
 
   // Editable form state
@@ -41,13 +40,18 @@ const UniversityAccountSection = () => {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h5 className="mb-0">Account Details</h5>
         {!isEditing && (
-          <FaPencilAlt style={{ cursor: 'pointer' }} onClick={handleEditClick} />
+          <FaPencilAlt
+            style={{ cursor: "pointer" }}
+            onClick={handleEditClick}
+          />
         )}
       </div>
 
       <Form>
         <Form.Group as={Row} className="mb-3">
-          <Form.Label column sm={3}>Full Name</Form.Label>
+          <Form.Label column sm={3}>
+            Full Name
+          </Form.Label>
           <Col sm={9}>
             <Form.Control
               type="text"
@@ -60,7 +64,9 @@ const UniversityAccountSection = () => {
         </Form.Group>
 
         <Form.Group as={Row} className="mb-3">
-          <Form.Label column sm={3}>Email Address</Form.Label>
+          <Form.Label column sm={3}>
+            Email Address
+          </Form.Label>
           <Col sm={9}>
             <Form.Control
               type="email"
@@ -73,7 +79,9 @@ const UniversityAccountSection = () => {
         </Form.Group>
 
         <Form.Group as={Row} className="mb-4">
-          <Form.Label column sm={3}>Primary Address</Form.Label>
+          <Form.Label column sm={3}>
+            Primary Address
+          </Form.Label>
           <Col sm={9}>
             <Form.Control
               type="text"
@@ -87,8 +95,12 @@ const UniversityAccountSection = () => {
 
         {isEditing && (
           <div className="d-flex justify-content-end gap-2">
-            <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
-            <Button variant="primary" onClick={handleSave}>Save Changes</Button>
+            <Button variant="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={handleSave}>
+              Save Changes
+            </Button>
           </div>
         )}
       </Form>

@@ -31,7 +31,7 @@ export default function Login() {
     const success = await authCtx.login(username, password);
 
     if (success) {
-      navigate('/donor');
+      navigate('/profile');
     } else {
       setError('Username or password is invalid.');
       setShowToast(true);

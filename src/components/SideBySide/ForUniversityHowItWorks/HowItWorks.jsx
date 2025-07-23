@@ -3,10 +3,10 @@ import { Container, Row, Col, Image } from 'react-bootstrap';
 import './HowItWorks.css';
 
 // Images to import
-import CheckDocument from '../../../../assets/Images/HowItWorks/CheckDocument.png';
-import Growth from '../../../../assets/Images/HowItWorks/Growth.png'
-import PeopleChatting from '../../../../assets/Images/HowItWorks/PeopleChatting.png'
-import StockCert from '../../../../assets/Images/HowItWorks/StockCert.png';
+import CheckDocument from '../../../assets/images/HowItWorks/CheckDocument.png';
+import Growth from '../../../assets/images/HowItWorks/Growth.png'
+import PeopleChatting from '../../../assets/images/HowItWorks/PeopleChatting.png';
+import StockCert from '../../../assets/images/HowItWorks/StockCert.png';
 
 export default function HowItWorks() {
   return (

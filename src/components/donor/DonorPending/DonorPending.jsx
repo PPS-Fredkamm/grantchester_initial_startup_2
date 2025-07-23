@@ -31,7 +31,7 @@ export default function DonorPendingDonations() {
   }
 
   return (
-    <Card className="shadow mb-4">
+    <Card className="shadow">
       <Card.Body>
         <Table responsive="lg" className="pending-table">
           <thead>

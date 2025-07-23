@@ -71,7 +71,7 @@ export default function DonorDonations() {
   });
 
   return (
-    <Card className="shadow mb-4">
+    <Card className="donations-card shadow mb-4">
       <Card.Body>
         <div className="donations-header">
           <Card.Title>My Donations</Card.Title>

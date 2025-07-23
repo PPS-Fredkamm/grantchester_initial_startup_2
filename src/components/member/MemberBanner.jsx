@@ -17,7 +17,7 @@ export default function MemberBanner() {
       greeting = 'Donor Dashboard';
       break;
     case 'company':
-      greeting = 'Compony Dashboard';
+      greeting = 'Company Dashboard';
       break;
     case 'university':
       greeting = 'University Dashboard';

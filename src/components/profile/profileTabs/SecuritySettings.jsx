@@ -1,12 +1,14 @@
-import { Button, Alert } from 'react-bootstrap';
-import { useState } from 'react';
+import { Button, Alert } from "react-bootstrap";
+import { useState } from "react";
+
+import ChangePasswordModal from "./ChangePasswordModal";
 
 export default function SecuritySettings() {
   const [showAlert, setShowAlert] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
   const handleResetPassword = () => {
-    // TODO: Implement password reset logic
-    alert('Reset password flow triggered.');
+    alert("Reset password flow triggered.");
   };
 
   const handleDeleteAccount = () => {
@@ -14,8 +16,7 @@ export default function SecuritySettings() {
   };
 
   const confirmDelete = () => {
-    // TODO: Implement delete account logic
-    alert('Account deletion process started.');
+    alert("Account deletion process started.");
     setShowAlert(false);
   };
 
@@ -28,7 +29,16 @@ export default function SecuritySettings() {
           className="security-button reset mb-3"
           onClick={handleResetPassword}
         >
-          Reset Password
+          Reset My Password
+        </Button>
+      </div>
+
+      <div>
+        <Button
+          className="security-button reset mb-3"
+          onClick={() => setShowChangePasswordModal(true)}
+        >
+          Change My Password
         </Button>
       </div>
 
@@ -43,7 +53,7 @@ export default function SecuritySettings() {
 
       {showAlert && (
         <Alert variant="danger" dismissible onClose={() => setShowAlert(false)}>
-          <strong>Warning:</strong> This action is permanent.{' '}
+          <strong>Warning:</strong> This action is permanent.{" "}
           <Button
             variant="danger"
             size="sm"
@@ -54,6 +64,12 @@ export default function SecuritySettings() {
           </Button>
         </Alert>
       )}
+
+      {/* Change Password Modal */}
+      <ChangePasswordModal
+        show={showChangePasswordModal}
+        onClose={() => setShowChangePasswordModal(false)}
+      />
     </div>
   );
 }

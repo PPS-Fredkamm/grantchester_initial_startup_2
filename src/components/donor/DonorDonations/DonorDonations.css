@@ -1,3 +1,7 @@
+.donations-card {
+  margin-top: 1.5rem;
+}
+
 /* Flex layout for the card header row */
 .donations-header {
   display: flex;

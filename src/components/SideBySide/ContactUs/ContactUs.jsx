@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './ContactUs.css';
 // import grantchester logo
-import grantchester from '../../../../assets/Images/grantchester.png'; // Adjust path as needed
+import grantchester from '../../../assets/images/grantchester.png';
 
 export default function ContactUs() {
   return (

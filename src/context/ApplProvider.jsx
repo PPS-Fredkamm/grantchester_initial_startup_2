@@ -35,7 +35,8 @@ export default function ApplProvider({ children }) {
   }
 
   function setGlobals(c) {
-    Globals.apiEnvironment = c.apiEnvironment;
+    Globals.initApiInfo();
+    Globals.apiInfo.apiEnvironment = c.apiEnvironment;
   }
 
   // ========================================

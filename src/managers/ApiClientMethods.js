@@ -11,7 +11,7 @@ export async function appendAuthenticationHeader(headers) {
   // ----------------------------------------
   if (headers === undefined || headers === null) return;
   // ----------------------------------------
-  token = Globals.userInfo.bearerToken;
+  token = Globals.apiInfo.bearerToken;
   if (token === undefined || token === null) return;
   bearer = "Bearer " + token;
   // ----------------------------------------
@@ -22,7 +22,7 @@ export async function appendAuthenticationHeader(headers) {
 //  generateFetchOptions
 // ========================================
 
-export function generateFetchOptions(httpMethod) {
+export function generateFetchOptions(httpMethod, item) {
   var options = null;
   const headers = new Headers();
   // ----------------------------------------
@@ -51,20 +51,33 @@ export function generateFetchOptions(httpMethod) {
       headers.append("Accept-Encoding", "gzip");
       headers.append("Accept-Encoding", "deflate");
       // ----------------------------------------
-      //   headers.append("Content-Type", "application/json");
-      //   headers.append("Access-Control-Allow-Origin", "*");
-      // ----------------------------------------
       options = {};
       options["method"] = method;
-      //   options["mode"] = "cors";
-      //   options["credentials"] = "include";
       // ----------------------------------------
       break;
     }
     case "PUT": {
+      // ----------------------------------------
+      headers.append("Accept", "*/*");
+      headers.append("Accept-Encoding", "gzip");
+      headers.append("Accept-Encoding", "deflate");
+      headers.append("Content-Type", "application/json");
+      // ----------------------------------------
+      options = {};
+      options["method"] = method;
+      options["body"] = JSON.stringify(item);
       break;
     }
     case "PATCH": {
+      headers.append("Accept", "*/*");
+      headers.append("Accept-Encoding", "gzip");
+      headers.append("Accept-Encoding", "deflate");
+      headers.append("Content-Type", "application/json");
+      // ----------------------------------------
+      options = {};
+      options["method"] = method;
+      1;
+      // ----------------------------------------
       break;
     }
     case "DELETE": {
@@ -115,9 +128,9 @@ export function generateFetchUrl(path, params) {
 
   // ----------------------------------------
 
-  env = Globals.apiEnvironment;
+  env = Globals.apiInfo.apiEnvironment;
   if (env === undefined || env === null) {
-    throw new Error("Global apiEnvironment is not defined");
+    throw new Error("Globals apiEnvironment is not defined");
   }
 
   switch (env) {
@@ -192,12 +205,12 @@ export function getApiResultData(item) {
 export async function processFetchError(route, error) {
   var msg;
   var apiResult = new ACO.ApiResult();
-  apiResult.StatusCode = 500;
-  apiResult.StatusText = "Error";
+  apiResult.statusCode = 500;
+  apiResult.statusText = "Error";
   msg = "Route : " + route;
-  apiResult.Messages.push(msg);
+  apiResult.messages.push(msg);
   msg = error.name + " : " + error.message;
-  apiResult.Messages.push(msg);
+  apiResult.messages.push(msg);
   return apiResult;
 }
 
@@ -206,13 +219,13 @@ export async function processFetchError(route, error) {
 // ========================================
 
 export async function processFetchResponse(response) {
-  // response.status = 404 Not found ( endpoint or api entity )
-  // response.status = 500 Internal server error ( all api C# exceptions )
+  // ----------------------------------------
+  // http status 400 Bad Request
+  // http status 401 Unauthorized
+  // http status 404 Not found ( endpoint or api entity )
+  // http status 500 Internal server error ( all api C# exceptions )
   //
-  //
-  //
-  //
-  //
+  // headers.get(name) is case-insensitive
   // ----------------------------------------
   var contentLength, contentType;
   var apiResult, result;
@@ -220,24 +233,18 @@ export async function processFetchResponse(response) {
   // ----------------------------------------
 
   contentLength = response.headers.get("content-length");
-  if (contentLength === 0) {
-    apiResult = new ACO.ApiResult();
-    apiResult.StatusCode = response.status;
-    apiResult.StatusText = "Error";
-    apiResult.Messages.push("Response header content-length zero");
-    return apiResult;
+  if (contentLength === undefined || contentLength === null) {
+    contentLength = 0;
   }
 
-  // ----------------------------------------
-  //   if (contentType !== undefined && contentType !== null)
   // ----------------------------------------
 
   contentType = response.headers.get("content-type");
   if (contentType === undefined || contentType === null) {
     apiResult = new ACO.ApiResult();
-    apiResult.StatusCode = response.status;
-    apiResult.StatusText = "Error";
-    apiResult.Messages.push("Response header content-type undefined");
+    apiResult.statusCode = response.status;
+    apiResult.statusText = "Error";
+    apiResult.messages.push("Response header content-type undefined");
     return apiResult;
   }
 
@@ -246,7 +253,7 @@ export async function processFetchResponse(response) {
   if (contentType.includes("text/plain")) {
     result = await response.text();
     apiResult = new ACO.ApiResult();
-    apiResult.Data = result;
+    apiResult.data = result;
     return apiResult;
   }
 
@@ -255,6 +262,21 @@ export async function processFetchResponse(response) {
   if (contentType.includes("application/json")) {
     result = await response.json();
     return result;
+  }
+
+  // ----------------------------------------
+
+  if (contentType.includes("application/problem+json")) {
+    result = await response.json();
+    apiResult = new ACO.ApiResult();
+    apiResult.statusCode = response.status;
+    apiResult.statusText = "Error";
+    apiResult.messages.push(result.type);
+    apiResult.messages.push(result.title);
+    apiResult.messages.push(result.status);
+    apiResult.messages.push(result.detail);
+    apiResult.messages.push(result.instance);
+    return apiResult;
   }
 
   // ----------------------------------------
@@ -278,7 +300,7 @@ export async function processFetchResponse(response) {
     }
 
     apiResult = new ACO.ApiResult();
-    apiResult.Data = image;
+    apiResult.data = image;
     return apiResult;
   }
 
@@ -291,7 +313,7 @@ export async function processFetchResponse(response) {
     // myImage.src = objectURL;
 
     apiResult = new ACO.ApiResult();
-    apiResult.Data = blob;
+    apiResult.data = blob;
     return apiResult;
   }
 
@@ -300,7 +322,28 @@ export async function processFetchResponse(response) {
   if (contentType.includes("array")) {
     result = await response.arrayBuffer();
     apiResult = new ACO.ApiResult();
-    apiResult.Data = result;
+    apiResult.data = result;
     return apiResult;
   }
+}
+
+// ========================================
+//  arrayBufferToBase64
+//
+// Example:
+//
+// let textEncoder = new TextEncoder();
+// let myBuffer = textEncoder.encode("Hello, ArrayBuffer!");
+// let base64Encoded = arrayBufferToBase64(myBuffer.buffer);
+// console.log(base64Encoded); // Output will be "SGVsbG8sIEFycmF5QnVmZmVyIQ=="
+// ========================================
+
+export function arrayBufferToBase64(arrayBuf) {
+  let uint8Array = new Uint8Array(arrayBuf);
+  let binaryString = "";
+  for (let i = 0; i < uint8Array.byteLength; i++) {
+    binaryString += String.fromCharCode(uint8Array[i]);
+  }
+  let base64String = btoa(binaryString);
+  return base64String;
 }

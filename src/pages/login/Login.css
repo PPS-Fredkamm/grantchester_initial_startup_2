@@ -33,3 +33,16 @@
 .password-toggle-button:hover {
   background-color: #e2e2e2;
 }
+
+.forgot-password-link {
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0;
+  color: var(--bs-link-color, #0d6efd); 
+  text-decoration: underline;
+}
+
+.forgot-password-link:hover {
+  color: var(--bs-link-hover-color, #0a58ca);
+  text-decoration: none;
+}

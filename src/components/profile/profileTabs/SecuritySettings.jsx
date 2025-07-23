@@ -1,37 +1,29 @@
-import { Button, Alert } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useState } from "react";
 
 import ChangePasswordModal from "./ChangePasswordModal";
+import DeleteAccountModal from "./DeleteAccountModal";
 
 export default function SecuritySettings() {
-  const [showAlert, setShowAlert] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  const handleResetPassword = () => {
-    alert("Reset password flow triggered.");
-  };
-
-  const handleDeleteAccount = () => {
-    setShowAlert(true);
-  };
-
-  const confirmDelete = () => {
-    alert("Account deletion process started.");
-    setShowAlert(false);
-  };
+  // const handleResetPassword = () => {
+  //   alert("Reset password flow triggered.");
+  // };
 
   return (
     <div className="px-2">
       <h5 className="mb-3">Security Settings</h5>
 
-      <div>
+      {/* <div>
         <Button
           className="security-button reset mb-3"
           onClick={handleResetPassword}
         >
           Reset My Password
         </Button>
-      </div>
+      </div> */}
 
       <div>
         <Button
@@ -45,30 +37,22 @@ export default function SecuritySettings() {
       <div>
         <Button
           className="security-button delete mb-3"
-          onClick={handleDeleteAccount}
+          onClick={() => setShowDeleteModal(true)}
         >
           Delete Account
         </Button>
       </div>
 
-      {showAlert && (
-        <Alert variant="danger" dismissible onClose={() => setShowAlert(false)}>
-          <strong>Warning:</strong> This action is permanent.{" "}
-          <Button
-            variant="danger"
-            size="sm"
-            onClick={confirmDelete}
-            className="ms-2"
-          >
-            Confirm Delete
-          </Button>
-        </Alert>
-      )}
-
       {/* Change Password Modal */}
       <ChangePasswordModal
         show={showChangePasswordModal}
         onClose={() => setShowChangePasswordModal(false)}
+      />
+
+      {/* Delete Account Modal */}
+      <DeleteAccountModal
+        show={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
       />
     </div>
   );

@@ -1,13 +1,12 @@
-import React from 'react';
-import { Row, Col, Button, Card } from 'react-bootstrap';
-import './UniversityPortfolioDashboard.css';
+import { Row, Col, Button, Card } from "react-bootstrap";
+import "./UniversityPortfolioDashboard.css";
 
 // Example data
 const portfolio = [
-  { company: 'Apple', shares: 50, price: 180 },
-  { company: 'Tesla', shares: 10, price: 250 },
-  { company: 'Amazon', shares: 25, price: 130 },
-  { company: 'Google', shares: 15, price: 145 },
+  { company: "Apple", shares: 50, price: 180 },
+  { company: "Tesla", shares: 10, price: 250 },
+  { company: "Amazon", shares: 25, price: 130 },
+  { company: "Google", shares: 15, price: 145 },
 ];
 
 function UniversityPortfolioDashboard() {
@@ -25,7 +24,10 @@ function UniversityPortfolioDashboard() {
           </Row>
 
           {portfolio.map((item, index) => (
-            <Card className="dashboard-row mb-3 shadow bg-white rounded" key={index}>
+            <Card
+              className="dashboard-row mb-3 shadow bg-white rounded"
+              key={index}
+            >
               <Card.Body>
                 <Row className="text-center">
                   <Col>{item.company}</Col>

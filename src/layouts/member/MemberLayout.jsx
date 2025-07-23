@@ -13,7 +13,6 @@ import UniversityCertificates from '../../pages/member/university/UniversityCert
 import UniversitySettings from '../../pages/member/university/UniversitySettings/UniversitySettings';
 import UniversityDonations from '../../pages/member/university/UniversityDonations/UniversityDonations';
 
-
 // Lazy-loaded dashboards
 const DonorDashboard = lazy(() =>
   import("../../pages/member/donor/DonorDashboard")
@@ -28,6 +27,7 @@ const ProfilePage = lazy(() => import("../../pages/member/profile/Profile"));
 const PublicProfile = lazy(() =>
   import("../../pages/member/profile/PublicProfile")
 );
+const DonatePage = lazy(() => import("../../pages/donate/Donate"));
 
 import "./MemberLayout.css";
 
@@ -83,25 +83,25 @@ export default function MemberLayout() {
       }
       break;
 
-    case 'university':
+    case "university":
       switch (resolvedOption) {
-        case '':
+        case "":
           content = <UniversityDashboard />;
           break;
-        case 'certificates':
-          content = <UniversityCertificates title="University Certificates" />;
+        case "certificates":
+          content = <UnderConstruction title="University Certificates" />;
           break;
-        case 'donations':
-          content = <UniversityDonations title="University Donations" />;
+        case "donations":
+          content = <UniversityDonations />;
           break;
-        case 'documents':
+        case "documents":
           content = <UnderConstruction title="University Documents" />;
           break;
-        case 'Mailing':
+        case "Mailing":
           content = <UnderConstruction title="University Mailing" />;
           break;
-        case 'settings':
-          content = <UniversitySettings title="University Settings" />;
+        case "settings":
+          content = <UniversitySettings />;
           break;
         default:
           content = <NotFound />;
@@ -123,7 +123,7 @@ export default function MemberLayout() {
     case "donate":
       switch (resolvedOption) {
         case "":
-          content = <UnderConstruction title="Donation Page" />;
+          content = <DonatePage />;
           break;
         default:
           content = <NotFound />;

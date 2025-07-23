@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-// import { useAuthContext } from '../../context/AuthProvider';
+import { useAuthContext } from '../../context/AuthProvider';
 
 import AlertToast from '../../components/userInterface/AlertToast';
 import ProfileInfoForm from './ProfileInfoForm';
@@ -18,7 +18,7 @@ import ProfileInfoForm from './ProfileInfoForm';
 import './Signup.css';
 
 export default function Signup() {
-  // const { register } = useAuthContext();
+  const authCtx = useAuthContext();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -46,13 +46,13 @@ export default function Signup() {
       return;
     }
 
-    // const user = await register(username, password);
+    var flag = await authCtx.register(username, password);
 
-    // if (!user) {
-    //   setError('Signup failed');
-    //   setShowToast(true);
-    //   return;
-    // }
+    if (!flag) {
+      setError('Signup failed');
+      setShowToast(true);
+      return;
+    }
 
     setShowProfileModal(true);
   }

@@ -10,10 +10,12 @@ import ErrorHandler from './pages/ErrorHandler/ErrorHandler.jsx';
 import MainLayout from './layouts/main/MainLayout.jsx';
 import MemberLayout from './layouts/member/MemberLayout.jsx';
 
-import Globals from "./global/globals.js";
-
+import WhyDonateLayout from './pages/WhyDonate/WhyDonateLayout.jsx';
+// import Globals from "./global/globals.js";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ForUniversitiesLayout from './pages/ForUniversities/ForUniversitiesLayout.jsx';
+import ForDonorsLayout from './pages/ForDonors/ForDonorsLayout.jsx';
 
 // Lazy-loaded route components
 const Home = lazy(() => import('./pages/home/Home.jsx'));
@@ -27,9 +29,6 @@ export default function App() {
   const applCtx = useApplContext();
       
   useEffect(() => {
-    Globals.initUserInfo();
-    Globals.initProfileInfo();
-    Globals.initRoleInfo();
     document.title = applCtx.ctx.documentTitle;
   }, [applCtx]);
 
@@ -55,15 +54,15 @@ export default function App() {
             <Route index element={<Home />} />
             <Route
               path="why-donate"
-              element={<UnderConstruction title="Why Donate Page" />}
+              element={<WhyDonateLayout title="Why Donate Page" />}
             />
             <Route
               path="for-donors"
-              element={<UnderConstruction title="For Donors Page" />}
+              element={<ForDonorsLayout title="For Donors Page" />}
             />
             <Route
               path="for-universities"
-              element={<UnderConstruction title="For Universities Page" />}
+              element={<ForUniversitiesLayout title="For Universities Page" />}
             />
             <Route
               path="partners"

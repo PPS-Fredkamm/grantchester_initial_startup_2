@@ -1,0 +1,10 @@
+.who-card {
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+  padding: 1rem;
+}
+
+.who-card:hover {
+  transform: translateY(-4px);
+}

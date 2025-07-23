@@ -1,52 +1,60 @@
-import { useParams } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
+import { useParams } from "react-router-dom";
+import { lazy, Suspense } from "react";
 
-import UnderConstruction from '../../pages/placeholder/UnderConstruction';
-import MemberBanner from '../../components/member/memberBanner';
-import MemberNav from '../../components/member/MemberNav';
-import NotFound from '../notFound/NotFound';
+import UnderConstruction from "../../pages/placeholder/UnderConstruction";
+import MemberBanner from "../../components/member/memberBanner";
+import MemberNav from "../../components/member/MemberNav";
+import NotFound from "../notFound/NotFound";
 import NavBar from "../../components/navbar/Navbar";
+import DonorDonations from "../../components/donor/DonorDonations/DonorDonations";
+
+// Imports for the University Sub pages //
+import UniversityCertificates from '../../pages/member/university/UniversityCertificates/UniversityCertificates';
+import UniversitySettings from '../../pages/member/university/UniversitySettings/UniversitySettings';
+import UniversityDonations from '../../pages/member/university/UniversityDonations/UniversityDonations';
+
 
 // Lazy-loaded dashboards
 const DonorDashboard = lazy(() =>
-  import('../../pages/member/donor/DonorDashboard')
+  import("../../pages/member/donor/DonorDashboard")
 );
 const CompanyDashboard = lazy(() =>
-  import('../../pages/member/company/CompanyDashboard')
+  import("../../pages/member/company/CompanyDashboard")
 );
 const UniversityDashboard = lazy(() =>
-  import('../../pages/member/university/UniversityDashboard')
+  import("../../pages/member/university/UniversityDashboard")
 );
-const ProfilePage = lazy(() =>
-  import('../../pages/member/profile/Profile')
+const ProfilePage = lazy(() => import("../../pages/member/profile/Profile"));
+const PublicProfile = lazy(() =>
+  import("../../pages/member/profile/PublicProfile")
 );
 
-import './MemberLayout.css';
+import "./MemberLayout.css";
 
 export default function MemberLayout() {
-  const { type, option = '' } = useParams();
+  const { type, option = "" } = useParams();
 
-  const resolvedType = type?.toLowerCase() || 'donor';
-  const resolvedOption = option?.toLowerCase() || '';
+  const resolvedType = type?.toLowerCase() || "donor";
+  const resolvedOption = option?.toLowerCase() || "";
 
   let content;
 
   switch (resolvedType) {
-    case 'donor':
+    case "donor":
       switch (resolvedOption) {
-        case '':
+        case "":
           content = <DonorDashboard />;
           break;
-        case 'donations':
-          content = <UnderConstruction title="Donations" />;
+        case "donations":
+          content = <DonorDonations />;
           break;
-        case 'documents':
+        case "documents":
           content = <UnderConstruction title="Documents" />;
           break;
-        case 'mailing':
+        case "mailing":
           content = <UnderConstruction title="Mailing" />;
           break;
-        case 'settings':
+        case "settings":
           content = <UnderConstruction title="Settings" />;
           break;
         default:
@@ -55,18 +63,18 @@ export default function MemberLayout() {
       }
       break;
 
-    case 'company':
+    case "company":
       switch (resolvedOption) {
-        case '':
+        case "":
           content = <CompanyDashboard />;
           break;
-        case 'requests':
+        case "requests":
           content = <UnderConstruction title="Company Requests" />;
           break;
-        case 'users':
+        case "users":
           content = <UnderConstruction title="Company Users" />;
           break;
-        case 'settings':
+        case "settings":
           content = <UnderConstruction title="Company Settings" />;
           break;
         default:
@@ -81,10 +89,10 @@ export default function MemberLayout() {
           content = <UniversityDashboard />;
           break;
         case 'certificates':
-          content = <UnderConstruction title="University Certificates" />;
+          content = <UniversityCertificates title="University Certificates" />;
           break;
         case 'donations':
-          content = <UnderConstruction title="University Donations" />;
+          content = <UniversityDonations title="University Donations" />;
           break;
         case 'documents':
           content = <UnderConstruction title="University Documents" />;
@@ -93,7 +101,7 @@ export default function MemberLayout() {
           content = <UnderConstruction title="University Mailing" />;
           break;
         case 'settings':
-          content = <UnderConstruction title="University Settings" />;
+          content = <UniversitySettings title="University Settings" />;
           break;
         default:
           content = <NotFound />;
@@ -101,13 +109,24 @@ export default function MemberLayout() {
       }
       break;
 
-    case 'profile':
+    case "profile":
       switch (resolvedOption) {
-        case '':
+        case "":
           content = <ProfilePage />;
           break;
-        case 'profile-setup':
-          content = <UnderConstruction title="Profile Setup Page" />;
+        default:
+          content = <PublicProfile username={resolvedOption} />;
+          break;
+      }
+      break;
+
+    case "donate":
+      switch (resolvedOption) {
+        case "":
+          content = <UnderConstruction title="Donation Page" />;
+          break;
+        default:
+          content = <NotFound />;
           break;
       }
       break;

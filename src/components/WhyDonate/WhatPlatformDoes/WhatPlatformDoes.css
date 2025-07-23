@@ -1,0 +1,18 @@
+.header-image-container {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  text-align: center;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.header-image {
+  width: 75%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

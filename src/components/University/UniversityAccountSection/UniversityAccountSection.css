@@ -1,0 +1,7 @@
+form input[readonly] {
+  background-color: transparent;
+  border: none;
+  padding-left: 0;
+  color: #495057;
+  cursor: default;
+}

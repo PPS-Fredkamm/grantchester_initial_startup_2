@@ -347,3 +347,19 @@ export function arrayBufferToBase64(arrayBuf) {
   let base64String = btoa(binaryString);
   return base64String;
 }
+
+// ----------------------------------------
+// createImageFileURL
+// ----------------------------------------
+
+export function createImageFileURL(imageFile) {
+  let dataUrl = "";
+  if (imageFile.data.length > 0) {
+    dataUrl += "data:";
+    dataUrl += imageFile.contentType;
+    dataUrl += ";";
+    dataUrl += "base64,";
+    dataUrl += imageFile.data;
+  }
+  return dataUrl;
+}

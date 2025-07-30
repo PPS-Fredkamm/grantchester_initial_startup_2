@@ -38,7 +38,7 @@ export default function AuthProvider({ children }) {
     let c = getDefaultContext();
     c.sequence += 1;
 
-    if (hasStoredGlobals && Globals.userInfo.id > 0) {
+    if (hasStoredGlobals && Globals.member.user.id > 0) {
       c.isAuthenticated = true;
     }
 

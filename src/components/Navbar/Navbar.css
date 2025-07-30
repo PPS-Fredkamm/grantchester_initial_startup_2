@@ -172,8 +172,12 @@
 /* Responsiveness */
 /* ========================= */
 
-@media (max-width: 1360px) {
+@media (max-width: 1500px) {
   .nav-menu .nav-link {
-    margin: .8rem;
+    margin: 0rem;
   }
+
+  .nav-content {
+  padding-right: 0rem
+}
 }

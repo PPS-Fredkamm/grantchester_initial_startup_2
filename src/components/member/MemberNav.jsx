@@ -9,22 +9,19 @@ export default function MemberNav() {
       { path: 'donations', label: 'My Donations' },
       { path: 'documents', label: 'Documents' },
       { path: 'mailing', label: 'Mailing' },
-      { path: 'settings', label: 'Settings' },
-      { path: '/company', label: 'Company Dashboard' },
+      { path: '/profile', label: 'Settings' },
     ],
     company: [
       { path: '', label: 'Dashboard' },
       { path: 'requests', label: 'Company Requests' },
       { path: 'users', label: 'Users' },
       { path: 'settings', label: 'Settings' },
-      { path: '/university', label: 'University Dashboard' },
     ],
     university: [
       { path: '', label: 'Dashboard' },
       { path: 'certificates', label: 'Certificates' },
       { path: 'donations', label: 'Donations' },
       { path: 'settings', label: 'Settings' },
-      { path: '/donor', label: 'Donor Dashboard' },
     ],
     profile: [
       { path: '', label: 'Profile' },

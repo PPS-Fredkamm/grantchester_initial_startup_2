@@ -3,8 +3,8 @@ import './SideBySide.css';
 import UniversityStock from '../../assets/images/SideBySideImages/UniversityStock.png';
 
 export default function SideBySide({ 
-  headline = "Unlock new stock options for your university",
-  text = "Discover how our platform can help universities access new stock options and enhance their financial strategies.",
+  headline = "Grantchester's Stock Grant Program Opens the Door for Private Stock Donations to University Endowments",
+  text = "For the first time, universities can accept private stock donations to strengthen their endowments supporting their financial future and the next generation of students.",
   buttonLabel = "Learn More",
   buttonLink = "/for-universities",
   imageSrc = UniversityStock, 

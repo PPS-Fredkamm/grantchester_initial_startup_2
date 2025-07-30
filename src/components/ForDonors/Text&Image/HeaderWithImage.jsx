@@ -1,6 +1,7 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "./HeaderWithImage.css";
-import Handshake from "../../../assets/images/SideBySideImages/Handshake.png";
+// import Handshake from "../../../assets/images/SideBySideImages/Handshake.png";
+import Handshake from "../../../assets/images/For-Donors.png";
 
 export default function HeaderWithImage({
   headline = "Empowering Donors to Make a Difference",

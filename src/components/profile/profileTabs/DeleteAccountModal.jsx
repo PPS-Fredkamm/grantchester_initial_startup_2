@@ -4,6 +4,7 @@ import { FaStar } from "react-icons/fa";
 
 export default function DeleteAccountModal({ show, onClose }) {
   const [feedback, setFeedback] = useState("");
+  const [challenges, setChallenges] = useState("");
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(null);
 
@@ -16,6 +17,7 @@ export default function DeleteAccountModal({ show, onClose }) {
   function handleConfirmDelete() {
     alert("Account deletion process started."); // replace with real API call later
     setFeedback("");
+    setChallenges(""); // reset new field
     setRating(0);
     setConfirmStep(false);
     onClose();
@@ -26,6 +28,7 @@ export default function DeleteAccountModal({ show, onClose }) {
       setConfirmStep(false);
     } else {
       setFeedback("");
+      setChallenges(""); // reset new field
       setRating(0);
       onClose();
     }
@@ -74,6 +77,17 @@ export default function DeleteAccountModal({ show, onClose }) {
                 })}
               </div>
             </div>
+
+            {/* Challenges Field */}
+            <Form.Group className="mb-3" controlId="deleteChallenges">
+              <Form.Label>Did you experience any challenges?</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Optional – let us know what didn't work"
+                value={challenges}
+                onChange={(e) => setChallenges(e.target.value)}
+              />
+            </Form.Group>
 
             {/* Feedback Textarea */}
             <Form>

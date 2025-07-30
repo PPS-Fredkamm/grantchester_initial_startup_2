@@ -2,11 +2,12 @@ import { useParams } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import UnderConstruction from "../../pages/placeholder/UnderConstruction";
-import MemberBanner from "../../components/member/memberBanner";
+import MemberBanner from "../../components/member/MemberBanner.jsx";
 import MemberNav from "../../components/member/MemberNav";
 import NotFound from "../notFound/NotFound";
 import NavBar from "../../components/navbar/Navbar";
 import DonorDonations from "../../components/donor/DonorDonations/DonorDonations";
+import CompanySettings from "../../components/company/CompanySettings/CompanySettings.jsx";
 
 // Imports for the University Sub pages //
 import UniversityCertificates from '../../pages/member/university/UniversityCertificates/UniversityCertificates';
@@ -54,9 +55,9 @@ export default function MemberLayout() {
         case "mailing":
           content = <UnderConstruction title="Mailing" />;
           break;
-        case "settings":
-          content = <UnderConstruction title="Settings" />;
-          break;
+        // case "settings":
+        //   content = <ProfilePage />;
+        //   break;
         default:
           content = <NotFound />;
           break;
@@ -75,7 +76,7 @@ export default function MemberLayout() {
           content = <UnderConstruction title="Company Users" />;
           break;
         case "settings":
-          content = <UnderConstruction title="Company Settings" />;
+          content = <CompanySettings />;
           break;
         default:
           content = <NotFound />;

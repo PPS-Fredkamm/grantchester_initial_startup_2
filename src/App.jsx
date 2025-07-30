@@ -10,6 +10,8 @@ import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
 import MainLayout from "./layouts/main/MainLayout.jsx";
 import MemberLayout from "./layouts/member/MemberLayout.jsx";
 
+import Globals from "./global/globals.js";
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 

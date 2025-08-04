@@ -6,7 +6,7 @@ import './SecondaryBanner.css';
 function SecondaryBanner() {
   return (
     <div className="secondary-banner">
-      <Container>
+      <Container fluid>
         <Row className="align-items-center">
           <Col md={6}>
             <div className="secondary-text">

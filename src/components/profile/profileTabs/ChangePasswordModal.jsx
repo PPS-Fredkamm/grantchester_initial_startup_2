@@ -5,7 +5,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAuthContext } from "../../../context/AuthProvider";
 
 import AlertToast from "../../userInterface/AlertToast";
-import "./ChangePasswordModal.css";
 
 export default function ChangePasswordModal({ show, onClose }) {
   const [currentPassword, setCurrentPassword] = useState("");

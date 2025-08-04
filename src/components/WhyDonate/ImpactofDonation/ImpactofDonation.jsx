@@ -1,7 +1,6 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from "react-bootstrap";
 
-export default function ImpactofDonation() {
+export default function ImpactOfDonation() {
   return (
     <Container className="my-5 text-center">
       <h2>The Impact of My Donation</h2>

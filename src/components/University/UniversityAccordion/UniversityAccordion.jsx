@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
-import { Accordion, Card, useAccordionButton } from 'react-bootstrap';
-import { FaChevronDown } from 'react-icons/fa';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import UniversityAccountSection from '../UniversityAccountSection/UniversityAccountSection';
-import PlansBillingSection from '../../University/PlansBillingSection/PlansBillingSection'
-import UniversityUserTeamSection from '../../University/UniversityUserTeamSection/UniversityUserTeamSection'
-
-
+import { useState } from "react";
+import { Accordion, Card, useAccordionButton } from "react-bootstrap";
+import { FaChevronDown } from "react-icons/fa";
+import "bootstrap/dist/css/bootstrap.min.css";
+import UniversityAccountSection from "../UniversityAccountSection/UniversityAccountSection";
+// import PlansBillingSection from '../../University/PlansBillingSection/PlansBillingSection'
+import UniversityUserTeamSection from "../../University/UniversityUserTeamSection/UniversityUserTeamSection";
 
 const CustomToggle = ({ children, eventKey }) => {
   const decoratedOnClick = useAccordionButton(eventKey);
@@ -21,20 +19,20 @@ const CustomToggle = ({ children, eventKey }) => {
     <div
       onClick={handleClick}
       className="d-flex justify-content-between align-items-center p-3 border bg-light cursor-pointer"
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: "pointer" }}
     >
       <strong>{children}</strong>
       <FaChevronDown
         style={{
-          transition: 'transform 0.3s ease',
-          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: "transform 0.3s ease",
+          transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
         }}
       />
     </div>
   );
 };
 
-const UniversityAccordion = ({ currentPlan, onPlanChange }) => {
+const UniversityAccordion = () => {
   return (
     <div className="container mt-4">
       <h2 className="mb-4">Settings</h2>
@@ -48,7 +46,7 @@ const UniversityAccordion = ({ currentPlan, onPlanChange }) => {
           </Accordion.Collapse>
         </Card>
 
-        <Card>
+        {/* <Card>
           <CustomToggle eventKey="1">Plans & Billing</CustomToggle>
           <Accordion.Collapse eventKey="1">
             <Card.Body>
@@ -58,26 +56,25 @@ const UniversityAccordion = ({ currentPlan, onPlanChange }) => {
               />
             </Card.Body>
           </Accordion.Collapse>
-        </Card>
+        </Card> */}
 
         <Card>
           <CustomToggle eventKey="2">Users & Teams</CustomToggle>
           <Accordion.Collapse eventKey="2">
             <Card.Body>
-             <UniversityUserTeamSection />
+              <UniversityUserTeamSection />
             </Card.Body>
           </Accordion.Collapse>
         </Card>
 
-        <Card>
+        {/* <Card>
           <CustomToggle eventKey="3">Payment Method</CustomToggle>
           <Accordion.Collapse eventKey="3">
             <Card.Body>
-              {/* Add/edit payment details */}
               Credit card, PayPal, etc.
             </Card.Body>
           </Accordion.Collapse>
-        </Card>
+        </Card> */}
       </Accordion>
     </div>
   );

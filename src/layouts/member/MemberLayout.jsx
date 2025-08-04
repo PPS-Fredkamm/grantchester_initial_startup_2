@@ -2,17 +2,17 @@ import { useParams } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
 import UnderConstruction from "../../pages/placeholder/UnderConstruction";
-import MemberBanner from "../../components/member/memberBanner";
+import MemberBanner from "../../components/member/MemberBanner.jsx";
 import MemberNav from "../../components/member/MemberNav";
 import NotFound from "../notFound/NotFound";
 import NavBar from "../../components/navbar/Navbar";
 import DonorDonations from "../../components/donor/DonorDonations/DonorDonations";
+import CompanySettings from "../../components/company/CompanySettings/CompanySettings.jsx";
 
 // Imports for the University Sub pages //
 import UniversityCertificates from '../../pages/member/university/UniversityCertificates/UniversityCertificates';
 import UniversitySettings from '../../pages/member/university/UniversitySettings/UniversitySettings';
 import UniversityDonations from '../../pages/member/university/UniversityDonations/UniversityDonations';
-
 
 // Lazy-loaded dashboards
 const DonorDashboard = lazy(() =>
@@ -28,6 +28,7 @@ const ProfilePage = lazy(() => import("../../pages/member/profile/Profile"));
 const PublicProfile = lazy(() =>
   import("../../pages/member/profile/PublicProfile")
 );
+const DonatePage = lazy(() => import("../../pages/donate/Donate"));
 
 import "./MemberLayout.css";
 
@@ -54,9 +55,9 @@ export default function MemberLayout() {
         case "mailing":
           content = <UnderConstruction title="Mailing" />;
           break;
-        case "settings":
-          content = <UnderConstruction title="Settings" />;
-          break;
+        // case "settings":
+        //   content = <ProfilePage />;
+        //   break;
         default:
           content = <NotFound />;
           break;
@@ -75,7 +76,7 @@ export default function MemberLayout() {
           content = <UnderConstruction title="Company Users" />;
           break;
         case "settings":
-          content = <UnderConstruction title="Company Settings" />;
+          content = <CompanySettings />;
           break;
         default:
           content = <NotFound />;
@@ -83,25 +84,25 @@ export default function MemberLayout() {
       }
       break;
 
-    case 'university':
+    case "university":
       switch (resolvedOption) {
-        case '':
+        case "":
           content = <UniversityDashboard />;
           break;
-        case 'certificates':
-          content = <UniversityCertificates title="University Certificates" />;
+        case "certificates":
+          content = <UnderConstruction title="University Certificates" />;
           break;
-        case 'donations':
-          content = <UniversityDonations title="University Donations" />;
+        case "donations":
+          content = <UniversityDonations />;
           break;
-        case 'documents':
+        case "documents":
           content = <UnderConstruction title="University Documents" />;
           break;
-        case 'Mailing':
+        case "Mailing":
           content = <UnderConstruction title="University Mailing" />;
           break;
-        case 'settings':
-          content = <UniversitySettings title="University Settings" />;
+        case "settings":
+          content = <UniversitySettings />;
           break;
         default:
           content = <NotFound />;
@@ -123,7 +124,7 @@ export default function MemberLayout() {
     case "donate":
       switch (resolvedOption) {
         case "":
-          content = <UnderConstruction title="Donation Page" />;
+          content = <DonatePage />;
           break;
         default:
           content = <NotFound />;

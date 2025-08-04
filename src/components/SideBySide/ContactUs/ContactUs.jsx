@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'react-bootstrap/Image';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import './ContactUs.css';

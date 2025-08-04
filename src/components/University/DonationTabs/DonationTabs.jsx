@@ -1,24 +1,66 @@
-import { useState } from 'react';
-import { Card, Nav, Tab, Row, Col } from 'react-bootstrap';
-import './DonationTabs.css';
+import { useState } from "react";
+import { Card, Nav, Tab, Row, Col } from "react-bootstrap";
+import "./DonationTabs.css";
 
 const newDonations = [
-  { donor: 'John Smith', amount: 500, date: '2025-06-01', type: 'Stock', shares: 10, price: 50 },
-  { donor: 'Lisa Johnson', amount: 300, date: '2025-06-05', type: 'Cash', shares: 0, price: 0 },
+  {
+    donor: "John Smith",
+    amount: 500,
+    date: "2025-06-01",
+    type: "Stock",
+    shares: 10,
+    price: 50,
+  },
+  {
+    donor: "Lisa Johnson",
+    amount: 300,
+    date: "2025-06-05",
+    type: "Cash",
+    shares: 0,
+    price: 0,
+  },
 ];
 
 const inProgressDonations = [
-  { donor: 'Michael Brown', amount: 1000, date: '2025-06-03', type: 'Stock', shares: 20, price: 50 },
-  { donor: 'Emily Davis', amount: 750, date: '2025-06-06', type: 'Cash', shares: 0, price: 0 },
+  {
+    donor: "Michael Brown",
+    amount: 1000,
+    date: "2025-06-03",
+    type: "Stock",
+    shares: 20,
+    price: 50,
+  },
+  {
+    donor: "Emily Davis",
+    amount: 750,
+    date: "2025-06-06",
+    type: "Cash",
+    shares: 0,
+    price: 0,
+  },
 ];
 
 const processedDonations = [
-  { donor: 'Sarah Wilson', amount: 1200, date: '2025-06-02', type: 'Stock', shares: 15, price: 80 },
-  { donor: 'David Lee', amount: 600, date: '2025-06-04', type: 'Cash', shares: 0, price: 0 },
+  {
+    donor: "Sarah Wilson",
+    amount: 1200,
+    date: "2025-06-02",
+    type: "Stock",
+    shares: 15,
+    price: 80,
+  },
+  {
+    donor: "David Lee",
+    amount: 600,
+    date: "2025-06-04",
+    type: "Cash",
+    shares: 0,
+    price: 0,
+  },
 ];
 
 function DonationTabs() {
-  const [key, setKey] = useState('new');
+  const [key, setKey] = useState("new");
 
   const renderCards = (donations) => (
     <>
@@ -75,8 +117,12 @@ function DonationTabs() {
         <Tab.Container activeKey={key}>
           <Tab.Content>
             <Tab.Pane eventKey="new">{renderCards(newDonations)}</Tab.Pane>
-            <Tab.Pane eventKey="progress">{renderCards(inProgressDonations)}</Tab.Pane>
-            <Tab.Pane eventKey="processed">{renderCards(processedDonations)}</Tab.Pane>
+            <Tab.Pane eventKey="progress">
+              {renderCards(inProgressDonations)}
+            </Tab.Pane>
+            <Tab.Pane eventKey="processed">
+              {renderCards(processedDonations)}
+            </Tab.Pane>
           </Tab.Content>
         </Tab.Container>
       </Card.Body>

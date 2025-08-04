@@ -10,12 +10,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center; /* centers horizontally */
-  text-align: center;  /* optional: centers the text itself */
+  text-align: center; /* optional: centers the text itself */
 }
 .side-text h2 {
-
-    font-size: 6rem;
-    font-weight: 600;
+  font-size: 3.5rem;
+  font-weight: 600;
   margin-bottom: 1rem;
 }
 
@@ -25,23 +24,22 @@
   color: #555;
 }
 
-
 .side-image-wrapper {
-   width: 100%;
+  width: 100%;
   height: auto; /* prevent it from stretching vertically */
   overflow: hidden; /* prevents bleeding out */
 }
 
 .side-image-wrapper img {
-   width: 100%;
+  width: 100%;
   height: auto;
   object-fit: contain; /* or 'cover' if you're cropping intentionally */
   display: block;
 }
 
 .side-by-side-row {
-  height: auto;         /* Don't force a fixed height */
-  overflow: hidden;     /* Contain child content */
+  height: auto; /* Don't force a fixed height */
+  overflow: hidden; /* Contain child content */
 }
 .cta-button {
   display: inline-block;

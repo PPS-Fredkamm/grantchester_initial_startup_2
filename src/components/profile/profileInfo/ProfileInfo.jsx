@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Card, Button, Image, Form } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
-import { FaCamera, FaGraduationCap, FaUniversity, FaTags, FaBuilding } from "react-icons/fa";
+import {
+  FaCamera,
+  FaGraduationCap,
+  FaUniversity,
+  FaTags,
+  FaBuilding,
+} from "react-icons/fa";
 
 import ProfilePlaceholder from "../../../assets/Images/profilePlaceholder.jpg";
 import Globals from "../../../global/globals";
@@ -20,18 +26,18 @@ export default function ProfileInfo() {
   const [editMode, setEditMode] = useState(false);
 
   const [profileData, setProfileData] = useState({
-    bio: Globals.profileInfo.bio || "",
-    company: Globals.profileInfo.company || "",
-    alumni: Globals.profileInfo.alumni || "",
-    universities: Globals.profileInfo.universities || "",
-    interests: Globals.profileInfo.interests || "",
+    // bio: Globals.profileInfo.bio || "",
+    // company: Globals.profileInfo.company || "",
+    // alumni: Globals.profileInfo.alumni || "",
+    // universities: Globals.profileInfo.universities || "",
+    // interests: Globals.profileInfo.interests || "",
   });
 
   const [originalData, setOriginalData] = useState({ ...profileData });
 
   useEffect(() => {
-    if (Globals.imageFileInfo.data.length > 0) {
-      let dataUrl = Globals.createImageFileURL();
+    if (Globals.member.imageFile.id > 0) {
+      let dataUrl = ACM.createImageFileURL(Globals.member.imageFile);
       setPreviewImage(dataUrl);
     }
   }, [previewImage]);
@@ -60,18 +66,17 @@ export default function ProfileInfo() {
       let file = fileRef.current;
 
       let imageFile = new ACO.ImageFile();
-      imageFile.isEnabled = true;
-      imageFile.userID = Globals.userInfo.id;
-      imageFile.path = "";
       imageFile.name = file.name;
       imageFile.contentType = file.type;
-      imageFile.order = 0;
       imageFile.data = ACM.arrayBufferToBase64(arrayBuf);
       imageFile.length = arrayBuf.byteLength;
 
       let flag = await AM.UpdateImageFile(imageFile);
       if (flag) {
-        let imageUrl = URL.createObjectURL(file);
+        await AM.ReloadMember();
+        // window.location.reload();
+        const imageUrl =
+          ACM.createImageFileURL(Globals.member.imageFile) + `?t=${Date.now()}`;
         setPreviewImage(imageUrl);
       }
 
@@ -124,11 +129,19 @@ export default function ProfileInfo() {
       </OverlayTrigger>
 
       {/* Hidden file input */}
-      <input type="file" accept="image/*" style={{ display: "none" }} ref={inputRef} onChange={handleFileChange} />
+      <input
+        type="file"
+        accept="image/*"
+        style={{ display: "none" }}
+        ref={inputRef}
+        onChange={handleFileChange}
+      />
 
       <div className="text-start">
-        <h4 className="mb-1">{Globals.userInfo.username}</h4>
-        <p className="text-muted mb-2">{Globals.profileInfo.email || "email@example.com"}</p>
+        <h4 className="mb-1">{Globals.member.user.username}</h4>
+        <p className="text-muted mb-2">
+          {Globals.member.profile.email || "email@example.com"}
+        </p>
 
         {!editMode ? (
           <>
@@ -139,29 +152,37 @@ export default function ProfileInfo() {
             )}
             {profileData.company && (
               <p className="text-muted mb-1 d-flex align-items-center">
-                <FaBuilding className="me-2" />I work for: <strong className="ms-1">{profileData.company}</strong>
+                <FaBuilding className="me-2" />I work for:{" "}
+                <strong className="ms-1">{profileData.company}</strong>
               </p>
             )}
             {profileData.alumni && (
               <p className="text-muted mb-1 d-flex align-items-center">
                 <FaGraduationCap className="me-2" />
-                Alumni of: <strong className="ms-1">{profileData.alumni}</strong>
+                Alumni of:{" "}
+                <strong className="ms-1">{profileData.alumni}</strong>
               </p>
             )}
             {profileData.universities && (
               <p className="text-muted mb-1 d-flex align-items-center">
                 <FaUniversity className="me-2" />
-                Interested Universities: <strong className="ms-1">{profileData.universities}</strong>
+                Interested Universities:{" "}
+                <strong className="ms-1">{profileData.universities}</strong>
               </p>
             )}
             {profileData.interests && (
               <p className="text-muted mb-3 d-flex align-items-center">
                 <FaTags className="me-2" />
-                Interests: <strong className="ms-1">{profileData.interests}</strong>
+                Interests:{" "}
+                <strong className="ms-1">{profileData.interests}</strong>
               </p>
             )}
 
-            <Button variant="outline-primary" className="w-100" onClick={handleEdit}>
+            <Button
+              variant="outline-primary"
+              className="w-100"
+              onClick={handleEdit}
+            >
               Edit Profile
             </Button>
           </>
@@ -235,7 +256,11 @@ export default function ProfileInfo() {
               <Button variant="primary" className="w-50" onClick={handleSave}>
                 Save
               </Button>
-              <Button variant="outline-secondary" className="w-50" onClick={handleCancel}>
+              <Button
+                variant="outline-secondary"
+                className="w-50"
+                onClick={handleCancel}
+              >
                 Cancel
               </Button>
             </div>

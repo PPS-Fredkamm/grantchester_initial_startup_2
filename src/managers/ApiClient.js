@@ -186,30 +186,6 @@ export async function GetImageFileAsync(id) {
 }
 
 // ========================================
-//  GetImageFileByUserID
-// ========================================
-
-export async function GetImageFileByUserIDAsync(userID) {
-  const apiRoute = 'member/imagefile/user';
-  const apiMethod = 'GET';
-  // ----------------------------------------
-  var url, options, params;
-  var response, result;
-  // ----------------------------------------
-  try {
-    params = {};
-    params['userID'] = userID;
-    url = ACM.generateFetchUrl(apiRoute, params);
-    options = ACM.generateFetchOptions(apiMethod, null);
-    response = await fetch(url, options);
-    result = await ACM.processFetchResponse(response);
-  } catch (error) {
-    result = await ACM.processFetchError(apiRoute, error);
-  }
-  return result;
-}
-
-// ========================================
 //  UpdateImageFile
 // ========================================
 
@@ -284,30 +260,6 @@ export async function GetProfileAsync(id) {
 }
 
 // ========================================
-//  GetProfileByUserID
-// ========================================
-
-export async function GetProfileByUserIDAsync(userID) {
-  const apiRoute = 'member/profile/user';
-  const apiMethod = 'GET';
-  // ----------------------------------------
-  var url, options, params;
-  var response, result;
-  // ----------------------------------------
-  try {
-    params = {};
-    params['userID'] = userID;
-    url = ACM.generateFetchUrl(apiRoute, params);
-    options = ACM.generateFetchOptions(apiMethod, null);
-    response = await fetch(url, options);
-    result = await ACM.processFetchResponse(response);
-  } catch (error) {
-    result = await ACM.processFetchError(apiRoute, error);
-  }
-  return result;
-}
-
-// ========================================
 //  UpdateProfile
 // ========================================
 
@@ -349,6 +301,34 @@ export async function GetRolesByUserIDAsync(userID) {
   try {
     params = {};
     params['userID'] = userID;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod, null);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+// ========================================
+//  Member Controller State endpoints
+// ========================================
+// ========================================
+
+// ========================================
+//  GetStates
+// ========================================
+
+export async function GetStatesAsync() {
+  const apiRoute = 'member/state/list';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
     url = ACM.generateFetchUrl(apiRoute, params);
     options = ACM.generateFetchOptions(apiMethod, null);
     response = await fetch(url, options);

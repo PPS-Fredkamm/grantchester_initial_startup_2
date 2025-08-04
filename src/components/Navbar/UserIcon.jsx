@@ -8,19 +8,31 @@ import ProfilePlaceholder from "../../assets/Images/profilePlaceholder.jpg";
 
 import { useAuthContext } from "../../context/AuthProvider";
 
-import Globals from "../../global/globals";
+import * as ACM from "../../managers/ApiClientMethods.js";
+
+import Globals from "../../global/globals.js";
 
 function UserIcon() {
   const authCtx = useAuthContext();
 
   const [profileImage, setProfileImage] = useState(ProfilePlaceholder);
-  
+
   useEffect(() => {
-    if (Globals.imageFileInfo.data.length > 0) {
-      let dataUrl = Globals.createImageFileURL();
-      setProfileImage(dataUrl);
+    const imageFile = Globals.member.imageFile;
+
+    if (imageFile && imageFile.id > 0) {
+      const imageUrl = ACM.createImageFileURL(imageFile);
+
+      if (imageUrl) {
+        const isBase64 = imageUrl.startsWith("data:image/");
+        setProfileImage(isBase64 ? imageUrl : `${imageUrl}?t=${Date.now()}`);
+      } else {
+        setProfileImage(ProfilePlaceholder);
+      }
+    } else {
+      setProfileImage(ProfilePlaceholder);
     }
-  }, [profileImage]);
+  }, []);
 
   function handleLogout() {
     authCtx.logout();
@@ -31,8 +43,8 @@ function UserIcon() {
       {authCtx.ctx.isAuthenticated && (
         <div className="d-flex align-items-center gap-2">
           <div className="d-flex flex-column text-end">
-            <span className="user-email">{Globals.profileInfo.email}</span>
-            {/* <span className="user-role">{Globals.roleInfo.roles.join(", ")}</span> */}
+            <span className="user-email">{Globals.member.profile.email}</span>
+            <span className="user-role">{Globals.member.roles.join(", ")}</span>
           </div>
           <NavDropdown
             align="end"
@@ -50,10 +62,14 @@ function UserIcon() {
             className="profile-dropdown"
           >
             <div className="profile-card">
-              <Image src={ProfilePlaceholder} className="profile-card-img" alt="Profile" />
+              <Image
+                src={profileImage}
+                className="profile-card-img"
+                alt="Profile"
+              />
               <div className="profile-card-info">
-                <strong>{Globals.userInfo.username}</strong>
-                <div className="text-muted">{Globals.profileInfo.email}</div>
+                <strong>{Globals.member.user.username}</strong>
+                <div className="text-muted">{Globals.member.profile.email}</div>
               </div>
             </div>
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>

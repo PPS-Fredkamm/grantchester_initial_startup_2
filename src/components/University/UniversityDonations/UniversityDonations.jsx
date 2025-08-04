@@ -1,7 +1,7 @@
-import { Dropdown } from 'react-bootstrap';
+import { Dropdown } from "react-bootstrap";
 
-export default function DonationsDropdown({ value = 'All', onChange }) {
-  const options = ['All', 'Completed', 'Waiting Approval', 'Verifying'];
+export default function DonationsDropdown({ value = "All", onChange }) {
+  const options = ["All", "Completed", "Waiting Approval", "Verifying"];
 
   return (
     <Dropdown className="donations-dropdown">

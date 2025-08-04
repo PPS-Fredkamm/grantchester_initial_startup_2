@@ -1,17 +1,19 @@
+
+
 .secondary-banner {
-  padding: 4rem 0;
+  padding: 2rem;
   background-color: #f8f9fa;
 }
 
 .section-heading {
-  font-size: 2rem;
+  font-size: 4rem;
   font-weight: 700;
   margin-bottom: 1rem;
   color: #1a1a1a;
 }
 
 .section-subtext {
-  font-size: 1.1rem;
+  font-size: 2rem;
   font-weight: 400;
   color: #555;
   line-height: 1.6;
@@ -23,3 +25,4 @@
   object-fit: cover;
   max-height: 350px;
 }
+

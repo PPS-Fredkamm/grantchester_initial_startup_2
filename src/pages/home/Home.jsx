@@ -19,7 +19,7 @@ export default function Home() {
       <WebBanner />
       <LogoScroller logos={logoList} speed={25} height={50} />
       <SecondaryBanner />
-      <BannerCarousel />
+      {/* <BannerCarousel /> */}
     </>
   );
 }

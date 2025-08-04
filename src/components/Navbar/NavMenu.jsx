@@ -16,7 +16,7 @@ function NavMenu() {
       <Nav.Link href="/for-donors">For Donors</Nav.Link>
       <Nav.Link href="/for-universities">For Universities</Nav.Link>
       <Nav.Link href="/partners">Partners</Nav.Link>
-      <Nav.Link href="/resources">Resources</Nav.Link>
+      <Nav.Link href="/FAQ">FAQ</Nav.Link>
       {!authCtx.ctx.isAuthenticated && (
         <>
           <Nav.Link href="/login">Sign In</Nav.Link>

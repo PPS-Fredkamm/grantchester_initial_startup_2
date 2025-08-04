@@ -135,6 +135,80 @@ export async function GenerateGuidAsync() {
 
 // ========================================
 // ========================================
+//  Member Controller Address endpoints
+// ========================================
+// ========================================
+
+// ========================================
+//  CreateAddress
+// ========================================
+
+export async function CreateAddressAsync() {
+  const apiRoute = 'member/address';
+  const apiMethod = 'POST';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod, null);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+//  GetAddress
+// ========================================
+
+export async function GetAddressAsync(id) {
+  const apiRoute = 'member/address';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['id'] = id;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod, null);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+//  UpdateAddress
+// ========================================
+
+export async function UpdateAddressAsync(address) {
+  const apiRoute = 'member/address';
+  const apiMethod = 'PUT';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod, address);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+// ========================================
 //  Member Controller ImageFile endpoints
 // ========================================
 // ========================================

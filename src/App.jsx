@@ -12,8 +12,12 @@ import MemberLayout from "./layouts/member/MemberLayout.jsx";
 
 import Globals from "./global/globals.js";
 
+import FAQLayout from "./pages/FAQ/FAQLayout.jsx"
+
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/home/Home.jsx"));
@@ -66,8 +70,8 @@ export default function App() {
               element={<UnderConstruction title="Partners Page" />}
             />
             <Route
-              path="resources"
-              element={<UnderConstruction title="Resources Page" />}
+              path="FAQ"
+              element={<FAQLayout title="FAQ Page" />}
             />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />

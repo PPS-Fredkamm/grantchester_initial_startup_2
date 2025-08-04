@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import { FaDollarSign } from "react-icons/fa";
-import AlertToast from "../../components/userInterface/AlertToast";
 import ConfirmDonationModal from "./ConfirmDonation";
 import ThankYouModal from "./ThankYouModal";
 
@@ -10,9 +9,10 @@ import "./Donate.css";
 export default function DonationPage() {
   const [companyName, setCompanyName] = useState("");
   const [recipient, setRecipient] = useState("");
+  const [otherUniversity, setOtherUniversity] = useState("");
   const [shares, setShares] = useState("");
   const [valuation, setValuation] = useState("");
-  const [totalValue, setTotalValue] = useState(0);
+  const [totalValue, setTotalValue] = useState("0.00");
   const [donationDate, setDonationDate] = useState(
     new Date().toISOString().split("T")[0]
   );
@@ -22,24 +22,13 @@ export default function DonationPage() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showThankYouModal, setShowThankYouModal] = useState(false);
 
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-    variant: "danger",
-  });
-
-  const organizations = [
-    "Example Organization A",
-    "Sample Company B",
-    "Test Corp C",
-  ];
-
   const universities = [
     "Penn State",
     "MIT",
     "Temple",
     "Drexel",
     "Lincoln University",
+    "Other"
   ];
 
   useEffect(() => {
@@ -55,28 +44,27 @@ export default function DonationPage() {
 
   function handleContinue(e) {
     e.preventDefault();
+    const form = e.currentTarget;
 
-    if (
-      !companyName ||
-      !recipient ||
-      !shares ||
-      !valuation ||
-      !agreementChecked
-    ) {
-      setToast({
-        show: true,
-        message: "Please complete all required fields and agree to the terms.",
-        variant: "danger",
-      });
+    // If "Other" is selected, treat `otherUniversity` as the recipient
+    const finalRecipient =
+      recipient === "other" ? otherUniversity.trim() : recipient.trim();
+
+    if (recipient === "other" && !finalRecipient) {
+      // Let native validation handle it (input has required + pattern)
+      if (!form.reportValidity()) return;
+    } else if (!form.reportValidity()) {
       return;
     }
 
+    setRecipient(finalRecipient); // save the final value for modal
     setShowConfirmModal(true);
   }
 
   function resetForm() {
     setCompanyName("");
     setRecipient("");
+    setOtherUniversity("");
     setShares("");
     setValuation("");
     setTotalValue(0);
@@ -87,31 +75,24 @@ export default function DonationPage() {
 
   return (
     <>
-      <AlertToast
-        show={toast.show}
-        onClose={() => setToast((prev) => ({ ...prev, show: false }))}
-        message={toast.message}
-        variant={toast.variant}
-      />
-
       <Card className="shadow my-4 p-4 mx-auto" style={{ maxWidth: "600px" }}>
         <h3 className="mb-4 text-center">Send a Private Stock Donation</h3>
         <Form onSubmit={handleContinue}>
           {/* Company/Organization Name */}
           <Form.Group className="mb-3">
             <Form.Label>Company or Organization</Form.Label>
-            <Form.Select
+            <Form.Control
+              type="text"
+              placeholder="Enter the company or organization name"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
+              onBlur={(e) => setCompanyName(e.target.value.trim())}
               required
-            >
-              <option value="">Select your organization...</option>
-              {organizations.map((org, index) => (
-                <option key={index} value={org}>
-                  {org}
-                </option>
-              ))}
-            </Form.Select>
+              autoComplete="organization"
+              inputMode="text"
+              pattern=".*\S.*"
+              title="Please enter a valid company/organization name."
+            />
           </Form.Group>
 
           {/* Recipient */}
@@ -120,15 +101,32 @@ export default function DonationPage() {
             <Form.Select
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
-              required
+              required={recipient !== "other"}
             >
               <option value="">Select a university...</option>
               {universities.map((uni, index) => (
-                <option key={index} value={uni}>
+                <option
+                  key={index}
+                  value={uni.toLowerCase() === "other" ? "other" : uni}
+                >
                   {uni}
                 </option>
               ))}
             </Form.Select>
+
+            {/* Show free text if "Other" is chosen */}
+            {recipient === "other" && (
+              <Form.Control
+                type="text"
+                placeholder="Enter the university name"
+                className="mt-2"
+                value={otherUniversity}
+                onChange={(e) => setOtherUniversity(e.target.value)}
+                required
+                pattern=".*\S.*"
+                title="Please enter a valid university name."
+              />
+            )}
           </Form.Group>
 
           {/* Number of Private Shares */}
@@ -194,13 +192,19 @@ export default function DonationPage() {
 
           {/* Legal Agreement */}
           <Form.Group className="mb-3">
-            <Form.Check
-              type="checkbox"
-              label="I confirm that I am authorized to make this private stock donation on behalf of the company/organization listed above and understand this action is legally binding."
-              checked={agreementChecked}
-              onChange={(e) => setAgreementChecked(e.target.checked)}
-              required
-            />
+            <Form.Check id="agreementCheck" className="m-0">
+              <Form.Check.Input
+                type="checkbox"
+                checked={agreementChecked}
+                onChange={(e) => setAgreementChecked(e.target.checked)}
+                required
+              />
+              <Form.Check.Label style={{ cursor: "pointer" }}>
+                I confirm that I am authorized to make this private stock
+                donation on behalf of the company/organization listed above and
+                understand this action is legally binding.
+              </Form.Check.Label>
+            </Form.Check>
           </Form.Group>
 
           {/* Continue Button */}

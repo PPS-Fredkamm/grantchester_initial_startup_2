@@ -19,7 +19,7 @@ export default function BasicInfo() {
         apiResult = await apiClient.GetStatesAsync();
         states = ACM.getApiResultData(apiResult);
         list = [];
-        for (let i = 1; i < states.length; i++) {
+        for (let i = 0; i < states.length; i++) {
           list.push(states[i].abbreviation);
         }
         setUS_STATES(list);
@@ -30,61 +30,6 @@ export default function BasicInfo() {
     fetchData();
   }, []);
 
-  //  var US_STATES = [];
-
-  // const US_STATES = [
-  //   "AL",
-  //   "AK",
-  //   "AZ",
-  //   "AR",
-  //   "CA",
-  //   "CO",
-  //   "CT",
-  //   "DE",
-  //   "FL",
-  //   "GA",
-  //   "HI",
-  //   "ID",
-  //   "IL",
-  //   "IN",
-  //   "IA",
-  //   "KS",
-  //   "KY",
-  //   "LA",
-  //   "ME",
-  //   "MD",
-  //   "MA",
-  //   "MI",
-  //   "MN",
-  //   "MS",
-  //   "MO",
-  //   "MT",
-  //   "NE",
-  //   "NV",
-  //   "NH",
-  //   "NJ",
-  //   "NM",
-  //   "NY",
-  //   "NC",
-  //   "ND",
-  //   "OH",
-  //   "OK",
-  //   "OR",
-  //   "PA",
-  //   "RI",
-  //   "SC",
-  //   "SD",
-  //   "TN",
-  //   "TX",
-  //   "UT",
-  //   "VT",
-  //   "VA",
-  //   "WA",
-  //   "WV",
-  //   "WI",
-  //   "WY",
-  // ];
-
   const [editMode, setEditMode] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -93,11 +38,13 @@ export default function BasicInfo() {
     lastName: Globals.member.profile.lastName,
     phoneNumber: Globals.member.profile.phoneNumber,
     email: Globals.member.profile.email,
-    // address1: Globals.profileInfo.address1,
-    // address2: Globals.profileInfo.address2,
-    // city: Globals.profileInfo.city,
-    // state: Globals.profileInfo.stateAbbrev,
-    // zip: Globals.profileInfo.zip,
+    address1: Globals.member.address.addressLine1,
+    address2: Globals.member.address.addressLine2,
+    address3: Globals.member.address.addressLine3,
+    cityName: Globals.member.address.cityName,
+    stateAbbreviation: Globals.member.address.stateAbbreviation,
+    stateName: Globals.member.address.stateName,
+    postalCode: Globals.member.address.postalCode,
   });
 
   const [originalData, setOriginalData] = useState({ ...formData });
@@ -116,25 +63,35 @@ export default function BasicInfo() {
 
   async function handleSave() {
     var flag;
-    var tmpProfile;
+    var tmpProfile, tmpAddress;
 
-    tmpProfile = new ACO.ProfileDTO();
-    tmpProfile.firstName = formData.firstName;
-    tmpProfile.middleName = formData.middleName;
-    tmpProfile.lastName = formData.lastName;
-    tmpProfile.phoneNumber = formData.phoneNumber;
-    tmpProfile.email = formData.email;
-    flag = await AM.UpdateProfile(tmpProfile);
+    tmpAddress = new ACO.AddressDTO();
+    tmpAddress.addressLine1 = formData.address1;
+    tmpAddress.addressLine2 = formData.address2;
+    tmpAddress.addressLine3 = "";
+    tmpAddress.cityName = formData.cityName;
+    tmpAddress.stateAbbreviation = formData.stateAbbreviation;
+    tmpAddress.stateName = "";
+    tmpAddress.postalCode = formData.postalCode;
+    flag = await AM.UpdateAddress(tmpAddress);
     if (flag) {
-      setOriginalData(formData);
+      tmpProfile = new ACO.ProfileDTO();
+      tmpProfile.firstName = formData.firstName;
+      tmpProfile.middleName = formData.middleName;
+      tmpProfile.lastName = formData.lastName;
+      tmpProfile.phoneNumber = formData.phoneNumber;
+      tmpProfile.email = formData.email;
+      flag = await AM.UpdateProfile(tmpProfile);
+      if (flag) {
+        setOriginalData(formData);
+      }
     }
     setEditMode(false);
   }
 
   return (
     <div className="px-2">
-      <div className="d-flex justify-content-between align-items-start mb-3">
-        <h5 className="mb-0">Donor Information</h5>
+      <div className="d-flex justify-content-end mb-3">
         {!editMode ? (
           <Button variant="outline-primary" onClick={() => setEditMode(true)}>
             Edit
@@ -242,8 +199,8 @@ export default function BasicInfo() {
                 <Form.Label>City</Form.Label>
                 <Form.Control
                   type="text"
-                  name="city"
-                  value={formData.city}
+                  name="cityName"
+                  value={formData.cityName}
                   onChange={handleChange}
                   disabled={!editMode}
                 />
@@ -251,7 +208,7 @@ export default function BasicInfo() {
 
               <Form.Group className="mb-3">
                 <Form.Label>State</Form.Label>
-                <Form.Select name="state" value={formData.state} onChange={handleChange} disabled={!editMode}>
+                <Form.Select name="stateAbbreviation" value={formData.stateAbbreviation} onChange={handleChange} disabled={!editMode}>
                   <option value="">Select a state</option>
                   {US_STATES.map((stateAbbr) => (
                     <option key={stateAbbr} value={stateAbbr}>
@@ -262,11 +219,11 @@ export default function BasicInfo() {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Zip</Form.Label>
+                <Form.Label>Postal Code</Form.Label>
                 <Form.Control
                   type="text"
-                  name="zip"
-                  value={formData.zip}
+                  name="postalCode"
+                  value={formData.postalCode}
                   onChange={handleChange}
                   disabled={!editMode}
                 />

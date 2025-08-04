@@ -1,4 +1,4 @@
-import BannerCarousel from '../../components/home/Carousel/BannerCarousel';
+// import BannerCarousel from '../../components/home/Carousel/BannerCarousel';
 import SubBanner from '../../components/home/SubBanner/SubBanner';
 import WebBanner from '../../components/home/WebBanner/WebBanner';
 import SecondaryBanner from '../../components/home/SecondaryBanner/SecondaryBanner';

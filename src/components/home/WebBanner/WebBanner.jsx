@@ -1,29 +1,33 @@
-import { useState } from 'react';
-import { Container, Form, FormControl, Button, InputGroup } from 'react-bootstrap';
-import './WebBanner.css';
+import { useState } from "react";
+import {
+  Container,
+  Form,
+  FormControl,
+  Button,
+  InputGroup,
+} from "react-bootstrap";
 
-// Fix: Use 'const' and require/import for image path
-import banner from '../../../assets/images/BannerHome/HomeBanner.png';
+import "./WebBanner.css";
+
+import HomeBanner from "../../../assets/images/HomeBanner.png";
 
 function WebBanner() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
-    console.log('Search:', query);
+    console.log("Search:", query);
   };
 
   return (
     <div className="web-banner-wrapper">
-      <img
-        src={banner}
-        alt="Web Banner"
-        className="web-banner-image"
-      />
+      <img src={HomeBanner} alt="Web Banner" className="web-banner-image" />
       <div className="web-banner-content text-center">
         <Container>
           <h2 className="web-banner-title">Welcome to Alumbiz</h2>
-          <p className="web-banner-subtitle">Connect, collaborate, and grow your alumni network.</p>
+          <p className="web-banner-subtitle">
+            Connect, collaborate, and grow your alumni network.
+          </p>
 
           <Form onSubmit={handleSearch} className="web-banner-search">
             <InputGroup>

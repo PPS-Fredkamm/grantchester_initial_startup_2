@@ -36,10 +36,10 @@ export function AddressDTO()
     this.addressLine2 = "";
     this.addressLine3 = "";
     this.cityName = "";
-    this.stateName = "";
     this.stateAbbreviation = "";
-    this.countryName = "";
+    this.stateName = "";
     this.countryAbbreviation = "";
+    this.countryName = "";
     this.postalCode = ""    ;
 }
 

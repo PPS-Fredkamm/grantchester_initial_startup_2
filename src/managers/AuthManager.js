@@ -30,7 +30,7 @@ export async function ChangePassword(currentPassword, newPassword) {
 export async function Login(username, password) {
   var flag = false;
   var apiResult;
-  var token, user, profile, roles, imageFile;
+  var token, user, roles, profile, address, imageFile;
   try {
     Globals.initMember();
     // ----------------------------------------
@@ -43,14 +43,20 @@ export async function Login(username, password) {
       user = ACM.getApiResultData(apiResult);
       Globals.member.user = user;
       // ----------------------------------------
-      apiResult = await apiClient.GetProfileAsync(user.profileID);
-      profile = ACM.getApiResultData(apiResult);
-      Globals.member.profile = profile;
-      // ----------------------------------------
       apiResult = await apiClient.GetRolesByUserIDAsync(user.id);
       roles = ACM.getApiResultData(apiResult);
       for (let i = 0; i < roles.length; i++) {
         Globals.member.roles.push(roles[i].name);
+      }
+      // ----------------------------------------
+      apiResult = await apiClient.GetProfileAsync(user.profileID);
+      profile = ACM.getApiResultData(apiResult);
+      Globals.member.profile = profile;
+      // ----------------------------------------
+      apiResult = await apiClient.GetAddressAsync(profile.addressID);
+      address = ACM.getApiResultData(apiResult);
+      if (address !== undefined && address !== null) {
+        Globals.member.address = address;
       }
       // ----------------------------------------
       apiResult = await apiClient.GetImageFileAsync(profile.imageID);
@@ -92,7 +98,7 @@ export async function Logout() {
 export async function Register(username, password) {
   var flag = false;
   var apiResult, token;
-  var userID, user, profileID, profile;
+  var userID, user, profileID, profile, addressID, address;
   try {
     Globals.initMember();
     // ----------------------------------------
@@ -123,6 +129,11 @@ export async function Register(username, password) {
               if (flag) {
                 apiResult = await apiClient.GetProfileAsync(profileID);
                 profile = ACM.getApiResultData(apiResult);
+                apiResult = await apiClient.CreateAddressAsync();
+                addressID = ACM.getApiResultData(apiResult);
+                if (addressID > 0) {
+                  profile.addressID = addressID;
+                }
                 apiResult = await apiClient.UpdateProfileAsync(profile);
                 flag = ACM.getApiResultData(apiResult);
                 if (flag) {
@@ -214,6 +225,45 @@ export async function UpdateProfile(tmpProfile) {
 }
 
 // ========================================
+//  UpdateAddress
+// ========================================
+
+export async function UpdateAddress(tmpAddress) {
+  var flag = false;
+  var apiResult;
+  var address, id;
+
+  if (Globals.member.address.id === 0) {
+    apiResult = await apiClient.CreateAddressAsync();
+    id = ACM.getApiResultData(apiResult);
+    if (id > 0) {
+      apiResult = await apiClient.GetAddressAsync(id);
+      Globals.member.address = ACM.getApiResultData(apiResult);
+
+      Globals.member.profile.addressID = Globals.member.address.id;
+      apiResult = await apiClient.UpdateProfileAsync(Globals.member.profile);
+      flag = ACM.getApiResultData(apiResult);
+    }
+  }
+
+  address = Globals.member.address;
+  address.addressLine1 = tmpAddress.addressLine1;
+  address.addressLine2 = tmpAddress.addressLine2;
+  address.addressLine3 = tmpAddress.addressLine3;
+  address.cityName = tmpAddress.cityName;
+  address.stateAbbreviation = tmpAddress.stateAbbreviation;
+  address.stateName = tmpAddress.stateName;
+  address.postalCode = tmpAddress.postalCode;
+  apiResult = await apiClient.UpdateAddressAsync(address);
+  flag = ACM.getApiResultData(apiResult);
+  if (flag) {
+  }
+
+  Globals.saveToSessionStorage();
+  return flag;
+}
+
+// ========================================
 //  ReloadMember
 // ========================================
 export async function ReloadMember() {
@@ -226,16 +276,12 @@ export async function ReloadMember() {
     Globals.member.user = ACM.getApiResultData(apiUser);
 
     // Fetch latest profile
-    const apiProfile = await apiClient.GetProfileAsync(
-      Globals.member.user.profileID
-    );
+    const apiProfile = await apiClient.GetProfileAsync(Globals.member.user.profileID);
     Globals.member.profile = ACM.getApiResultData(apiProfile);
 
     // Fetch latest roles
     Globals.member.roles = [];
-    const apiRoles = await apiClient.GetRolesByUserIDAsync(
-      Globals.member.user.id
-    );
+    const apiRoles = await apiClient.GetRolesByUserIDAsync(Globals.member.user.id);
     const roles = ACM.getApiResultData(apiRoles);
     if (roles) {
       for (let r of roles) {
@@ -244,9 +290,7 @@ export async function ReloadMember() {
     }
 
     // Fetch latest image
-    const apiImage = await apiClient.GetImageFileAsync(
-      Globals.member.profile.imageID
-    );
+    const apiImage = await apiClient.GetImageFileAsync(Globals.member.profile.imageID);
     Globals.member.imageFile = ACM.getApiResultData(apiImage);
 
     // Save new state

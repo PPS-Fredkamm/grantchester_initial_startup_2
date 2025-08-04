@@ -10,14 +10,8 @@ import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
 import MainLayout from "./layouts/main/MainLayout.jsx";
 import MemberLayout from "./layouts/member/MemberLayout.jsx";
 
-import Globals from "./global/globals.js";
-
-import FAQLayout from "./pages/FAQ/FAQLayout.jsx"
-
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/home/Home.jsx"));
@@ -31,6 +25,7 @@ const ForDonors = lazy(() => import("./pages/forDonors/ForDonors.jsx"));
 const ForUniversities = lazy(() =>
   import("./pages/forUniversities/ForUniversities.jsx")
 );
+const FAQPage = lazy(() => import("./pages/FAQ/FaqPage.jsx"));
 
 export default function App() {
   const applCtx = useApplContext();
@@ -61,18 +56,12 @@ export default function App() {
             <Route index element={<Home />} />
             <Route path="why-donate" element={<WhyDonate />} />
             <Route path="for-donors" element={<ForDonors />} />
-            <Route
-              path="for-universities"
-              element={<ForUniversities />}
-            />
+            <Route path="for-universities" element={<ForUniversities />} />
             <Route
               path="partners"
               element={<UnderConstruction title="Partners Page" />}
             />
-            <Route
-              path="FAQ"
-              element={<FAQLayout title="FAQ Page" />}
-            />
+            <Route path="FAQ" element={<FAQPage title="FAQ Page" />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
 

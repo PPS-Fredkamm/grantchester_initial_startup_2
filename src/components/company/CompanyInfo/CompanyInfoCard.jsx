@@ -8,7 +8,7 @@ import './CompanyInfoCard.css';
 
 // Placeholder object for now — replace this with actual data (e.g., from fetch or context)
 const company = {
-  companyName: 'Alumbiz Inc.',
+  companyName: 'AlumBiz Inc.',
   name: 'Joe Doe',
   location: 'Wellington',
   email: 'contact@gmail.org',

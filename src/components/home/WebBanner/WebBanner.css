@@ -14,18 +14,15 @@
 
 .web-banner-content {
   position: absolute;
-  top: 0;
+  top: 0px;
   left: 0;
   width: 100%;
   height: 100%;
   padding: 5rem 1rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   color: black;
-  /* text-shadow: black; */
-  /* background: rgba(0, 0, 0, 0.3); Optional: overlay tint */
 }
 
 .web-banner-title {
@@ -37,9 +34,166 @@
 .web-banner-subtitle {
   font-size: 3rem;
   color: #000000ec;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem auto;
+  max-width: 800px;
+  text-align: center; 
 }
 
 .web-banner-search {
-  padding-top: 2vh; /* fine-tune how far from top you want it */
+  padding-top: 2rem;
+  max-width: 600px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+
+/* Get Started button styling */
+.get-started-btn {
+  display: inline-block;
+  margin: 1.5rem 0 2rem 0;
+  padding: 0.9rem 2.4rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  transition: all 0.25s ease;
+}
+
+.get-started-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Call to Action button styling */
+.web-banner-cta .btn {
+  font-weight: 600;
+  padding: 0.55rem 1.3rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+/* CTA signin button */
+.web-banner-cta .sign-in-btn {
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  border: none !important;
+}
+
+.web-banner-cta .sign-in-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* CTA create account button */
+.web-banner-cta .create-account-btn {
+  background-color: transparent;
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
+}
+
+.web-banner-cta .create-account-btn:hover {
+  background-color: var(--primary-blue);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the search button */
+.web-banner-search .btn {
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  font-weight: 600;
+  border: none !important;
+  padding: 0.5rem 1.3rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+.web-banner-search .btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Shared CTA container */
+.web-banner-cta {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Primary CTA — Go to Dashboard */
+.web-banner-cta .dashboard-btn {
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+.web-banner-cta .dashboard-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Secondary CTA — View Profile */
+.web-banner-cta .profile-btn {
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  font-size: 1.05rem;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 2px solid var(--primary-blue);
+  color: var(--primary-blue);
+  transition: all 0.25s ease;
+}
+
+.web-banner-cta .profile-btn:hover {
+  background-color: var(--primary-blue);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .web-banner-title {
+    font-size: 4rem;
+  }
+
+  .web-banner-subtitle {
+    font-size: 2rem;
+  }
+
+  .web-banner-content {
+    padding: 4rem 1rem 0 1rem;
+  }
 }

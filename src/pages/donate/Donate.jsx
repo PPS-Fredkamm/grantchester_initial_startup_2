@@ -18,6 +18,7 @@ export default function DonationPage() {
   );
   const [note, setNote] = useState("");
   const [agreementChecked, setAgreementChecked] = useState(false);
+  const [file, setFile] = useState(null);
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showThankYouModal, setShowThankYouModal] = useState(false);
@@ -28,7 +29,7 @@ export default function DonationPage() {
     "Temple",
     "Drexel",
     "Lincoln University",
-    "Other"
+    "Other",
   ];
 
   useEffect(() => {
@@ -46,19 +47,51 @@ export default function DonationPage() {
     e.preventDefault();
     const form = e.currentTarget;
 
-    // If "Other" is selected, treat `otherUniversity` as the recipient
     const finalRecipient =
       recipient === "other" ? otherUniversity.trim() : recipient.trim();
 
     if (recipient === "other" && !finalRecipient) {
-      // Let native validation handle it (input has required + pattern)
       if (!form.reportValidity()) return;
     } else if (!form.reportValidity()) {
       return;
     }
 
-    setRecipient(finalRecipient); // save the final value for modal
+    setRecipient(finalRecipient);
     setShowConfirmModal(true);
+  }
+
+  async function handleSubmitDonation() {
+    const formData = new FormData();
+    formData.append("companyName", companyName);
+    formData.append("recipient", recipient);
+    formData.append("shares", shares);
+    formData.append("valuation", valuation);
+    formData.append("totalValue", totalValue);
+    formData.append("donationDate", donationDate);
+    formData.append("note", note);
+    if (file) {
+      formData.append("attachment", file);
+    }
+
+    try {
+      const response = await fetch("/api/donation/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        resetForm();
+        setShowConfirmModal(false);
+        setShowThankYouModal(true);
+      } else {
+        alert("There was an error submitting your donation.");
+      }
+    } catch (err) {
+      console.error("Error submitting donation:", err);
+      alert("Something went wrong while submitting your donation.");
+    }
   }
 
   function resetForm() {
@@ -67,10 +100,11 @@ export default function DonationPage() {
     setOtherUniversity("");
     setShares("");
     setValuation("");
-    setTotalValue(0);
+    setTotalValue("0.00");
     setNote("");
     setDonationDate(new Date().toISOString().split("T")[0]);
     setAgreementChecked(false);
+    setFile(null);
   }
 
   return (
@@ -78,7 +112,7 @@ export default function DonationPage() {
       <Card className="shadow my-4 p-4 mx-auto" style={{ maxWidth: "600px" }}>
         <h3 className="mb-4 text-center">Send a Private Stock Donation</h3>
         <Form onSubmit={handleContinue}>
-          {/* Company/Organization Name */}
+          {/* Company Name */}
           <Form.Group className="mb-3">
             <Form.Label>Company or Organization</Form.Label>
             <Form.Control
@@ -90,7 +124,7 @@ export default function DonationPage() {
               required
               autoComplete="organization"
               inputMode="text"
-              pattern=".*\S.*"
+              pattern=".*\\S.*"
               title="Please enter a valid company/organization name."
             />
           </Form.Group>
@@ -113,8 +147,6 @@ export default function DonationPage() {
                 </option>
               ))}
             </Form.Select>
-
-            {/* Show free text if "Other" is chosen */}
             {recipient === "other" && (
               <Form.Control
                 type="text"
@@ -123,13 +155,13 @@ export default function DonationPage() {
                 value={otherUniversity}
                 onChange={(e) => setOtherUniversity(e.target.value)}
                 required
-                pattern=".*\S.*"
+                pattern=".*\\S.*"
                 title="Please enter a valid university name."
               />
             )}
           </Form.Group>
 
-          {/* Number of Private Shares */}
+          {/* Shares */}
           <Form.Group className="mb-3">
             <Form.Label>Number of Private Shares (Units)</Form.Label>
             <Form.Control
@@ -142,7 +174,7 @@ export default function DonationPage() {
             />
           </Form.Group>
 
-          {/* Valuation Per Share */}
+          {/* Valuation */}
           <Form.Group className="mb-3">
             <Form.Label>Valuation Per Share (USD)</Form.Label>
             <InputGroup>
@@ -161,13 +193,13 @@ export default function DonationPage() {
             </InputGroup>
           </Form.Group>
 
-          {/* Total Donation Value */}
+          {/* Total */}
           <Form.Group className="mb-3">
             <Form.Label>Total Donation Value (as of today)</Form.Label>
             <Form.Control type="text" value={`$${totalValue}`} readOnly />
           </Form.Group>
 
-          {/* Donation Date */}
+          {/* Date */}
           <Form.Group className="mb-3">
             <Form.Label>Donation Date</Form.Label>
             <Form.Control
@@ -178,7 +210,7 @@ export default function DonationPage() {
             />
           </Form.Group>
 
-          {/* Optional Note */}
+          {/* Note */}
           <Form.Group className="mb-3">
             <Form.Label>Message (Optional)</Form.Label>
             <Form.Control
@@ -190,7 +222,17 @@ export default function DonationPage() {
             />
           </Form.Group>
 
-          {/* Legal Agreement */}
+          {/* File Upload */}
+          <Form.Group className="mb-3">
+            <Form.Label>Upload Document</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={(e) => setFile(e.target.files[0])}
+              accept=".pdf,.doc,.docx"
+            />
+          </Form.Group>
+
+          {/* Agreement */}
           <Form.Group className="mb-3">
             <Form.Check id="agreementCheck" className="m-0">
               <Form.Check.Input
@@ -207,7 +249,7 @@ export default function DonationPage() {
             </Form.Check>
           </Form.Group>
 
-          {/* Continue Button */}
+          {/* Continue */}
           <Button
             type="submit"
             variant="primary"
@@ -229,8 +271,8 @@ export default function DonationPage() {
         donationDate={donationDate}
         note={note}
         companyName={companyName}
-        onSuccessReset={resetForm}
-        onShowThankYou={() => setShowThankYouModal(true)}
+        file={file}
+        onSubmit={handleSubmitDonation}
       />
 
       <ThankYouModal

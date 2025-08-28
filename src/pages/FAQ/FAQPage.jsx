@@ -1,6 +1,6 @@
 import FAQAccordion from "../../components/FAQ/FAQAccordion";
+import ContactUs from "../../components/forUniversities/ContactUs/ContactUs";
 
-import ContactUs from "../../components/SideBySide/ContactUs/ContactUs";
 export default function FAQPage() {
   return (
     <>

@@ -1,13 +1,12 @@
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "./HeaderWithImage.css";
-// import Handshake from "../../../assets/images/SideBySideImages/Handshake.png";
 import Handshake from "../../../assets/images/For-Donors.png";
 
 export default function HeaderWithImage({
-  headline = "Empowering Donors to Make a Difference",
-  text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  buttonLabel,
-  buttonLink,
+  headline = "Empowering Donors to Drive Meaningful Impact",
+  text = "We make it simple for private companies and individuals to donate stock or equity to universities and institutional endowments — creating opportunities, building relationships, and driving long-term growth.",
+  buttonLabel = "Learn More",
+  buttonLink = "/for-donors",
   imageSrc = Handshake,
   imageAlt = "Side image",
   reverse = false,

@@ -1,13 +1,12 @@
 .how-it-works-section {
   background-color: #f8f9fa;
-   padding-top: 10rem;  /* Increase top padding inside the section */
-  padding-bottom: 10rem;
-  margin-top: 10rem;   /* Space above this section */
+  padding-bottom: 5rem;
+  margin-top: 5rem;   /* Space above this section */
 }
 
 
 .section-title {
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 600;
   padding-bottom: 2rem;
 }

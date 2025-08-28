@@ -7,12 +7,12 @@ export default function MemberBanner() {
   const { type } = useParams();
 
   const role = type?.toLowerCase();
-  const username = Globals.member.user.username;
+  const firstName = Globals.member.profile.firstName;
 
   let greeting = "";
   switch (role) {
     case "donor":
-      greeting = `${username}'s Donor Dashboard`;
+      greeting = `${firstName}'s Donor Dashboard`;
       break;
     case "company":
       greeting = "Company Dashboard";
@@ -21,13 +21,13 @@ export default function MemberBanner() {
       greeting = "University Dashboard";
       break;
     case "profile":
-      greeting = `${username}' Profile`;
+      greeting = `${firstName}' Profile`;
       break;
     case "donate":
       greeting = `Donate Page`;
       break;
     default:
-      greeting = `Welcome ${username}`;
+      greeting = `Welcome ${firstName}`;
       break;
   }
 

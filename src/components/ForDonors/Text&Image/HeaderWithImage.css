@@ -5,7 +5,7 @@
 }
 
 .header-title {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
@@ -15,4 +15,10 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.side-text h2 {
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.3;   
 }

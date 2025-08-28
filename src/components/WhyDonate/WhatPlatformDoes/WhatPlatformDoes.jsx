@@ -6,8 +6,8 @@ import "./WhatPlatformDoes.css"
 export default function WhatPlatformDoes({
   headline = "Support Innovation with Your Equity",
   text = "Private stock donations help fund next-generation research, student success, and university advancement.",
-  buttonLabel,
-  buttonLink,
+  buttonLabel = "Learn More",
+  buttonLink = "/why-donate",
   imageSrc = Startup,
   imageAlt = "Side image",
   reverse = false,

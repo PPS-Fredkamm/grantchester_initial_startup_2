@@ -10,9 +10,9 @@ import DonorDonations from "../../components/donor/DonorDonations/DonorDonations
 import CompanySettings from "../../components/company/CompanySettings/CompanySettings.jsx";
 
 // Imports for the University Sub pages //
-import UniversityCertificates from '../../pages/member/university/UniversityCertificates/UniversityCertificates';
-import UniversitySettings from '../../pages/member/university/UniversitySettings/UniversitySettings';
-import UniversityDonations from '../../pages/member/university/UniversityDonations/UniversityDonations';
+// import UniversityCertificates from "../../pages/member/university/UniversityCertificates/UniversityCertificates";
+import UniversitySettings from "../../pages/member/university/UniversitySettings/UniversitySettings";
+import UniversityDonations from "../../pages/member/university/UniversityDonations/UniversityDonations";
 
 // Lazy-loaded dashboards
 const DonorDashboard = lazy(() =>
@@ -29,6 +29,12 @@ const PublicProfile = lazy(() =>
   import("../../pages/member/profile/PublicProfile")
 );
 const DonatePage = lazy(() => import("../../pages/donate/Donate"));
+const UniversityRegistration = lazy(() =>
+  import("../../pages/member/university/UniversityRegistration.jsx")
+);
+const CompanyRegistration = lazy(() =>
+  import("../../pages/member/company/CompanyRegistration.jsx")
+);
 
 import "./MemberLayout.css";
 
@@ -125,6 +131,20 @@ export default function MemberLayout() {
       switch (resolvedOption) {
         case "":
           content = <DonatePage />;
+          break;
+        default:
+          content = <NotFound />;
+          break;
+      }
+      break;
+
+    case "register":
+      switch (resolvedOption) {
+        case "university":
+          content = <UniversityRegistration />;
+          break;
+        case "company":
+          content = <CompanyRegistration />;
           break;
         default:
           content = <NotFound />;

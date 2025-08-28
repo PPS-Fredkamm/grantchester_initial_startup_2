@@ -5,7 +5,7 @@ import UniversityPriceHistory from '../../../components/university/UniversityPri
 import DonationTabs from '../../../components/university/DonationTabs/DonationTabs';
 import UniversityStockPlot from '../../../components/university/UniversityStockPlot/UniversityStockPlot';
 
-import './UniversityDashboard.css';
+import './University.css';
 
 export default function UniversityDashboard() {
   return (

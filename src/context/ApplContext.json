@@ -1,9 +1,9 @@
 {
   "apiEnvironment": "azure",
   "authors": ["Fred Kamm", "Drew Senour", "Richard L Van Winkle"],
-  "description": "Alumbiz Prototype Client",
-  "documentTitle": "Alumbiz",
-  "headerTitle": "Grantchester Alumbiz Prototype",
+  "description": "AlumBiz Prototype Client",
+  "documentTitle": "AlumBiz",
+  "headerTitle": "Grantchester AlumBiz Prototype",
   "projectCodename": "Project Acheron LV-426",
   "releaseDate": "May 13, 2025",
   "sequence": 0,

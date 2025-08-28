@@ -10,7 +10,7 @@ function Footer() {
     <footer className="footer mt-auto py-3">
       <Container className="text-center">
         <p className="mb-0">
-          &copy; {new Date().getFullYear()} Alumbiz. All rights reserved.
+          &copy; {new Date().getFullYear()} AlumBiz. All rights reserved.
         </p>
         <div>Version {applCtx.ctx.version}</div>
       </Container>

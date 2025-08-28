@@ -1,6 +1,6 @@
-import HowItWorks from '../../components/SideBySide/ForUniversityHowItWorks/HowItWorks';
-import SideBySide from '../../components/SideBySide/SideBySide';
-import ContactUs from '../../components/SideBySide/ContactUs/ContactUs';
+import HowItWorks from '../../components/forUniversities/ForUniversityHowItWorks/HowItWorks';
+import SideBySide from '../../components/forUniversities/SideBySide';
+import ContactUs from '../../components/forUniversities/ContactUs/ContactUs';
 
 export default function ForUniversities() {
   return (

@@ -6,7 +6,7 @@ import ProfileCTA from '../../../components/donor/DonorCTA/DonorCTA';
 import CompanyNewRequest from '../../../components/company/CompanyNewRequest/CompanyNewRequest';
 import CompanyRequest from '../../../components/company/CompanyRequestHistory/CompanyRequest';
 
-import './CompanyDashboard.css';
+import './Company.css';
 
 export default function CompanyDashboard() {
   return (

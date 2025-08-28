@@ -1,13 +1,15 @@
 import { Container, Row, Col, Image } from 'react-bootstrap';
+
+import UniversityStock2 from '../../assets/images/for-universities.jpg';
+
 import './SideBySide.css';
-import UniversityStock from '../../assets/images/SideBySideImages/UniversityStock.png';
 
 export default function SideBySide({ 
-  headline = "Grantchester's Stock Grant Program Opens the Door for Private Stock Donations to University Endowments",
-  text = "For the first time, universities can accept private stock donations to strengthen their endowments supporting their financial future and the next generation of students.",
+  headline = "Empower Universities Through Stock Donations",
+  text = "Support institutional endowments, fund the next generation of students, and create lasting impact through private stock contributions.",
   buttonLabel = "Learn More",
   buttonLink = "/for-universities",
-  imageSrc = UniversityStock, 
+  imageSrc = UniversityStock2, 
   imageAlt = 'Side image', 
   reverse = false 
 }) {

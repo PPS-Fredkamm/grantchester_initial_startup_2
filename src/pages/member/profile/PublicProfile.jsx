@@ -1,6 +1,6 @@
 
-export default function PublicProfile() {
+export default function PublicProfile({ username}) {
   return (
-    <div>PublicProfile</div>
+    <div>{username}'s PublicProfile</div>
   )
 }

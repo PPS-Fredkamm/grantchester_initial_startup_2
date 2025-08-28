@@ -8,14 +8,6 @@
   flex-wrap: wrap;
 }
 
-.logo-scroller-label {
-  font-size: 1.25rem;
-  font-weight: 700;
-  white-space: wrap;
-  color: #1a1a1a;
-  min-width: 300px;
-}
-
 .logo-scroller {
   overflow: hidden;
   width: 100%;
@@ -26,18 +18,15 @@
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
-  animation: scroll 30s linear infinite;
 }
-
 
 .logo-slide {
   flex: 0 0 auto;
   padding: 0 2rem;
 }
 
-
 .logo-slide img {
-  max-height: 100%;
+  height: 50px;
   object-fit: contain;
   pointer-events: none;
   user-select: none;

@@ -74,6 +74,8 @@ function UserIcon() {
             </div>
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
             <NavDropdown.Item href="/donor">Donor Dashboard</NavDropdown.Item>
+            <NavDropdown.Item href="/register/company">Company Registration</NavDropdown.Item>
+            <NavDropdown.Item href="/register/university">University Registration</NavDropdown.Item>
             <NavDropdown.Item onClick={handleLogout}>Sign Out</NavDropdown.Item>
           </NavDropdown>
         </div>

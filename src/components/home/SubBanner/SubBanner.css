@@ -1,9 +1,17 @@
 .sub-banner {
-  background-color: lightblue;
-  color: white;
-  padding: 0.75rem;
-  width: 100%;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
   text-align: center;
+  padding: 0.5rem 8rem;
   font-weight: 750;
   border-bottom: 1px solid #ddd;
+}
+
+.sub-banner p {
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 0;
 }

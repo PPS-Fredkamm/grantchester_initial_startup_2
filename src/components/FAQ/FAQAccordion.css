@@ -1,0 +1,31 @@
+.custom-accordion .accordion-item {
+  border: 1px solid #e6e8eb;
+  border-radius: 8px;
+  margin-bottom: .5rem;
+  overflow: hidden;
+}
+
+.custom-accordion .accordion-header button {
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  color: #333;
+  box-shadow: none;
+}
+
+.custom-accordion .accordion-button:not(.collapsed) {
+  color: var(--primary-blue);
+  background-color: #f7faff;
+}
+
+.custom-accordion .accordion-body {
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.faq-title {
+  font-weight: 700;
+  color: #222;
+}

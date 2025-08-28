@@ -16,3 +16,9 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.side-text h2 {
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 1.3;   
+}

@@ -1,17 +1,13 @@
-import './LogoScroller.css';
+import "./LogoScroller.css";
 
-function LogoScroller({ logos = [], speed = 30, height = 60 }) {
-  const duplicatedLogos = logos.concat(logos); // Duplicate for seamless scroll
+function LogoScroller({ logos = [], speed }) {
+  const duplicatedLogos = logos.concat(logos);
   const trackStyle = {
     animation: `scroll ${speed}s linear infinite`,
   };
 
   return (
     <div className="logo-scroller-wrapper">
-      <div className="logo-scroller-label">
-        Universities that have partnered with us
-      </div>
-
       <div className="logo-scroller">
         <div className="logo-track" style={trackStyle}>
           {duplicatedLogos.map((logo, index) => (
@@ -19,7 +15,7 @@ function LogoScroller({ logos = [], speed = 30, height = 60 }) {
               <img
                 src={logo}
                 alt={`logo-${index}`}
-                style={{ height: `${height}px` }}
+                // style={{ height: `${height}px` }}
               />
             </div>
           ))}

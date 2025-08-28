@@ -1,0 +1,41 @@
+/* The parent of the donor dashboard */
+
+.company-dashboard {
+  background-color: #f7fafc;
+}
+
+.company-content {
+  padding-top: .3rem;
+}
+
+/* Company Registration Form */
+
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.register-wrapper {
+  width: 100%;
+  max-width: 500px;
+}
+
+.register-card {
+  border: none;
+  border-radius: 12px;
+  padding: 30px;
+}
+
+.register-button {
+  background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+  color: white;
+  border: none !important;
+}
+
+.readonly-input {
+  background-color: #e6e6e6;
+  pointer-events: none;
+  cursor: not-allowed;
+}

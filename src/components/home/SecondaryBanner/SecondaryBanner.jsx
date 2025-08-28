@@ -1,5 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap';
-import sectionImage from '../../../assets/images/House.jpg'; // Replace with your image path
+import sectionImage from '../../../assets/images/House.jpg';
 
 import './SecondaryBanner.css';
 
@@ -12,7 +12,7 @@ function SecondaryBanner() {
             <div className="secondary-text">
               <h2 className="section-heading">Empowering Your Alumni Community</h2>
               <p className="section-subtext">
-                Alumbiz connects graduates, fosters collaboration, and unlocks exclusive resources
+                AlumBiz connects graduates, fosters collaboration, and unlocks exclusive resources
                 to help your alumni grow professionally and personally.
               </p>
             </div>

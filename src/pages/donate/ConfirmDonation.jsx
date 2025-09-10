@@ -9,8 +9,7 @@ export default function ConfirmDonationModal({
   valuation,
   totalValue,
   donationDate,
-  onSuccessReset,
-  onShowThankYou,
+  onSubmit
 }) {
   function handleConfirm() {
     console.log("Donation confirmed:", {
@@ -22,9 +21,7 @@ export default function ConfirmDonationModal({
       donationDate,
     });
 
-    onClose();
-    if (onSuccessReset) onSuccessReset();
-    if (onShowThankYou) onShowThankYou();
+    if (onSubmit) onSubmit();
   }
 
   return (

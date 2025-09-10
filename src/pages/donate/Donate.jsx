@@ -60,38 +60,10 @@ export default function DonationPage() {
     setShowConfirmModal(true);
   }
 
-  async function handleSubmitDonation() {
-    const formData = new FormData();
-    formData.append("companyName", companyName);
-    formData.append("recipient", recipient);
-    formData.append("shares", shares);
-    formData.append("valuation", valuation);
-    formData.append("totalValue", totalValue);
-    formData.append("donationDate", donationDate);
-    formData.append("note", note);
-    if (file) {
-      formData.append("attachment", file);
-    }
-
-    try {
-      const response = await fetch("/api/donation/submit", {
-        method: "POST",
-        body: formData,
-      });
-
-      const result = await response.json();
-
-      if (result.success) {
-        resetForm();
-        setShowConfirmModal(false);
-        setShowThankYouModal(true);
-      } else {
-        alert("There was an error submitting your donation.");
-      }
-    } catch (err) {
-      console.error("Error submitting donation:", err);
-      alert("Something went wrong while submitting your donation.");
-    }
+  function handleSubmitDonation() {
+    resetForm();
+    setShowConfirmModal(false);
+    setShowThankYouModal(true);
   }
 
   function resetForm() {
@@ -124,7 +96,6 @@ export default function DonationPage() {
               required
               autoComplete="organization"
               inputMode="text"
-              pattern=".*\\S.*"
               title="Please enter a valid company/organization name."
             />
           </Form.Group>
@@ -155,7 +126,6 @@ export default function DonationPage() {
                 value={otherUniversity}
                 onChange={(e) => setOtherUniversity(e.target.value)}
                 required
-                pattern=".*\\S.*"
                 title="Please enter a valid university name."
               />
             )}

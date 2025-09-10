@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Form, Button, Accordion } from "react-bootstrap";
 
-import Globals from "../../../global/globals";
 import * as AM from "../../../managers/AuthManager";
 import * as apiClient from "../../../managers/ApiClient";
 import * as ACM from "../../../managers/ApiClientMethods";
@@ -12,16 +12,16 @@ import "./ProfileTabs.css";
 export default function BasicInfo() {
   const [US_STATES, setUS_STATES] = useState([]);
 
+  // Redux state
+  const profile = useSelector((state) => state.auth.profile);
+  const address = useSelector((state) => state.auth.address);
+
   useEffect(() => {
     async function fetchData() {
       try {
-        var apiResult, states, list;
-        apiResult = await apiClient.GetStatesAsync();
-        states = ACM.getApiResultData(apiResult);
-        list = [];
-        for (let i = 0; i < states.length; i++) {
-          list.push(states[i].abbreviation);
-        }
+        const apiResult = await apiClient.GetStatesAsync();
+        const states = ACM.getApiResultData(apiResult);
+        const list = states.map((s) => s.abbreviation);
         setUS_STATES(list);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -33,18 +33,18 @@ export default function BasicInfo() {
   const [editMode, setEditMode] = useState(false);
 
   const [formData, setFormData] = useState({
-    firstName: Globals.member.profile.firstName,
-    middleName: Globals.member.profile.middleName,
-    lastName: Globals.member.profile.lastName,
-    phoneNumber: Globals.member.profile.phoneNumber,
-    email: Globals.member.profile.email,
-    address1: Globals.member.address.addressLine1,
-    address2: Globals.member.address.addressLine2,
-    address3: Globals.member.address.addressLine3,
-    cityName: Globals.member.address.cityName,
-    stateAbbreviation: Globals.member.address.stateAbbreviation,
-    stateName: Globals.member.address.stateName,
-    postalCode: Globals.member.address.postalCode,
+    firstName: profile?.firstName || "",
+    middleName: profile?.middleName || "",
+    lastName: profile?.lastName || "",
+    phoneNumber: profile?.phoneNumber || "",
+    email: profile?.email || "",
+    address1: address?.addressLine1 || "",
+    address2: address?.addressLine2 || "",
+    address3: address?.addressLine3 || "",
+    cityName: address?.cityName || "",
+    stateAbbreviation: address?.stateAbbreviation || "",
+    stateName: address?.stateName || "",
+    postalCode: address?.postalCode || "",
   });
 
   const [originalData, setOriginalData] = useState({ ...formData });
@@ -64,27 +64,33 @@ export default function BasicInfo() {
   async function handleSave() {
     var flag;
     var tmpProfile, tmpAddress;
+    try {
+      tmpAddress = new ACO.AddressDTO();
+      tmpAddress.addressLine1 = formData.address1;
+      tmpAddress.addressLine2 = formData.address2;
+      tmpAddress.addressLine3 = "";
+      tmpAddress.cityName = formData.cityName;
+      tmpAddress.stateAbbreviation = formData.stateAbbreviation;
+      tmpAddress.stateName = "";
+      tmpAddress.postalCode = formData.postalCode;
 
-    tmpAddress = new ACO.AddressDTO();
-    tmpAddress.addressLine1 = formData.address1;
-    tmpAddress.addressLine2 = formData.address2;
-    tmpAddress.addressLine3 = "";
-    tmpAddress.cityName = formData.cityName;
-    tmpAddress.stateAbbreviation = formData.stateAbbreviation;
-    tmpAddress.stateName = "";
-    tmpAddress.postalCode = formData.postalCode;
-    flag = await AM.UpdateAddress(tmpAddress);
-    if (flag) {
-      tmpProfile = new ACO.ProfileDTO();
-      tmpProfile.firstName = formData.firstName;
-      tmpProfile.middleName = formData.middleName;
-      tmpProfile.lastName = formData.lastName;
-      tmpProfile.phoneNumber = formData.phoneNumber;
-      tmpProfile.email = formData.email;
-      flag = await AM.UpdateProfile(tmpProfile);
+      flag = await AM.UpdateAddress(tmpAddress);
+
       if (flag) {
-        setOriginalData(formData);
+        tmpProfile = new ACO.ProfileDTO();
+        tmpProfile.firstName = formData.firstName;
+        tmpProfile.middleName = formData.middleName;
+        tmpProfile.lastName = formData.lastName;
+        tmpProfile.phoneNumber = formData.phoneNumber;
+        tmpProfile.email = formData.email;
+
+        flag = await AM.UpdateProfile(tmpProfile);
+        if (flag) {
+          setOriginalData(formData);
+        }
       }
+    } catch (err) {
+      console.error("Error saving profile:", err);
     }
     setEditMode(false);
   }
@@ -208,7 +214,12 @@ export default function BasicInfo() {
 
               <Form.Group className="mb-3">
                 <Form.Label>State</Form.Label>
-                <Form.Select name="stateAbbreviation" value={formData.stateAbbreviation} onChange={handleChange} disabled={!editMode}>
+                <Form.Select
+                  name="stateAbbreviation"
+                  value={formData.stateAbbreviation}
+                  onChange={handleChange}
+                  disabled={!editMode}
+                >
                   <option value="">Select a state</option>
                   {US_STATES.map((stateAbbr) => (
                     <option key={stateAbbr} value={stateAbbr}>

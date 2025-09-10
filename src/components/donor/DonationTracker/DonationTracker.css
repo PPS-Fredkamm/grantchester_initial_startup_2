@@ -1,0 +1,16 @@
+/* space under each metadata block */
+.donation-meta {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+/* spacing around the whole status area */
+.status-section {
+  margin-top: 1.5rem;
+}
+
+/* space just above the badge */
+.status-label {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

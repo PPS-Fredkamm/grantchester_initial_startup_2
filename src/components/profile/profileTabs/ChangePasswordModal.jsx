@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Modal, Form, Button, InputGroup, Card } from "react-bootstrap";
+import { Modal, Form, Button, InputGroup } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { useAuthContext } from "../../../context/AuthProvider";
+import { useDispatch } from "react-redux";
+import { changePassword } from "../../../redux/slices/authSlice";
 
 import AlertToast from "../../userInterface/AlertToast";
 
@@ -20,13 +21,9 @@ export default function ChangePasswordModal({ show, onClose }) {
     variant: "danger",
   });
 
-  const authCtx = useAuthContext();
-
-  // ========================================
-  // ========================================
+  const dispatch = useDispatch();
 
   async function handleSave(e) {
-    var flag;
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
@@ -38,46 +35,51 @@ export default function ChangePasswordModal({ show, onClose }) {
       return;
     }
 
-    flag = await authCtx.changePassword(
-      currentPassword,
-      newPassword,
-      confirmPassword
-    );
+    try {
+      const resultAction = await dispatch(
+        changePassword({ currentPassword, newPassword, confirmPassword })
+      );
 
-    if (!flag) {
+      if (
+        changePassword.fulfilled.match(resultAction) &&
+        resultAction.payload
+      ) {
+        if (currentPassword === newPassword) {
+          setToast({
+            show: true,
+            message: "New password cannot be the same as the current password.",
+            variant: "danger",
+          });
+          return;
+        }
+
+        setToast({
+          show: true,
+          message: "Password changed successfully!",
+          variant: "success",
+        });
+
+        setTimeout(() => {
+          setCurrentPassword("");
+          setNewPassword("");
+          setConfirmPassword("");
+          onClose();
+        }, 500);
+      } else {
+        setToast({
+          show: true,
+          message: "Current password is incorrect or update failed.",
+          variant: "danger",
+        });
+      }
+    } catch {
       setToast({
         show: true,
-        message: "Current password is incorrect or update failed.",
+        message: "Unexpected error occurred.",
         variant: "danger",
       });
-      return;
     }
-
-    if (currentPassword === newPassword) {
-      setToast({
-        show: true,
-        message: "New password cannot be the same as the current password.",
-        variant: "danger",
-      });
-      return;
-    }
-
-    setToast({
-      show: true,
-      message: "Password changed successfully!",
-      variant: "success",
-    });
-
-    setTimeout(() => {
-      setCurrentPassword("");
-      setNewPassword("");
-      setConfirmPassword("");
-      onClose();
-    }, 500);
   }
-
-  // ========================================
-  // ========================================
 
   return (
     <>

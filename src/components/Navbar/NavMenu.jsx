@@ -5,10 +5,10 @@ import Tooltip from "react-bootstrap/Tooltip";
 
 import { FaHeart } from "react-icons/fa";
 
-import { useAuthContext } from "../../context/AuthProvider";
+import { useSelector } from "react-redux";
 
 function NavMenu() {
-  const authCtx = useAuthContext();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <Nav className="nav-menu">
@@ -17,11 +17,9 @@ function NavMenu() {
       <Nav.Link href="/for-universities">For Universities</Nav.Link>
       <Nav.Link href="/partners">Partners</Nav.Link>
       <Nav.Link href="/FAQ">FAQs</Nav.Link>
-      {!authCtx.ctx.isAuthenticated && (
-        <>
-          <Nav.Link href="/login">Sign In</Nav.Link>
-        </>
-      )}
+
+      {!isAuthenticated && <Nav.Link href="/login">Sign In</Nav.Link>}
+
       <OverlayTrigger
         placement="bottom"
         overlay={<Tooltip id="donate-tooltip">Donate</Tooltip>}

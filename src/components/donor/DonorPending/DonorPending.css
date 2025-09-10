@@ -38,6 +38,11 @@
   color: #ffffff;
 }
 
+.status-submitted {
+  background-color: #6c757d;
+  color: #fff;
+}
+
 /* More icon */
 .pending-icon {
   font-size: 1.5rem;

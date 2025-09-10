@@ -1,7 +1,7 @@
 import { useEffect, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { useApplContext } from "./context/ApplProvider.jsx";
+import { useSelector } from "react-redux";
 
 import RequireAuthentication from "./components/auth/RequireAuthentication.jsx";
 
@@ -10,8 +10,8 @@ import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
 import MainLayout from "./layouts/main/MainLayout.jsx";
 import MemberLayout from "./layouts/member/MemberLayout.jsx";
 
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/home/Home.jsx"));
@@ -28,11 +28,11 @@ const ForUniversities = lazy(() =>
 const FAQPage = lazy(() => import("./pages/FAQ/FaqPage.jsx"));
 
 export default function App() {
-  const applCtx = useApplContext();
+  const documentTitle = useSelector((state) => state.app.documentTitle);
 
   useEffect(() => {
-    document.title = applCtx.ctx.documentTitle;
-  }, [applCtx]);
+    document.title = documentTitle;
+  }, [documentTitle]);
 
   return (
     <div className="app">

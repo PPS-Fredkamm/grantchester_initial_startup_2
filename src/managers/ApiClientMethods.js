@@ -1,5 +1,4 @@
-import Globals from "../global/globals";
-
+import { store } from "../redux/store";
 import * as ACO from "./ApiClientObjects";
 
 // ========================================
@@ -11,7 +10,7 @@ export async function appendAuthenticationHeader(headers) {
   // ----------------------------------------
   if (headers === undefined || headers === null) return;
   // ----------------------------------------
-  token = Globals.apiInfo.bearerToken;
+  token = store.getState().auth?.apiInfo?.bearerToken;
   if (token === undefined || token === null) return;
   bearer = "Bearer " + token;
   // ----------------------------------------
@@ -120,6 +119,7 @@ export function generateFetchOptions(httpMethod, item) {
 // ========================================
 
 export function generateFetchUrl(path, params) {
+  const state = store.getState();
   var env = undefined;
   var baseUri = undefined;
   var fetchUri, fetchUrl;
@@ -128,14 +128,15 @@ export function generateFetchUrl(path, params) {
 
   // ----------------------------------------
 
-  env = Globals.apiInfo.apiEnvironment;
-  if (env === undefined || env === null) {
-    throw new Error("Globals apiEnvironment is not defined");
+  env = env = state.app.apiEnvironment;
+  if (!env) {
+    throw new Error("Redux app.apiEnvironment is not defined");
   }
 
   switch (env) {
     case "azure": {
-      baseUri = "https://customdataservicesapi20240309210451.azurewebsites.net/api/";
+      baseUri =
+        "https://customdataservicesapi20240309210451.azurewebsites.net/api/";
       break;
     }
     case "dev": {
@@ -184,13 +185,13 @@ export function getApiResultData(item) {
   try {
     buf = JSON.stringify(item);
     JSON.parse(buf);
-  } catch (error) {
+  } catch {
     isJson = false;
   }
   // ----------------------------------------
   if (isJson) {
     tag = "data";
-    if (item.hasOwnProperty(tag)) {
+    if (Object.prototype.hasOwnProperty.call(item, tag)) {
       data = item[tag];
     }
   }
@@ -289,14 +290,26 @@ export async function processFetchResponse(response) {
 
   if (contentType.includes("image")) {
     image = await response.bytes();
-    if (image.slice(0, jpgSignature.length).every((byte, index) => byte === jpgSignature[index])) {
-      log(`JPG signature: FF D8 FF E0`);
-    } else if (image.slice(0, pngSignature.length).every((byte, index) => byte === pngSignature[index])) {
-      log(`PNG signature: 89 50 4E 47 0D 0A 1A 0A`);
-    } else if (image.slice(0, gif89aSignature.length).every((byte, index) => byte === gif89aSignature[index])) {
-      log(`GIF (GIF89a) signature: 47 49 46 38 39 61`);
+    if (
+      image
+        .slice(0, jpgSignature.length)
+        .every((byte, index) => byte === jpgSignature[index])
+    ) {
+      console.log(`JPG signature: FF D8 FF E0`);
+    } else if (
+      image
+        .slice(0, pngSignature.length)
+        .every((byte, index) => byte === pngSignature[index])
+    ) {
+      console.log(`PNG signature: 89 50 4E 47 0D 0A 1A 0A`);
+    } else if (
+      image
+        .slice(0, gif89aSignature.length)
+        .every((byte, index) => byte === gif89aSignature[index])
+    ) {
+      console.log(`GIF (GIF89a) signature: 47 49 46 38 39 61`);
     } else {
-      log("Unknown format");
+      console.log("Unknown format");
     }
 
     apiResult = new ACO.ApiResult();

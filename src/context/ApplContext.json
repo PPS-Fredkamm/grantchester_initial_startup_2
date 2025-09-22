@@ -1,5 +1,5 @@
 {
-  "apiEnvironment": "azure",
+  "apiEnvironment": "dev",
   "authors": ["Fred Kamm", "Drew Senour", "Richard L Van Winkle"],
   "description": "AlumBiz Prototype Client",
   "documentTitle": "AlumBiz",

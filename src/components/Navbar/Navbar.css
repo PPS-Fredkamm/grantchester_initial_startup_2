@@ -4,8 +4,12 @@
 }
 
 .nav-menu .nav-link {
-  margin: 0 1.5rem;
-  color: black;
+  margin: 0 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  color: #333;
+  transition: color 0.2s ease;
 }
 
 /* ========================= */
@@ -16,10 +20,10 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-right: 3rem
+  padding-right: 3rem;
 }
 
-.nav-image{
+.nav-image {
   display: inline-block;
   align-items: center;
   padding-left: 2rem;
@@ -37,7 +41,6 @@
   );
   color: white;
   border: none !important;
-  padding: 0.5rem 1rem;
 }
 
 .donate-heart-icon {
@@ -178,6 +181,6 @@
   }
 
   .nav-content {
-  padding-right: 0rem
-}
+    padding-right: 0rem;
+  }
 }

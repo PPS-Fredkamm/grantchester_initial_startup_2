@@ -1,7 +1,7 @@
 import { useEffect, lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import { useApplContext } from "./context/ApplProvider.jsx";
+import { useSelector } from "react-redux";
 
 import RequireAuthentication from "./components/auth/RequireAuthentication.jsx";
 
@@ -10,13 +10,15 @@ import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
 import MainLayout from "./layouts/main/MainLayout.jsx";
 import MemberLayout from "./layouts/member/MemberLayout.jsx";
 
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+// import HowItWorks from "./components/forUniversities/ForUniversityHowItWorks/HowItWorks.jsx";
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/home/Home.jsx"));
 const Login = lazy(() => import("./pages/login/Login.jsx"));
 const Signup = lazy(() => import("./pages/signup/Signup.jsx"));
+const HowItWorks = lazy(() => import("./pages/howItWorks/HowItWorks.jsx"));
 const UnderConstruction = lazy(() =>
   import("./pages/placeholder/UnderConstruction.jsx")
 );
@@ -28,11 +30,11 @@ const ForUniversities = lazy(() =>
 const FAQPage = lazy(() => import("./pages/FAQ/FaqPage.jsx"));
 
 export default function App() {
-  const applCtx = useApplContext();
+  const documentTitle = useSelector((state) => state.app.documentTitle);
 
   useEffect(() => {
-    document.title = applCtx.ctx.documentTitle;
-  }, [applCtx]);
+    document.title = documentTitle;
+  }, [documentTitle]);
 
   return (
     <div className="app">
@@ -54,6 +56,7 @@ export default function App() {
             errorElement={<ErrorHandler />}
           >
             <Route index element={<Home />} />
+            <Route path="how-it-works" element={<HowItWorks />} />
             <Route path="why-donate" element={<WhyDonate />} />
             <Route path="for-donors" element={<ForDonors />} />
             <Route path="for-universities" element={<ForUniversities />} />

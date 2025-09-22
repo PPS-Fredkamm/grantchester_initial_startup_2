@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState, useRef, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import {
   Form,
   Button,
@@ -7,29 +7,30 @@ import {
   Card,
   InputGroup,
   Modal,
-} from 'react-bootstrap';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+} from "react-bootstrap";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { useAuthContext } from '../../context/AuthProvider';
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/slices/authSlice";
 
-import AlertToast from '../../components/userInterface/AlertToast';
-import ProfileInfoForm from './ProfileInfoForm';
+import AlertToast from "../../components/userInterface/AlertToast";
+import ProfileInfoForm from "./ProfileInfoForm";
 
-import './Signup.css';
+import "./Signup.css";
 
 export default function Signup() {
-  const authCtx = useAuthContext();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
 
   const usernameRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (usernameRef.current) {
@@ -41,15 +42,15 @@ export default function Signup() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       setShowToast(true);
       return;
     }
 
-    var flag = await authCtx.register(username, password);
+    const resultAction = await dispatch(register({ username, password }));
 
-    if (!flag) {
-      setError('Signup failed');
+    if (!register.fulfilled.match(resultAction)) {
+      setError("Signup failed");
       setShowToast(true);
       return;
     }
@@ -87,7 +88,7 @@ export default function Signup() {
                   <Form.Label>Password</Form.Label>
                   <InputGroup>
                     <Form.Control
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       placeholder="Enter password"
                       onChange={(e) => setPassword(e.target.value)}
                       required
@@ -106,7 +107,7 @@ export default function Signup() {
                   <Form.Label>Confirm Password</Form.Label>
                   <InputGroup>
                     <Form.Control
-                      type={showConfirmPassword ? 'text' : 'password'}
+                      type={showConfirmPassword ? "text" : "password"}
                       placeholder="Confirm password"
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       required
@@ -129,7 +130,7 @@ export default function Signup() {
               </Form>
 
               <Form.Text className="text-center d-block mt-3">
-                Already have an account?{' '}
+                Already have an account?{" "}
                 <Link to="/login" className="auth-link">
                   Sign In
                 </Link>
@@ -148,12 +149,11 @@ export default function Signup() {
         size="xl"
         contentClassName="custom-modal-content"
       >
-        {/* Form */}
         <ProfileInfoForm
           username={username}
           onSuccess={() => {
             setShowProfileModal(false);
-            navigate('/donor');
+            navigate("/donor");
           }}
         />
       </Modal>

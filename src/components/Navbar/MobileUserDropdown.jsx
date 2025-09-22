@@ -5,26 +5,35 @@ import { Image } from "react-bootstrap";
 
 import ProfilePlaceholder from "../../assets/Images/profilePlaceholder.jpg";
 
-import { useAuthContext } from "../../context/AuthProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/slices/authSlice";
 import * as ACM from "../../managers/ApiClientMethods";
-import Globals from "../../global/globals";
 
 function MobileUserDropdown({ onClose }) {
-  const authCtx = useAuthContext();
+  const dispatch = useDispatch();
+
+  // Redux state
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const profile = useSelector((state) => state.auth.profile);
+  const roles = useSelector((state) => state.auth.roles);
+  const imageFile = useSelector((state) => state.auth.imageFile);
+
   const [isOpen, setIsOpen] = useState(false);
   const [profileImage, setProfileImage] = useState(ProfilePlaceholder);
 
   useEffect(() => {
-    if (Globals.member.imageFile?.id > 0) {
-      const imageUrl = ACM.createImageFileURL(Globals.member.imageFile);
+    if (imageFile?.id > 0) {
+      const imageUrl = ACM.createImageFileURL(imageFile);
       setProfileImage(imageUrl);
+    } else {
+      setProfileImage(ProfilePlaceholder);
     }
-  }, []);
+  }, [imageFile]);
 
-  if (!authCtx.ctx.isAuthenticated) return null;
+  if (!isAuthenticated) return null;
 
   async function handleLogout() {
-    await authCtx.logout();
+    await dispatch(logout());
     if (onClose) onClose();
   }
 
@@ -42,8 +51,10 @@ function MobileUserDropdown({ onClose }) {
           alt="Profile"
         />
         <div className="d-flex flex-column text-end flex-grow-1 px-2">
-          <span className="user-email">{Globals.member.profile.email}</span>
-          <span className="user-role">{Globals.member.roles.join(", ")}</span>
+          <span className="user-email">{profile?.email || "No email"}</span>
+          <span className="user-role">
+            {roles && roles.length > 0 ? roles.join(", ") : "No roles"}
+          </span>
         </div>
         <FiChevronDown className={`chevron ${isOpen ? "open" : ""}`} />
       </div>

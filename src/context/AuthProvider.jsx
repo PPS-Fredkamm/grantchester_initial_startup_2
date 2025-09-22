@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import * as AM from "../managers/AuthManager";
+import * as AM from "../managers/BusinessLayerMethods";
 import Globals from "../global/globals";
 
 import ctxConfig from "./AuthContext.json";

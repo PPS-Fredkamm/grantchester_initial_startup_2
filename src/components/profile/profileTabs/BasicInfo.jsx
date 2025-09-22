@@ -1,50 +1,66 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Form, Button, Accordion } from "react-bootstrap";
 
-import Globals from "../../../global/globals";
-import * as AM from "../../../managers/AuthManager";
-import * as apiClient from "../../../managers/ApiClient";
+import * as ACELocation from "../../../managers/ApiClient-Location";
 import * as ACM from "../../../managers/ApiClientMethods";
 import * as ACO from "../../../managers/ApiClientObjects";
+import * as BLM from "../../../managers/BusinessLayerMethods";
 
 import "./ProfileTabs.css";
+import { HiOutlineArrowRightStartOnRectangle } from "react-icons/hi2";
 
 export default function BasicInfo() {
-  const [US_STATES, setUS_STATES] = useState([]);
+  const [states, setStates] = useState([]);
+  const [statesDDL, setStatesDDL] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [countriesDDL, setCountriesDDL] = useState([]);
+
+  // Redux state
+  const profile = useSelector((state) => state.auth.profile);
+  const addressCDO = useSelector((state) => state.auth.addressCDO);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchDDLData() {
       try {
-        var apiResult, states, list;
-        apiResult = await apiClient.GetStatesAsync();
+        let apiResult;
+        let states, countries;
+        let list;
+
+        apiResult = await ACELocation.GetStatesAsync();
         states = ACM.getApiResultData(apiResult);
-        list = [];
-        for (let i = 0; i < states.length; i++) {
-          list.push(states[i].abbreviation);
-        }
-        setUS_STATES(list);
+        setStates(states);
+        list = states.map((o) => o.abbreviation + ' ( ' + o.name + ' )');
+        setStatesDDL(list);
+
+        apiResult = await ACELocation.GetCountriesAsync();
+        countries = ACM.getApiResultData(apiResult);
+        setCountries(countries);
+        list = countries.map((o) => o.name + ' [ ' + o.abbreviation + ' ]');
+        setCountriesDDL(list);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching DDL data:", error);
       }
     }
-    fetchData();
+    fetchDDLData();
   }, []);
 
   const [editMode, setEditMode] = useState(false);
 
   const [formData, setFormData] = useState({
-    firstName: Globals.member.profile.firstName,
-    middleName: Globals.member.profile.middleName,
-    lastName: Globals.member.profile.lastName,
-    phoneNumber: Globals.member.profile.phoneNumber,
-    email: Globals.member.profile.email,
-    address1: Globals.member.address.addressLine1,
-    address2: Globals.member.address.addressLine2,
-    address3: Globals.member.address.addressLine3,
-    cityName: Globals.member.address.cityName,
-    stateAbbreviation: Globals.member.address.stateAbbreviation,
-    stateName: Globals.member.address.stateName,
-    postalCode: Globals.member.address.postalCode,
+    firstName: profile?.firstName || "",
+    middleName: profile?.middleName || "",
+    lastName: profile?.lastName || "",
+    phoneNumber: profile?.phoneNumber || "",
+    email: profile?.email || "",
+
+    address1: addressCDO?.addressLine1 || "",
+    address2: addressCDO?.addressLine2 || "",
+    address3: addressCDO?.addressLine3 || "",
+    cityName: addressCDO?.cityName || "",
+    stateListItem: addressCDO?.state.abbreviation + ' ( ' + addressCDO.state.name + ' )',
+    postalCode: addressCDO?.postalCode || "",
+    countryListItem: addressCDO?.country.name + ' [ ' + addressCDO?.country.abbreviation + ' ]',
   });
 
   const [originalData, setOriginalData] = useState({ ...formData });
@@ -63,28 +79,42 @@ export default function BasicInfo() {
 
   async function handleSave() {
     var flag;
-    var tmpProfile, tmpAddress;
+    var index;
+    var tmpProfile, tmpAddressCDO;
 
-    tmpAddress = new ACO.AddressDTO();
-    tmpAddress.addressLine1 = formData.address1;
-    tmpAddress.addressLine2 = formData.address2;
-    tmpAddress.addressLine3 = "";
-    tmpAddress.cityName = formData.cityName;
-    tmpAddress.stateAbbreviation = formData.stateAbbreviation;
-    tmpAddress.stateName = "";
-    tmpAddress.postalCode = formData.postalCode;
-    flag = await AM.UpdateAddress(tmpAddress);
-    if (flag) {
-      tmpProfile = new ACO.ProfileDTO();
-      tmpProfile.firstName = formData.firstName;
-      tmpProfile.middleName = formData.middleName;
-      tmpProfile.lastName = formData.lastName;
-      tmpProfile.phoneNumber = formData.phoneNumber;
-      tmpProfile.email = formData.email;
-      flag = await AM.UpdateProfile(tmpProfile);
+    try {
+      tmpAddressCDO = new ACO.AddressCDO();
+      tmpAddressCDO.addressLine1 = formData.address1;
+      tmpAddressCDO.addressLine2 = formData.address2;
+      tmpAddressCDO.addressLine3 = "";
+      tmpAddressCDO.cityName = formData.cityName;
+      tmpAddressCDO.postalCode = formData.postalCode;
+
+      index = statesDDL.findIndex(o => o === formData.stateListItem);
+      tmpAddressCDO.stateID = index;
+      tmpAddressCDO.state = states[index];
+
+      index = countriesDDL.findIndex(o => o === formData.countryListItem);
+      tmpAddressCDO.countryID = index;
+      tmpAddressCDO.country = countries[index];
+
+      flag = await BLM.UpdateAddressCDO(tmpAddressCDO);
+
       if (flag) {
-        setOriginalData(formData);
+        tmpProfile = new ACO.ProfileDTO();
+        tmpProfile.firstName = formData.firstName;
+        tmpProfile.middleName = formData.middleName;
+        tmpProfile.lastName = formData.lastName;
+        tmpProfile.phoneNumber = formData.phoneNumber;
+        tmpProfile.email = formData.email;
+
+        flag = await BLM.UpdateProfile(tmpProfile);
+        if (flag) {
+          setOriginalData(formData);
+        }
       }
+    } catch (err) {
+      console.error("Error saving profile:", err);
     }
     setEditMode(false);
   }
@@ -208,9 +238,14 @@ export default function BasicInfo() {
 
               <Form.Group className="mb-3">
                 <Form.Label>State</Form.Label>
-                <Form.Select name="stateAbbreviation" value={formData.stateAbbreviation} onChange={handleChange} disabled={!editMode}>
+                <Form.Select
+                  name="stateListItem"
+                  value={formData.stateListItem}
+                  onChange={handleChange}
+                  disabled={!editMode}
+                >
                   <option value="">Select a state</option>
-                  {US_STATES.map((stateAbbr) => (
+                  {statesDDL.map((stateAbbr) => (
                     <option key={stateAbbr} value={stateAbbr}>
                       {stateAbbr}
                     </option>
@@ -228,6 +263,24 @@ export default function BasicInfo() {
                   disabled={!editMode}
                 />
               </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Country</Form.Label>
+                <Form.Select
+                  name="countryListItem"
+                  value={formData.countryListItem}
+                  onChange={handleChange}
+                  disabled={!editMode}
+                >
+                  <option value="">Select a country</option>
+                  {countriesDDL.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

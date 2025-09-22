@@ -3,7 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { Form, Button, Container, Card, InputGroup } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-import { useAuthContext } from "../../context/AuthProvider";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/slices/authSlice";
 import AlertToast from "../../components/userInterface/AlertToast";
 import ForgotPasswordModal from "./ForgotPassword";
 
@@ -18,8 +19,8 @@ export default function Login() {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
 
   const usernameRef = useRef(null);
-  const authCtx = useAuthContext();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (usernameRef.current) {
@@ -30,9 +31,9 @@ export default function Login() {
   async function handleLogin(e) {
     e.preventDefault();
 
-    const success = await authCtx.login(username, password);
+    const resultAction = await dispatch(login({ username, password }));
 
-    if (success) {
+    if (login.fulfilled.match(resultAction)) {
       navigate("/profile");
     } else {
       setError("Username or password is invalid.");

@@ -1,4 +1,11 @@
 // ========================================
+// ----------------------------------------
+//  ApiClientObjects
+//  Javascript Constructor Functions for use with new operator
+// ----------------------------------------
+// ========================================
+
+// ========================================
 //  ApiResult
 // ========================================
 
@@ -20,48 +27,84 @@ export function Address()
     this.addressLine2 = "";
     this.addressLine3 = "";
     this.cityName = "";
+    this.postalCode = "";
     this.stateID = 0;
     this.countryID = 0;
-    this.postalCode = ""    ;
 }
 
 // ========================================
-//  AddressDTO
+//  AddressCDO
 // ========================================
 
-export function AddressDTO()
+export function AddressCDO()
 {
     this.id = 0;
     this.addressLine1 = "";
     this.addressLine2 = "";
     this.addressLine3 = "";
     this.cityName = "";
-    this.stateAbbreviation = "";
-    this.stateName = "";
-    this.countryAbbreviation = "";
-    this.countryName = "";
-    this.postalCode = ""    ;
+    this.postalCode = "";
+    this.stateID = 0;
+    this.state = new State();
+    this.countryID = 0;
+    this.country = new Country();
 }
 
 // ========================================
-//  State
+//  Company
 // ========================================
 
-export function State()
+export function Company()
 {
     this.id = 0;
-    this.abbreviation = "";
     this.name = "";
-    this.capital = "";
-    this.timezones = "";
-    this.ianaTimezones = "";
-    this.lattitude = 0;
-    this.longitude = 0;
+    this.phoneNumber = "";
+    this.addressID = 0;
+    this.primaryContactID = 0;
 }
 
 // ========================================
 //  Country
 // ========================================
+
+export function Country()
+{
+    this.id = 0;
+    this.name = "";
+    this.abbreviation = "";
+    this.capital = "";
+    this.lattitude = 0;
+    this.longitude = 0;
+}
+
+// ========================================
+//  Donation
+// ========================================
+
+export function Donation()
+{
+    this.id = 0;
+    this.createdDate = new Date().toISOString();
+    this.modifiedDate = new Date().toISOString();
+    this.isConfirmed = false;
+    this.userID = 0;
+    this.donationID = 0;
+    this.donationDate = new Date().toISOString();
+    this.donationStatusID = 0;
+    this.transactionID = 0;
+    this.units = 0;
+    this.initialValuation = 0;
+    this.currentValuation = 0;
+    this.valuationDate = new Date().toISOString();
+    this.note = "";
+    this.companyID = 0;
+    this.universityID = 0;
+}
+
+export const DonationStatusCode = Object.freeze({
+    UNDEFINED: 0,
+    CREATED: 1
+})
 
 // ========================================
 //  ImageFile
@@ -122,6 +165,36 @@ export function Role() {
     this.modifiedDate = new Date().toISOString();
     this.name = "";
     this.description = "";
+}
+
+// ========================================
+//  State
+// ========================================
+
+export function State()
+{
+    this.id = 0;
+    this.abbreviation = "";
+    this.name = "";
+    this.capital = "";
+    this.timezones = "";
+    this.ianaTimezones = "";
+    this.lattitude = 0;
+    this.longitude = 0;
+}
+
+// ========================================
+//  University
+// ========================================
+
+export function University()
+{
+    this.id = 0;
+    this.name = "";
+    this.displayCode = "";
+    this.phoneNumber = "";
+    this.addressID = 0;
+    this.primaryContactID = 0;
 }
 
 // ========================================

@@ -7,17 +7,17 @@ import {
   InputGroup,
 } from "react-bootstrap";
 
-import { useAuthContext } from "../../../context/AuthProvider";
-import Globals from "../../../global/globals";
+import { useSelector } from "react-redux";
 
 import HomeBanner from "../../../assets/images/HomeBanner2.png";
-
 import "./WebBanner.css";
 
 function WebBanner() {
   const [query, setQuery] = useState("");
-  const authCtx = useAuthContext();
-  const isAuthenticated = authCtx.ctx.isAuthenticated;
+
+  // Redux state
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const profile = useSelector((state) => state.auth.profile);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ function WebBanner() {
           {isAuthenticated ? (
             <>
               <h2 className="web-banner-title">
-                Welcome back, {Globals.member.profile.firstName || "Alum"}!
+                Welcome back, {profile?.firstName || "Alum"}!
               </h2>
               <p className="web-banner-subtitle">
                 Manage your private stock donations, track valuations, and view
@@ -67,7 +67,7 @@ function WebBanner() {
           ) : (
             <>
               <h2 className="web-banner-title">Welcome to AlumBiz</h2>
-              <Button className="get-started-btn" href="/why-donate">
+              <Button className="get-started-btn" href="/how-it-works">
                 Get Started
               </Button>
               <p className="web-banner-subtitle">

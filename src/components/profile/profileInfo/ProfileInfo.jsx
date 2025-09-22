@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { Card, Button, Image, Form } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -10,15 +11,21 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 
-import ProfilePlaceholder from "../../../assets/Images/profilePlaceholder.jpg";
-import Globals from "../../../global/globals";
-import * as AM from "../../../managers/AuthManager";
 import * as ACM from "../../../managers/ApiClientMethods";
 import * as ACO from "../../../managers/ApiClientObjects";
+import * as BLM from "../../../managers/BusinessLayerMethods";
+
+import ProfilePlaceholder from "../../../assets/Images/profilePlaceholder.jpg";
 
 import "./ProfileInfo.css";
 
 export default function ProfileInfo() {
+  // Redux state
+  const user = useSelector((state) => state.auth.user);
+  const profile = useSelector((state) => state.auth.profile);
+  const imageFile = useSelector((state) => state.auth.imageFile);
+
+  // Local state
   const inputRef = useRef(null);
   const fileRef = useRef(null);
 
@@ -26,21 +33,30 @@ export default function ProfileInfo() {
   const [editMode, setEditMode] = useState(false);
 
   const [profileData, setProfileData] = useState({
-    // bio: Globals.profileInfo.bio || "",
-    // company: Globals.profileInfo.company || "",
-    // alumni: Globals.profileInfo.alumni || "",
-    // universities: Globals.profileInfo.universities || "",
-    // interests: Globals.profileInfo.interests || "",
+    // bio: profile?.bio || "",
+    // company: profile?.company || "",
+    // alumni: profile?.alumni || "",
+    // universities: profile?.universities || "",
+    // interests: profile?.interests || "",
   });
 
   const [originalData, setOriginalData] = useState({ ...profileData });
 
+  // Update preview when Redux imageFile changes
   useEffect(() => {
-    if (Globals.member.imageFile.id > 0) {
-      let dataUrl = ACM.createImageFileURL(Globals.member.imageFile);
-      setPreviewImage(dataUrl);
+    if (imageFile && imageFile.id > 0) {
+      const imageUrl = ACM.createImageFileURL(imageFile);
+
+      if (imageUrl) {
+        const isBase64 = imageUrl.startsWith("data:image/");
+        setPreviewImage(isBase64 ? imageUrl : `${imageUrl}?t=${Date.now()}`);
+      } else {
+        setPreviewImage(ProfilePlaceholder);
+      }
+    } else {
+      setPreviewImage(ProfilePlaceholder);
     }
-  }, [previewImage]);
+  }, [imageFile]);
 
   // ========================================
   // Image Handlers
@@ -62,22 +78,18 @@ export default function ProfileInfo() {
 
   async function handleFileLoad(e) {
     try {
-      let arrayBuf = e.target.result;
-      let file = fileRef.current;
+      const arrayBuf = e.target.result;
+      const file = fileRef.current;
 
-      let imageFile = new ACO.ImageFile();
-      imageFile.name = file.name;
-      imageFile.contentType = file.type;
-      imageFile.data = ACM.arrayBufferToBase64(arrayBuf);
-      imageFile.length = arrayBuf.byteLength;
+      const newImageFile = new ACO.ImageFile();
+      newImageFile.name = file.name;
+      newImageFile.contentType = file.type;
+      newImageFile.data = ACM.arrayBufferToBase64(arrayBuf);
+      newImageFile.length = arrayBuf.byteLength;
 
-      let flag = await AM.UpdateImageFile(imageFile);
-      if (flag) {
-        await AM.ReloadMember();
-        // window.location.reload();
-        const imageUrl =
-          ACM.createImageFileURL(Globals.member.imageFile) + `?t=${Date.now()}`;
-        setPreviewImage(imageUrl);
+      const updated = await BLM.UpdateImageFile(newImageFile);
+      if (!updated) {
+        console.error("Image update failed");
       }
 
       fileRef.current = null;
@@ -138,9 +150,9 @@ export default function ProfileInfo() {
       />
 
       <div className="text-start">
-        <h4 className="mb-1">{Globals.member.user.username}</h4>
+        <h4 className="mb-1">{user?.username || "Unknown User"}</h4>
         <p className="text-muted mb-2">
-          {Globals.member.profile.email || "email@example.com"}
+          {profile?.email || "email@example.com"}
         </p>
 
         {!editMode ? (

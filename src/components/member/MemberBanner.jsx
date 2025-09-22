@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import "./MemberBanner.css";
-import Globals from "../../global/globals";
 
 export default function MemberBanner() {
   const { type } = useParams();
 
   const role = type?.toLowerCase();
-  const firstName = Globals.member.profile.firstName;
+  const profile = useSelector((state) => state.auth.profile);
+  const firstName = profile?.firstName || "User";
 
   let greeting = "";
   switch (role) {

@@ -67,7 +67,7 @@ function WebBanner() {
           ) : (
             <>
               <h2 className="web-banner-title">Welcome to AlumBiz</h2>
-              <Button className="get-started-btn" href="/why-donate">
+              <Button className="get-started-btn" href="/how-it-works">
                 Get Started
               </Button>
               <p className="web-banner-subtitle">

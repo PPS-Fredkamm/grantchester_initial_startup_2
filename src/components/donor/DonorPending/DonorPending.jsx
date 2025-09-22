@@ -56,12 +56,12 @@ export default function DonorPendingDonations() {
     setShowModal(true);
   };
 
-  const handleKeyOpen = (e, donation) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      handleOpenTracker(donation);
-    }
-  };
+  // const handleKeyOpen = (e, donation) => {
+  //   if (e.key === "Enter" || e.key === " ") {
+  //     e.preventDefault();
+  //     handleOpenTracker(donation);
+  //   }
+  // };
 
   return (
     <>
@@ -110,7 +110,7 @@ export default function DonorPendingDonations() {
                         role="button"
                         tabIndex={0}
                         onClick={() => handleOpenTracker(d)}
-                        onKeyDown={(e) => handleKeyOpen(e, d)}
+                        // onKeyDown={(e) => handleKeyOpen(e, d)}
                       >
                         <FiMoreHorizontal className="pending-icon" />
                       </span>

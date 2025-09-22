@@ -12,11 +12,13 @@ import MemberLayout from "./layouts/member/MemberLayout.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+// import HowItWorks from "./components/forUniversities/ForUniversityHowItWorks/HowItWorks.jsx";
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/home/Home.jsx"));
 const Login = lazy(() => import("./pages/login/Login.jsx"));
 const Signup = lazy(() => import("./pages/signup/Signup.jsx"));
+const HowItWorks = lazy(() => import("./pages/howItWorks/HowItWorks.jsx"));
 const UnderConstruction = lazy(() =>
   import("./pages/placeholder/UnderConstruction.jsx")
 );
@@ -54,6 +56,7 @@ export default function App() {
             errorElement={<ErrorHandler />}
           >
             <Route index element={<Home />} />
+            <Route path="how-it-works" element={<HowItWorks />} />
             <Route path="why-donate" element={<WhyDonate />} />
             <Route path="for-donors" element={<ForDonors />} />
             <Route path="for-universities" element={<ForUniversities />} />

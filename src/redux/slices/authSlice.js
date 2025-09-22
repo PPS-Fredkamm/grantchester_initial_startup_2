@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import * as AM from "../../managers/AuthManager";
+import * as BLM from "../../managers/BusinessLayerMethods";
 
 // ----------------------------------------
 // Thunks (async actions)
@@ -9,9 +9,9 @@ export const login = createAsyncThunk(
   "auth/login",
   async ({ username, password }, thunkAPI) => {
     try {
-      const result = await AM.Login(username, password);
+      const result = await BLM.Login(username, password);
       if (result) {
-        // AuthManager.Login returns an object with { user, profile, roles, imageFile, address, token }
+        // BusinessLayerMethods.Login returns an object with { user, profile, roles, imageFile, address, token }
         return {
           isAuthenticated: true,
           ...result,
@@ -26,7 +26,7 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    const flag = await AM.Logout();
+    const flag = await BLM.Logout();
     if (flag) {
       return { isAuthenticated: false };
     }
@@ -40,7 +40,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async ({ username, password }, thunkAPI) => {
     try {
-      const flag = await AM.Register(username, password);
+      const flag = await BLM.Register(username, password);
       if (flag) {
         return { isAuthenticated: true };
       }
@@ -55,7 +55,7 @@ export const changePassword = createAsyncThunk(
   "auth/changePassword",
   async ({ currentPassword, newPassword, confirmPassword }, thunkAPI) => {
     try {
-      const flag = await AM.ChangePassword(
+      const flag = await BLM.ChangePassword(
         currentPassword,
         newPassword,
         confirmPassword
@@ -71,7 +71,7 @@ export const resetPassword = createAsyncThunk(
   "auth/resetPassword",
   async (_, thunkAPI) => {
     try {
-      const flag = await AM.ResetPassword();
+      const flag = await BLM.ResetPassword();
       return flag;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
@@ -94,6 +94,7 @@ const initialState = {
   profile: null,
   roles: [],
   imageFile: null,
+  addressCDO: null,
 };
 
 // ----------------------------------------
@@ -112,7 +113,7 @@ const authSlice = createSlice({
       profile: null,
       roles: [],
       imageFile: null,
-      address: null,
+      addressCDO: null,
     }),
     setApiInfo: (state, action) => {
       state.apiInfo = action.payload;
@@ -133,7 +134,7 @@ const authSlice = createSlice({
       state.imageFile = action.payload;
     },
     setAddress: (state, action) => {
-      state.address = action.payload;
+      state.addressCDO = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -145,7 +146,7 @@ const authSlice = createSlice({
         state.profile = action.payload.profile;
         state.roles = action.payload.roles;
         state.imageFile = action.payload.imageFile;
-        state.address = action.payload.address;
+        state.addressCDO = action.payload.addressCDO;
       })
       .addCase(logout.fulfilled, (state) => {
         state.isAuthenticated = false;
@@ -154,7 +155,7 @@ const authSlice = createSlice({
         state.profile = null;
         state.roles = [];
         state.imageFile = null;
-        state.address = null;
+        state.addressCDO = null;
       })
       .addCase(register.fulfilled, (state) => {
         state.isAuthenticated = true;

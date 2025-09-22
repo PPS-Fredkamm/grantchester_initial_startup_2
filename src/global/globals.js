@@ -46,7 +46,7 @@ export default {
   },
 
   initAddress: function () {
-    this.member.address = new ACO.AddressDTO();
+    this.member.address = new ACO.AddressCDO();
   },
 
   initRoles: function () {

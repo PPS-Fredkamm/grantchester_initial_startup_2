@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import { FaDollarSign } from "react-icons/fa";
+
 import ConfirmDonationModal from "./ConfirmDonation";
 import ThankYouModal from "./ThankYouModal";
+
+import * as ACEDonation from "../../managers/ApiClient-Donation";
+import * as ACM from "../../managers/ApiClientMethods";
+import * as ACO from "../../managers/ApiClientObjects";
+import * as BLM from "../../managers/BusinessLayerMethods";
 
 import "./Donate.css";
 
@@ -33,13 +39,7 @@ export default function DonationPage() {
   ];
 
   useEffect(() => {
-    const total =
-      shares && valuation
-        ? (shares * valuation).toLocaleString("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })
-        : "0.00";
+    const total = shares && valuation ? shares * valuation : 0;
     setTotalValue(total);
   }, [shares, valuation]);
 
@@ -77,6 +77,17 @@ export default function DonationPage() {
     setDonationDate(new Date().toISOString().split("T")[0]);
     setAgreementChecked(false);
     setFile(null);
+  }
+
+  async function processForm() {
+    let apiResult;
+    let id, donation;
+
+    apiResult = await ACEDonation.CreateDonationAsync();
+    id = ACM.getApiResultData(apiResult);
+    apiResult = await ACEDonation.GetDonationAsync(id);
+    donation = ACM.getApiResultData(apiResult);
+    donation.donationStatus = ACO.DonationStatusCode.CREATED;
   }
 
   return (
@@ -166,7 +177,14 @@ export default function DonationPage() {
           {/* Total */}
           <Form.Group className="mb-3">
             <Form.Label>Total Donation Value (as of today)</Form.Label>
-            <Form.Control type="text" value={`$${totalValue}`} readOnly />
+            <Form.Control
+              type="text"
+              value={`$${Number(totalValue).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`}
+              readOnly
+            />
           </Form.Group>
 
           {/* Date */}

@@ -8,7 +8,10 @@ import {
   setImageFile,
 } from "../redux/slices/authSlice";
 import { clearAuthState } from "../redux/slices/authSlice";
+
 import * as apiClient from "./ApiClient";
+import * as ACEAddress from "./ApiClient-Location";
+import * as ACEImage from "./ApiClient-ImageFile";
 import * as ACM from "./ApiClientMethods";
 
 // ========================================
@@ -53,7 +56,8 @@ export async function ChangePassword(currentPassword, newPassword) {
 
 export async function Login(username, password) {
   var apiResult;
-  var token, user, roles, profile, address, imageFile, roleNames;
+  var addressCDO;
+  var token, user, roles, profile, imageFile, roleNames;
   try {
     store.dispatch(clearAuthState());
     // ----------------------------------------
@@ -80,18 +84,18 @@ export async function Login(username, password) {
       profile = ACM.getApiResultData(apiResult);
       store.dispatch(setProfile(profile));
       // ----------------------------------------
-      apiResult = await apiClient.GetAddressAsync(profile.addressID);
-      address = ACM.getApiResultData(apiResult);
-      if (address !== undefined && address !== null) {
-        store.dispatch(setAddress(address));
+      apiResult = await ACEAddress.GetAddressCDOAsync(profile.addressID);
+      addressCDO = ACM.getApiResultData(apiResult);
+      if (addressCDO !== undefined && addressCDO !== null) {
+        store.dispatch(setAddress(addressCDO));
       }
       // ----------------------------------------
-      apiResult = await apiClient.GetImageFileAsync(profile.imageID);
+      apiResult = await ACEImage.GetImageFileAsync(profile.imageID);
       imageFile = ACM.getApiResultData(apiResult);
       if (imageFile !== undefined && imageFile !== null) {
         store.dispatch(setImageFile(imageFile));
       }
-      return { user, profile, roles: roleNames, imageFile, address, token };
+      return { user, profile, roles: roleNames, imageFile, addressCDO, token };
     }
   } catch (ex) {
     console.error("Error: ", ex);
@@ -167,7 +171,7 @@ export async function Register(username, password) {
                 // 5. Get profile and attach address
                 apiResult = await apiClient.GetProfileAsync(profileID);
                 profile = ACM.getApiResultData(apiResult);
-                apiResult = await apiClient.CreateAddressAsync();
+                apiResult = await ACEAddress.CreateAddressAsync();
                 addressID = ACM.getApiResultData(apiResult);
 
                 if (addressID > 0) {
@@ -227,7 +231,7 @@ export async function UpdateImageFile(imageFile) {
     // ----------------------------------------
     // 1. If profile has no imageID, create one
     if (!profile.imageID || profile.imageID === 0) {
-      apiResult = await apiClient.CreateImageFileAsync();
+      apiResult = await ACEImage.CreateImageFileAsync();
       id = ACM.getApiResultData(apiResult);
 
       if (id > 0) {
@@ -252,7 +256,7 @@ export async function UpdateImageFile(imageFile) {
     // ----------------------------------------
     // 2. Upload image file
     if (imageFile.id > 0) {
-      apiResult = await apiClient.UpdateImageFileAsync(imageFile);
+      apiResult = await ACEImage.UpdateImageFileAsync(imageFile);
       flag = ACM.getApiResultData(apiResult);
 
       if (flag) {
@@ -312,17 +316,18 @@ export async function UpdateProfile(tmpProfile) {
 }
 
 // ========================================
-//  UpdateAddress
+//  UpdateAddressCDO
 // ========================================
 
-export async function UpdateAddress(tmpAddress) {
+export async function UpdateAddressCDO(tmpAddressCDO) {
   var flag = false;
   var apiResult;
-  var state, address, profile, id, updatedAddress;
+  var addressCDO;
+  var state, profile, id, updatedAddress;
 
   try {
     state = store.getState();
-    address = state.auth.address;
+    addressCDO = state.auth.addressCDO;
     profile = state.auth.profile;
 
     if (!profile) {
@@ -332,41 +337,43 @@ export async function UpdateAddress(tmpAddress) {
 
     // ----------------------------------------
     // 1. If no address exists, create one
-    if (!address || address.id === 0) {
-      apiResult = await apiClient.CreateAddressAsync();
+    if (!addressCDO || addressCDO.id === 0) {
+      apiResult = await ACEAddress.CreateAddressAsync();
       id = ACM.getApiResultData(apiResult);
 
       if (id > 0) {
-        apiResult = await apiClient.GetAddressAsync(id);
-        address = ACM.getApiResultData(apiResult);
+        apiResult = await ACEAddress.GetAddressCDOAsync(id);
+        addressCDO = ACM.getApiResultData(apiResult);
 
         // Update profile with new addressID
-        var updatedProfile = { ...profile, addressID: address.id };
+        var updatedProfile = { ...profile, addressID: addressCDO.id };
         apiResult = await apiClient.UpdateProfileAsync(updatedProfile);
         flag = ACM.getApiResultData(apiResult);
 
         if (flag) {
           store.dispatch(setProfile(updatedProfile));
-          store.dispatch(setAddress(address));
+          store.dispatch(setAddress(addressCDO));
         }
       }
     }
 
     // ----------------------------------------
-    // 2. Merge tmpAddress into current address
+    // 2. Merge tmpAddressCDO into current address
     updatedAddress = {
-      ...address,
-      addressLine1: tmpAddress.addressLine1,
-      addressLine2: tmpAddress.addressLine2,
-      addressLine3: tmpAddress.addressLine3,
-      cityName: tmpAddress.cityName,
-      stateAbbreviation: tmpAddress.stateAbbreviation,
-      stateName: tmpAddress.stateName,
-      postalCode: tmpAddress.postalCode,
+      ...addressCDO,
+      addressLine1: tmpAddressCDO.addressLine1,
+      addressLine2: tmpAddressCDO.addressLine2,
+      addressLine3: tmpAddressCDO.addressLine3,
+      cityName: tmpAddressCDO.cityName,
+      postalCode: tmpAddressCDO.postalCode,
+      stateID: tmpAddressCDO.stateID,
+      state: tmpAddressCDO.state,
+      countryID: tmpAddressCDO.countryID,
+      country: tmpAddressCDO.country,
     };
 
     // Call API
-    apiResult = await apiClient.UpdateAddressAsync(updatedAddress);
+    apiResult = await ACEAddress.UpdateAddressCDOAsync(updatedAddress);
     flag = ACM.getApiResultData(apiResult);
 
     if (flag) {
@@ -383,6 +390,7 @@ export async function UpdateAddress(tmpAddress) {
 // ========================================
 //  ReloadMember
 // ========================================
+
 export async function ReloadMember() {
   try {
     var state = store.getState();
@@ -417,7 +425,7 @@ export async function ReloadMember() {
     // ----------------------------------------
     // 4. Fetch latest image
     if (newProfile?.imageID) {
-      var apiImage = await apiClient.GetImageFileAsync(newProfile.imageID);
+      var apiImage = await ACEImage.GetImageFileAsync(newProfile.imageID);
       var newImage = ACM.getApiResultData(apiImage);
       if (newImage) {
         store.dispatch(setImageFile(newImage));

@@ -11,7 +11,6 @@ export default function WhyDonate() {
       <WhyPrivate />
       <BenefitsOfDonating />
       <ImpactOfDonation />
-      <ContactUs />{" "}
     </>
   );
 }

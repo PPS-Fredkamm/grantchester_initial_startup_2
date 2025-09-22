@@ -2,32 +2,47 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Form, Button, Accordion } from "react-bootstrap";
 
-import * as AM from "../../../managers/AuthManager";
-import * as apiClient from "../../../managers/ApiClient";
+import * as ACELocation from "../../../managers/ApiClient-Location";
 import * as ACM from "../../../managers/ApiClientMethods";
 import * as ACO from "../../../managers/ApiClientObjects";
+import * as BLM from "../../../managers/BusinessLayerMethods";
 
 import "./ProfileTabs.css";
+import { HiOutlineArrowRightStartOnRectangle } from "react-icons/hi2";
 
 export default function BasicInfo() {
-  const [US_STATES, setUS_STATES] = useState([]);
+  const [states, setStates] = useState([]);
+  const [statesDDL, setStatesDDL] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [countriesDDL, setCountriesDDL] = useState([]);
 
   // Redux state
   const profile = useSelector((state) => state.auth.profile);
-  const address = useSelector((state) => state.auth.address);
+  const addressCDO = useSelector((state) => state.auth.addressCDO);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchDDLData() {
       try {
-        const apiResult = await apiClient.GetStatesAsync();
-        const states = ACM.getApiResultData(apiResult);
-        const list = states.map((s) => s.abbreviation);
-        setUS_STATES(list);
+        let apiResult;
+        let states, countries;
+        let list;
+
+        apiResult = await ACELocation.GetStatesAsync();
+        states = ACM.getApiResultData(apiResult);
+        setStates(states);
+        list = states.map((o) => o.abbreviation + ' ( ' + o.name + ' )');
+        setStatesDDL(list);
+
+        apiResult = await ACELocation.GetCountriesAsync();
+        countries = ACM.getApiResultData(apiResult);
+        setCountries(countries);
+        list = countries.map((o) => o.name + ' [ ' + o.abbreviation + ' ]');
+        setCountriesDDL(list);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching DDL data:", error);
       }
     }
-    fetchData();
+    fetchDDLData();
   }, []);
 
   const [editMode, setEditMode] = useState(false);
@@ -38,13 +53,14 @@ export default function BasicInfo() {
     lastName: profile?.lastName || "",
     phoneNumber: profile?.phoneNumber || "",
     email: profile?.email || "",
-    address1: address?.addressLine1 || "",
-    address2: address?.addressLine2 || "",
-    address3: address?.addressLine3 || "",
-    cityName: address?.cityName || "",
-    stateAbbreviation: address?.stateAbbreviation || "",
-    stateName: address?.stateName || "",
-    postalCode: address?.postalCode || "",
+
+    address1: addressCDO?.addressLine1 || "",
+    address2: addressCDO?.addressLine2 || "",
+    address3: addressCDO?.addressLine3 || "",
+    cityName: addressCDO?.cityName || "",
+    stateListItem: addressCDO?.state.abbreviation + ' ( ' + addressCDO.state.name + ' )',
+    postalCode: addressCDO?.postalCode || "",
+    countryListItem: addressCDO?.country.name + ' [ ' + addressCDO?.country.abbreviation + ' ]',
   });
 
   const [originalData, setOriginalData] = useState({ ...formData });
@@ -63,18 +79,26 @@ export default function BasicInfo() {
 
   async function handleSave() {
     var flag;
-    var tmpProfile, tmpAddress;
-    try {
-      tmpAddress = new ACO.AddressDTO();
-      tmpAddress.addressLine1 = formData.address1;
-      tmpAddress.addressLine2 = formData.address2;
-      tmpAddress.addressLine3 = "";
-      tmpAddress.cityName = formData.cityName;
-      tmpAddress.stateAbbreviation = formData.stateAbbreviation;
-      tmpAddress.stateName = "";
-      tmpAddress.postalCode = formData.postalCode;
+    var index;
+    var tmpProfile, tmpAddressCDO;
 
-      flag = await AM.UpdateAddress(tmpAddress);
+    try {
+      tmpAddressCDO = new ACO.AddressCDO();
+      tmpAddressCDO.addressLine1 = formData.address1;
+      tmpAddressCDO.addressLine2 = formData.address2;
+      tmpAddressCDO.addressLine3 = "";
+      tmpAddressCDO.cityName = formData.cityName;
+      tmpAddressCDO.postalCode = formData.postalCode;
+
+      index = statesDDL.findIndex(o => o === formData.stateListItem);
+      tmpAddressCDO.stateID = index;
+      tmpAddressCDO.state = states[index];
+
+      index = countriesDDL.findIndex(o => o === formData.countryListItem);
+      tmpAddressCDO.countryID = index;
+      tmpAddressCDO.country = countries[index];
+
+      flag = await BLM.UpdateAddressCDO(tmpAddressCDO);
 
       if (flag) {
         tmpProfile = new ACO.ProfileDTO();
@@ -84,7 +108,7 @@ export default function BasicInfo() {
         tmpProfile.phoneNumber = formData.phoneNumber;
         tmpProfile.email = formData.email;
 
-        flag = await AM.UpdateProfile(tmpProfile);
+        flag = await BLM.UpdateProfile(tmpProfile);
         if (flag) {
           setOriginalData(formData);
         }
@@ -215,13 +239,13 @@ export default function BasicInfo() {
               <Form.Group className="mb-3">
                 <Form.Label>State</Form.Label>
                 <Form.Select
-                  name="stateAbbreviation"
-                  value={formData.stateAbbreviation}
+                  name="stateListItem"
+                  value={formData.stateListItem}
                   onChange={handleChange}
                   disabled={!editMode}
                 >
                   <option value="">Select a state</option>
-                  {US_STATES.map((stateAbbr) => (
+                  {statesDDL.map((stateAbbr) => (
                     <option key={stateAbbr} value={stateAbbr}>
                       {stateAbbr}
                     </option>
@@ -239,6 +263,24 @@ export default function BasicInfo() {
                   disabled={!editMode}
                 />
               </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label>Country</Form.Label>
+                <Form.Select
+                  name="countryListItem"
+                  value={formData.countryListItem}
+                  onChange={handleChange}
+                  disabled={!editMode}
+                >
+                  <option value="">Select a country</option>
+                  {countriesDDL.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>

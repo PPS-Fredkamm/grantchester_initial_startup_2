@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Card, Button, Image, Form } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
@@ -11,18 +11,15 @@ import {
   FaBuilding,
 } from "react-icons/fa";
 
-import * as AM from "../../../managers/AuthManager";
 import * as ACM from "../../../managers/ApiClientMethods";
 import * as ACO from "../../../managers/ApiClientObjects";
-import { setImageFile } from "../../../redux/slices/authSlice";
+import * as BLM from "../../../managers/BusinessLayerMethods";
 
 import ProfilePlaceholder from "../../../assets/Images/profilePlaceholder.jpg";
 
 import "./ProfileInfo.css";
 
 export default function ProfileInfo() {
-  const dispatch = useDispatch();
-
   // Redux state
   const user = useSelector((state) => state.auth.user);
   const profile = useSelector((state) => state.auth.profile);
@@ -90,9 +87,9 @@ export default function ProfileInfo() {
       newImageFile.data = ACM.arrayBufferToBase64(arrayBuf);
       newImageFile.length = arrayBuf.byteLength;
 
-      const updated = await AM.UpdateImageFile(newImageFile);
-      if (updated) {
-        dispatch(setImageFile(updated));
+      const updated = await BLM.UpdateImageFile(newImageFile);
+      if (!updated) {
+        console.error("Image update failed");
       }
 
       fileRef.current = null;

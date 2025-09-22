@@ -12,9 +12,10 @@ function NavMenu() {
 
   return (
     <Nav className="nav-menu">
-      <Nav.Link href="/why-donate">Why Donate</Nav.Link>
+      <Nav.Link href="/how-it-works">How It Works</Nav.Link>
+      {/* <Nav.Link href="/why-donate">Why Donate</Nav.Link>
       <Nav.Link href="/for-donors">For Donors</Nav.Link>
-      <Nav.Link href="/for-universities">For Universities</Nav.Link>
+      <Nav.Link href="/for-universities">For Universities</Nav.Link> */}
       <Nav.Link href="/partners">Partners</Nav.Link>
       <Nav.Link href="/FAQ">FAQs</Nav.Link>
 

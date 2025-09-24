@@ -1,12 +1,5 @@
 import { store } from "../redux/store";
-import {
-  setToken,
-  setUser,
-  setRoles,
-  setProfile,
-  setAddress,
-  setImageFile,
-} from "../redux/slices/authSlice";
+import { setToken, setUser, setRoles, setProfile, setAddress, setImageFile } from "../redux/slices/authSlice";
 import { clearAuthState } from "../redux/slices/authSlice";
 
 import * as apiClient from "./ApiClient";
@@ -56,8 +49,9 @@ export async function ChangePassword(currentPassword, newPassword) {
 
 export async function Login(username, password) {
   var apiResult;
+  var token;
   var addressCDO;
-  var token, user, roles, profile, imageFile, roleNames;
+  var user, roles, profile, imageFile, roleNames;
   try {
     store.dispatch(clearAuthState());
     // ----------------------------------------
@@ -127,62 +121,70 @@ export async function Register(username, password) {
   var flag = false;
   var apiResult, token;
   var userID, user, profileID, profile, addressID;
+  // var loginResult;
   try {
     // ----------------------------------------
     // 1. Acquire registration token
+    // ----------------------------------------
     apiResult = await apiClient.AcquireRegistrationTokenAsync();
     token = ACM.getApiResultData(apiResult);
     if (token !== undefined && token !== null) {
       store.dispatch(setToken(token));
       // ----------------------------------------
-      // 2. Create user
+      // 2. Create a new user
+      // ----------------------------------------
       apiResult = await apiClient.CreateUserAsync();
       userID = ACM.getApiResultData(apiResult);
-
       if (userID > 0) {
         apiResult = await apiClient.GetUserAsync(userID);
         user = ACM.getApiResultData(apiResult);
-
+        // Set the username and the isEnabled flag.
         user.isEnabled = true;
         user.username = username;
-
         apiResult = await apiClient.UpdateUserAsync(user);
         flag = ACM.getApiResultData(apiResult);
-
         if (flag) {
           // ----------------------------------------
-          // 3. Set password
+          // 3. Set the specified user password
+          // ----------------------------------------
           apiResult = await apiClient.SetPasswordAsync(userID, password);
           flag = ACM.getApiResultData(apiResult);
           if (flag) {
+            // Get the updated user record from the database
+            apiResult = await apiClient.GetUserAsync(userID);
+            user = ACM.getApiResultData(apiResult);
             // ----------------------------------------
-            // 4. Create profile
+            // 4. Create a new profile
+            // ----------------------------------------
             apiResult = await apiClient.CreateProfileAsync();
             profileID = ACM.getApiResultData(apiResult);
-
             if (profileID > 0) {
+              // Update the profile ID in the user record
               user.profileID = profileID;
-
               apiResult = await apiClient.UpdateUserAsync(user);
               flag = ACM.getApiResultData(apiResult);
-
               if (flag) {
                 // ----------------------------------------
-                // 5. Get profile and attach address
+                // 5. Get the created profile
+                // ----------------------------------------
                 apiResult = await apiClient.GetProfileAsync(profileID);
                 profile = ACM.getApiResultData(apiResult);
+                // Create a new address for the profile
                 apiResult = await ACEAddress.CreateAddressAsync();
                 addressID = ACM.getApiResultData(apiResult);
-
                 if (addressID > 0) {
+                  // Update the profile
                   profile.addressID = addressID;
-                }
-                apiResult = await apiClient.UpdateProfileAsync(profile);
-                flag = ACM.getApiResultData(apiResult);
-                if (flag) {
-                  // ----------------------------------------
-                  // 6. Auto-login new user
-                  flag = await Login(username, password);
+                  apiResult = await apiClient.UpdateProfileAsync(profile);
+                  flag = ACM.getApiResultData(apiResult);
+                  if (flag) {
+                    // ----------------------------------------
+                    // 6. Auto-login the new user
+                    // ----------------------------------------
+                    // flag = false;
+                    // loginResult = await Login(username, password);
+                    // if (loginResult !== undefined && loginResult !== null) flag = true;
+                  }
                 }
               }
             }

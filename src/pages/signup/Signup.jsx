@@ -47,7 +47,7 @@ export default function Signup() {
       return;
     }
 
-    const resultAction = dispatch(register({ username, password }));
+    const resultAction = await dispatch(register({ username, password }));
 
     if (!register.fulfilled.match(resultAction)) {
       setError("Signup failed");

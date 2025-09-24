@@ -8,7 +8,6 @@ import * as ACO from "../../../managers/ApiClientObjects";
 import * as BLM from "../../../managers/BusinessLayerMethods";
 
 import "./ProfileTabs.css";
-import { HiOutlineArrowRightStartOnRectangle } from "react-icons/hi2";
 
 export default function BasicInfo() {
   const [states, setStates] = useState([]);

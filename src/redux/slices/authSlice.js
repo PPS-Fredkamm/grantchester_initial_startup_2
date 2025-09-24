@@ -36,20 +36,24 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   }
 });
 
-export const register = createAsyncThunk(
-  "auth/register",
-  async ({ username, password }, thunkAPI) => {
-    try {
-      const flag = await BLM.Register(username, password);
-      if (flag) {
-        return { isAuthenticated: true };
+export const register = createAsyncThunk("auth/register", async ({ username, password }, thunkAPI) => {
+  try {
+    const flag = await BLM.Register(username, password);
+    if (flag) {
+      // return { isAuthenticated: true };
+      const result = await BLM.Login(username, password);
+      if (result) {
+        return {
+          isAuthenticated: true,
+          ...result,
+        };
       }
-      return thunkAPI.rejectWithValue("Registration failed");
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
     }
+    return thunkAPI.rejectWithValue("Registration failed");
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.message);
   }
-);
+});
 
 export const changePassword = createAsyncThunk(
   "auth/changePassword",
@@ -157,9 +161,14 @@ const authSlice = createSlice({
         state.imageFile = null;
         state.addressCDO = null;
       })
-      .addCase(register.fulfilled, (state) => {
+      .addCase(register.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.sequence += 1;
+        state.user = action.payload.user;
+        state.profile = action.payload.profile;
+        state.roles = action.payload.roles;
+        state.imageFile = action.payload.imageFile;
+        state.addressCDO = action.payload.addressCDO;
       });
   },
 });

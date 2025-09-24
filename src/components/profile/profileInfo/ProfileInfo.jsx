@@ -25,6 +25,11 @@ export default function ProfileInfo() {
   const profile = useSelector((state) => state.auth.profile);
   const imageFile = useSelector((state) => state.auth.imageFile);
 
+
+  const roles = useSelector((state) => state.auth.roles);
+  const addressCDO = useSelector((state) => state.auth.addressCDO);
+
+
   // Local state
   const inputRef = useRef(null);
   const fileRef = useRef(null);
@@ -44,9 +49,8 @@ export default function ProfileInfo() {
 
   // Update preview when Redux imageFile changes
   useEffect(() => {
-    if (imageFile && imageFile.id > 0) {
+    if (imageFile) {
       const imageUrl = ACM.createImageFileURL(imageFile);
-
       if (imageUrl) {
         const isBase64 = imageUrl.startsWith("data:image/");
         setPreviewImage(isBase64 ? imageUrl : `${imageUrl}?t=${Date.now()}`);
@@ -63,6 +67,11 @@ export default function ProfileInfo() {
   // ========================================
 
   function handleImageClick() {
+    let u = user;
+    let p = profile;
+    let i = imageFile;
+    let r = roles;
+    let a = addressCDO;
     inputRef.current.click();
   }
 

@@ -1,0 +1,31 @@
+.info-icon {
+  margin-left: 6px;  
+  color: #0c2340;     
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.tooltip {
+  font-size: 0.875rem;        
+  padding: 6px 10px;          
+  border-radius: 6px;         
+  max-width: 260px;           
+}
+
+.tooltip-inner {
+  text-align: start !important;  
+  color: #fff;                  
+  padding: 8px 12px;            
+}
+
+.readonly-input {
+  background-color: #e6e6e6;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.required-asterisk {
+  color: red;
+  margin-left: 2px;
+}

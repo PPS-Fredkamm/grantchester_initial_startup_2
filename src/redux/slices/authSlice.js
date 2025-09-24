@@ -108,7 +108,7 @@ const authSlice = createSlice({
     clearAuthState: () => ({
       isAuthenticated: false,
       sequence: 0,
-      apiInfo: { apiEnvironment: "", bearerToken: null },
+      apiInfo: { bearerToken: null },
       user: null,
       profile: null,
       roles: [],

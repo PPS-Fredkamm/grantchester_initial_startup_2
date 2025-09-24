@@ -7,21 +7,23 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-
 import { FaCircleInfo } from "react-icons/fa6";
 
-import Globals from "../../../global/globals";
+import { useSelector } from "react-redux";
 
 import "./University.css";
 
 export default function UniversityRegistration() {
+  const email = useSelector((state) => state.auth.profile?.email);
+  const phone = useSelector((state) => state.auth.profile?.phoneNumber);
+
   const [form, setForm] = useState({
     universityName: "",
     website: "",
     ipedsId: "",
     accreditationBody: "",
-    email: Globals.member?.profile?.email || "",
-    phone: Globals.member?.profile?.phoneNumber || "",
+    email: email,
+    phone: phone,
   });
 
   function handleChange(e) {
@@ -96,8 +98,8 @@ export default function UniversityRegistration() {
                       placement="right"
                       overlay={
                         <Tooltip id="tooltip-affected">
-                          This email is pulled from your profile and can
-                          be updated there.
+                          This email is pulled from your profile and can be
+                          updated there.
                         </Tooltip>
                       }
                     >

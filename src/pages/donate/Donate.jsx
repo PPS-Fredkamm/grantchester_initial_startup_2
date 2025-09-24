@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
-import { Card, Button, Form, InputGroup } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Form,
+  InputGroup,
+  Tooltip,
+  OverlayTrigger,
+  Row,
+  Col,
+} from "react-bootstrap";
 import { FaDollarSign } from "react-icons/fa";
+import { FaCircleInfo } from "react-icons/fa6";
+
+import { useSelector } from "react-redux";
 
 import ConfirmDonationModal from "./ConfirmDonation";
 import ThankYouModal from "./ThankYouModal";
@@ -29,6 +41,9 @@ export default function DonationPage() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showThankYouModal, setShowThankYouModal] = useState(false);
 
+  const email = useSelector((state) => state.auth.profile?.email);
+  const phone = useSelector((state) => state.auth.profile?.phoneNumber);
+
   const universities = [
     "Penn State",
     "MIT",
@@ -53,6 +68,13 @@ export default function DonationPage() {
     if (recipient === "other" && !finalRecipient) {
       if (!form.reportValidity()) return;
     } else if (!form.reportValidity()) {
+      return;
+    }
+
+    if (!email || !phone) {
+      alert(
+        "Please ensure your profile has both an email and phone number before proceeding."
+      );
       return;
     }
 
@@ -97,7 +119,10 @@ export default function DonationPage() {
         <Form onSubmit={handleContinue}>
           {/* Company Name */}
           <Form.Group className="mb-3">
-            <Form.Label>Company or Organization</Form.Label>
+            <Form.Label>
+              Company or Organization{" "}
+              <span className="required-asterisk">*</span>
+            </Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter the company or organization name"
@@ -113,7 +138,10 @@ export default function DonationPage() {
 
           {/* Recipient */}
           <Form.Group className="mb-3">
-            <Form.Label>Recipient (University)</Form.Label>
+            <Form.Label>
+              Recipient (University){" "}
+              <span className="required-asterisk">*</span>
+            </Form.Label>
             <Form.Select
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
@@ -144,7 +172,10 @@ export default function DonationPage() {
 
           {/* Shares */}
           <Form.Group className="mb-3">
-            <Form.Label>Number of Private Shares (Units)</Form.Label>
+            <Form.Label>
+              Number of Private Shares (Units){" "}
+              <span className="required-asterisk">*</span>
+            </Form.Label>
             <Form.Control
               type="number"
               value={shares}
@@ -157,7 +188,10 @@ export default function DonationPage() {
 
           {/* Valuation */}
           <Form.Group className="mb-3">
-            <Form.Label>Valuation Per Share (USD)</Form.Label>
+            <Form.Label>
+              Valuation Per Share (USD){" "}
+              <span className="required-asterisk">*</span>
+            </Form.Label>
             <InputGroup>
               <InputGroup.Text>
                 <FaDollarSign />
@@ -176,7 +210,10 @@ export default function DonationPage() {
 
           {/* Total */}
           <Form.Group className="mb-3">
-            <Form.Label>Total Donation Value (as of today)</Form.Label>
+            <Form.Label>
+              Total Donation Value (as of today){" "}
+              <span className="required-asterisk">*</span>{" "}
+            </Form.Label>
             <Form.Control
               type="text"
               value={`$${Number(totalValue).toLocaleString("en-US", {
@@ -189,11 +226,22 @@ export default function DonationPage() {
 
           {/* Date */}
           <Form.Group className="mb-3">
-            <Form.Label>Donation Date</Form.Label>
+            <Form.Label>Donation Date </Form.Label>
+            <OverlayTrigger
+              placement="right"
+              overlay={
+                <Tooltip id="tooltip-affected">
+                  You may choose today's date or a future date for tax purposes.
+                </Tooltip>
+              }
+            >
+              <FaCircleInfo className="info-icon" />
+            </OverlayTrigger>
             <Form.Control
               type="date"
               value={donationDate}
               onChange={(e) => setDonationDate(e.target.value)}
+              min={new Date().toISOString().split("T")[0]}
               required
             />
           </Form.Group>
@@ -212,13 +260,77 @@ export default function DonationPage() {
 
           {/* File Upload */}
           <Form.Group className="mb-3">
-            <Form.Label>Upload Document</Form.Label>
+            <Form.Label>Upload Document (Optional)</Form.Label>
+            <OverlayTrigger
+              placement="right"
+              overlay={
+                <Tooltip id="tooltip-affected">
+                  Upload supporting documents for your donation. <br />
+                  <br />
+                  Examples: <br /> Valuation statement, bill of sale, legal
+                  note.
+                </Tooltip>
+              }
+            >
+              <FaCircleInfo className="info-icon" />
+            </OverlayTrigger>
             <Form.Control
               type="file"
               onChange={(e) => setFile(e.target.files[0])}
               accept=".pdf,.doc,.docx"
             />
           </Form.Group>
+
+          {/* Contact Info */}
+          <Row className="mb-3">
+            <Form.Group as={Col} md="6">
+              <Form.Label>
+                Contact Email
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="tooltip-email">
+                      This email will be used for all communications. <br /><br />
+                      You can update it in your profile settings.
+                    </Tooltip>
+                  }
+                >
+                  <FaCircleInfo className="info-icon ms-2" />
+                </OverlayTrigger>
+              </Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                readOnly
+                className="readonly-input"
+                required
+              />
+            </Form.Group>
+
+            <Form.Group as={Col} md="6">
+              <Form.Label>
+                Contact Phone
+                <OverlayTrigger
+                  placement="right"
+                  overlay={
+                    <Tooltip id="tooltip-phone">
+                      This number will be used for all communications. <br /><br />
+                      You can update it in your profile settings.
+                    </Tooltip>
+                  }
+                >
+                  <FaCircleInfo className="info-icon ms-2" />
+                </OverlayTrigger>
+              </Form.Label>
+              <Form.Control
+                type="text"
+                value={phone}
+                readOnly
+                className="readonly-input"
+                required
+              />
+            </Form.Group>
+          </Row>
 
           {/* Agreement */}
           <Form.Group className="mb-3">

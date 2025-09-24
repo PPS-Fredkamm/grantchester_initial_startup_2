@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice.js";
 import appReducer from "./slices/appSlice.js";
+import donationReducer from "./slices/donationSlice.js";
 
 // Load from sessionStorage
 function loadState() {
@@ -28,7 +29,8 @@ const preloadedState = loadState();
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    app: appReducer
+    app: appReducer,
+    donation: donationReducer,
   },
   preloadedState,
 });

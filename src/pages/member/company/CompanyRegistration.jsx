@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { FaCircleInfo } from "react-icons/fa6";
 
-import Globals from "../../../global/globals";
+import { useSelector } from "react-redux";
 
 import "./Company.css";
 
@@ -18,12 +18,8 @@ export default function CompanyRegistration() {
   const [website, setWebsite] = useState("");
   const [ein, setEin] = useState("");
   const [address, setAddress] = useState("");
-  const [contactEmail, setContactEmail] = useState(
-    Globals.member?.profile?.email || ""
-  );
-  const [contactPhone, setContactPhone] = useState(
-    Globals.member?.profile?.phoneNumber || ""
-  );
+  const email = useSelector((state) => state.auth.profile?.email);
+  const phone = useSelector((state) => state.auth.profile?.phoneNumber);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,8 +28,8 @@ export default function CompanyRegistration() {
       website,
       ein,
       address,
-      contactEmail,
-      contactPhone,
+      email,
+      phone,
     });
   }
 
@@ -111,7 +107,7 @@ export default function CompanyRegistration() {
                 </Form.Label>
                 <Form.Control
                   type="email"
-                  value={contactEmail}
+                  value={email}
                   readOnly
                   className="readonly-input"
                 />
@@ -136,7 +132,7 @@ export default function CompanyRegistration() {
                 </Form.Label>
                 <Form.Control
                   type="text"
-                  value={contactPhone}
+                  value={phone}
                   readOnly
                   className="readonly-input"
                 />

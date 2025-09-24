@@ -66,6 +66,16 @@
   padding: 0 7rem;
 }
 
+.required-asterisk {
+  color: red;
+  margin-left: 2px;
+}
+
+.invalid-feedback {
+  text-align: start;
+}
+
+
 /* .modal-close-header {
   width: 100%;
   display: flex;

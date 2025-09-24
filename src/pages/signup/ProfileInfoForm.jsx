@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Form, Button, Card, Col, Row } from 'react-bootstrap';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Form, Button, Card, Col, Row } from "react-bootstrap";
 
 export default function ProfileInfoForm({ onSuccess }) {
   const navigate = useNavigate();
@@ -28,20 +28,32 @@ export default function ProfileInfoForm({ onSuccess }) {
 
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="firstName">
-                <Form.Label>First Name</Form.Label>
+              <Form.Group as={Col} md="6" controlId="firstName">
+                <Form.Label>
+                  First Name <span className="required-asterisk">*</span>
+                </Form.Label>
                 <Form.Control required type="text" placeholder="First name" />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please enter your first name.
+                </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="4" controlId="lastName">
-                <Form.Label>Last Name</Form.Label>
+              <Form.Group as={Col} md="6" controlId="lastName">
+                <Form.Label>
+                  Last Name <span className="required-asterisk">*</span>
+                </Form.Label>
                 <Form.Control required type="text" placeholder="Last name" />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please enter your last name.
+                </Form.Control.Feedback>
               </Form.Group>
+            </Row>
 
-              <Form.Group as={Col} md="4" controlId="email">
-                <Form.Label>Email</Form.Label>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="6" controlId="email">
+                <Form.Label>
+                  Email <span className="required-asterisk">*</span>
+                </Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="you@example.com"
@@ -51,30 +63,78 @@ export default function ProfileInfoForm({ onSuccess }) {
                   Please enter a valid email.
                 </Form.Control.Feedback>
               </Form.Group>
+
+              <Form.Group as={Col} md="6" controlId="phone">
+                <Form.Label>
+                  Phone Number <span className="required-asterisk">*</span>
+                </Form.Label>
+                <Form.Control
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  required
+                  pattern="^[0-9\-\+\s\(\)]{7,15}$"
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please enter a valid phone number.
+                </Form.Control.Feedback>
+              </Form.Group>
             </Row>
 
             <Row className="mb-3">
               <Form.Group as={Col} md="6" controlId="city">
-                <Form.Label>City</Form.Label>
+                <Form.Label>
+                  Address 1 <span className="required-asterisk">*</span>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="address1"
+                  placeholder="1234 Main St"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please enter a valid address.
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} md="6" controlId="city">
+                <Form.Label>
+                  City <span className="required-asterisk">*</span>
+                </Form.Label>
                 <Form.Control type="text" placeholder="City" required />
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid city.
+                  Please enter a valid city.
                 </Form.Control.Feedback>
               </Form.Group>
+            </Row>
 
-              <Form.Group as={Col} md="3" controlId="state">
-                <Form.Label>State</Form.Label>
+            <Row className="mb-3">
+              <Form.Group as={Col} md="4" controlId="state">
+                <Form.Label>
+                  State <span className="required-asterisk">*</span>
+                </Form.Label>
                 <Form.Control type="text" placeholder="State" required />
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid state.
+                  Please enter a valid state.
                 </Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group as={Col} md="3" controlId="zip">
-                <Form.Label>Zip</Form.Label>
-                <Form.Control type="text" placeholder="Zip" required />
+              <Form.Group as={Col} md="4" controlId="zip">
+                <Form.Label>
+                  Postal Code <span className="required-asterisk">*</span>
+                </Form.Label>
+                <Form.Control type="text" placeholder="Postal Code" required />
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid zip.
+                  Please enter a valid zip.
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group as={Col} md="4" controlId="zip">
+                <Form.Label>
+                  County <span className="required-asterisk">*</span>
+                </Form.Label>
+                <Form.Control type="text" placeholder="County" required />
+                <Form.Control.Feedback type="invalid">
+                  Please enter a valid zip.
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
@@ -90,14 +150,6 @@ export default function ProfileInfoForm({ onSuccess }) {
 
             <Button type="submit" className="signup-button w-100 mb-2">
               Save & Continue
-            </Button>
-
-            <Button
-              variant="outline-secondary"
-              className="w-100"
-              onClick={() => navigate('/donor')}
-            >
-              Skip for Now
             </Button>
           </Form>
         </Card.Body>

@@ -21,6 +21,9 @@ const appSlice = createSlice({
     setVersion: (state, action) => {
       state.version = action.payload;
     },
+    setViewMode: (state, action) => {
+      state.viewMode = action.payload;
+    },
   },
 });
 

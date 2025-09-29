@@ -38,6 +38,9 @@ export default function EnvIndicator() {
           <div>
             <strong>Version:</strong> {app.version || "n/a"}
           </div>
+          <div>
+            <strong>ViewMode:</strong> {app.viewMode || "n/a"}
+          </div>
         </Toast.Body>
       </Toast>
     </>

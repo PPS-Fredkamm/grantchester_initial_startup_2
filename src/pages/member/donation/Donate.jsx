@@ -11,7 +11,6 @@ import {
 } from "react-bootstrap";
 import { FaDollarSign } from "react-icons/fa";
 import { FaCircleInfo } from "react-icons/fa6";
-
 import { useSelector } from "react-redux";
 
 import ConfirmDonationModal from "./ConfirmDonation";
@@ -25,18 +24,18 @@ import * as BLM from "../../../managers/BusinessLayerMethods";
 import "./Donate.css";
 
 export default function DonationPage() {
-  const [companyName, setCompanyName] = useState("");
-  const [recipient, setRecipient] = useState("");
-  const [otherUniversity, setOtherUniversity] = useState("");
-  const [shares, setShares] = useState("");
-  const [valuation, setValuation] = useState("");
-  const [totalValue, setTotalValue] = useState("0.00");
-  const [donationDate, setDonationDate] = useState(
-    new Date().toISOString().split("T")[0]
-  );
-  const [note, setNote] = useState("");
-  const [agreementChecked, setAgreementChecked] = useState(false);
-  const [file, setFile] = useState(null);
+  const [formState, setFormState] = useState({
+    companyName: "",
+    recipient: "",
+    otherUniversity: "",
+    shares: "",
+    valuation: "",
+    totalValue: "0.00",
+    donationDate: new Date().toISOString().split("T")[0],
+    note: "",
+    agreementChecked: false,
+    file: null,
+  });
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showThankYouModal, setShowThankYouModal] = useState(false);
@@ -53,19 +52,29 @@ export default function DonationPage() {
     "Other",
   ];
 
+  // helper to update formState
+  const updateForm = (field, value) => {
+    setFormState((prev) => ({ ...prev, [field]: value }));
+  };
+
   useEffect(() => {
-    const total = shares && valuation ? shares * valuation : 0;
-    setTotalValue(total);
-  }, [shares, valuation]);
+    const total =
+      formState.shares && formState.valuation
+        ? formState.shares * formState.valuation
+        : 0;
+    updateForm("totalValue", total);
+  }, [formState.shares, formState.valuation]);
 
   function handleContinue(e) {
     e.preventDefault();
     const form = e.currentTarget;
 
     const finalRecipient =
-      recipient === "other" ? otherUniversity.trim() : recipient.trim();
+      formState.recipient === "other"
+        ? formState.otherUniversity.trim()
+        : formState.recipient.trim();
 
-    if (recipient === "other" && !finalRecipient) {
+    if (formState.recipient === "other" && !finalRecipient) {
       if (!form.reportValidity()) return;
     } else if (!form.reportValidity()) {
       return;
@@ -78,7 +87,7 @@ export default function DonationPage() {
       return;
     }
 
-    setRecipient(finalRecipient);
+    updateForm("recipient", finalRecipient);
     setShowConfirmModal(true);
   }
 
@@ -89,16 +98,18 @@ export default function DonationPage() {
   }
 
   function resetForm() {
-    setCompanyName("");
-    setRecipient("");
-    setOtherUniversity("");
-    setShares("");
-    setValuation("");
-    setTotalValue("0.00");
-    setNote("");
-    setDonationDate(new Date().toISOString().split("T")[0]);
-    setAgreementChecked(false);
-    setFile(null);
+    setFormState({
+      companyName: "",
+      recipient: "",
+      otherUniversity: "",
+      shares: "",
+      valuation: "",
+      totalValue: "0.00",
+      donationDate: new Date().toISOString().split("T")[0],
+      note: "",
+      agreementChecked: false,
+      file: null,
+    });
   }
 
   async function processForm() {
@@ -126,9 +137,9 @@ export default function DonationPage() {
             <Form.Control
               type="text"
               placeholder="Enter the company or organization name"
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              onBlur={(e) => setCompanyName(e.target.value.trim())}
+              value={formState.companyName}
+              onChange={(e) => updateForm("companyName", e.target.value)}
+              onBlur={(e) => updateForm("companyName", e.target.value.trim())}
               required
               autoComplete="organization"
               inputMode="text"
@@ -143,9 +154,9 @@ export default function DonationPage() {
               <span className="required-asterisk">*</span>
             </Form.Label>
             <Form.Select
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              required={recipient !== "other"}
+              value={formState.recipient}
+              onChange={(e) => updateForm("recipient", e.target.value)}
+              required={formState.recipient !== "other"}
             >
               <option value="">Select a university...</option>
               {universities.map((uni, index) => (
@@ -157,13 +168,13 @@ export default function DonationPage() {
                 </option>
               ))}
             </Form.Select>
-            {recipient === "other" && (
+            {formState.recipient === "other" && (
               <Form.Control
                 type="text"
                 placeholder="Enter the university name"
                 className="mt-2"
-                value={otherUniversity}
-                onChange={(e) => setOtherUniversity(e.target.value)}
+                value={formState.otherUniversity}
+                onChange={(e) => updateForm("otherUniversity", e.target.value)}
                 required
                 title="Please enter a valid university name."
               />
@@ -178,8 +189,8 @@ export default function DonationPage() {
             </Form.Label>
             <Form.Control
               type="number"
-              value={shares}
-              onChange={(e) => setShares(e.target.value)}
+              value={formState.shares}
+              onChange={(e) => updateForm("shares", e.target.value)}
               placeholder="Enter number of shares"
               required
               min="1"
@@ -198,8 +209,8 @@ export default function DonationPage() {
               </InputGroup.Text>
               <Form.Control
                 type="number"
-                value={valuation}
-                onChange={(e) => setValuation(e.target.value)}
+                value={formState.valuation}
+                onChange={(e) => updateForm("valuation", e.target.value)}
                 placeholder="0.00"
                 required
                 min="10.00"
@@ -216,7 +227,7 @@ export default function DonationPage() {
             </Form.Label>
             <Form.Control
               type="text"
-              value={`$${Number(totalValue).toLocaleString("en-US", {
+              value={`$${Number(formState.totalValue).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}
@@ -239,8 +250,8 @@ export default function DonationPage() {
             </OverlayTrigger>
             <Form.Control
               type="date"
-              value={donationDate}
-              onChange={(e) => setDonationDate(e.target.value)}
+              value={formState.donationDate}
+              onChange={(e) => updateForm("donationDate", e.target.value)}
               min={new Date().toISOString().split("T")[0]}
               required
             />
@@ -252,8 +263,8 @@ export default function DonationPage() {
             <Form.Control
               as="textarea"
               rows={2}
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
+              value={formState.note}
+              onChange={(e) => updateForm("note", e.target.value)}
               placeholder="Add a note for the university"
             />
           </Form.Group>
@@ -276,7 +287,7 @@ export default function DonationPage() {
             </OverlayTrigger>
             <Form.Control
               type="file"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) => updateForm("file", e.target.files[0])}
               accept=".pdf,.doc,.docx"
             />
           </Form.Group>
@@ -339,8 +350,10 @@ export default function DonationPage() {
             <Form.Check id="agreementCheck" className="m-0">
               <Form.Check.Input
                 type="checkbox"
-                checked={agreementChecked}
-                onChange={(e) => setAgreementChecked(e.target.checked)}
+                checked={formState.agreementChecked}
+                onChange={(e) =>
+                  updateForm("agreementChecked", e.target.checked)
+                }
                 required
               />
               <Form.Check.Label style={{ cursor: "pointer" }}>
@@ -356,7 +369,7 @@ export default function DonationPage() {
             type="submit"
             variant="primary"
             className="donate-button w-100"
-            disabled={!agreementChecked}
+            disabled={!formState.agreementChecked}
           >
             Continue
           </Button>
@@ -366,14 +379,14 @@ export default function DonationPage() {
       <ConfirmDonationModal
         show={showConfirmModal}
         onClose={() => setShowConfirmModal(false)}
-        recipient={recipient}
-        shares={shares}
-        valuation={valuation}
-        totalValue={totalValue}
-        donationDate={donationDate}
-        note={note}
-        companyName={companyName}
-        file={file}
+        recipient={formState.recipient}
+        shares={formState.shares}
+        valuation={formState.valuation}
+        totalValue={formState.totalValue}
+        donationDate={formState.donationDate}
+        note={formState.note}
+        companyName={formState.companyName}
+        file={formState.file}
         onSubmit={handleSubmitDonation}
       />
 

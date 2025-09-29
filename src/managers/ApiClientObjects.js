@@ -59,9 +59,8 @@ export function Company() {
   this.createdDate = new Date().toISOString();
   this.modifiedDate = new Date().toISOString();
   this.name = "";
-  this.phoneNumber = "";
-  this.addressID = 0;
-  this.primaryContactID = 0;
+  this.profileID = 0;
+  this.employerIdentificationNumber = "";
 }
 
 // ========================================

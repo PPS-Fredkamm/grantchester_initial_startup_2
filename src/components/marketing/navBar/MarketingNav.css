@@ -1,0 +1,30 @@
+/* The parent to the navbar component */
+.marketing-navbar-container {
+  background-color: #ffffff;
+}
+
+.marketing-nav-menu .nav-link {
+  margin: 0 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+/* ========================= */
+/* Content inside the nav-bar */
+/* ========================= */
+.marketing-nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.marketing-nav-image {
+  display: inline-block;
+  align-items: center;
+  padding-left: 2rem;
+}

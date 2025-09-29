@@ -11,32 +11,38 @@ import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
 import MainLayout from "./layouts/main/MainLayout.jsx";
 import MemberLayout from "./layouts/member/MemberLayout.jsx";
 import AdminLayout from "./layouts/admin/AdminLayout.jsx";
+import MarketingLayout from "./layouts/marketing/MarketingLayout.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-// import HowItWorks from "./components/forUniversities/ForUniversityHowItWorks/HowItWorks.jsx";
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/public/home/Home.jsx"));
 const Login = lazy(() => import("./pages/public/login/Login.jsx"));
 const Signup = lazy(() => import("./pages/public/signup/Signup.jsx"));
-const HowItWorks = lazy(() => import("./pages/public/howItWorks/HowItWorks.jsx"));
+const HowItWorks = lazy(() =>
+  import("./pages/public/howItWorks/HowItWorks.jsx")
+);
 const UnderConstruction = lazy(() =>
   import("./components/userInterface/placeholder/UnderConstruction.jsx")
-);
-const WhyDonate = lazy(() => import("./pages/public/howItWorks/whyDonate/WhyDonate.jsx"));
-const ForDonors = lazy(() => import("./pages/public/howItWorks/forDonors/ForDonors.jsx"));
-const ForUniversities = lazy(() =>
-  import("./pages/public/howItWorks/forUniversities/ForUniversities.jsx")
 );
 const FAQPage = lazy(() => import("./pages/public/FAQ/FAQPage.jsx"));
 
 export default function App() {
-  const documentTitle = useSelector((state) => state.app.documentTitle);
+  const app = useSelector((state) => state.app);
 
   useEffect(() => {
-    document.title = documentTitle;
-  }, [documentTitle]);
+    document.title = app.documentTitle;
+  }, [app.documentTitle]);
+
+  if (app.viewMode === "marketing") {
+    // 👇 Only show marketing layout, no login/dashboard routes
+    return (
+      <div className="app">
+        <MarketingLayout />
+      </div>
+    );
+  }
 
   return (
     <div className="app">
@@ -59,9 +65,6 @@ export default function App() {
           >
             <Route index element={<Home />} />
             <Route path="how-it-works" element={<HowItWorks />} />
-            <Route path="why-donate" element={<WhyDonate />} />
-            <Route path="for-donors" element={<ForDonors />} />
-            <Route path="for-universities" element={<ForUniversities />} />
             <Route
               path="partners"
               element={<UnderConstruction title="Partners Page" />}
@@ -82,7 +85,7 @@ export default function App() {
 
             {/* --------- PROTECTED ADMIN ROUTES --------- */}
             <Route
-              path="admin"
+              path="admin/:option?"
               element={
                 <AdminAuthentication>
                   <AdminLayout />

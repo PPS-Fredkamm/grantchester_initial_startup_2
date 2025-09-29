@@ -1,10 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap';
 
-import DonorInfoCard from '../../../components/donor/DonorInfo/DonorInfoCard';
-import DonorCTA from '../../../components/donor/DonorCTA/DonorCTA';
-import DonorStats from '../../../components/donor/DonorStats/DonorStats';
-import DonorPendingDonations from '../../../components/donor/DonorPending/DonorPending';
-import DonorDonations from '../../../components/donor/DonorDonations/DonorDonations';
+import DonorInfoCard from '../../../components/member/donor/DonorInfo/DonorInfoCard';
+import DonorCTA from '../../../components/member/donor/DonorCTA/DonorCTA';
+import DonorStats from '../../../components/member/donor/DonorStats/DonorStats';
+import DonorPendingDonations from '../../../components/member/donor/DonorPending/DonorPending';
+import DonorDonations from '../../../components/member/donor/DonorDonations/DonorDonations';
 
 import './DonorDashboard.css';
 

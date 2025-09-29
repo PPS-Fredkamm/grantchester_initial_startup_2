@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Container, Row, Col, Card, Tabs, Tab } from "react-bootstrap";
 
-import ProfileInfo from "../../../components/profile/profileInfo/ProfileInfo";
-import BasicInfo from "../../../components/profile/profileTabs/BasicInfo";
-import NotiPreferences from "../../../components/profile/profileTabs/NotiPreferences";
-import SecuritySettings from "../../../components/profile/profileTabs/SecuritySettings";
+import ProfileInfo from "../../../components/member/profile/profileInfo/ProfileInfo";
+import BasicInfo from "../../../components/member/profile/profileTabs/BasicInfo";
+import NotiPreferences from "../../../components/member/profile/profileTabs/NotiPreferences";
+import SecuritySettings from "../../../components/member/profile/profileTabs/SecuritySettings";
 
 import "./Profile.css";
 

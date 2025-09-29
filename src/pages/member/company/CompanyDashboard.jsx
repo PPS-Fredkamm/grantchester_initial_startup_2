@@ -1,10 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap';
 
-import NewReqBanner from '../../../components/company/NewReqBanner/NewReqBanner';
-import CompanyInfoCard from '../../../components/company/CompanyInfo/CompanyInfoCard';
-import ProfileCTA from '../../../components/donor/DonorCTA/DonorCTA';
-import CompanyNewRequest from '../../../components/company/CompanyNewRequest/CompanyNewRequest';
-import CompanyRequest from '../../../components/company/CompanyRequestHistory/CompanyRequest';
+import NewReqBanner from '../../../components/member/company/NewReqBanner/NewReqBanner';
+import CompanyInfoCard from '../../../components/member/company/CompanyInfo/CompanyInfoCard';
+import ProfileCTA from '../../../components/member/donor/DonorCTA/DonorCTA';
+import CompanyNewRequest from '../../../components/member/company/CompanyNewRequest/CompanyNewRequest';
+import CompanyRequest from '../../../components/member/company/CompanyRequestHistory/CompanyRequest';
 
 import './Company.css';
 

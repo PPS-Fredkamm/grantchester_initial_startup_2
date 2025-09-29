@@ -1,0 +1,11 @@
+{
+  "isAuthenticated": false,
+  "sequence": 0,
+  "apiInfo": {
+    "apiEnvironment": "",
+    "bearerToken": null
+  },
+  "userDTO": null,
+  "profileCDO": null,
+  "roles": []
+}

@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
-import UnderConstruction from "../../pages/placeholder/UnderConstruction";
-import MemberBanner from "../../components/member/MemberBanner.jsx";
-import MemberNav from "../../components/member/MemberNav";
-import NotFound from "../notFound/NotFound";
-import NavBar from "../../components/navbar/Navbar";
-import DonorDonations from "../../components/donor/DonorDonations/DonorDonations";
-import CompanySettings from "../../components/company/CompanySettings/CompanySettings.jsx";
+import UnderConstruction from "../../components/userInterface/placeholder/UnderConstruction.jsx";
+import MemberBanner from "../../components/member/banner/MemberBanner.jsx";
+import MemberNav from "../../components/member/navBar/MemberNav.jsx";
+import NotFound from "../../pages/public/notFound/NotFound.jsx";
+import NavBar from "../../components/public/navbar/Navbar";
+import DonorDonations from "../../components/member/donor/DonorDonations/DonorDonations.jsx";
+import CompanySettings from "../../components/member/company/CompanySettings/CompanySettings.jsx";
 
 // Imports for the University Sub pages //
 // import UniversityCertificates from "../../pages/member/university/UniversityCertificates/UniversityCertificates";
@@ -28,7 +28,7 @@ const ProfilePage = lazy(() => import("../../pages/member/profile/Profile"));
 const PublicProfile = lazy(() =>
   import("../../pages/member/profile/PublicProfile")
 );
-const DonatePage = lazy(() => import("../../pages/donate/Donate"));
+const DonatePage = lazy(() => import("../../pages/member/donation/Donate"));
 const UniversityRegistration = lazy(() =>
   import("../../pages/member/university/UniversityRegistration.jsx")
 );

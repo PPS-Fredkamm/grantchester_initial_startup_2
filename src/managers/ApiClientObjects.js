@@ -10,112 +10,111 @@
 // ========================================
 
 export function ApiResult() {
-    this.data = null;
-    this.statusCode = 200;
-    this.statusText = "Success";
-    this.messages = [];
+  this.data = null;
+  this.statusCode = 200;
+  this.statusText = "Success";
+  this.messages = [];
 }
 
 // ========================================
 //  Address
 // ========================================
 
-export function Address()
-{
-    this.id = 0;
-    this.addressLine1 = "";
-    this.addressLine2 = "";
-    this.addressLine3 = "";
-    this.cityName = "";
-    this.postalCode = "";
-    this.stateID = 0;
-    this.countryID = 0;
+export function Address() {
+  this.id = 0;
+  this.addressLine1 = "";
+  this.addressLine2 = "";
+  this.addressLine3 = "";
+  this.cityName = "";
+  this.postalCode = "";
+  this.stateID = 0;
+  this.countryID = 0;
 }
 
 // ========================================
 //  AddressCDO
 // ========================================
 
-export function AddressCDO()
-{
-    this.id = 0;
-    this.addressLine1 = "";
-    this.addressLine2 = "";
-    this.addressLine3 = "";
-    this.cityName = "";
-    this.postalCode = "";
-    this.stateID = 0;
-    this.state = new State();
-    this.countryID = 0;
-    this.country = new Country();
+export function AddressCDO() {
+  this.id = 0;
+  this.addressLine1 = "";
+  this.addressLine2 = "";
+  this.addressLine3 = "";
+  this.cityName = "";
+  this.postalCode = "";
+  this.stateID = 0;
+  this.state = new State();
+  this.countryID = 0;
+  this.country = new Country();
 }
 
 // ========================================
 //  Company
 // ========================================
 
-export function Company()
-{
-    this.id = 0;
-    this.name = "";
-    this.phoneNumber = "";
-    this.addressID = 0;
-    this.primaryContactID = 0;
+export function Company() {
+  this.id = 0;
+  this.isEnabled = false;
+  this.isVerifed = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.name = "";
+  this.phoneNumber = "";
+  this.addressID = 0;
+  this.primaryContactID = 0;
 }
 
 // ========================================
 //  Country
 // ========================================
 
-export function Country()
-{
-    this.id = 0;
-    this.name = "";
-    this.abbreviation = "";
-    this.capital = "";
-    this.lattitude = 0;
-    this.longitude = 0;
+export function Country() {
+  this.id = 0;
+  this.name = "";
+  this.abbreviation = "";
+  this.capital = "";
+  this.lattitude = 0;
+  this.longitude = 0;
 }
 
 // ========================================
 //  Donation
 // ========================================
 
-export function Donation()
-{
-    this.id = 0;
-    this.createdDate = new Date().toISOString();
-    this.modifiedDate = new Date().toISOString();
-    this.isConfirmed = false;
-    this.userID = 0;
-    this.donationID = 0;
-    this.donationDate = new Date().toISOString();
-    this.donationStatusID = 0;
-    this.transactionID = 0;
-    this.units = 0;
-    this.initialValuation = 0;
-    this.currentValuation = 0;
-    this.valuationDate = new Date().toISOString();
-    this.note = "";
-    this.companyID = 0;
-    this.universityID = 0;
+export function Donation() {
+  this.id = 0;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.isConfirmed = false;
+  this.userID = 0;
+  this.donationID = 0;
+  this.donationDate = new Date().toISOString();
+  this.donationStatusID = 0;
+  this.transactionID = 0;
+  this.units = 0;
+  this.initialValuation = 0;
+  this.currentValuation = 0;
+  this.valuationDate = new Date().toISOString();
+  this.note = "";
+  this.companyID = 0;
+  this.universityID = 0;
 }
 
 export const DonationStatusCode = Object.freeze({
-    UNDEFINED: 0,
-    CREATED: 1
-})
+  UNDEFINED: 0,
+  CREATED: 1,
+});
 
 // ========================================
 //  ImageFile
 // ========================================
 
 export function ImageFile() {
-    this.id = 0;
-    this.name = "";
-    this.contentType = "";
-    this.data = "";
-    this.length = 0;
+  this.id = 0;
+  this.name = "";
+  this.contentType = "";
+  this.data = "";
+  this.length = 0;
 }
 
 // ========================================
@@ -123,35 +122,37 @@ export function ImageFile() {
 // ========================================
 
 export function Profile() {
-    this.id = 0;
-    this.addressID = 0;
-    this.email = "";
-    this.firstName = "";
-    this.imageID = 0;
-    this.lastName = "";
-    this.middleName = "";
-    this.phoneNumber = "";
-    this.prefix = "";
-    this.suffix = "";
-    this.title = "";
+  this.id = 0;
+  this.addressID = 0;
+  this.email = "";
+  this.firstName = "";
+  this.imageID = 0;
+  this.lastName = "";
+  this.middleName = "";
+  this.phoneNumber = "";
+  this.prefix = "";
+  this.suffix = "";
+  this.title = "";
 }
 
 // ========================================
-//  ProfileDTO
+//  ProfileCDO
 // ========================================
 
-export function ProfileDTO() {
-    this.id = 0;
-    this.addressID = 0;
-    this.email = "";
-    this.firstName = "";
-    this.imageID = 0;
-    this.lastName = "";
-    this.middleName = "";
-    this.phoneNumber = "";
-    this.prefix = "";
-    this.suffix = "";
-    this.title = "";
+export function ProfileCDO() {
+  this.id = 0;
+  this.addressID = 0;
+  this.addressCDO = new AddressCDO();
+  this.email = "";
+  this.firstName = "";
+  this.imageID = 0;
+  this.imageFile = new ImageFile();
+  this.lastName = "";
+  this.middleName = "";
+  this.phoneNumber = "";
+  this.prefix = "";
+  this.suffix = "";
+  this.title = "";
 }
 
 // ========================================
@@ -159,42 +160,40 @@ export function ProfileDTO() {
 // ========================================
 
 export function Role() {
-    this.id = 0;
-    this.isEnabled = false;
-    this.createdDate = new Date().toISOString();
-    this.modifiedDate = new Date().toISOString();
-    this.name = "";
-    this.description = "";
+  this.id = 0;
+  this.isEnabled = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.name = "";
+  this.description = "";
 }
 
 // ========================================
 //  State
 // ========================================
 
-export function State()
-{
-    this.id = 0;
-    this.abbreviation = "";
-    this.name = "";
-    this.capital = "";
-    this.timezones = "";
-    this.ianaTimezones = "";
-    this.lattitude = 0;
-    this.longitude = 0;
+export function State() {
+  this.id = 0;
+  this.abbreviation = "";
+  this.name = "";
+  this.capital = "";
+  this.timezones = "";
+  this.ianaTimezones = "";
+  this.lattitude = 0;
+  this.longitude = 0;
 }
 
 // ========================================
 //  University
 // ========================================
 
-export function University()
-{
-    this.id = 0;
-    this.name = "";
-    this.displayCode = "";
-    this.phoneNumber = "";
-    this.addressID = 0;
-    this.primaryContactID = 0;
+export function University() {
+  this.id = 0;
+  this.name = "";
+  this.displayCode = "";
+  this.phoneNumber = "";
+  this.addressID = 0;
+  this.primaryContactID = 0;
 }
 
 // ========================================
@@ -202,19 +201,19 @@ export function University()
 // ========================================
 
 export function User() {
-    this.id = 0;
-    this.isEnabled = false;
-    this.createdDate = new Date().toISOString();
-    this.modifiedDate = new Date().toISOString();
-    this.memberID = "";
-    this.profileID = "";
-    this.username = "";
-    this.passwordSalt = "";
-    this.passwordHash = "";
-    this.passwordChangeRequired = false;
-    this.passwordLastChanged = new Date().toISOString();
-    this.loginCount = 0;
-    this.loginTimestamp = new Date().toISOString();
+  this.id = 0;
+  this.isEnabled = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.memberID = "";
+  this.profileID = "";
+  this.username = "";
+  this.passwordSalt = "";
+  this.passwordHash = "";
+  this.passwordChangeRequired = false;
+  this.passwordLastChanged = new Date().toISOString();
+  this.loginCount = 0;
+  this.loginTimestamp = new Date().toISOString();
 }
 
 // ========================================
@@ -222,17 +221,17 @@ export function User() {
 // ========================================
 
 export function UserDTO() {
-    this.id = 0;
-    this.isEnabled = false;
-    this.createdDate = new Date().toISOString();
-    this.modifiedDate = new Date().toISOString();
-    this.memberID = "";
-    this.profileID = 0;
-    this.username = "";
-    this.passwordChangeRequired = false;
-    this.passwordLastChanged = new Date().toISOString();
-    this.loginCount = 0;
-    this.loginTimestamp = new Date().toISOString();
+  this.id = 0;
+  this.isEnabled = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.memberID = "";
+  this.profileID = 0;
+  this.username = "";
+  this.passwordChangeRequired = false;
+  this.passwordLastChanged = new Date().toISOString();
+  this.loginCount = 0;
+  this.loginTimestamp = new Date().toISOString();
 }
 
 // ========================================
@@ -240,10 +239,10 @@ export function UserDTO() {
 // ========================================
 
 export function UserRole() {
-    this.id = 0;
-    this.isEnabled = false;
-    this.createdDate = new Date().toISOString();
-    this.modifiedDate = new Date().toISOString();
-    this.userID = 0;
-    this.roleID = 0;
+  this.id = 0;
+  this.isEnabled = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.userID = 0;
+  this.roleID = 0;
 }

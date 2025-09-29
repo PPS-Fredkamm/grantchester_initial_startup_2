@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import ctxConfig from "../../context/ApplContext.json";
+import sliceConfig from "./appSlice.json";
 
-const initialState = {
-  documentTitle: ctxConfig.documentTitle,
-  apiEnvironment: ctxConfig.apiEnvironment,
-  version: ctxConfig.version,
-};
+const initialState = getDefaultSlice();
+
+function getDefaultSlice() {
+  let c = sliceConfig;
+  return c;
+}
 
 const appSlice = createSlice({
   name: "app",

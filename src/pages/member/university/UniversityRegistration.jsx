@@ -14,8 +14,8 @@ import { useSelector } from "react-redux";
 import "./University.css";
 
 export default function UniversityRegistration() {
-  const email = useSelector((state) => state.auth.profile?.email);
-  const phone = useSelector((state) => state.auth.profile?.phoneNumber);
+  const email = useSelector((state) => state.auth.profileCDO?.email);
+  const phone = useSelector((state) => state.auth.profileCDO?.phoneNumber);
 
   const [form, setForm] = useState({
     universityName: "",

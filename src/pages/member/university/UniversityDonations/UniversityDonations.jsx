@@ -1,4 +1,4 @@
-import UniversityDonationsLink from '../../../../components/University/SubLinks/UniversityDonationsLink'
+import UniversityDonationsLink from '../../../../components/member/university/SubLinks/UniversityDonationsLink'
 
 export default function UniversityDonations() {
    return(

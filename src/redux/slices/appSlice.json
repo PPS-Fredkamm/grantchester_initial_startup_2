@@ -1,0 +1,11 @@
+{
+  "apiEnvironment": "dev",
+  "authors": ["Fred Kamm", "Drew Senour", "Richard L Van Winkle"],
+  "description": "AlumBiz Prototype Client",
+  "documentTitle": "AlumBiz",
+  "headerTitle": "Grantchester AlumBiz Prototype",
+  "projectCodename": "Project Acheron LV-426",
+  "releaseDate": "May 13, 2025",
+  "sequence": 0,
+  "version": "2025.09.26.1301"
+}

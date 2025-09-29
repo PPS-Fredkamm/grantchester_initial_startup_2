@@ -4,30 +4,32 @@ import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import RequireAuthentication from "./components/auth/RequireAuthentication.jsx";
+import AdminAuthentication from "./components/auth/AdminAuthentication.jsx";
 
-import NotFound from "./layouts/notFound/NotFound.jsx";
+import NotFound from "./pages/public/notFound/NotFound.jsx";
 import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
 import MainLayout from "./layouts/main/MainLayout.jsx";
 import MemberLayout from "./layouts/member/MemberLayout.jsx";
+import AdminLayout from "./layouts/admin/AdminLayout.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 // import HowItWorks from "./components/forUniversities/ForUniversityHowItWorks/HowItWorks.jsx";
 
 // Lazy-loaded route components
-const Home = lazy(() => import("./pages/home/Home.jsx"));
-const Login = lazy(() => import("./pages/login/Login.jsx"));
-const Signup = lazy(() => import("./pages/signup/Signup.jsx"));
-const HowItWorks = lazy(() => import("./pages/howItWorks/HowItWorks.jsx"));
+const Home = lazy(() => import("./pages/public/home/Home.jsx"));
+const Login = lazy(() => import("./pages/public/login/Login.jsx"));
+const Signup = lazy(() => import("./pages/public/signup/Signup.jsx"));
+const HowItWorks = lazy(() => import("./pages/public/howItWorks/HowItWorks.jsx"));
 const UnderConstruction = lazy(() =>
-  import("./pages/placeholder/UnderConstruction.jsx")
+  import("./components/userInterface/placeholder/UnderConstruction.jsx")
 );
-const WhyDonate = lazy(() => import("./pages/whyDonate/WhyDonate.jsx"));
-const ForDonors = lazy(() => import("./pages/forDonors/ForDonors.jsx"));
+const WhyDonate = lazy(() => import("./pages/public/howItWorks/whyDonate/WhyDonate.jsx"));
+const ForDonors = lazy(() => import("./pages/public/howItWorks/forDonors/ForDonors.jsx"));
 const ForUniversities = lazy(() =>
-  import("./pages/forUniversities/ForUniversities.jsx")
+  import("./pages/public/howItWorks/forUniversities/ForUniversities.jsx")
 );
-const FAQPage = lazy(() => import("./pages/FAQ/FaqPage.jsx"));
+const FAQPage = lazy(() => import("./pages/public/FAQ/FAQPage.jsx"));
 
 export default function App() {
   const documentTitle = useSelector((state) => state.app.documentTitle);
@@ -75,6 +77,16 @@ export default function App() {
                 <RequireAuthentication>
                   <MemberLayout />
                 </RequireAuthentication>
+              }
+            />
+
+            {/* --------- PROTECTED ADMIN ROUTES --------- */}
+            <Route
+              path="admin"
+              element={
+                <AdminAuthentication>
+                  <AdminLayout />
+                </AdminAuthentication>
               }
             />
 

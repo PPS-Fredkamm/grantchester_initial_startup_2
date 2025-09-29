@@ -1,9 +1,9 @@
+import { useSelector } from "react-redux";
 import { store } from "../redux/store";
-import { setToken, setUser, setRoles, setProfile, setAddress, setImageFile } from "../redux/slices/authSlice";
-import { clearAuthState } from "../redux/slices/authSlice";
+import { clearAuthState, setToken, setUser, setProfile, setRoles } from "../redux/slices/authSlice";
 
 import * as apiClient from "./ApiClient";
-import * as ACEAddress from "./ApiClient-Location";
+import * as ACELocation from "./ApiClient-Location";
 import * as ACEImage from "./ApiClient-ImageFile";
 import * as ACM from "./ApiClientMethods";
 
@@ -17,14 +17,14 @@ export async function ChangePassword(currentPassword, newPassword) {
 
   try {
     var state = store.getState();
-    var user = state.auth.user;
+    var userDTO = state.auth.userDTO;
 
-    if (!user || !user.id) {
+    if (!userDTO || !userDTO.id) {
       console.error("No user in Redux state — cannot change password.");
       return false;
     }
 
-    id = user.id;
+    id = userDTO.id;
 
     // ----------------------------------------
     // 1. Check current password
@@ -50,8 +50,9 @@ export async function ChangePassword(currentPassword, newPassword) {
 export async function Login(username, password) {
   var apiResult;
   var token;
-  var addressCDO;
-  var user, roles, profile, imageFile, roleNames;
+  var userDTO;
+  var profileCDO;
+  var rolesList, roles;
   try {
     store.dispatch(clearAuthState());
     // ----------------------------------------
@@ -61,35 +62,24 @@ export async function Login(username, password) {
       store.dispatch(setToken(token));
       // ----------------------------------------
       apiResult = await apiClient.GetUserByUsernameAsync(username);
-      user = ACM.getApiResultData(apiResult);
-      store.dispatch(setUser(user));
+      userDTO = ACM.getApiResultData(apiResult);
+      store.dispatch(setUser(userDTO));
       // ----------------------------------------
-      apiResult = await apiClient.GetRolesByUserIDAsync(user.id);
-      roles = ACM.getApiResultData(apiResult);
-      roleNames = [];
-      if (roles !== undefined && roles !== null) {
-        for (var i = 0; i < roles.length; i++) {
-          roleNames.push(roles[i].name);
+      apiResult = await apiClient.GetProfileCDOAsync(userDTO.profileID);
+      profileCDO = ACM.getApiResultData(apiResult);
+      store.dispatch(setProfile(profileCDO));
+      // ----------------------------------------
+      apiResult = await apiClient.GetRolesByUserIDAsync(userDTO.id);
+      rolesList = ACM.getApiResultData(apiResult);
+      roles = [];
+      if (rolesList !== undefined && rolesList !== null) {
+        for (var i = 0; i < rolesList.length; i++) {
+          roles.push(rolesList[i].name);
         }
       }
-      store.dispatch(setRoles(roleNames));
+      store.dispatch(setRoles(roles));
       // ----------------------------------------
-      apiResult = await apiClient.GetProfileAsync(user.profileID);
-      profile = ACM.getApiResultData(apiResult);
-      store.dispatch(setProfile(profile));
-      // ----------------------------------------
-      apiResult = await ACEAddress.GetAddressCDOAsync(profile.addressID);
-      addressCDO = ACM.getApiResultData(apiResult);
-      if (addressCDO !== undefined && addressCDO !== null) {
-        store.dispatch(setAddress(addressCDO));
-      }
-      // ----------------------------------------
-      apiResult = await ACEImage.GetImageFileAsync(profile.imageID);
-      imageFile = ACM.getApiResultData(apiResult);
-      if (imageFile !== undefined && imageFile !== null) {
-        store.dispatch(setImageFile(imageFile));
-      }
-      return { user, profile, roles: roleNames, imageFile, addressCDO, token };
+      return { userDTO, profileCDO, roles, token };
     }
   } catch (ex) {
     console.error("Error: ", ex);
@@ -104,7 +94,6 @@ export async function Login(username, password) {
 export async function Logout() {
   var flag = false;
   try {
-    // Reset Redux auth state
     store.dispatch(clearAuthState());
     flag = true;
   } catch (ex) {
@@ -120,8 +109,10 @@ export async function Logout() {
 export async function Register(username, password) {
   var flag = false;
   var apiResult, token;
-  var userID, user, profileID, profile, addressID;
-  // var loginResult;
+  var userID, user;
+  var profileID, profile;
+  var addressID, address;
+
   try {
     // ----------------------------------------
     // 1. Acquire registration token
@@ -170,7 +161,7 @@ export async function Register(username, password) {
                 apiResult = await apiClient.GetProfileAsync(profileID);
                 profile = ACM.getApiResultData(apiResult);
                 // Create a new address for the profile
-                apiResult = await ACEAddress.CreateAddressAsync();
+                apiResult = await ACELocation.CreateAddressAsync();
                 addressID = ACM.getApiResultData(apiResult);
                 if (addressID > 0) {
                   // Update the profile
@@ -178,12 +169,11 @@ export async function Register(username, password) {
                   apiResult = await apiClient.UpdateProfileAsync(profile);
                   flag = ACM.getApiResultData(apiResult);
                   if (flag) {
-                    // ----------------------------------------
-                    // 6. Auto-login the new user
-                    // ----------------------------------------
-                    // flag = false;
-                    // loginResult = await Login(username, password);
-                    // if (loginResult !== undefined && loginResult !== null) flag = true;
+                    apiResult = await ACELocation.GetAddressAsync(addressID);
+                    address = ACM.getApiResultData(apiResult);
+                    if (address !== undefined && address !== null) {
+                      flag = true;
+                    }
                   }
                 }
               }
@@ -217,53 +207,51 @@ export async function ResetPassword() {
 //  UpdateImageFile
 // ========================================
 
-export async function UpdateImageFile(imageFile) {
+export async function UpdateImageFile(tmpImageFile) {
   var flag = false;
   var apiResult, id;
+  var tmpProfileCDO;
 
   try {
-    var state = store.getState();
-    var profile = state.auth.profile;
-
-    if (!profile) {
-      console.error("No profile in Redux state — cannot update image file.");
-      return false;
-    }
+    const profileCDO = useSelector((state) => state.auth.profileCDO);
+    
+    tmpProfileCDO = JSON.parse(JSON.stringify(profileCDO));
 
     // ----------------------------------------
-    // 1. If profile has no imageID, create one
-    if (!profile.imageID || profile.imageID === 0) {
+    //  (1) If the profile has no imageID then create a new one
+    // ----------------------------------------
+
+    if (tmpProfileCDO.imageID === 0) {
       apiResult = await ACEImage.CreateImageFileAsync();
       id = ACM.getApiResultData(apiResult);
-
       if (id > 0) {
-        // Update profile with new imageID
-        profile = { ...profile, imageID: id };
-        apiResult = await apiClient.UpdateProfileAsync(profile);
-        flag = ACM.getApiResultData(apiResult);
-
-        if (flag) {
-          imageFile.id = id;
-          store.dispatch(setProfile(profile));
-        }
+        tmpProfileCDO.imageID = id;
+        apiResult = ACEImage.GetImageFileAsync(id);
+        tmpProfileCDO.imageFile = ACM.getApiResultData(apiResult);
       } else {
         console.error("CreateImageFile failed");
         return false;
       }
-    } else {
-      // Profile already has an image
-      imageFile.id = profile.imageID;
     }
 
     // ----------------------------------------
-    // 2. Upload image file
-    if (imageFile.id > 0) {
-      apiResult = await ACEImage.UpdateImageFileAsync(imageFile);
-      flag = ACM.getApiResultData(apiResult);
+    //  (2) Update the image file
+    // ----------------------------------------
 
-      if (flag) {
-        store.dispatch(setImageFile(imageFile));
-      }
+    tmpProfileCDO.imageFile.name = tmpImageFile.name;
+    tmpProfileCDO.imageFile.contentType = tmpImageFile.contentType;
+    tmpProfileCDO.imageFile.data = tmpImageFile.data;
+    tmpProfileCDO.imageFile.length = tmpImageFile.length;
+
+    // ----------------------------------------
+    //  (3) Update the profileCDO
+    // ----------------------------------------
+
+    apiResult = await apiClient.UpdateProfileCDOAsync(tmpProfileCDO);
+    flag = ACM.getApiResultData(apiResult);
+    if (flag) {
+      store.dispatch(setProfile(tmpProfileCDO));
+      flag = true;
     }
   } catch (error) {
     console.error("Error in UpdateImageFile:", error);
@@ -274,43 +262,21 @@ export async function UpdateImageFile(imageFile) {
 }
 
 // ========================================
-//  UpdateProfile
+//  UpdateProfileCDO
 // ========================================
 
-export async function UpdateProfile(tmpProfile) {
+export async function UpdateProfileCDO(tmpProfileCDO) {
   var flag = false;
   var apiResult;
-  var currentProfile, updatedProfile;
 
   try {
-    var state = store.getState();
-    currentProfile = state.auth.profile;
-
-    if (!currentProfile) {
-      console.error("No profile in Redux state — cannot update profile.");
-      return false;
-    }
-
-    // Merge tmpProfile values into currentProfile
-    updatedProfile = {
-      ...currentProfile,
-      firstName: tmpProfile.firstName,
-      middleName: tmpProfile.middleName,
-      lastName: tmpProfile.lastName,
-      phoneNumber: tmpProfile.phoneNumber,
-      email: tmpProfile.email,
-    };
-
-    // Call API
-    apiResult = await apiClient.UpdateProfileAsync(updatedProfile);
+    apiResult = await apiClient.UpdateProfileCDOAsync(tmpProfileCDO);
     flag = ACM.getApiResultData(apiResult);
-
-    // If successful, update Redux
     if (flag) {
-      store.dispatch(setProfile(updatedProfile));
+      store.dispatch(setProfile(tmpProfileCDO));
     }
   } catch (error) {
-    console.error("Error in UpdateProfile:", error);
+    console.error("Error in UpdateProfileCDO:", error);
     flag = false;
   }
 
@@ -324,62 +290,49 @@ export async function UpdateProfile(tmpProfile) {
 export async function UpdateAddressCDO(tmpAddressCDO) {
   var flag = false;
   var apiResult;
-  var addressCDO;
-  var state, profile, id, updatedAddress;
-
+  var id;
+  var tmpProfileCDO;
+  
   try {
-    state = store.getState();
-    addressCDO = state.auth.addressCDO;
-    profile = state.auth.profile;
-
-    if (!profile) {
-      console.error("No profile in Redux state — cannot update address.");
-      return false;
-    }
+    const profileCDO = useSelector((state) => state.auth.profileCDO);
+    
+    tmpProfileCDO = JSON.parse(JSON.stringify(profileCDO));
 
     // ----------------------------------------
-    // 1. If no address exists, create one
-    if (!addressCDO || addressCDO.id === 0) {
-      apiResult = await ACEAddress.CreateAddressAsync();
+    //  (1) If no address exists, create one
+    // ----------------------------------------
+
+    if (profileCDO.addressID === 0) {
+      apiResult = await ACELocation.CreateAddressAsync();
       id = ACM.getApiResultData(apiResult);
-
       if (id > 0) {
-        apiResult = await ACEAddress.GetAddressCDOAsync(id);
-        addressCDO = ACM.getApiResultData(apiResult);
-
-        // Update profile with new addressID
-        var updatedProfile = { ...profile, addressID: addressCDO.id };
-        apiResult = await apiClient.UpdateProfileAsync(updatedProfile);
-        flag = ACM.getApiResultData(apiResult);
-
-        if (flag) {
-          store.dispatch(setProfile(updatedProfile));
-          store.dispatch(setAddress(addressCDO));
-        }
+        tmpProfileCDO.addressID = id;
       }
     }
 
     // ----------------------------------------
     // 2. Merge tmpAddressCDO into current address
-    updatedAddress = {
-      ...addressCDO,
-      addressLine1: tmpAddressCDO.addressLine1,
-      addressLine2: tmpAddressCDO.addressLine2,
-      addressLine3: tmpAddressCDO.addressLine3,
-      cityName: tmpAddressCDO.cityName,
-      postalCode: tmpAddressCDO.postalCode,
-      stateID: tmpAddressCDO.stateID,
-      state: tmpAddressCDO.state,
-      countryID: tmpAddressCDO.countryID,
-      country: tmpAddressCDO.country,
-    };
+    // ----------------------------------------
 
-    // Call API
-    apiResult = await ACEAddress.UpdateAddressCDOAsync(updatedAddress);
+    tmpProfileCDO.addressCDO.id = id;
+    tmpProfileCDO.addressCDO.addressLine1 = tmpAddressCDO.addressLine1;
+    tmpProfileCDO.addressCDO.addressLine2 = tmpAddressCDO.addressLine2;
+    tmpProfileCDO.addressCDO.addressLine3 = tmpAddressCDO.addressLine3;
+    tmpProfileCDO.addressCDO.cityName = tmpAddressCDO.cityName;
+    tmpProfileCDO.addressCDO.postalCode = tmpAddressCDO.postalCode;
+    tmpProfileCDO.addressCDO.stateID = tmpAddressCDO.stateID;
+    tmpProfileCDO.addressCDO.state = tmpAddressCDO.state;
+    tmpProfileCDO.addressCDO.countryID = tmpAddressCDO.countryID;
+    tmpProfileCDO.addressCDO.country = tmpAddressCDO.country;
+
+    // ----------------------------------------
+    //  (3) Update the profileCDO
+    // ----------------------------------------
+
+    apiResult = await apiClient.UpdateProfileCDOAsync(tmpProfileCDO);
     flag = ACM.getApiResultData(apiResult);
-
     if (flag) {
-      store.dispatch(setAddress(updatedAddress));
+      store.dispatch(setProfile(tmpProfileCDO));
     }
   } catch (error) {
     console.error("Error in UpdateAddress:", error);
@@ -396,13 +349,13 @@ export async function UpdateAddressCDO(tmpAddressCDO) {
 export async function ReloadMember() {
   try {
     var state = store.getState();
-    var user = state.auth.user;
+    var userDTO = state.auth.userDTO;
 
-    if (!user || !user.username) return false;
+    if (!userDTO || !userDTO.username) return false;
 
     // ----------------------------------------
     // 1. Fetch latest user
-    const apiUser = await apiClient.GetUserByUsernameAsync(user.username);
+    const apiUser = await apiClient.GetUserByUsernameAsync(userDTO.username);
     var newUser = ACM.getApiResultData(apiUser);
     if (!newUser) return false;
     store.dispatch(setUser(newUser));

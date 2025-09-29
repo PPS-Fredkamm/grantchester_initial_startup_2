@@ -53,6 +53,30 @@ export async function GetProfileAsync(id) {
 }
 
 // ========================================
+//  GetProfileCDO
+// ========================================
+
+export async function GetProfileCDOAsync(id) {
+  const apiRoute = 'member/profile/cdo';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['id'] = id;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod, null);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
 //  UpdateProfile
 // ========================================
 
@@ -66,6 +90,28 @@ export async function UpdateProfileAsync(profile) {
   try {
     url = ACM.generateFetchUrl(apiRoute, params);
     options = ACM.generateFetchOptions(apiMethod, profile);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
+//  UpdateProfileCDO
+// ========================================
+
+export async function UpdateProfileCDOAsync(profileCDO) {
+  const apiRoute = 'member/profile/cdo';
+  const apiMethod = 'PUT';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod, profileCDO);
     response = await fetch(url, options);
     result = await ACM.processFetchResponse(response);
   } catch (error) {

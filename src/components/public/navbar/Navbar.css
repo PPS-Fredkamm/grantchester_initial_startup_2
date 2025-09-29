@@ -1,0 +1,221 @@
+/* The parent to the navbar component */
+.navbar-container {
+  background-color: #ffffff;
+}
+
+.nav-menu .nav-link {
+  margin: 0 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+/* ========================= */
+/* Content inside the nav-bar */
+/* ========================= */
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.nav-image {
+  display: inline-block;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+/* ========================= */
+/* Blue donate button */
+/* ========================= */
+.donate-button {
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  border: none !important;
+}
+
+.donate-heart-icon {
+  color: white;
+  font-size: 0.7rem;
+  margin-right: 0.5rem;
+}
+/* ========================= */
+/* User information when signed in */
+/* ========================= */
+.user-email {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: #6c757d;
+  white-space: nowrap;
+  margin-top: -2px;
+}
+/* ========================= */
+/* Dropdown menu style */
+/* ========================= */
+.profile-dropdown .dropdown-menu {
+  width: 300px;
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.usericon-accordion .accordion-item {
+  border: 0 !important;
+}
+
+.usericon-accordion .accordion-button {
+  background: transparent !important;
+  padding: 0.6rem 1rem !important;
+  font-weight: 500;
+  color: #000;
+  box-shadow: none !important;
+}
+
+.usericon-accordion .accordion-button:not(.collapsed) {
+  background: transparent !important;
+  color: #000;
+}
+
+.usericon-accordion .accordion-body {
+  padding: 0.25rem 0 0.5rem 0;
+}
+
+/* action rows (Join/Create, Register) with icon */
+.dropdown-menu .org-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1.25rem;
+}
+
+.dropdown-menu .org-action .org-action-icon {
+  font-size: 1rem;
+  color: var(--primary-blue);
+}
+
+/* ========================= */
+/* Profile card layout */
+/* ========================= */
+.profile-card {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.profile-card-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dee2e6;
+  margin-bottom: 0.5rem;
+}
+
+.profile-card-info strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.profile-card-info .text-muted {
+  font-size: 0.85rem;
+}
+
+/* ========================= */
+/* Menu items */
+/* ========================= */
+.profile-dropdown .dropdown-item {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+.profile-dropdown .dropdown-item:hover {
+  background-color: #e9ecef;
+}
+
+/* ========================= */
+/* Mobile toggle */
+/* ========================= */
+.mobile-toggle-button {
+  /* background: transparent; */
+  border: none;
+  font-size: 1.8rem;
+  padding: 0;
+}
+
+.mobile-user-dropdown {
+  border-top: 1px solid #dee2e6;
+  padding-top: 1rem;
+}
+
+.mobile-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.mobile-user-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #000;
+  flex-grow: 1;
+}
+
+.mobile-user-menu {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-user-menu .dropdown-item {
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  color: #000;
+  text-decoration: none;
+  /* cursor: 'pointer' */
+}
+
+.mobile-user-menu .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.mobile-user-dropdown .chevron {
+  transition: transform 0.2s ease;
+}
+
+.mobile-user-dropdown .chevron.open {
+  transform: rotate(180deg);
+}
+
+
+/* ========================= */
+/* Responsiveness */
+/* ========================= */
+
+@media (max-width: 1500px) {
+  .nav-menu .nav-link {
+    margin: 0rem;
+  }
+
+  .nav-content {
+    padding-right: 0rem;
+  }
+}

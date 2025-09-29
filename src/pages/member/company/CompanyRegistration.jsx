@@ -18,8 +18,8 @@ export default function CompanyRegistration() {
   const [website, setWebsite] = useState("");
   const [ein, setEin] = useState("");
   const [address, setAddress] = useState("");
-  const email = useSelector((state) => state.auth.profile?.email);
-  const phone = useSelector((state) => state.auth.profile?.phoneNumber);
+  const email = useSelector((state) => state.auth.profileCDO?.email);
+  const phone = useSelector((state) => state.auth.profileCDO?.phoneNumber);
 
   function handleSubmit(e) {
     e.preventDefault();

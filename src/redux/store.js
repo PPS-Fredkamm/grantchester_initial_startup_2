@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice.js";
 import appReducer from "./slices/appSlice.js";
 import donationReducer from "./slices/donationSlice.js";
+import testReducer from "./slices/testSlice.js";
 
 // Load from sessionStorage
 function loadState() {
@@ -31,6 +32,8 @@ export const store = configureStore({
     auth: authReducer,
     app: appReducer,
     donation: donationReducer,
+    test: testReducer,
+
   },
   preloadedState,
 });

@@ -1,9 +1,9 @@
 import { Container, Row, Col } from 'react-bootstrap';
 
-import UniversityPortfolioDashboard from '../../../components/university/UniversityPortfolioDashboard/UniversityPortfolioDashboard';
-import UniversityPriceHistory from '../../../components/university/UniversityPriceHistory/UniversityPriceHistory';
-import DonationTabs from '../../../components/university/DonationTabs/DonationTabs';
-import UniversityStockPlot from '../../../components/university/UniversityStockPlot/UniversityStockPlot';
+import UniversityPortfolioDashboard from '../../../components/member/university/UniversityPortfolioDashboard/UniversityPortfolioDashboard';
+import UniversityPriceHistory from '../../../components/member/university/UniversityPriceHistory/UniversityPriceHistory';
+import DonationTabs from '../../../components/member/university/DonationTabs/DonationTabs';
+import UniversityStockPlot from '../../../components/member/university/UniversityStockPlot/UniversityStockPlot';
 
 import './University.css';
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import UniversityAccordion from '../../../../components/University/UniversityAccordion/UniversityAccordion';
+import { useState } from 'react';
+import UniversityAccordion from '../../../../components/member/university/UniversityAccordion/UniversityAccordion';
 
 export default function UniversitySettings() {
   const [currentPlan, setCurrentPlan] = useState('Pro');

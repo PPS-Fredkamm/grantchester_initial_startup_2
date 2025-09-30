@@ -36,10 +36,22 @@ export default function App() {
   }, [app.documentTitle]);
 
   if (app.viewMode === "marketing") {
-    // 👇 Only show marketing layout, no login/dashboard routes
+    // Only show marketing layout, no login/dashboard routes
     return (
       <div className="app">
-        <MarketingLayout />
+        <Routes>
+          <Route
+            path="/"
+            element={<MarketingLayout />}
+            errorElement={<ErrorHandler />}
+          >
+            <Route index element={<UnderConstruction title="Home" />} />
+            <Route path="page1" element={<UnderConstruction title="page1" />} />
+            <Route path="page2" element={<UnderConstruction title="page2" />} />
+            <Route path="page3" element={<UnderConstruction title="page3" />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
       </div>
     );
   }

@@ -1,46 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Card, Table, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { GoDotFill } from "react-icons/go";
 import { FiMoreHorizontal } from "react-icons/fi";
 
+import {formatDate} from "../../../../utils/formatDate";
 import DonationTracker from "../DonationTracker/DonationTracker";
+
+import * as ACEDonation from "../../../../managers/ApiClient-Donation";
+import * as ACM from "../../../../managers/ApiClientMethods";
 
 import "./DonorPending.css";
 
 export default function DonorPendingDonations() {
+  const userDTO = useSelector((state) => state.auth.userDTO);
+
   const [showModal, setShowModal] = useState(false);
   const [selectedDonation, setSelectedDonation] = useState(null);
+  const [pendingOrders, setPendingOrders] = useState([]);
 
-  const pendingOrders = [
-    {
-      donationId: "773211",
-      university: "Duke University",
-      amount: "$3,200",
-      status: "Submitted",
-      date: "2024-03-10",
-    },
-    {
-      donationId: "252407",
-      university: "Clemson University",
-      amount: "$1,500",
-      status: "Donation verification by university",
-      date: "2024-03-12",
-    },
-    {
-      donationId: "402509",
-      university: "University of Pennsylvania",
-      amount: "$2,000",
-      status: "Waiting approval",
-      date: "2024-03-15",
-    },
-    {
-      donationId: "885144",
-      university: "Ohio State University",
-      amount: "$2,800",
-      status: "Completed",
-      date: "2024-03-05",
-    },
-  ];
+  useEffect(() => {
+    async function fetchPendingOrders() {
+      try {
+        let apiResult;
+        let searchCriteria;
+        let list;
+
+        searchCriteria = `userID=${userDTO.id}`;
+        apiResult = await ACEDonation.SearchDonationCDOAsync(searchCriteria);
+        list = ACM.getApiResultData(apiResult);
+        
+        // Ensure it's always an array
+        setPendingOrders(list || []);
+      } catch (error) {
+        console.error("Error fetching DDL data:", error);
+        setPendingOrders([]);
+      }
+    }
+    fetchPendingOrders();
+  }, [userDTO.id]);
 
   function getStatusClass(status) {
     const lower = status.toLowerCase();
@@ -71,45 +69,55 @@ export default function DonorPendingDonations() {
               </tr>
             </thead>
             <tbody>
-              {pendingOrders.map((d) => (
-                <tr key={d.donationId}>
-                  <td>
-                    <span className="pending-cell">
-                      <GoDotFill color="#4B9DE7" />#{d.donationId}
-                    </span>
-                  </td>
-                  <td className="text-nowrap">
-                    <span className="pending-cell">{d.date}</span>
-                  </td>
-                  <td className="text-nowrap">
-                    <span className="pending-cell">{d.university}</span>
-                  </td>
-                  <td className="text-nowrap">
-                    <span
-                      className={`pending-cell status-pill ${getStatusClass(
-                        d.status
-                      )}`}
-                    >
-                      {d.status}
-                    </span>
-                  </td>
-                  <td>
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={<Tooltip>View donation status</Tooltip>}
-                    >
-                      <span
-                        className="pending-icon-wrapper"
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => handleOpenTracker(d)}
-                      >
-                        <FiMoreHorizontal className="pending-icon" />
+              {pendingOrders.length > 0 ? (
+                pendingOrders.map((d) => (
+                  <tr key={d.donationID}>
+                    <td>
+                      <span className="pending-cell">
+                        <GoDotFill color="#4B9DE7" />#{d.donationID}
                       </span>
-                    </OverlayTrigger>
+                    </td>
+                    <td className="text-nowrap">
+                      <span className="pending-cell">{formatDate(d.donationDate)}</span>
+                    </td>
+                    <td className="text-nowrap">
+                      <span className="pending-cell">
+                        {d.universityCDO?.name}
+                      </span>
+                    </td>
+                    <td className="text-nowrap">
+                      <span
+                        className={`pending-cell status-pill ${getStatusClass(
+                          d.donationStatus?.name || ""
+                        )}`}
+                      >
+                        {d.donationStatus?.name || "Unknown"}
+                      </span>
+                    </td>
+                    <td>
+                      <OverlayTrigger
+                        placement="top"
+                        overlay={<Tooltip>View donation status</Tooltip>}
+                      >
+                        <span
+                          className="pending-icon-wrapper"
+                          role="button"
+                          tabIndex={0}
+                          onClick={() => handleOpenTracker(d)}
+                        >
+                          <FiMoreHorizontal className="pending-icon" />
+                        </span>
+                      </OverlayTrigger>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4} className="pt-3 text-center">
+                    No pending donations
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </Table>
         </Card.Body>

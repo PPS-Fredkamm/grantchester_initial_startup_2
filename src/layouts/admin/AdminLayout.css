@@ -13,8 +13,17 @@
 }
 
 .admin-nav .nav-link.active {
-  color: #3182ce !important;
+  color: var(--admin-red);
   font-weight: 500;
+}
+
+/* The parent of the admin dashboard */
+.admin-dashboard {
+  background-color: #f7fafc;
+}
+
+.admin-content {
+  padding-top: 1.5rem;
 }
 
 @media (max-width: 1199px) {

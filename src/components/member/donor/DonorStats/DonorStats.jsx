@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-import { FiMoreHorizontal } from 'react-icons/fi';
+// import { FiMoreHorizontal } from 'react-icons/fi';
 import { FaCircleInfo } from 'react-icons/fa6';
 
 import './DonorStats.css';
@@ -71,7 +71,7 @@ export default function DonorStats() {
               </OverlayTrigger>
             </div>
           </div>
-          <FiMoreHorizontal className="more-stats-icon" />
+          {/* <FiMoreHorizontal className="more-stats-icon" /> */}
         </div>
       </Card.Body>
     </Card>

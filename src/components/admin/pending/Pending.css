@@ -1,0 +1,116 @@
+/* Clean up the last row — no bottom border, thinner top border */
+.admin-pending-table tbody tr:last-child td {
+  border-top: 0.5px solid #dee2e6;
+  border-bottom: none;
+}
+
+/* Line up the dot icon and text nicely with a little spacing */
+.admin-pending-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* General pill style for the status labels */
+.status-pill {
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Yellow style for 'Waiting approval' */
+.admin-status-waiting {
+  background-color: #e4bb2a;
+  color: #ffffff;
+}
+
+/* Blue style for 'Verification by university' */
+.admin-status-verifying {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+/* Green pill for completed status */
+.admin-status-completed {
+  background-color: #8DC843;
+  color: #ffffff;
+}
+
+.admin-status-submitted {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+/* admin-PendingStats component */
+.pending-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.stat-block {
+  flex: 1;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: var(--admin-red);
+  font-size: 2.3rem;
+}
+
+.stat-label {
+  color: #383b3e;
+}
+
+.stat-label span {
+  font-weight: 500;
+  font-size: 1rem;
+  padding-right: 0.3rem;
+}
+
+.stat-divider {
+  width: 0.2rem;
+  height: 4.5rem;
+  background-color: #dee2e6;
+  margin: 0 1.5rem;
+}
+
+.info-icon {
+  color: #a3a3a3;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+
+.more-stats-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+@media (max-width: 960px) {
+  .pending-stats {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stat-block {
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .more-icon {
+    align-self: flex-end;
+    margin-top: 0.5rem;
+  }
+}

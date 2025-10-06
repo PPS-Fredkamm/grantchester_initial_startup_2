@@ -11,7 +11,10 @@ import {
 } from "react-bootstrap";
 import { FaDollarSign } from "react-icons/fa";
 import { FaCircleInfo } from "react-icons/fa6";
+
 import { useSelector } from "react-redux";
+import { store } from "../../../redux/store";
+import { setDonation } from "../../../redux/slices/donationSlice";
 
 import ConfirmDonationModal from "./ConfirmDonation";
 import ThankYouModal from "./ThankYouModal";
@@ -19,16 +22,15 @@ import ThankYouModal from "./ThankYouModal";
 import * as ACEDonation from "../../../managers/ApiClient-Donation";
 import * as ACM from "../../../managers/ApiClientMethods";
 import * as ACO from "../../../managers/ApiClientObjects";
-import * as BLM from "../../../managers/BusinessLayerMethods";
 
 import "./Donate.css";
 
 export default function DonationPage() {
-  const [formState, setFormState] = useState({
+  const [formData, setFormData] = useState({
     companyName: "",
     recipient: "",
     otherUniversity: "",
-    shares: "",
+    units: "",
     valuation: "",
     totalValue: "0.00",
     donationDate: new Date().toISOString().split("T")[0],
@@ -40,6 +42,7 @@ export default function DonationPage() {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showThankYouModal, setShowThankYouModal] = useState(false);
 
+  const userDTO = useSelector((state) => state.auth.userDTO);
   const email = useSelector((state) => state.auth.profileCDO?.email);
   const phone = useSelector((state) => state.auth.profileCDO?.phoneNumber);
 
@@ -52,29 +55,29 @@ export default function DonationPage() {
     "Other",
   ];
 
-  // helper to update formState
+  // helper to update formData
   const updateForm = (field, value) => {
-    setFormState((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   useEffect(() => {
     const total =
-      formState.shares && formState.valuation
-        ? formState.shares * formState.valuation
+      formData.units && formData.valuation
+        ? formData.units * formData.valuation
         : 0;
     updateForm("totalValue", total);
-  }, [formState.shares, formState.valuation]);
+  }, [formData.units, formData.valuation]);
 
   function handleContinue(e) {
     e.preventDefault();
     const form = e.currentTarget;
 
     const finalRecipient =
-      formState.recipient === "other"
-        ? formState.otherUniversity.trim()
-        : formState.recipient.trim();
+      formData.recipient === "other"
+        ? formData.otherUniversity.trim()
+        : formData.recipient.trim();
 
-    if (formState.recipient === "other" && !finalRecipient) {
+    if (formData.recipient === "other" && !finalRecipient) {
       if (!form.reportValidity()) return;
     } else if (!form.reportValidity()) {
       return;
@@ -92,17 +95,18 @@ export default function DonationPage() {
   }
 
   function handleSubmitDonation() {
+    processForm();
     resetForm();
     setShowConfirmModal(false);
     setShowThankYouModal(true);
   }
 
   function resetForm() {
-    setFormState({
+    setFormData({
       companyName: "",
       recipient: "",
       otherUniversity: "",
-      shares: "",
+      units: "",
       valuation: "",
       totalValue: "0.00",
       donationDate: new Date().toISOString().split("T")[0],
@@ -113,14 +117,38 @@ export default function DonationPage() {
   }
 
   async function processForm() {
-    let apiResult;
-    let id, donation;
+    var apiResult;
+    var flag;
+    var id, tmpDonationCDO;
 
     apiResult = await ACEDonation.CreateDonationAsync();
     id = ACM.getApiResultData(apiResult);
-    apiResult = await ACEDonation.GetDonationAsync(id);
-    donation = ACM.getApiResultData(apiResult);
-    donation.donationStatus = ACO.DonationStatusCode.CREATED;
+    if (id > 0) {
+      apiResult = await ACEDonation.GetDonationCDOAsync(id);
+      tmpDonationCDO = ACM.getApiResultData(apiResult);
+
+      tmpDonationCDO.userID = userDTO.id;
+      tmpDonationCDO.donationDate = formData.donationDate;
+      tmpDonationCDO.donationStatusID = ACO.DonationStatusCode.CREATED;
+      tmpDonationCDO.units = formData.units;
+      tmpDonationCDO.initialValuation = formData.valuation;
+      tmpDonationCDO.currentValuation = formData.valuation;
+      tmpDonationCDO.valuationDate = formData.donationDate;
+      tmpDonationCDO.note = formData.note;
+
+      tmpDonationCDO.companyCDO.name = formData.companyName;
+
+      tmpDonationCDO.universityCDO.name =
+        formData.recipient || formData.otherUniversity;
+
+      apiResult = await ACEDonation.UpdateDonationCDOAsync(tmpDonationCDO);
+      flag = ACM.getApiResultData(apiResult);
+      if (flag) {
+        apiResult = await ACEDonation.GetDonationCDOAsync(id);
+        tmpDonationCDO = ACM.getApiResultData(apiResult);
+        store.dispatch(setDonation(tmpDonationCDO));
+      }
+    }
   }
 
   return (
@@ -137,7 +165,7 @@ export default function DonationPage() {
             <Form.Control
               type="text"
               placeholder="Enter the company or organization name"
-              value={formState.companyName}
+              value={formData.companyName}
               onChange={(e) => updateForm("companyName", e.target.value)}
               onBlur={(e) => updateForm("companyName", e.target.value.trim())}
               required
@@ -154,9 +182,9 @@ export default function DonationPage() {
               <span className="required-asterisk">*</span>
             </Form.Label>
             <Form.Select
-              value={formState.recipient}
+              value={formData.recipient}
               onChange={(e) => updateForm("recipient", e.target.value)}
-              required={formState.recipient !== "other"}
+              required={formData.recipient !== "other"}
             >
               <option value="">Select a university...</option>
               {universities.map((uni, index) => (
@@ -168,12 +196,12 @@ export default function DonationPage() {
                 </option>
               ))}
             </Form.Select>
-            {formState.recipient === "other" && (
+            {formData.recipient === "other" && (
               <Form.Control
                 type="text"
                 placeholder="Enter the university name"
                 className="mt-2"
-                value={formState.otherUniversity}
+                value={formData.otherUniversity}
                 onChange={(e) => updateForm("otherUniversity", e.target.value)}
                 required
                 title="Please enter a valid university name."
@@ -181,7 +209,7 @@ export default function DonationPage() {
             )}
           </Form.Group>
 
-          {/* Shares */}
+          {/* Units */}
           <Form.Group className="mb-3">
             <Form.Label>
               Number of Private Shares (Units){" "}
@@ -189,8 +217,8 @@ export default function DonationPage() {
             </Form.Label>
             <Form.Control
               type="number"
-              value={formState.shares}
-              onChange={(e) => updateForm("shares", e.target.value)}
+              value={formData.units}
+              onChange={(e) => updateForm("units", e.target.value)}
               placeholder="Enter number of shares"
               required
               min="1"
@@ -209,7 +237,7 @@ export default function DonationPage() {
               </InputGroup.Text>
               <Form.Control
                 type="number"
-                value={formState.valuation}
+                value={formData.valuation}
                 onChange={(e) => updateForm("valuation", e.target.value)}
                 placeholder="0.00"
                 required
@@ -227,7 +255,7 @@ export default function DonationPage() {
             </Form.Label>
             <Form.Control
               type="text"
-              value={`$${Number(formState.totalValue).toLocaleString("en-US", {
+              value={`$${Number(formData.totalValue).toLocaleString("en-US", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}
@@ -250,7 +278,7 @@ export default function DonationPage() {
             </OverlayTrigger>
             <Form.Control
               type="date"
-              value={formState.donationDate}
+              value={formData.donationDate}
               onChange={(e) => updateForm("donationDate", e.target.value)}
               min={new Date().toISOString().split("T")[0]}
               required
@@ -263,7 +291,7 @@ export default function DonationPage() {
             <Form.Control
               as="textarea"
               rows={2}
-              value={formState.note}
+              value={formData.note}
               onChange={(e) => updateForm("note", e.target.value)}
               placeholder="Add a note for the university"
             />
@@ -350,7 +378,7 @@ export default function DonationPage() {
             <Form.Check id="agreementCheck" className="m-0">
               <Form.Check.Input
                 type="checkbox"
-                checked={formState.agreementChecked}
+                checked={formData.agreementChecked}
                 onChange={(e) =>
                   updateForm("agreementChecked", e.target.checked)
                 }
@@ -369,7 +397,7 @@ export default function DonationPage() {
             type="submit"
             variant="primary"
             className="donate-button w-100"
-            disabled={!formState.agreementChecked}
+            disabled={!formData.agreementChecked}
           >
             Continue
           </Button>
@@ -379,15 +407,8 @@ export default function DonationPage() {
       <ConfirmDonationModal
         show={showConfirmModal}
         onClose={() => setShowConfirmModal(false)}
-        recipient={formState.recipient}
-        shares={formState.shares}
-        valuation={formState.valuation}
-        totalValue={formState.totalValue}
-        donationDate={formState.donationDate}
-        note={formState.note}
-        companyName={formState.companyName}
-        file={formState.file}
         onSubmit={handleSubmitDonation}
+        formData={formData}
       />
 
       <ThankYouModal

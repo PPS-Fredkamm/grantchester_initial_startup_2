@@ -1,26 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 
-export default function ConfirmDonationModal({
-  show,
-  onClose,
-  companyName,
-  recipient,
-  shares,
-  valuation,
-  totalValue,
-  donationDate,
-  onSubmit
-}) {
+export default function ConfirmDonationModal({ show, onClose, onSubmit, formData }) {
   function handleConfirm() {
-    console.log("Donation confirmed:", {
-      companyName,
-      recipient,
-      shares,
-      valuation,
-      totalValue,
-      donationDate,
-    });
-
     if (onSubmit) onSubmit();
   }
 
@@ -33,32 +14,30 @@ export default function ConfirmDonationModal({
         <p>Please review your donation details before confirming:</p>
         <ul>
           <li>
-            <strong>Company/Organization:</strong> {companyName}
+            <strong>Company/Organization:</strong> {formData.companyName}
           </li>
           <li>
-            <strong>Recipient:</strong> {recipient}
+            <strong>Recipient:</strong> {formData.recipient}
           </li>
           <li>
-            <strong>Shares:</strong> {shares}
+            <strong>Shares:</strong> {formData.units}
           </li>
           <li>
             <strong>Valuation Per Share:</strong> $
-            {Number(valuation).toLocaleString("en-US", {
+            {Number(formData.valuation).toLocaleString("en-US", {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
           </li>
           <li>
-            <strong>Total Value:</strong> $
-            {Number(totalValue).toLocaleString("en-US")}
+            <strong>Total Value:</strong> ${Number(formData.totalValue).toLocaleString("en-US")}
           </li>
           <li>
-            <strong>Date:</strong> {donationDate}
+            <strong>Date:</strong> {formData.donationDate}
           </li>
         </ul>
         <p className="text-danger mt-3">
-          By confirming, you acknowledge this is a legally binding donation
-          commitment.
+          By confirming, you acknowledge this is a legally binding donation commitment.
         </p>
       </Modal.Body>
       <Modal.Footer>

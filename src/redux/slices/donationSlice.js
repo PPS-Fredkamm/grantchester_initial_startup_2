@@ -1,4 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+import * as ACEDonation from "../../managers/ApiClient-Donation";
+import * as ACM from "../../managers/ApiClientMethods";
 import * as BLM from "../../managers/BusinessLayerMethods";
 
 // ========================================
@@ -30,14 +33,19 @@ export const submitDonation = createAsyncThunk(
 //   [ {id:1, status:"Approved"}, {id:2, status:"Pending"} ]
 // - If it fails, rejects with an error message
 // ========================================
+// donationSlice.js
 export const fetchDonations = createAsyncThunk(
-  "donation/fetch",
-  async (userId, thunkAPI) => {
+  "donation/fetchDonations",
+  async (userId, { rejectWithValue }) => {
     try {
-      const result = await BLM.GetDonations(userId);
-      return result;
+      const searchCriteria = "userID=" + userId;
+      const apiResult = await ACEDonation.SearchDonationCDOAsync(
+        searchCriteria
+      );
+      const list = ACM.getApiResultData(apiResult);
+      return list;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return rejectWithValue(err.message);
     }
   }
 );
@@ -55,9 +63,9 @@ export const fetchDonations = createAsyncThunk(
 const donationSlice = createSlice({
   name: "donation",
   initialState: {
+    donationCDO: null,
     donations: [],
     currentDonation: null,
-    loading: false,
     error: null,
   },
   reducers: {
@@ -66,6 +74,9 @@ const donationSlice = createSlice({
       state.donations = [];
       state.currentDonation = null;
       state.error = null;
+    },
+    setDonation: (state, action) => {
+      state.donationCDO = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -102,7 +113,7 @@ const donationSlice = createSlice({
 });
 
 // Export actions for components to call
-export const { clearDonations } = donationSlice.actions;
+export const { clearDonations, setDonation } = donationSlice.actions;
 
 // Export reducer for store.js
 export default donationSlice.reducer;

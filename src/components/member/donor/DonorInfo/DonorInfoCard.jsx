@@ -47,7 +47,9 @@ export default function DonorInfoCard() {
               type="text"
               value={
                 profileCDO?.firstName || profileCDO?.lastName
-                  ? `${profileCDO?.firstName || ""} ${profileCDO?.lastName || ""}`.trim()
+                  ? `${profileCDO?.firstName || ""} ${
+                      profileCDO?.lastName || ""
+                    }`.trim()
                   : profileCDO?.username || ""
               }
               readOnly
@@ -86,7 +88,7 @@ export default function DonorInfoCard() {
             />
           </div>
 
-          <Button className="donor-donate-button">
+          <Button href="/donate" className="donor-donate-button">
             <span>Donate Now</span>
             <FiArrowRight />
           </Button>

@@ -152,7 +152,7 @@ export default function UserIcon() {
 
             {/* Admin link (only for site admins) */}
             {roles && roles.includes("Admin") && (
-              <NavDropdown.Item href="/admin">Admin Dashboard</NavDropdown.Item>
+              <NavDropdown.Item href="/admin/dashboard">Admin Dashboard</NavDropdown.Item>
             )}
             {/* Footer */}
             <NavDropdown.Item onClick={handleLogout}>Sign Out</NavDropdown.Item>

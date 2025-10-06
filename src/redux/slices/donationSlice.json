@@ -1,3 +1,5 @@
 {
-    "donationCDO": null
+    "donationCDO": null,
+    "donationIndex": -1,
+    "donationList": []
 }

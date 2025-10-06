@@ -64,6 +64,22 @@ export function Company() {
 }
 
 // ========================================
+//  CompanyCDO
+// ========================================
+
+export function CompanyCDO() {
+  this.id = 0;
+  this.isEnabled = false;
+  this.isVerified = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.name = "";
+  this.profileID = 0;
+  this.profileCDO = new ProfileCDO();
+  this.employerIdentificationNumber = "";
+}
+
+// ========================================
 //  Country
 // ========================================
 
@@ -98,6 +114,51 @@ export function Donation() {
   this.companyID = 0;
   this.universityID = 0;
 }
+
+// ========================================
+//  DonationCDO
+// ========================================
+
+export function DonationCDO() {
+  this.id = 0;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.isConfirmed = false;
+  this.userID = 0;
+  this.donationID = 0;
+  this.donationDate = new Date().toISOString();
+  this.donationStatusID = 0;
+  this.donationStatus = new DonationStatus();
+  this.transactionID = 0;
+  this.units = 0;
+  this.initialValuation = 0;
+  this.currentValuation = 0;
+  this.valuationDate = new Date().toISOString();
+  this.note = "";
+  this.companyID = 0;
+  this.companyCDO = null;
+  this.universityID = 0;
+  this.universityCDO = null;
+}
+
+// ========================================
+//  DonationStatus
+// ========================================
+
+export function DonationStatus() {
+  this.id = 0;
+  this.isEnabled = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.sequence = 0;
+  this.code = "";
+  this.name = "";
+  this.description = "";
+}
+
+// ========================================
+//  DonationStatusCode
+// ========================================
 
 export const DonationStatusCode = Object.freeze({
   UNDEFINED: 0,
@@ -188,11 +249,29 @@ export function State() {
 
 export function University() {
   this.id = 0;
+  this.isEnabled = false;
+  this.isVerified = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
   this.name = "";
   this.displayCode = "";
-  this.phoneNumber = "";
-  this.addressID = 0;
-  this.primaryContactID = 0;
+  this.profileID = 0;
+}
+
+// ========================================
+//  UniversityCDO
+// ========================================
+
+export function UniversityCDO() {
+  this.id = 0;
+  this.isEnabled = false;
+  this.isVerified = false;
+  this.createdDate = new Date().toISOString();
+  this.modifiedDate = new Date().toISOString();
+  this.name = "";
+  this.displayCode = "";
+  this.profileID = 0;
+  this.profileCDO = new ProfileCDO();
 }
 
 // ========================================

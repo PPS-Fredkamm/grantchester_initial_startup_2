@@ -7,41 +7,66 @@ import UnderConstruction from "../../components/userInterface/placeholder/UnderC
 
 import "./AdminLayout.css";
 
-// Lazy-loaded dashboards
-const DonorDashboard = lazy(() =>
-  import("../../pages/member/donor/DonorDashboard")
+// Lazy-loaded pages
+const AdminDashboard = lazy(() =>
+  import("../../pages/admin/dashboard/AdminDashboard")
+);
+
+const PendingDonationPage = lazy(() =>
+  import("../../pages/admin/pending/PendingDonationPage")
+);
+
+const AdminUserPage = lazy(() =>
+  import("../../pages/admin/users/AdminUserPage")
 );
 
 export default function AdminLayout() {
-  const { type, option = "" } = useParams();
+  const { option } = useParams();
 
-  const resolvedType = type?.toLowerCase() || "admin";
   const resolvedOption = option?.toLowerCase() || "";
 
   let content;
 
-  switch (resolvedType) {
-    case "admin":
-      switch (resolvedOption) {
-        case "":
-          content = <UnderConstruction title="Dashboard" />;
-          break;
-        case "donations":
-          content = <UnderConstruction title="Donations" />;
-          break;
-        case "documents":
-          content = <UnderConstruction title="Documents" />;
-          break;
-        case "mailing":
-          content = <UnderConstruction title="Mailing" />;
-          break;
-      }
+  switch (resolvedOption) {
+    case "dashboard":
+      content = <AdminDashboard />;
       break;
-
+    case "pending-donations":
+      content = <PendingDonationPage />;
+      break;
+    case "view-donations":
+      content = (
+        <UnderConstruction title="Feature to view and manage all donations that have been processed and submitted" />
+      );
+      break;
+    case "view-companies":
+      content = (
+        <UnderConstruction title="Feature to view and manage all companies registered to the site" />
+      );
+      break;
+    case "company-registrations":
+      content = (
+        <UnderConstruction title="Feature to view and manage all university registrations waiting to be verified" />
+      );
+      break;
+    case "view-universities":
+      content = (
+        <UnderConstruction title="Feature to view and manage all university registered to the site" />
+      );
+      break;
+    case "university-registrations":
+      content = (
+        <UnderConstruction title="Feature to view and manage all university registrations waiting to be verified" />
+      );
+      break;
+    case "users":
+      content = <AdminUserPage />;
+      break;
     default:
       content = <NotFound />;
       break;
   }
+
   return (
     <>
       <AdminBanner />

@@ -1,0 +1,30 @@
+/* General pill style for the status labels */
+.status-pill {
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Yellow style for 'Waiting approval' */
+.admin-status-waiting {
+  background-color: #e4bb2a;
+  color: #ffffff;
+}
+
+/* Blue style for 'Verification by university' */
+.admin-status-verifying {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+/* Green pill for completed status */
+.admin-status-completed {
+  background-color: #8DC843;
+  color: #ffffff;
+}
+
+.admin-status-submitted {
+  background-color: #6c757d;
+  color: #fff;
+}

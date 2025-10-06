@@ -77,6 +77,30 @@ export async function GetDonationCDOAsync(id) {
 }
 
 // ========================================
+//  SearchDonationCDOAsync
+// ========================================
+
+export async function SearchDonationCDOAsync(searchCriteria) {
+  const apiRoute = 'donation/search/cdo';
+  const apiMethod = 'GET';
+  // ----------------------------------------
+  var url, options, params;
+  var response, result;
+  // ----------------------------------------
+  try {
+    params = {};
+    params['searchCriteria'] = searchCriteria;
+    url = ACM.generateFetchUrl(apiRoute, params);
+    options = ACM.generateFetchOptions(apiMethod, null);
+    response = await fetch(url, options);
+    result = await ACM.processFetchResponse(response);
+  } catch (error) {
+    result = await ACM.processFetchError(apiRoute, error);
+  }
+  return result;
+}
+
+// ========================================
 //  UpdateDonationAsync
 // ========================================
 

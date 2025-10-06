@@ -1,11 +1,11 @@
 // CSS for this banner is coming from the MemberBanner.css file
-// import "./MemberBanner.css";
+import "./AdminBanner.css";
 
 export default function AdminBanner() {
-  let greeting = `Site Admin Dashboard`;
+  let greeting = `System Admin Interface`;
 
   return (
-    <div className="banner-container">
+    <div className="admin-banner-container">
       <p>{greeting}</p>
     </div>
   );

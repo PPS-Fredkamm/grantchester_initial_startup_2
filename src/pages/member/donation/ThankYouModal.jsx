@@ -1,6 +1,14 @@
 import { Modal, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function ThankYouModal({ show, onClose }) {
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    if (onClose) onClose(); 
+    navigate("/donor");
+  };
+  
   return (
     <Modal show={show} onHide={onClose} centered>
       <Modal.Header closeButton>
@@ -34,7 +42,7 @@ export default function ThankYouModal({ show, onClose }) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={onClose}>
+        <Button variant="primary" onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

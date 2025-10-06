@@ -2,6 +2,12 @@
 :root {
   --primary-blue: #4b9be7;
   --secondary-blue: #4bc8e7;
+  --admin-red: #e74c3c;
+  --admin-light-red: #f7968b;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .app-container {

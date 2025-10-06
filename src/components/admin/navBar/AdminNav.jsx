@@ -1,14 +1,44 @@
 import { NavLink, useLocation } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+
+// CSS for this file is located in the AdminLayout.css file
+
+import { useState } from "react";
 
 export default function AdminNav() {
+  const [openDropdown, setOpenDropdown] = useState(null);
+
   const navConfig = {
     admin: [
-      { path: "", label: "Dashboard" },
-      { path: "donations", label: "View All Donations" },
-      { path: "documents", label: "View All Documents" },
-      { path: "mailing", label: "View All Mailing" },
+      { path: "dashboard", label: "Dashboard" },
+
+      {
+        label: "Donations",
+        children: [
+          { path: "pending-donations", label: "Pending Donations" },
+          { path: "view-donations", label: "View All Donations" },
+        ],
+      },
+      {
+        label: "Users",
+        children: [{ path: "users", label: "View All Users" }],
+      },
+      {
+        label: "Company",
+        children: [
+          { path: "company-registrations", label: "Pending Registrations" },
+          { path: "view-companies", label: "View all Companies" },
+        ],
+      },
+      {
+        label: "University",
+        children: [
+          { path: "university-registrations", label: "Pending Registrations" },
+          { path: "view-universities", label: "View all Universities" },
+        ],
+      },
     ],
   };
 
@@ -17,31 +47,56 @@ export default function AdminNav() {
   const links = navConfig[basePath];
 
   if (!links) return null;
+
   return (
-    <>
-      <Navbar expand="md" className="admin-nav" collapseOnSelect>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Nav>
-            {links.map(({ path, label }) => {
-              const isAbsolute = path.startsWith("/");
-              const fullPath = isAbsolute
-                ? path
-                : `/${basePath}${path ? `/${path}` : ""}`;
+    <Navbar expand="md" className="admin-nav" collapseOnSelect>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
+        <Nav>
+          {links.map(({ path, label, children }) => {
+            if (children) {
               return (
-                <Nav.Link
+                <NavDropdown
                   key={label}
-                  as={NavLink}
-                  to={fullPath}
-                  end={path === "" || isAbsolute}
+                  title={label}
+                  show={openDropdown === label}
+                  onMouseEnter={() => setOpenDropdown(label)}
+                  onMouseLeave={() => setOpenDropdown(null)}
                 >
-                  {label}
-                </Nav.Link>
+                  {children.map((child) => {
+                    const fullPath = `/${basePath}/${child.path}`;
+                    return (
+                      <NavDropdown.Item
+                        key={child.label}
+                        as={NavLink}
+                        to={fullPath}
+                      >
+                        {child.label}
+                      </NavDropdown.Item>
+                    );
+                  })}
+                </NavDropdown>
               );
-            })}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    </>
+            }
+
+            const isAbsolute = path.startsWith("/");
+            const fullPath = isAbsolute
+              ? path
+              : `/${basePath}${path ? `/${path}` : ""}`;
+
+            return (
+              <Nav.Link
+                key={label}
+                as={NavLink}
+                to={fullPath}
+                end={path === "" || isAbsolute}
+              >
+                {label}
+              </Nav.Link>
+            );
+          })}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 }

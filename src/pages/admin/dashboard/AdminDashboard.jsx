@@ -1,8 +1,9 @@
 import { Container, Row } from "react-bootstrap";
 
-import RecentDonations from "../../../components/admin/donations/RecentDonations";
-import AdminPending from "../../../components/admin/pending/AdminPending";
-import UnderConstruction from "../../../components/userInterface/placeholder/UnderConstruction";
+import AdminAllDonations from "../../../components/admin/donations/AdminAllDonations";
+import AdminPending from "../../../components/admin/donations/pending/AdminPending";
+import PendingCompanies from "../../../components/admin/company/pending/PendingCompanies";
+import PendingUniversities from "../../../components/admin/university/pending/PendingUniversities";
 
 
 export default function AdminDashboard() {
@@ -12,8 +13,8 @@ export default function AdminDashboard() {
         <div className="admin-container">
           <Row className="admin-content">
             <AdminPending />
-            <UnderConstruction title="More features to be added soon" />
-            <RecentDonations />
+            <PendingCompanies />
+            <PendingUniversities />
           </Row>
         </div>
       </Container>

@@ -1,31 +1,73 @@
-import { Card } from 'react-bootstrap';
-import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card, OverlayTrigger, Tooltip, Spinner } from "react-bootstrap";
+import { FaCircleInfo } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
-// import { FiMoreHorizontal } from 'react-icons/fi';
-import { FaCircleInfo } from 'react-icons/fa6';
+import { formatNumber, formatCurrency } from "../../../../utils/formatNumber";
 
-import './DonorStats.css';
+import "./DonorStats.css";
 
 export default function DonorStats() {
-  const stats = {
-    studentsImpacted: 5,
-    unitsDonated: 0,
-    totalValue: '$25,000',
-  };
+  // Access donation data from Redux
+  const { donations, loading, error } = useSelector((state) => state.donation);
+
+  // ===========================
+  // Computed Aggregates
+  // ===========================
+
+  // Total number of donations
+  const totalDonations = donations.length;
+
+  // Total units donated across all records
+  const totalUnits = donations.reduce((sum, d) => {
+    const units = Number(d?.units) || 0;
+    return sum + units;
+  }, 0);
+
+  // Total value = sum of (units * initialValuation)
+  const totalValueNumber = donations.reduce((sum, d) => {
+    const units = Number(d?.units) || 0;
+    const perShare = Number(d?.initialValuation) || 0; // price per unit at donation time
+    return sum + units * perShare;
+  }, 0);
+
+  // ===========================
+  // UI
+  // ===========================
+  if (loading) {
+    return (
+      <Card className="shadow mb-4">
+        <Card.Body className="text-center py-4">
+          <Spinner animation="border" variant="primary" size="sm" /> Loading
+          donor stats...
+        </Card.Body>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card className="shadow mb-4">
+        <Card.Body className="text-danger text-center py-3">
+          Failed to load donor stats: {error}
+        </Card.Body>
+      </Card>
+    );
+  }
 
   return (
     <Card className="shadow mb-4">
       <Card.Body>
         <div className="donor-stats">
+          {/* Total Donations */}
           <div className="stat-block">
-            <div className="stat-value">{stats.studentsImpacted}</div>
+            <div className="stat-value">{totalDonations}</div>
             <div className="stat-label">
-              <span>Affected Over</span>
+              <span>Total Donations</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id="tooltip-affected">
-                    This is the number of students impacted.
+                  <Tooltip id="tooltip-total-donations">
+                    The total number of donations you have made.
                   </Tooltip>
                 }
               >
@@ -36,15 +78,16 @@ export default function DonorStats() {
 
           <div className="stat-divider"></div>
 
+          {/* Units Donated */}
           <div className="stat-block">
-            <div className="stat-value">{stats.unitsDonated}</div>
+            <div className="stat-value">{formatNumber(totalUnits)}</div>
             <div className="stat-label">
               <span>Units Donated</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id="tooltip-affected">
-                    This is the number of units the donor has contributed.
+                  <Tooltip id="tooltip-units-donated">
+                    The total number of stock units you have contributed.
                   </Tooltip>
                 }
               >
@@ -55,15 +98,17 @@ export default function DonorStats() {
 
           <div className="stat-divider"></div>
 
+          {/* Total Amount */}
           <div className="stat-block">
-            <div className="stat-value">{stats.totalValue}</div>
+            <div className="stat-value">{formatCurrency(totalValueNumber)}</div>
             <div className="stat-label">
               <span>Total Amount</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id="tooltip-affected">
-                    This reflects the total dollar value of the units donated.
+                  <Tooltip id="tooltip-total-amount">
+                    The total dollar value of all donated units, calculated as
+                    (units x initial valuation per share).
                   </Tooltip>
                 }
               >
@@ -71,7 +116,6 @@ export default function DonorStats() {
               </OverlayTrigger>
             </div>
           </div>
-          {/* <FiMoreHorizontal className="more-stats-icon" /> */}
         </div>
       </Card.Body>
     </Card>

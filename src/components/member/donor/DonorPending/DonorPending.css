@@ -1,10 +1,15 @@
-/* Clean up the last row — no bottom border, thinner top border */
-.pending-table tbody tr:last-child td {
-  border-top: 0.5px solid #dee2e6;
-  border-bottom: none;
+/* ==========================================================================
+   Card Layout
+   ========================================================================== */
+
+.pending-card {
+  margin-top: 1.5rem;
 }
 
-/* Line up the dot icon and text nicely with a little spacing */
+/* ==========================================================================
+   Cell + Icon Formatting
+   ========================================================================== */
+
 .pending-cell {
   display: inline-flex;
   align-items: center;
@@ -12,7 +17,16 @@
   gap: 0.5rem;
 }
 
-/* General pill style for the status labels */
+.pending-icon {
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Status Pill Styles
+   ========================================================================== */
+
 .status-pill {
   padding: 0.3rem 0.75rem;
   border-radius: 0.4rem;
@@ -20,32 +34,33 @@
   font-weight: 500;
 }
 
-/* Yellow style for 'Waiting approval' */
 .status-waiting {
   background-color: #e4bb2a;
   color: #ffffff;
 }
 
-/* Blue style for 'Verification by university' */
 .status-verifying {
   background-color: var(--primary-blue);
   color: #ffffff;
 }
 
-/* Green pill for completed status */
 .status-completed {
-  background-color: #8DC843;
+  background-color: #8dc843;
   color: #ffffff;
 }
 
 .status-submitted {
   background-color: #6c757d;
-  color: #fff;
+  color: #ffffff;
 }
 
-/* More icon */
-.pending-icon {
-  font-size: 1.5rem;
-  color: #6c757d;
-  cursor: pointer;
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .status-pill {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
 }

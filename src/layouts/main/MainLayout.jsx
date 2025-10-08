@@ -11,13 +11,13 @@ import "./MainLayout.css";
 
 export default function MainLayout() {
   return (
-    <div className="app-container">
+    <>
       <NavBar />
       <main className="outlet-container">
         <Outlet />
         <EnvIndicator />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

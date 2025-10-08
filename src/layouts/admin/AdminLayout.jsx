@@ -3,7 +3,6 @@ import { lazy, Suspense } from "react";
 
 import AdminBanner from "../../components/admin/banner/AdminBanner";
 import AdminNav from "../../components/admin/navBar/AdminNav";
-import UnderConstruction from "../../components/userInterface/placeholder/UnderConstruction";
 
 import "./AdminLayout.css";
 
@@ -11,13 +10,26 @@ import "./AdminLayout.css";
 const AdminDashboard = lazy(() =>
   import("../../pages/admin/dashboard/AdminDashboard")
 );
-
 const PendingDonationPage = lazy(() =>
-  import("../../pages/admin/pending/PendingDonationPage")
+  import("../../pages/admin/donations/PendingDonationPage")
 );
-
-const AdminUserPage = lazy(() =>
-  import("../../pages/admin/users/AdminUserPage")
+const ViewDonationsPage = lazy(() =>
+  import("../../pages/admin/donations/ViewDonationsPage")
+);
+const ViewUsersPage = lazy(() =>
+  import("../../pages/admin/users/ViewUsersPage")
+);
+const ViewCompanyPage = lazy(() =>
+  import("../../pages/admin/company/ViewCompanyPage")
+);
+const PendingCompanyPage = lazy(() =>
+  import("../../pages/admin/company/PendingCompanyPage")
+);
+const ViewUniversityPage = lazy(() =>
+  import("../../pages/admin/university/ViewUniversityPage")
+);
+const PendingUniversityPage = lazy(() =>
+  import("../../pages/admin/university/PendingUniversityPage")
 );
 
 export default function AdminLayout() {
@@ -35,32 +47,22 @@ export default function AdminLayout() {
       content = <PendingDonationPage />;
       break;
     case "view-donations":
-      content = (
-        <UnderConstruction title="Feature to view and manage all donations that have been processed and submitted" />
-      );
+      content = <ViewDonationsPage />;
       break;
     case "view-companies":
-      content = (
-        <UnderConstruction title="Feature to view and manage all companies registered to the site" />
-      );
+      content = <ViewCompanyPage />;
       break;
     case "company-registrations":
-      content = (
-        <UnderConstruction title="Feature to view and manage all university registrations waiting to be verified" />
-      );
+      content = <PendingCompanyPage />;
       break;
     case "view-universities":
-      content = (
-        <UnderConstruction title="Feature to view and manage all university registered to the site" />
-      );
+      content = <ViewUniversityPage />;
       break;
     case "university-registrations":
-      content = (
-        <UnderConstruction title="Feature to view and manage all university registrations waiting to be verified" />
-      );
+      content = <PendingUniversityPage />;
       break;
     case "users":
-      content = <AdminUserPage />;
+      content = <ViewUsersPage />;
       break;
     default:
       content = <NotFound />;

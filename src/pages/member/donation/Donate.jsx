@@ -12,20 +12,17 @@ import {
 import { FaDollarSign } from "react-icons/fa";
 import { FaCircleInfo } from "react-icons/fa6";
 
-import { useSelector } from "react-redux";
-import { store } from "../../../redux/store";
-import { setDonation } from "../../../redux/slices/donationSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { submitDonationForm } from "../../../redux/slices/donationSlice";
 
 import ConfirmDonationModal from "./ConfirmDonation";
 import ThankYouModal from "./ThankYouModal";
 
-import * as ACEDonation from "../../../managers/ApiClient-Donation";
-import * as ACM from "../../../managers/ApiClientMethods";
-import * as ACO from "../../../managers/ApiClientObjects";
-
 import "./Donate.css";
 
 export default function DonationPage() {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     companyName: "",
     recipient: "",
@@ -94,11 +91,18 @@ export default function DonationPage() {
     setShowConfirmModal(true);
   }
 
-  function handleSubmitDonation() {
-    processForm();
-    resetForm();
+  async function handleSubmitDonation() {
     setShowConfirmModal(false);
-    setShowThankYouModal(true);
+
+    await dispatch(submitDonationForm({ formData, userDTO }))
+      .unwrap()
+      .then(() => {
+        resetForm();
+        setShowThankYouModal(true);
+      })
+      .catch((err) => {
+        alert("Donation failed: " + err);
+      });
   }
 
   function resetForm() {
@@ -114,41 +118,6 @@ export default function DonationPage() {
       agreementChecked: false,
       file: null,
     });
-  }
-
-  async function processForm() {
-    var apiResult;
-    var flag;
-    var id, tmpDonationCDO;
-
-    apiResult = await ACEDonation.CreateDonationAsync();
-    id = ACM.getApiResultData(apiResult);
-    if (id > 0) {
-      apiResult = await ACEDonation.GetDonationCDOAsync(id);
-      tmpDonationCDO = ACM.getApiResultData(apiResult);
-
-      tmpDonationCDO.userID = userDTO.id;
-      tmpDonationCDO.donationDate = formData.donationDate;
-      tmpDonationCDO.donationStatusID = ACO.DonationStatusCode.CREATED;
-      tmpDonationCDO.units = formData.units;
-      tmpDonationCDO.initialValuation = formData.valuation;
-      tmpDonationCDO.currentValuation = formData.valuation;
-      tmpDonationCDO.valuationDate = formData.donationDate;
-      tmpDonationCDO.note = formData.note;
-
-      tmpDonationCDO.companyCDO.name = formData.companyName;
-
-      tmpDonationCDO.universityCDO.name =
-        formData.recipient || formData.otherUniversity;
-
-      apiResult = await ACEDonation.UpdateDonationCDOAsync(tmpDonationCDO);
-      flag = ACM.getApiResultData(apiResult);
-      if (flag) {
-        apiResult = await ACEDonation.GetDonationCDOAsync(id);
-        tmpDonationCDO = ACM.getApiResultData(apiResult);
-        store.dispatch(setDonation(tmpDonationCDO));
-      }
-    }
   }
 
   return (

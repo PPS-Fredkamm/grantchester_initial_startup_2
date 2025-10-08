@@ -1,7 +1,15 @@
+/* ==========================================================================
+   FORM ELEMENTS
+   ========================================================================== */
+
 .form-label {
   display: flex;
   text-align: start;
 }
+
+/* ==========================================================================
+   SECURITY BUTTONS
+   ========================================================================== */
 
 .security-button {
   padding: 0.75rem;
@@ -10,6 +18,7 @@
   transition: all 0.2s ease;
 }
 
+/* --- Reset Password Button --- */
 .security-button.reset {
   background-color: var(--primary-blue);
   color: white;
@@ -20,6 +29,7 @@
   background-color: var(--secondary-blue);
 }
 
+/* --- Delete Account Button --- */
 .security-button.delete {
   background-color: transparent;
   color: #dc3545;
@@ -31,7 +41,9 @@
   color: white;
 }
 
-/* Change Password Modal */
+/* ==========================================================================
+   CHANGE PASSWORD MODAL
+   ========================================================================== */
 
 .modal-header {
   border-bottom: none !important;
@@ -57,12 +69,15 @@
   border: none !important;
 }
 
-/* Delete Account Modal Styles */
+/* ==========================================================================
+   DELETE ACCOUNT MODAL
+   ========================================================================== */
+
 .delete-account-modal .modal-footer {
   border-top: none !important;
 }
 
-/* DELETE ACCOUNT MODAL STAR RATING */
+/* --- Star Rating --- */
 .delete-account-modal .star-rating {
   display: flex;
   align-items: center;
@@ -73,9 +88,18 @@
   cursor: pointer;
   transition: color 0.2s ease-in-out;
   font-size: 24px;
-  color: #e4e5e9; 
+  color: #e4e5e9;
 }
 
 .delete-account-modal .star-rating .star.active {
-  color: #ffc107; 
+  color: #ffc107;
+}
+
+/* ==========================================================================
+   ACCORDION BEHAVIOR
+   ========================================================================== */
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+  box-shadow: none;
 }

@@ -7,7 +7,7 @@ import "./MarketingLayout.css";
 
 export default function MarketingLayout() {
   return (
-    <div className="app-container">
+    <>
       <MarketingNav />
       <main className="outlet-container">
         <Suspense fallback={<div>Loading...</div>}>
@@ -16,6 +16,6 @@ export default function MarketingLayout() {
         <EnvIndicator />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

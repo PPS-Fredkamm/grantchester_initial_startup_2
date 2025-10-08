@@ -26,6 +26,12 @@
   padding-top: 1.5rem;
 }
 
+
+
+/* ==================
+Mobile responsiveness 
+================== */
+
 @media (max-width: 1199px) {
   .admin-layout {
     padding: 1rem 4rem;

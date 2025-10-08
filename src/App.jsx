@@ -38,7 +38,7 @@ export default function App() {
   if (app.viewMode === "marketing") {
     // Only show marketing layout, no login/dashboard routes
     return (
-      <div className="app">
+      <div className="app-container">
         <Routes>
           <Route
             path="/"
@@ -57,7 +57,7 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div className="app-container">
       <Suspense
         fallback={
           <div className="d-flex justify-content-center align-items-center vh-100">

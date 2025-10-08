@@ -1,9 +1,32 @@
 import { Modal, Button, Badge } from "react-bootstrap";
 import Stepper from "react-stepper-horizontal";
+
+import { formatDate } from "../../../../utils/formatDate";
+import { formatNumber, formatCurrency } from "../../../../utils/formatNumber";
+
 import "./DonationTracker.css";
 
-const DonationTracker = ({ show, onHide, donation }) => {
+export default function DonationTracker({ show, onHide, donation }) {
   if (!donation) return null;
+
+  // ===========================
+  // Normalize fields from Redux data
+  // ===========================
+  const id = donation.donationID || donation.id || "N/A";
+  const university = donation.universityCDO?.name || "N/A";
+  const company =
+    donation.companyCDO?.name || `ID: ${donation.companyID || "N/A"}`;
+  const status = donation.donationStatus?.name || "Unknown";
+  const units = donation.units || 0;
+  const initialValuation = donation.initialValuation || 0;
+  const totalValue = units * initialValuation;
+  const valuationDate = donation.valuationDate
+    ? formatDate(donation.valuationDate)
+    : "N/A";
+  const dateSubmitted = donation.donationDate
+    ? formatDate(donation.donationDate)
+    : "N/A";
+  const note = donation.note || "";
 
   const stages = [
     "Submitted",
@@ -29,7 +52,7 @@ const DonationTracker = ({ show, onHide, donation }) => {
     return stages[0]; // Default to "Submitted"
   };
 
-  const currentStage = normalizeStatus(donation?.status);
+  const currentStage = normalizeStatus(status);
   const currentIdx = stages.indexOf(currentStage);
 
   const getVariant = (stage) => {
@@ -50,48 +73,77 @@ const DonationTracker = ({ show, onHide, donation }) => {
   return (
     <Modal show={show} onHide={onHide} centered className="tracker-modal">
       <Modal.Header closeButton>
-        <Modal.Title>Donation Status</Modal.Title>
+        <Modal.Title>Donation Tracker</Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
-        <div className="donation-meta">
-          <strong>Donation ID:</strong> {donation?.donationId || "N/A"}
-        </div>
-
-        <div className="donation-meta">
+        {/* === 1. Donation Overview === */}
+        <div className="donation-section">
+          <h6 className="text-muted mb-2">Overview</h6>
           <p>
-            <strong>Recipient:</strong> {donation?.university || "N/A"}
+            <strong>Donation ID:</strong> #{id}
           </p>
           <p>
-            <strong>Submitted:</strong> {donation?.date || "N/A"}
+            <strong>University:</strong> {university}
           </p>
-        </div>
-
-        <div className="status-section">
-          <div className="status-label">
-            <strong>Current Status: </strong>
+          <p>
+            <strong>Company:</strong> {company}
+          </p>
+          <p>
+            <strong>Date Submitted:</strong> {dateSubmitted}
+          </p>
+          <p className="mt-2">
+            <strong>Status:</strong>{" "}
             <Badge
               bg={getVariant(currentStage)}
               text={currentStage === "Waiting approval" ? "dark" : "light"}
             >
               {currentStage}
             </Badge>
+          </p>
+          {/* === Stepper === */}
+          <div className="status-section">
+            <Stepper
+              steps={stages.map((stage) => ({ title: stage }))}
+              activeStep={currentIdx}
+              activeColor="#0d6efd"
+              completeColor="#198754"
+              defaultColor="#dee2e6"
+              activeTitleColor="#0d6efd"
+              completeTitleColor="#198754"
+              defaultTitleColor="#6c757d"
+              size={36}
+              circleFontSize={18}
+              barStyle="solid"
+            />
           </div>
+        </div>
 
-          <Stepper
-            steps={stages.map((stage) => ({ title: stage }))}
-            activeStep={currentIdx}
-            activeColor="#0d6efd"
-            completeColor="#198754"
-            defaultColor="#dee2e6"
-            activeTitleColor="#0d6efd"
-            completeTitleColor="#198754"
-            defaultTitleColor="#6c757d"
-            size={36}
-            circleFontSize={18}
-            barStyle="solid"
-          />
+        {/* === 2. Donation Details === */}
+        <hr />
+        <div className="donation-section">
+          <h6 className="text-muted mb-2">Donation Details</h6>
+          <p>
+            <strong>Units Donated:</strong> {formatNumber(units)}
+          </p>
+          <p>
+            <strong>Initial Valuation (per share):</strong>{" "}
+            {formatCurrency(initialValuation)}
+          </p>
+          <p>
+            <strong>Total Estimated Value:</strong> {formatCurrency(totalValue)}
+          </p>
+          <p>
+            <strong>Valuation Date:</strong> {valuationDate}
+          </p>
+          {note && (
+            <p>
+              <strong>Note:</strong> {note}
+            </p>
+          )}
         </div>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>
           Close
@@ -99,6 +151,4 @@ const DonationTracker = ({ show, onHide, donation }) => {
       </Modal.Footer>
     </Modal>
   );
-};
-
-export default DonationTracker;
+}

@@ -1,74 +1,47 @@
-import { useState } from 'react';
-import { Card, Table } from 'react-bootstrap';
+import { useState, useEffect } from "react";
+import { Card, Table, Spinner } from "react-bootstrap";
 
-import DonationsDropdown from './DonationsDropdown';
-import './DonorDonations.css';
+import { useDispatch, useSelector } from "react-redux";
+import { fetchDonations } from "../../../../redux/slices/donationSlice";
+import { formatDate } from "../../../../utils/formatDate";
+import { formatCurrency, formatNumber } from "../../../../utils/formatNumber";
+
+import DonationsDropdown from "./DonationsDropdown";
+import "./DonorDonations.css";
 
 export default function DonorDonations() {
-  const [filter, setFilter] = useState('All');
+  const dispatch = useDispatch();
+  const userDTO = useSelector((state) => state.auth.userDTO);
+  const { donations, loading, error } = useSelector((state) => state.donation);
+  const [filter, setFilter] = useState("All");
 
-  const donations = [
-    {
-      donationId: '402509',
-      university: 'University of Pennsylvania',
-      amount: '$2,000',
-      status: 'Waiting approval',
-      date: '2024-03-15',
-    },
-    {
-      donationId: '252407',
-      university: 'Clemson University',
-      amount: '$1,500',
-      status: 'Donation verification by university',
-      date: '2024-03-12',
-    },
-    {
-      donationId: '207509',
-      university: 'Penn State University',
-      amount: '$2,000',
-      status: 'Completed',
-      date: '2024-02-28',
-    },
-    {
-      donationId: '302587',
-      university: 'Clemson University',
-      amount: '$1,500',
-      status: 'Completed',
-      date: '2024-02-18',
-    },
-    {
-      donationId: '702509',
-      university: 'Louisiana State University',
-      amount: '$1,500',
-      status: 'Completed',
-      date: '2024-01-20',
-    },
-    {
-      donationId: '202406',
-      university: 'University of California, Berkley',
-      amount: '$1,500',
-      status: 'Completed',
-      date: '2024-01-10',
-    },
-  ];
+  // Fetch all donations when user loads the page
+  useEffect(() => {
+    if (userDTO?.id) {
+      dispatch(fetchDonations(userDTO.id));
+    }
+  }, [dispatch, userDTO?.id]);
 
+  // Styling helper for status pills
   function getStatusClass(status) {
-    if (status.toLowerCase() === 'completed') return 'status-completed';
-    if (status.toLowerCase().includes('waiting')) return 'status-waiting';
-    if (status.toLowerCase().includes('verification'))
-      return 'status-verifying';
-    return '';
+    if (!status) return "";
+    const lower = status.toLowerCase();
+    if (lower === "completed") return "status-completed";
+    if (lower.includes("waiting")) return "status-waiting";
+    if (lower.includes("verification")) return "status-verifying";
+    if (lower.includes("submitted")) return "status-submitted";
+    return "";
   }
 
-  const filteredDonations = donations.filter((d) => {
-    if (filter === 'All') return true;
-    if (filter === 'Completed') return d.status.toLowerCase() === 'completed';
-    if (filter === 'Waiting Approval')
-      return d.status.toLowerCase().includes('waiting');
-    if (filter === 'Verifying')
-      return d.status.toLowerCase().includes('verification');
-    return true;
-  });
+  const filteredDonations =
+    donations?.filter((d) => {
+      const status = d.donationStatus?.name?.toLowerCase() || "";
+      if (filter === "All") return true;
+      if (filter === "Completed") return status === "completed";
+      if (filter === "Waiting Approval") return status.includes("waiting");
+      if (filter === "Verifying") return status.includes("verification");
+      return true;
+    }) || [];
 
   return (
     <Card className="donations-card shadow mb-4">
@@ -78,49 +51,62 @@ export default function DonorDonations() {
           <DonationsDropdown value={filter} onChange={setFilter} />
         </div>
 
-        <Table responsive="lg" striped className="donations-table">
-          <thead>
-            <tr className="text-nowrap">
-              <th className="w-20">Donation ID</th>
-              <th className="w-20">Date</th>
-              <th className="w-40">University</th>
-              <th className="w-20">Amount</th>
-              <th className="w-10">Status</th>
-            </tr>
-          </thead>
+        {loading ? (
+          <div className="text-center py-4">
+            <Spinner animation="border" variant="primary" size="sm" /> Loading
+            donations...
+          </div>
+        ) : error ? (
+          <div className="text-danger text-center py-3">{error}</div>
+        ) : (
+          <div className="scrollable-table">
+            <Table responsive={false} striped className="donations-table">
+              <thead>
+                <tr className="text-nowrap">
+                  <th style={{ width: "8%" }}>Donation ID</th>
+                  <th style={{ width: "12%" }}>Date</th>
+                  <th style={{ width: "25%" }} className="truncate">
+                    University
+                  </th>
+                  <th style={{ width: "10%" }}>Units</th>
+                  <th style={{ width: "15%" }}>Value per Unit</th>
+                  <th style={{ width: "10%" }}>Status</th>
+                </tr>
+              </thead>
 
-          <tbody>
-            {filteredDonations.map((d, idx) => (
-              <tr className="text-nowrap" key={idx}>
-                <td>
-                  <span>#{d.donationId}</span>
-                </td>
-                <td>
-                  <span>{d.date}</span>
-                </td>
-                <td>
-                  <span>{d.university}</span>
-                </td>
-                <td>
-                  <span>{d.amount}</span>
-                </td>
-                <td>
-                  <span className={`status-pill ${getStatusClass(d.status)}`}>
-                    {d.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
-
-            {filteredDonations.length === 0 && (
-              <tr>
-                <td colSpan="4" className="text-center">
-                  No donations match this filter.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
+              <tbody>
+                {filteredDonations.length > 0 ? (
+                  filteredDonations.map((d, idx) => (
+                    <tr key={d.donationID || `donation-${idx}`}>
+                      <td>#{d.donationID}</td>
+                      <td>{formatDate(d.donationDate)}</td>
+                      <td className="truncate truncate-university">
+                        {d.universityCDO?.name || "N/A"}
+                      </td>
+                      <td>{formatNumber(d.units) || "0"}</td>
+                      <td>{formatCurrency(d.currentValuation) || "$0.00"}</td>
+                      <td>
+                        <span
+                          className={`status-pill ${getStatusClass(
+                            d.donationStatus?.name || ""
+                          )}`}
+                        >
+                          {d.donationStatus?.name || "Unknown"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="text-center py-3">
+                      No donations match this filter.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
+          </div>
+        )}
       </Card.Body>
     </Card>
   );

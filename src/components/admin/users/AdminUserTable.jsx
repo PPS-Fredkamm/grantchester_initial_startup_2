@@ -49,55 +49,69 @@ export default function AdminUsers() {
     alert(`User ${id} deleted (placeholder action)`);
   };
 
+  // Dropdown actions to map
+  const dropdownActions = [
+    { label: "View Profile", onClick: handleViewProfile },
+    { label: "Edit Role", onClick: handleEditRole },
+    { label: "Suspend User", onClick: handleSuspend },
+  ];
+
   return (
     <Card className="shadow">
       <Card.Body>
         <h4 className="mb-3">All Users</h4>
-        <Table striped responsive="xxl" className="admin-pending-table">
-          <thead>
-            <tr>
-              <th>User ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th aria-label="Actions" />
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((u) => (
-              <tr key={u.userId}>
-                <td>#{u.userId}</td>
-                <td>{u.name}</td>
-                <td>{u.email}</td>
-                <td>{u.role}</td>
-                <td>{u.status}</td>
-                <td>
-                  <DropdownButton
-                    id={`dropdown-${u.userId}`}
-                    title="Actions"
-                    size="sm"
-                    variant="outline-secondary"
-                  >
-                    <Dropdown.Item onClick={() => handleViewProfile(u.userId)}>
-                      View Profile
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleEditRole(u.userId)}>
-                      Edit Role
-                    </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleSuspend(u.userId)}>
-                      Suspend User
-                    </Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item onClick={() => handleDelete(u.userId)}>
-                      Delete User
-                    </Dropdown.Item>
-                  </DropdownButton>
-                </td>
+        <div className="scrollable-table">
+          <Table striped responsive="xxl" className="admin-pending-table">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th aria-label="Actions" />
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {users.map((u) => (
+                <tr key={u.userId}>
+                  <td>#{u.userId}</td>
+                  <td>{u.name}</td>
+                  <td>{u.email}</td>
+                  <td>{u.role}</td>
+                  <td>{u.status}</td>
+                  <td>
+                    <DropdownButton
+                      id={`dropdown-${u.userId}`}
+                      title="Actions"
+                      size="sm"
+                      variant="outline-secondary"
+                    >
+                      {/* Dynamically mapped actions */}
+                      {dropdownActions.map((action) => (
+                        <Dropdown.Item
+                          key={action.label}
+                          onClick={() => action.onClick(u.userId)}
+                        >
+                          {action.label}
+                        </Dropdown.Item>
+                      ))}
+
+                      {/* Hardcoded divider + final destructive action */}
+                      <Dropdown.Divider />
+                      <Dropdown.Item
+                        className="text-danger"
+                        onClick={() => handleDelete(u.userId)}
+                      >
+                        Delete User
+                      </Dropdown.Item>
+                    </DropdownButton>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </Card.Body>
     </Card>
   );

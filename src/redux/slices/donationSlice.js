@@ -2,38 +2,83 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import * as ACEDonation from "../../managers/ApiClient-Donation";
 import * as ACM from "../../managers/ApiClientMethods";
-import * as BLM from "../../managers/BusinessLayerMethods";
+import * as ACO from "../../managers/ApiClientObjects";
 
-// ========================================
-// Async thunk: Submit a donation
-// ----------------------------------------
-// - Called when a user submits a new donation form
-// - Sends the donationData object to the backend via BusinessLayerMethods
-// - If successful, returns the new donation object { id, status, ... }
-// - If it fails, rejects with an error message
-// ========================================
-export const submitDonation = createAsyncThunk(
-  "donation/submit",
-  async (donationData, thunkAPI) => {
+/* ============================================================
+   Async Thunk: submitDonationForm
+   ------------------------------------------------------------
+   Description:
+   • Submits a new donation request to the backend API.
+   • Replicates the old `processForm()` logic that was previously 
+     handled directly inside Donate.jsx.
+
+   Flow:
+   1. Create a new donation record (CreateDonationAsync)
+   2. Retrieve the created record (GetDonationCDOAsync)
+   3. Populate it with form and user data
+   4. Update the donation record (UpdateDonationCDOAsync)
+   5. Fetch and return the finalized DonationCDO
+
+   Returns:
+   • On success: fully populated donation object
+   • On failure: rejects with an error message
+   ============================================================ */
+export const submitDonationForm = createAsyncThunk(
+  "donation/submitDonationForm",
+  async ({ formData, userDTO }, { rejectWithValue }) => {
     try {
-      const result = await BLM.SubmitDonation(donationData);
-      return result; // e.g. { id: 123, status: "Pending", ... }
+      // Step 1: Create new donation record
+      let apiResult = await ACEDonation.CreateDonationAsync();
+      const id = ACM.getApiResultData(apiResult);
+      if (id <= 0) throw new Error("Failed to create donation record");
+
+      // Step 2: Retrieve the newly created donation CDO
+      apiResult = await ACEDonation.GetDonationCDOAsync(id);
+      let tmpDonationCDO = ACM.getApiResultData(apiResult);
+
+      // Step 3: Populate donation fields
+      tmpDonationCDO.userID = userDTO.id;
+      tmpDonationCDO.donationDate = formData.donationDate;
+      tmpDonationCDO.donationStatusID = ACO.DonationStatusCode.CREATED;
+      tmpDonationCDO.units = formData.units;
+      tmpDonationCDO.initialValuation = formData.valuation;
+      tmpDonationCDO.currentValuation = formData.valuation;
+      tmpDonationCDO.valuationDate = formData.donationDate;
+      tmpDonationCDO.note = formData.note;
+
+      tmpDonationCDO.companyCDO.name = formData.companyName;
+      tmpDonationCDO.universityCDO.name =
+        formData.recipient || formData.otherUniversity;
+
+      // Step 4: Update the donation CDO
+      apiResult = await ACEDonation.UpdateDonationCDOAsync(tmpDonationCDO);
+      const flag = ACM.getApiResultData(apiResult);
+      if (!flag) throw new Error("Failed to update donation");
+
+      // Step 5: Fetch the final donation object
+      apiResult = await ACEDonation.GetDonationCDOAsync(id);
+      tmpDonationCDO = ACM.getApiResultData(apiResult);
+
+      return tmpDonationCDO;
     } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+      return rejectWithValue(err.message);
     }
   }
 );
 
-// ========================================
-// Async thunk: Fetch donations
-// ----------------------------------------
-// - Called to load all donations tied to a specific user
-// - Takes userId as input, calls backend, and retrieves an array of donations
-// - If successful, returns something like:
-//   [ {id:1, status:"Approved"}, {id:2, status:"Pending"} ]
-// - If it fails, rejects with an error message
-// ========================================
-// donationSlice.js
+/* ============================================================
+   Async Thunk: fetchDonations
+   ------------------------------------------------------------
+   Description:
+   • Retrieves all donations tied to a specific user from the API.
+
+   Input:
+   • userId — the authenticated user's ID.
+
+   Returns:
+   • On success: array of donation objects
+   • On failure: rejects with an error message
+   ============================================================ */
 export const fetchDonations = createAsyncThunk(
   "donation/fetchDonations",
   async (userId, { rejectWithValue }) => {
@@ -50,22 +95,35 @@ export const fetchDonations = createAsyncThunk(
   }
 );
 
-// ========================================
-// Slice: Donation
-// ----------------------------------------
-// - Holds all donation-related state in Redux
-// - initialState includes:
-//   donations: array of all donations for the user
-//   currentDonation: last submitted or currently active donation
-//   loading: spinner flag for async operations
-//   error: error message if an API call fails
-// ========================================
+/* ============================================================
+   Slice: donationSlice
+   ------------------------------------------------------------
+   Description:
+   • Manages all Redux state related to donations.
+
+   State Structure:
+   {
+     donationCDO:  most recent or active donation object
+     donations:    array of all fetched donations for current user
+     currentDonation: last submitted donation
+     loading:      boolean flag for active async operations
+     error:        string describing the latest API error (if any)
+   }
+
+   Reducers:
+   • clearDonations() — resets donation-related data (e.g. on logout)
+   • setDonation(payload) — manually sets the active donation CDO
+
+   Extra Reducers:
+   • Handles all async thunk state transitions (pending, fulfilled, rejected)
+   ============================================================ */
 const donationSlice = createSlice({
   name: "donation",
   initialState: {
     donationCDO: null,
     donations: [],
     currentDonation: null,
+    loading: false,
     error: null,
   },
   reducers: {
@@ -84,36 +142,43 @@ const donationSlice = createSlice({
       // ===============================
       // SUBMIT DONATION
       // ===============================
-      .addCase(submitDonation.pending, (state) => {
-        // Mark state as loading while API request is in-flight
+      .addCase(submitDonationForm.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
-      .addCase(submitDonation.fulfilled, (state, action) => {
-        // Request finished successfully
+      .addCase(submitDonationForm.fulfilled, (state, action) => {
         state.loading = false;
-        // Save the new donation as currentDonation
         state.currentDonation = action.payload;
-        // Add it to the donations list
+        state.donationCDO = action.payload;
         state.donations.push(action.payload);
       })
-      .addCase(submitDonation.rejected, (state, action) => {
-        // Request failed
+      .addCase(submitDonationForm.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload || "Failed to submit donation.";
       })
 
       // ===============================
       // FETCH DONATIONS
       // ===============================
+      .addCase(fetchDonations.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchDonations.fulfilled, (state, action) => {
-        // Replace donations array with the latest from API
+        state.loading = false;
         state.donations = action.payload;
+      })
+      .addCase(fetchDonations.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload || "Failed to fetch donations.";
       });
   },
 });
 
-// Export actions for components to call
+/* ============================================================
+   Exports
+   ------------------------------------------------------------
+   • clearDonations, setDonation — regular Redux actions
+   • donationSlice.reducer — the reducer to register in store.js
+   ============================================================ */
 export const { clearDonations, setDonation } = donationSlice.actions;
-
-// Export reducer for store.js
 export default donationSlice.reducer;

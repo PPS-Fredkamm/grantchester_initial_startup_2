@@ -1,28 +1,28 @@
 import { Card, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FaCircleInfo } from "react-icons/fa6";
 
-export default function AdminUserStats() {
+export default function PendingCompanyStats() {
   const stats = {
-    totalUsers: 158,
-    activeUsers: 142,
-    suspendedUsers: 6,
-    universities: 12,
-    admins: 5,
+    pendingCompanies: 18,
+    underReview: 9,
+    approvedToday: 3,
+    totalSubmittedThisMonth: 42,
   };
 
   return (
     <Card className="shadow mb-4">
       <Card.Body>
         <div className="pending-stats">
+          {/* Pending Companies */}
           <div className="stat-block">
-            <div className="stat-value">{stats.totalUsers}</div>
+            <div className="stat-value">{stats.pendingCompanies}</div>
             <div className="stat-label">
-              <span>Total Users</span>
+              <span>Pending Companies</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id="tooltip-totalUsers">
-                    Total number of registered users in the system
+                  <Tooltip id="tooltip-pending-companies">
+                    Total companies awaiting approval or verification by admins
                   </Tooltip>
                 }
               >
@@ -33,15 +33,17 @@ export default function AdminUserStats() {
 
           <div className="stat-divider"></div>
 
+          {/* Under Review */}
           <div className="stat-block">
-            <div className="stat-value">{stats.activeUsers}</div>
+            <div className="stat-value">{stats.underReview}</div>
             <div className="stat-label">
-              <span>Active Users</span>
+              <span>Under Review</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id="tooltip-activeUsers">
-                    Users who currently have active accounts
+                  <Tooltip id="tooltip-under-review">
+                    Company registrations currently being reviewed or contacted
+                    for additional information
                   </Tooltip>
                 }
               >
@@ -52,15 +54,17 @@ export default function AdminUserStats() {
 
           <div className="stat-divider"></div>
 
+          {/* Approved Today */}
           <div className="stat-block">
-            <div className="stat-value">{stats.universities}</div>
+            <div className="stat-value">{stats.approvedToday}</div>
             <div className="stat-label">
-              <span>Universities</span>
+              <span>Approved Today</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id="tooltip-universities">
-                    Distinct universities represented by registered users
+                  <Tooltip id="tooltip-approved-today">
+                    Number of company registrations approved within the last 24
+                    hours
                   </Tooltip>
                 }
               >
@@ -71,15 +75,16 @@ export default function AdminUserStats() {
 
           <div className="stat-divider"></div>
 
+          {/* Monthly Submissions */}
           <div className="stat-block">
-            <div className="stat-value">{stats.admins}</div>
+            <div className="stat-value">{stats.totalSubmittedThisMonth}</div>
             <div className="stat-label">
-              <span>Admins</span>
+              <span>Submitted This Month</span>
               <OverlayTrigger
                 placement="right"
                 overlay={
-                  <Tooltip id="tooltip-admins">
-                    Number of users with admin privileges
+                  <Tooltip id="tooltip-monthly-submissions">
+                    Total new company registration forms submitted this month
                   </Tooltip>
                 }
               >

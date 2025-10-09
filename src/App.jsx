@@ -18,6 +18,7 @@ import "./App.css";
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/public/home/Home.jsx"));
+const MarketingHome = lazy(() => import("./pages/marketing/home/MarketingHome.jsx"));
 const Login = lazy(() => import("./pages/public/login/Login.jsx"));
 const Signup = lazy(() => import("./pages/public/signup/Signup.jsx"));
 const HowItWorks = lazy(() =>
@@ -45,7 +46,7 @@ export default function App() {
             element={<MarketingLayout />}
             errorElement={<ErrorHandler />}
           >
-            <Route index element={<UnderConstruction title="Home" />} />
+            <Route index element={<MarketingHome />} />
             <Route path="page1" element={<UnderConstruction title="page1" />} />
             <Route path="page2" element={<UnderConstruction title="page2" />} />
             <Route path="page3" element={<UnderConstruction title="page3" />} />

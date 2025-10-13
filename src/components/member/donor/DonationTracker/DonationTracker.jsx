@@ -79,37 +79,45 @@ export default function DonationTracker({ show, onHide, donation }) {
       <Modal.Body>
         {/* === 1. Donation Overview === */}
         <div className="donation-section">
-          <h6 className="text-muted mb-2">Overview</h6>
-          <p>
-            <strong>Donation ID:</strong> #{id}
-          </p>
-          <p>
-            <strong>University:</strong> {university}
-          </p>
-          <p>
-            <strong>Company:</strong> {company}
-          </p>
-          <p>
-            <strong>Date Submitted:</strong> {dateSubmitted}
-          </p>
-          <p className="mt-2">
-            <strong>Status:</strong>{" "}
-            <Badge
-              bg={getVariant(currentStage)}
-              text={currentStage === "Waiting approval" ? "dark" : "light"}
+          <h6>Overview</h6>
+
+          {/* Status Badge */}
+          <div className="mb-4">
+            <strong style={{ fontSize: "0.875rem", color: "#6c757d" }}>
+              Current Status:
+            </strong>
+            <div className="mt-2">
+              <Badge
+                className="status-badge"
+                bg={getVariant(currentStage)}
+                text={currentStage === "Waiting approval" ? "dark" : "light"}
+              >
+                {currentStage}
+              </Badge>
+            </div>
+          </div>
+
+          {/* Progress Tracker */}
+          <div className="mb-4">
+            <h6
+              style={{
+                marginBottom: "1rem",
+                color: "var(--primary-blue)",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+                textTransform: "uppercase",
+                letterSpacing: "0.5px",
+              }}
             >
-              {currentStage}
-            </Badge>
-          </p>
-          {/* === Stepper === */}
-          <div className="status-section">
+              Progress Tracker
+            </h6>
             <Stepper
               steps={stages.map((stage) => ({ title: stage }))}
               activeStep={currentIdx}
-              activeColor="#0d6efd"
+              activeColor="#4b9be7"
               completeColor="#198754"
               defaultColor="#dee2e6"
-              activeTitleColor="#0d6efd"
+              activeTitleColor="#4b9be7"
               completeTitleColor="#198754"
               defaultTitleColor="#6c757d"
               size={36}
@@ -117,33 +125,60 @@ export default function DonationTracker({ show, onHide, donation }) {
               barStyle="solid"
             />
           </div>
+
+          {/* Info Grid */}
+          <div className="info-grid">
+            <div className="info-item">
+              <strong>Donation ID</strong>
+              <span>#{id}</span>
+            </div>
+            <div className="info-item">
+              <strong>University</strong>
+              <span>{university}</span>
+            </div>
+            <div className="info-item">
+              <strong>Company</strong>
+              <span>{company}</span>
+            </div>
+            <div className="info-item">
+              <strong>Date Submitted</strong>
+              <span>{dateSubmitted}</span>
+            </div>
+          </div>
         </div>
 
-        {/* === 2. Donation Details === */}
-        <hr />
+        {/* === 3. Financial Details === */}
         <div className="donation-section">
-          <h6 className="text-muted mb-2">Donation Details</h6>
-          <p>
-            <strong>Units Donated:</strong> {formatNumber(units)}
-          </p>
-          <p>
-            <strong>Initial Valuation (per share):</strong>{" "}
-            {formatCurrency(initialValuation)}
-          </p>
-          <p>
-            <strong>Total Estimated Value:</strong> {formatCurrency(totalValue)}
-          </p>
-          <p>
-            <strong>Valuation Date:</strong> {valuationDate}
-          </p>
+          <h6>Financial Details</h6>
+
+          <div className="financial-grid">
+            <div className="financial-item">
+              <strong>Units Donated</strong>
+              <div className="value">{formatNumber(units)}</div>
+            </div>
+            <div className="financial-item">
+              <strong>Valuation per Share</strong>
+              <div className="currency">{formatCurrency(initialValuation)}</div>
+            </div>
+            <div className="financial-item">
+              <strong>Total Value</strong>
+              <div className="currency">{formatCurrency(totalValue)}</div>
+            </div>
+            <div className="financial-item">
+              <strong>Valuation Date</strong>
+              <div className="value">{valuationDate}</div>
+            </div>
+          </div>
+
+          {/* Note Section */}
           {note && (
-            <p>
-              <strong>Note:</strong> {note}
-            </p>
+            <div className="note-section">
+              <strong>Additional Note</strong>
+              <p>{note}</p>
+            </div>
           )}
         </div>
       </Modal.Body>
-
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>
           Close

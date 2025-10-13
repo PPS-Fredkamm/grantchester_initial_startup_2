@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
-import { Table, Button, Form, Row, Col, Badge } from 'react-bootstrap';
+import { useState } from "react";
+import { Table, Button, Form, Row, Col, Badge } from "react-bootstrap";
 
 const initialUsers = [
-  { id: 1, name: 'Drew Senour', email: 'drew@example.com', role: 'Admin' },
-  { id: 2, name: 'Alex Jordan', email: 'alex@example.com', role: 'Editor' },
+  { id: 1, name: "Drew Senour", email: "drew@example.com", role: "Admin" },
+  { id: 2, name: "Alex Jordan", email: "alex@example.com", role: "Editor" },
 ];
 
-const roles = ['Admin', 'Editor', 'Viewer'];
+const roles = ["Admin", "Editor", "Viewer"];
 
 export default function UniversityUserTeamSection() {
   const [users, setUsers] = useState(initialUsers);
-  const [newUser, setNewUser] = useState({ name: '', email: '', role: 'Viewer' });
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    role: "Viewer",
+  });
 
   const handleAddUser = (e) => {
     e.preventDefault();
@@ -25,13 +29,13 @@ export default function UniversityUserTeamSection() {
     ]);
 
     // Reset form
-    setNewUser({ name: '', email: '', role: 'Viewer' });
+    setNewUser({ name: "", email: "", role: "Viewer" });
   };
 
   const handleRoleChange = (id, newRole) => {
-    setUsers(users.map((user) =>
-      user.id === id ? { ...user, role: newRole } : user
-    ));
+    setUsers(
+      users.map((user) => (user.id === id ? { ...user, role: newRole } : user))
+    );
   };
 
   const handleRemove = (id) => {
@@ -58,7 +62,9 @@ export default function UniversityUserTeamSection() {
             <Form.Control
               type="email"
               value={newUser.email}
-              onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
+              onChange={(e) =>
+                setNewUser({ ...newUser, email: e.target.value })
+              }
               placeholder="Email address"
             />
           </Col>
@@ -69,12 +75,16 @@ export default function UniversityUserTeamSection() {
               onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
             >
               {roles.map((role) => (
-                <option key={role} value={role}>{role}</option>
+                <option key={role} value={role}>
+                  {role}
+                </option>
               ))}
             </Form.Select>
           </Col>
           <Col md={2}>
-            <Button type="submit" className="w-100">Invite</Button>
+            <Button type="submit" className="w-100">
+              Invite
+            </Button>
           </Col>
         </Row>
       </Form>
@@ -100,7 +110,9 @@ export default function UniversityUserTeamSection() {
                   onChange={(e) => handleRoleChange(id, e.target.value)}
                 >
                   {roles.map((r) => (
-                    <option key={r} value={r}>{r}</option>
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
                   ))}
                 </Form.Select>
               </td>

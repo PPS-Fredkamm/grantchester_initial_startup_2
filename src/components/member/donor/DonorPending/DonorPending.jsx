@@ -104,7 +104,7 @@ export default function DonorPendingDonations() {
                       <td>
                         <OverlayTrigger
                           placement="top"
-                          overlay={<Tooltip>View donation status</Tooltip>}
+                          overlay={<Tooltip>More Info</Tooltip>}
                         >
                           <span
                             className="pending-icon-wrapper"

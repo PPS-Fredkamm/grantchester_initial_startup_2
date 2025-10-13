@@ -18,11 +18,22 @@ import "./App.css";
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/public/home/Home.jsx"));
-const MarketingHome = lazy(() => import("./pages/marketing/home/MarketingHome.jsx"));
+const MarketingHome = lazy(() =>
+  import("./pages/marketing/home/MarketingHome.jsx")
+);
 const Login = lazy(() => import("./pages/public/login/Login.jsx"));
 const Signup = lazy(() => import("./pages/public/signup/Signup.jsx"));
 const HowItWorks = lazy(() =>
   import("./pages/public/howItWorks/HowItWorks.jsx")
+);
+const MarketingHowItWorks = lazy(() =>
+  import("./pages/marketing/how-it-works/HowItWorks.jsx")
+);
+const ForUniversities = lazy(() =>
+  import("./pages/marketing/how-it-works/forUniversities/ForUniversities.jsx")
+);
+const ForDonors = lazy(() =>
+  import("./pages/marketing/how-it-works/forDonors/ForDonors.jsx")
 );
 const UnderConstruction = lazy(() =>
   import("./components/userInterface/placeholder/UnderConstruction.jsx")
@@ -47,6 +58,9 @@ export default function App() {
             errorElement={<ErrorHandler />}
           >
             <Route index element={<MarketingHome />} />
+            <Route path="how-it-works" element={<MarketingHowItWorks />} />
+            <Route path="for-universities" element={<ForUniversities />} />
+            <Route path="for-donors" element={<ForDonors />} />
             <Route path="page1" element={<UnderConstruction title="page1" />} />
             <Route path="page2" element={<UnderConstruction title="page2" />} />
             <Route path="page3" element={<UnderConstruction title="page3" />} />

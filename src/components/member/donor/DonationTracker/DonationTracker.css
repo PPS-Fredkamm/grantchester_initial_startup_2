@@ -1,16 +1,395 @@
-/* space under each metadata block */
-.donation-meta {
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+/* ========================================
+   MODAL STRUCTURE & LAYOUT
+   ======================================== */
+
+/* Main Modal Container */
+.tracker-modal .modal-content {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 
-/* spacing around the whole status area */
+/* Modal Header - Gradient Background */
+.tracker-modal .modal-header {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  color: white;
+  border: none;
+  padding: 1.5rem 2rem;
+}
+
+/* Modal Title */
+.tracker-modal .modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Close Button */
+.tracker-modal .btn-close {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.tracker-modal .btn-close:hover {
+  opacity: 1;
+}
+
+/* Modal Body */
+.tracker-modal .modal-body {
+  padding: 2rem;
+  background: #f8f9fa;
+}
+
+/* Modal Footer */
+.tracker-modal .modal-footer {
+  background: white;
+  border: none;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e9ecef;
+}
+
+/* ========================================
+   CONTENT SECTIONS & CARDS
+   ======================================== */
+
+/* Overview Section Cards */
+.donation-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+}
+
+/* Section Headings with Blue Accent */
+.donation-section h6 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-blue);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.donation-section h6::before {
+  content: '';
+  width: 4px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border-radius: 2px;
+}
+
+/* ========================================
+   INFO GRID LAYOUT
+   ======================================== */
+
+/* Info Grid Container */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Individual Info Items */
+.info-item {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-blue);
+  transition: all 0.2s ease;
+}
+
+.info-item:hover {
+  background: #e9ecef;
+  transform: translateY(-1px);
+}
+
+.info-item strong {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+}
+
+.info-item span {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ========================================
+   STATUS BADGE & PROGRESS TRACKER
+   ======================================== */
+
+/* Status Badge with Pulsing Animation */
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Progress Stepper Container */
 .status-section {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
 }
 
-/* space just above the badge */
-.status-label {
+/* Stepper Component Styling */
+.status-section .react-stepper-horizontal {
+  padding: 0;
+}
+
+.status-section .react-stepper-horizontal .react-stepper-horizontal-item {
+  padding: 0 0.5rem;
+}
+
+.status-section .react-stepper-horizontal .react-stepper-horizontal-item-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6c757d;
+  text-align: center;
+  margin-top: 0.5rem;
+  line-height: 1.3;
+}
+
+.status-section .react-stepper-horizontal .react-stepper-horizontal-item-title.active {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.status-section .react-stepper-horizontal .react-stepper-horizontal-item-title.completed {
+  color: #198754;
+  font-weight: 600;
+}
+
+/* ========================================
+   FINANCIAL DETAILS GRID
+   ======================================== */
+
+/* Financial Grid Container */
+.financial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.25rem;
   margin-top: 1rem;
-  margin-bottom: 1rem;
+}
+
+/* Financial Item Cards */
+.financial-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.financial-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(75, 155, 231, 0.15);
+  border-color: var(--primary-blue);
+}
+
+/* Financial Item Labels */
+.financial-item strong {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #495057;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  position: relative;
+}
+
+.financial-item strong::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+}
+
+/* Financial Values */
+.financial-item .value {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.25rem;
+}
+
+.financial-item .currency {
+  font-size: 1.1rem;
+  color: #198754;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   NOTE SECTION & ADDITIONAL CONTENT
+   ======================================== */
+
+/* Note Section Styling */
+.note-section {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.note-section strong {
+  color: #856404;
+  font-size: 0.875rem;
+}
+
+.note-section p {
+  color: #856404;
+  margin: 0.5rem 0 0 0;
+  font-style: italic;
+}
+
+/* ========================================
+   FOOTER BUTTONS
+   ======================================== */
+
+/* Footer Button Base Styling */
+.tracker-modal .modal-footer .btn {
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+/* Secondary Button Styling */
+.tracker-modal .modal-footer .btn-secondary {
+  background: #6c757d;
+  border: none;
+}
+
+.tracker-modal .modal-footer .btn-secondary:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet & Small Desktop (≤768px) */
+@media (max-width: 768px) {
+  .tracker-modal .modal-body {
+    padding: 1rem;
+  }
+  
+  .tracker-modal .modal-header {
+    padding: 1rem;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .financial-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .financial-item {
+    padding: 1.25rem;
+  }
+  
+  .financial-item .value {
+    font-size: 1.2rem;
+  }
+  
+  .financial-item .currency {
+    font-size: 1rem;
+  }
+  
+  .status-section .react-stepper-horizontal .react-stepper-horizontal-item-title {
+    font-size: 0.7rem;
+  }
+}
+
+/* Mobile (≤480px) */
+@media (max-width: 480px) {
+  .financial-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .financial-item {
+    padding: 1rem;
+  }
+  
+  .financial-item .value {
+    font-size: 1.1rem;
+  }
+  
+  .financial-item .currency {
+    font-size: 0.95rem;
+  }
+  
+  .status-section .react-stepper-horizontal .react-stepper-horizontal-item-title {
+    font-size: 0.65rem;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+/* Modal Slide-in Animation */
+.tracker-modal .modal-content {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

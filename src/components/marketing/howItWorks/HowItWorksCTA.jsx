@@ -14,16 +14,12 @@ export default function HowItWorksCTA() {
             <div className="cta-buttons">
               <Button
                 as={Link}
-                to="/how-it-works/for-universities"
+                to="/for-universities"
                 className="btn-primary-gradient me-3"
               >
                 University Benefits
               </Button>
-              <Button
-                as={Link}
-                to="/how-it-works/for-donors"
-                variant="outline-primary"
-              >
+              <Button as={Link} to="/for-donors" variant="outline-primary">
                 Donor Benefits
               </Button>
             </div>

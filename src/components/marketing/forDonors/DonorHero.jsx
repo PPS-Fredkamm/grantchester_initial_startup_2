@@ -2,11 +2,11 @@ import { Container, Row, Col, Button, Image } from "react-bootstrap";
 
 export default function DonorHero() {
   const scrollToBenefits = () => {
-    const benefitsSection = document.getElementById('donor-benefits');
+    const benefitsSection = document.getElementById("donor-benefits");
     if (benefitsSection) {
-      benefitsSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      benefitsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };
@@ -18,8 +18,8 @@ export default function DonorHero() {
           <Col lg={8} className="text-center">
             <h1 className="hero-title">For Donors</h1>
             <p className="hero-subtitle">
-              Make a meaningful impact by supporting university initiatives
-              that align with your values. Track your donations and see the
+              Make a meaningful impact by supporting university initiatives that
+              align with your values. Track your donations and see the
               difference you're making.
             </p>
             <div className="hero-cta">

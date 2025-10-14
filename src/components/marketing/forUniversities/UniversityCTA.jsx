@@ -9,8 +9,8 @@ export default function UniversityCTA() {
           <Col lg={8} className="text-center">
             <h3 className="cta-title">Ready to Start Fundraising?</h3>
             <p className="cta-text">
-              Join our platform and start connecting with donors who share
-              your mission.
+              Join our platform and start connecting with donors who share your
+              mission.
             </p>
             <div className="cta-buttons">
               <Button className="btn-primary-gradient me-3">

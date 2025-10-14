@@ -9,8 +9,8 @@ export default function DonorProcess() {
             <div className="process-content">
               <h3 className="process-title">Transparent Donations</h3>
               <p className="process-text">
-                Our platform ensures you know exactly where your money goes
-                and the impact it creates, every step of the way.
+                Our platform ensures you know exactly where your money goes and
+                the impact it creates, every step of the way.
               </p>
               <div className="process-steps">
                 <div className="process-step">
@@ -18,8 +18,8 @@ export default function DonorProcess() {
                   <div className="step-content">
                     <h5>Browse Projects</h5>
                     <p>
-                      Explore university initiatives and find causes that
-                      match your interests.
+                      Explore university initiatives and find causes that match
+                      your interests.
                     </p>
                   </div>
                 </div>
@@ -28,8 +28,8 @@ export default function DonorProcess() {
                   <div className="step-content">
                     <h5>Make Donation</h5>
                     <p>
-                      Contribute securely with full transparency about how
-                      funds will be used.
+                      Contribute securely with full transparency about how funds
+                      will be used.
                     </p>
                   </div>
                 </div>

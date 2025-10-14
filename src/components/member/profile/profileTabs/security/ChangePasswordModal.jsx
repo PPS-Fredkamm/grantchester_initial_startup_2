@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Modal, Form, Button, InputGroup } from "react-bootstrap";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FiLock } from "react-icons/fi";
 
 import { useDispatch } from "react-redux";
-import { changePassword } from "../../../../redux/slices/authSlice";
+import { changePassword } from "../../../../../redux/slices/authSlice";
 
-import AlertToast from "../../../userInterface/alerts/AlertToast";
+import AlertToast from "../../../../userInterface/alerts/AlertToast";
 
 export default function ChangePasswordModal({ show, onClose }) {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -90,22 +91,32 @@ export default function ChangePasswordModal({ show, onClose }) {
         variant={toast.variant}
       />
 
-      <Modal show={show} onHide={onClose} centered>
+      <Modal
+        show={show}
+        onHide={onClose}
+        centered
+        className="change-password-modal"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Change Password</Modal.Title>
+          <Modal.Title>
+            <div className="icon">
+              <FiLock />
+            </div>
+            Change Password
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <Form onSubmit={handleSave}>
             {/* Current Password */}
-            <Form.Group className="mb-3">
+            <Form.Group className="form-group">
               <Form.Label>Current Password</Form.Label>
               <InputGroup>
                 <Form.Control
                   type={showCurrentPassword ? "text" : "password"}
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
-                  placeholder="Enter current password"
+                  placeholder="Enter your current password"
                   required
                 />
                 <Button
@@ -119,14 +130,14 @@ export default function ChangePasswordModal({ show, onClose }) {
             </Form.Group>
 
             {/* New Password */}
-            <Form.Group className="mb-3">
+            <Form.Group className="form-group">
               <Form.Label>New Password</Form.Label>
               <InputGroup>
                 <Form.Control
                   type={showNewPassword ? "text" : "password"}
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="Enter new password"
+                  placeholder="Enter your new password"
                   required
                 />
                 <Button
@@ -140,14 +151,14 @@ export default function ChangePasswordModal({ show, onClose }) {
             </Form.Group>
 
             {/* Confirm New Password */}
-            <Form.Group className="mb-3">
+            <Form.Group className="form-group">
               <Form.Label>Confirm New Password</Form.Label>
               <InputGroup>
                 <Form.Control
                   type={showConfirmPassword ? "text" : "password"}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Re-enter new password"
+                  placeholder="Confirm your new password"
                   required
                 />
                 <Button
@@ -161,15 +172,13 @@ export default function ChangePasswordModal({ show, onClose }) {
             </Form.Group>
 
             {/* Action Buttons */}
-            <div className="d-flex gap-2">
-              <Button variant="primary" type="submit" className="w-100 mb-3">
-                Save
+            <div className="modal-actions">
+              <Button variant="primary" type="submit" className="flex-fill">
+                Update Password
               </Button>
-            </div>
-            <div>
               <Button
                 variant="outline-secondary"
-                className="w-100"
+                className="flex-fill"
                 onClick={onClose}
               >
                 Cancel

@@ -1,0 +1,325 @@
+/* ==========================================================================
+   CONFIRM DONATION MODAL
+   ========================================================================== */
+
+.confirm-donation-modal .modal-dialog {
+  max-width: 900px;
+}
+
+.confirm-modal-header {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  padding: 2rem;
+  color: white;
+}
+
+.confirm-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.confirm-icon {
+  font-size: 2.5rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.confirm-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.confirm-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+.confirm-modal-body {
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.donation-summary {
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  background: white;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.summary-card.total-card {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  color: white;
+}
+
+.summary-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.company-icon {
+  color: #28a745;
+}
+
+.recipient-icon {
+  color: #007bff;
+}
+
+.shares-icon {
+  color: #ffc107;
+}
+
+.valuation-icon {
+  color: #17a2b8;
+}
+
+.total-icon {
+  color: white;
+}
+
+.date-icon {
+  color: #6f42c1;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.total-card .summary-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.summary-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #495057;
+  margin-bottom: 0;
+  word-break: break-word;
+}
+
+.total-card .summary-value {
+  color: white;
+}
+
+.total-value {
+  font-size: 1.3rem !important;
+  font-weight: 800 !important;
+}
+
+.legal-warning {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 2px solid #ffc107;
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.warning-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.warning-icon {
+  font-size: 1.5rem;
+  color: #856404;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.warning-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 0.5rem;
+}
+
+.warning-text {
+  font-size: 0.95rem;
+  color: #856404;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.confirm-modal-footer {
+  border: none;
+  padding: 1.5rem 2rem;
+  background-color: white;
+  gap: 1rem;
+}
+
+.cancel-btn {
+  border: 2px solid #6c757d;
+  color: #6c757d;
+  background: transparent;
+  border-radius: 12px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #6c757d;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  border: none;
+  border-radius: 12px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background: linear-gradient(135deg, #c82333, #dc3545);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .confirm-donation-modal .modal-dialog {
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .confirm-modal-header {
+    padding: 1.5rem;
+  }
+  
+  .confirm-header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .confirm-icon {
+    font-size: 2rem;
+  }
+  
+  .confirm-title {
+    font-size: 1.5rem;
+  }
+  
+  .confirm-modal-body {
+    padding: 1.5rem;
+  }
+  
+  .summary-icon {
+    font-size: 1.5rem;
+  }
+  
+  .summary-value {
+    font-size: 1rem;
+  }
+  
+  .total-value {
+    font-size: 1.2rem !important;
+  }
+  
+  .confirm-modal-footer {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+  }
+  
+  .cancel-btn,
+  .confirm-btn {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .confirm-modal-header {
+    padding: 1rem;
+  }
+  
+  .confirm-modal-body {
+    padding: 1rem;
+  }
+  
+  .legal-warning {
+    padding: 1rem;
+  }
+  
+  .warning-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .warning-icon {
+    margin-top: 0;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confirm-donation-modal .modal-content {
+  animation: slideInDown 0.4s ease-out;
+}
+
+.summary-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.summary-card:nth-child(1) { animation-delay: 0.1s; }
+.summary-card:nth-child(2) { animation-delay: 0.2s; }
+.summary-card:nth-child(3) { animation-delay: 0.3s; }
+.summary-card:nth-child(4) { animation-delay: 0.4s; }
+.summary-card:nth-child(5) { animation-delay: 0.5s; }
+.summary-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

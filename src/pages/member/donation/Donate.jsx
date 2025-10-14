@@ -8,8 +8,9 @@ import {
   OverlayTrigger,
   Row,
   Col,
+  FloatingLabel,
 } from "react-bootstrap";
-import { FaDollarSign } from "react-icons/fa";
+import { FaDollarSign, FaBuilding, FaUniversity, FaChartLine, FaCalendarAlt, FaFileAlt, FaEnvelope, FaPhone } from "react-icons/fa";
 import { FaCircleInfo } from "react-icons/fa6";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -122,256 +123,325 @@ export default function DonationPage() {
 
   return (
     <>
-      <Card className="shadow my-4 p-4 mx-auto" style={{ maxWidth: "600px" }}>
-        <h3 className="mb-4 text-center">Send a Private Stock Donation</h3>
-        <Form onSubmit={handleContinue}>
-          {/* Company Name */}
-          <Form.Group className="mb-3">
-            <Form.Label>
-              Company or Organization{" "}
-              <span className="required-asterisk">*</span>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter the company or organization name"
-              value={formData.companyName}
-              onChange={(e) => updateForm("companyName", e.target.value)}
-              onBlur={(e) => updateForm("companyName", e.target.value.trim())}
-              required
-              autoComplete="organization"
-              inputMode="text"
-              title="Please enter a valid company/organization name."
-            />
-          </Form.Group>
+      <div className="donation-page-container">
+        <Card className="donation-card shadow-lg">
+          <Card.Header className="donation-header">
+            <div className="donation-header-content">
+              <h2 className="donation-title">
+                <FaChartLine className="me-2" />
+                Send a Private Stock Donation
+              </h2>
+              <p className="donation-subtitle">
+                Complete the form below to initiate your private stock donation to a university
+              </p>
+            </div>
+          </Card.Header>
+          <Card.Body className="donation-body">
+            <Form onSubmit={handleContinue} className="donation-form">
+              {/* Company Name */}
+              <div className="form-field mb-4">
+                <Form.Label className="field-label">Company or Organization <span className="required-asterisk">*</span></Form.Label>
+                <div className="input-group-modern">
+                  <span className="input-icon-wrapper">
+                    <FaBuilding className="input-icon" />
+                  </span>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter the company or organization name"
+                    value={formData.companyName}
+                    onChange={(e) => updateForm("companyName", e.target.value)}
+                    onBlur={(e) => updateForm("companyName", e.target.value.trim())}
+                    required
+                    autoComplete="organization"
+                    inputMode="text"
+                    title="Please enter a valid company/organization name."
+                    className="form-input"
+                  />
+                </div>
+              </div>
 
-          {/* Recipient */}
-          <Form.Group className="mb-3">
-            <Form.Label>
-              Recipient (University){" "}
-              <span className="required-asterisk">*</span>
-            </Form.Label>
-            <Form.Select
-              value={formData.recipient}
-              onChange={(e) => updateForm("recipient", e.target.value)}
-              required={formData.recipient !== "other"}
-            >
-              <option value="">Select a university...</option>
-              {universities.map((uni, index) => (
-                <option
-                  key={index}
-                  value={uni.toLowerCase() === "other" ? "other" : uni}
-                >
-                  {uni}
-                </option>
-              ))}
-            </Form.Select>
-            {formData.recipient === "other" && (
-              <Form.Control
-                type="text"
-                placeholder="Enter the university name"
-                className="mt-2"
-                value={formData.otherUniversity}
-                onChange={(e) => updateForm("otherUniversity", e.target.value)}
-                required
-                title="Please enter a valid university name."
-              />
-            )}
-          </Form.Group>
+              {/* Recipient */}
+              <div className="form-field mb-4">
+                <Form.Label className="field-label">Recipient (University) <span className="required-asterisk">*</span></Form.Label>
+                <div className="input-group-modern">
+                  <span className="input-icon-wrapper">
+                    <FaUniversity className="input-icon" />
+                  </span>
+                  <Form.Select
+                    value={formData.recipient}
+                    onChange={(e) => updateForm("recipient", e.target.value)}
+                    required={formData.recipient !== "other"}
+                    className="form-input"
+                  >
+                    <option value="">Select a university...</option>
+                    {universities.map((uni, index) => (
+                      <option
+                        key={index}
+                        value={uni.toLowerCase() === "other" ? "other" : uni}
+                      >
+                        {uni}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </div>
+              </div>
+              
+              {formData.recipient === "other" && (
+                <div className="form-field mb-4">
+                  <Form.Label className="field-label">University Name <span className="required-asterisk">*</span></Form.Label>
+                  <div className="input-group-modern">
+                    <span className="input-icon-wrapper">
+                      <FaUniversity className="input-icon" />
+                    </span>
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter the university name"
+                      value={formData.otherUniversity}
+                      onChange={(e) => updateForm("otherUniversity", e.target.value)}
+                      required
+                      title="Please enter a valid university name."
+                      className="form-input"
+                    />
+                  </div>
+                </div>
+              )}
 
-          {/* Units */}
-          <Form.Group className="mb-3">
-            <Form.Label>
-              Number of Private Shares (Units){" "}
-              <span className="required-asterisk">*</span>
-            </Form.Label>
-            <Form.Control
-              type="number"
-              value={formData.units}
-              onChange={(e) => updateForm("units", e.target.value)}
-              placeholder="Enter number of shares"
-              required
-              min="1"
-            />
-          </Form.Group>
+              {/* Units and Valuation Row */}
+              <Row className="mb-4">
+                <Col md={6}>
+                  <div className="form-field">
+                    <Form.Label className="field-label">Number of Shares <span className="required-asterisk">*</span></Form.Label>
+                    <Form.Control
+                      type="number"
+                      value={formData.units}
+                      onChange={(e) => updateForm("units", e.target.value)}
+                      placeholder="Enter number of shares"
+                      required
+                      min="1"
+                      className="form-input"
+                    />
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <div className="form-field">
+                    <Form.Label className="field-label">Valuation Per Share (USD) <span className="required-asterisk">*</span></Form.Label>
+                    <div className="input-group-modern">
+                      <span className="input-icon-wrapper">
+                        <FaDollarSign className="input-icon" />
+                      </span>
+                      <Form.Control
+                        type="number"
+                        value={formData.valuation}
+                        onChange={(e) => updateForm("valuation", e.target.value)}
+                        placeholder="0.00"
+                        required
+                        min="10.00"
+                        step=".01"
+                        className="form-input"
+                      />
+                    </div>
+                  </div>
+                </Col>
+              </Row>
 
-          {/* Valuation */}
-          <Form.Group className="mb-3">
-            <Form.Label>
-              Valuation Per Share (USD){" "}
-              <span className="required-asterisk">*</span>
-            </Form.Label>
-            <InputGroup>
-              <InputGroup.Text>
-                <FaDollarSign />
-              </InputGroup.Text>
-              <Form.Control
-                type="number"
-                value={formData.valuation}
-                onChange={(e) => updateForm("valuation", e.target.value)}
-                placeholder="0.00"
-                required
-                min="10.00"
-                step=".01"
-              />
-            </InputGroup>
-          </Form.Group>
 
-          {/* Total */}
-          <Form.Group className="mb-3">
-            <Form.Label>
-              Total Donation Value (as of today){" "}
-              <span className="required-asterisk">*</span>{" "}
-            </Form.Label>
-            <Form.Control
-              type="text"
-              value={`$${Number(formData.totalValue).toLocaleString("en-US", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}`}
-              readOnly
-            />
-          </Form.Group>
+              {/* Total Value Display */}
+              <div className="total-value-display mb-4">
+                <div className="total-value-card">
+                  <div className="total-value-header">
+                    <FaChartLine className="total-icon" />
+                    <span>Total Donation Value</span>
+                  </div>
+                  <div className="total-value-amount">
+                    ${Number(formData.totalValue).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </div>
+                </div>
+              </div>
 
-          {/* Date */}
-          <Form.Group className="mb-3">
-            <Form.Label>Donation Date </Form.Label>
-            <OverlayTrigger
-              placement="right"
-              overlay={
-                <Tooltip id="tooltip-affected">
-                  You may choose today's date or a future date for tax purposes.
-                </Tooltip>
-              }
-            >
-              <FaCircleInfo className="info-icon" />
-            </OverlayTrigger>
-            <Form.Control
-              type="date"
-              value={formData.donationDate}
-              onChange={(e) => updateForm("donationDate", e.target.value)}
-              min={new Date().toISOString().split("T")[0]}
-              required
-            />
-          </Form.Group>
+              {/* Date and File Upload Row */}
+              <Row className="mb-4">
+                <Col md={6}>
+                  <div className="form-field">
+                    <Form.Label className="field-label">
+                      Donation Date
+                      <OverlayTrigger
+                        placement="right"
+                        overlay={
+                          <Tooltip id="tooltip-date">
+                            You may choose today's date or a future date for tax purposes.
+                          </Tooltip>
+                        }
+                      >
+                        <FaCircleInfo className="info-icon" />
+                      </OverlayTrigger>
+                    </Form.Label>
+                    <div className="input-group-modern">
+                      <span className="input-icon-wrapper">
+                        <FaCalendarAlt className="input-icon" />
+                      </span>
+                      <Form.Control
+                        type="date"
+                        value={formData.donationDate}
+                        onChange={(e) => updateForm("donationDate", e.target.value)}
+                        min={new Date().toISOString().split("T")[0]}
+                        required
+                        className="form-input"
+                      />
+                    </div>
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <div className="form-field">
+                    <Form.Label className="field-label">
+                      Upload Document (Optional)
+                      <OverlayTrigger
+                        placement="right"
+                        overlay={
+                          <Tooltip id="tooltip-file">
+                            Upload supporting documents for your donation.<br /><br />
+                            Examples: Valuation statement, bill of sale, legal note.
+                          </Tooltip>
+                        }
+                      >
+                        <FaCircleInfo className="info-icon" />
+                      </OverlayTrigger>
+                    </Form.Label>
+                    <div className="input-group-modern">
+                      <span className="input-icon-wrapper">
+                        <FaFileAlt className="input-icon" />
+                      </span>
+                      <Form.Control
+                        type="file"
+                        onChange={(e) => updateForm("file", e.target.files[0])}
+                        accept=".pdf,.doc,.docx"
+                        className="form-input file-input"
+                      />
+                    </div>
+                  </div>
+                </Col>
+              </Row>
 
-          {/* Note */}
-          <Form.Group className="mb-3">
-            <Form.Label>Message (Optional)</Form.Label>
-            <Form.Control
-              as="textarea"
-              rows={2}
-              value={formData.note}
-              onChange={(e) => updateForm("note", e.target.value)}
-              placeholder="Add a note for the university"
-            />
-          </Form.Group>
+              {/* Note */}
+              <div className="form-field mb-4">
+                <Form.Label className="field-label">Message (Optional)</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={formData.note}
+                  onChange={(e) => updateForm("note", e.target.value)}
+                  placeholder="Add a note for the university"
+                  className="form-input textarea-input"
+                  style={{ height: '80px' }}
+                />
+              </div>
 
-          {/* File Upload */}
-          <Form.Group className="mb-3">
-            <Form.Label>Upload Document (Optional)</Form.Label>
-            <OverlayTrigger
-              placement="right"
-              overlay={
-                <Tooltip id="tooltip-affected">
-                  Upload supporting documents for your donation. <br />
-                  <br />
-                  Examples: <br /> Valuation statement, bill of sale, legal
-                  note.
-                </Tooltip>
-              }
-            >
-              <FaCircleInfo className="info-icon" />
-            </OverlayTrigger>
-            <Form.Control
-              type="file"
-              onChange={(e) => updateForm("file", e.target.files[0])}
-              accept=".pdf,.doc,.docx"
-            />
-          </Form.Group>
 
-          {/* Contact Info */}
-          <Row className="mb-3">
-            <Form.Group as={Col} md="6">
-              <Form.Label>
-                Contact Email
-                <OverlayTrigger
-                  placement="right"
-                  overlay={
-                    <Tooltip id="tooltip-email">
-                      This email will be used for all communications. <br />
-                      <br />
-                      You can update it in your profile settings.
-                    </Tooltip>
-                  }
-                >
-                  <FaCircleInfo className="info-icon ms-2" />
-                </OverlayTrigger>
-              </Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                readOnly
-                className="readonly-input"
-                required
-              />
-            </Form.Group>
+              {/* Contact Info */}
+              <div className="contact-info-section mb-4">
+                <h6 className="contact-info-title">
+                  <FaEnvelope className="me-2" />
+                  Contact Information
+                </h6>
+                <Row>
+                  <Col md={6}>
+                    <div className="form-field">
+                      <Form.Label className="field-label">
+                        Contact Email
+                        <OverlayTrigger
+                          placement="right"
+                          overlay={
+                            <Tooltip id="tooltip-email">
+                              This email will be used for all communications.<br /><br />
+                              You can update it in your profile settings.
+                            </Tooltip>
+                          }
+                        >
+                          <FaCircleInfo className="info-icon" />
+                        </OverlayTrigger>
+                      </Form.Label>
+                      <div className="input-group-modern">
+                        <span className="input-icon-wrapper">
+                          <FaEnvelope className="input-icon" />
+                        </span>
+                        <Form.Control
+                          type="email"
+                          value={email}
+                          readOnly
+                          className="form-input readonly-input"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                  <Col md={6}>
+                    <div className="form-field">
+                      <Form.Label className="field-label">
+                        Contact Phone
+                        <OverlayTrigger
+                          placement="right"
+                          overlay={
+                            <Tooltip id="tooltip-phone">
+                              This number will be used for all communications.<br /><br />
+                              You can update it in your profile settings.
+                            </Tooltip>
+                          }
+                        >
+                          <FaCircleInfo className="info-icon" />
+                        </OverlayTrigger>
+                      </Form.Label>
+                      <div className="input-group-modern">
+                        <span className="input-icon-wrapper">
+                          <FaPhone className="input-icon" />
+                        </span>
+                        <Form.Control
+                          type="text"
+                          value={phone}
+                          readOnly
+                          className="form-input readonly-input"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
 
-            <Form.Group as={Col} md="6">
-              <Form.Label>
-                Contact Phone
-                <OverlayTrigger
-                  placement="right"
-                  overlay={
-                    <Tooltip id="tooltip-phone">
-                      This number will be used for all communications. <br />
-                      <br />
-                      You can update it in your profile settings.
-                    </Tooltip>
-                  }
-                >
-                  <FaCircleInfo className="info-icon ms-2" />
-                </OverlayTrigger>
-              </Form.Label>
-              <Form.Control
-                type="text"
-                value={phone}
-                readOnly
-                className="readonly-input"
-                required
-              />
-            </Form.Group>
-          </Row>
+              {/* Agreement */}
+              <div className="agreement-section mb-4">
+                <Form.Check id="agreementCheck" className="modern-checkbox">
+                  <Form.Check.Input
+                    type="checkbox"
+                    checked={formData.agreementChecked}
+                    onChange={(e) =>
+                      updateForm("agreementChecked", e.target.checked)
+                    }
+                    required
+                    className="agreement-checkbox"
+                  />
+                  <Form.Check.Label className="agreement-label">
+                    I confirm that I am authorized to make this private stock donation on behalf of the company/organization listed above and understand this action is legally binding.
+                  </Form.Check.Label>
+                </Form.Check>
+              </div>
 
-          {/* Agreement */}
-          <Form.Group className="mb-3">
-            <Form.Check id="agreementCheck" className="m-0">
-              <Form.Check.Input
-                type="checkbox"
-                checked={formData.agreementChecked}
-                onChange={(e) =>
-                  updateForm("agreementChecked", e.target.checked)
-                }
-                required
-              />
-              <Form.Check.Label style={{ cursor: "pointer" }}>
-                I confirm that I am authorized to make this private stock
-                donation on behalf of the company/organization listed above and
-                understand this action is legally binding.
-              </Form.Check.Label>
-            </Form.Check>
-          </Form.Group>
-
-          {/* Continue */}
-          <Button
-            type="submit"
-            variant="primary"
-            className="donate-button w-100"
-            disabled={!formData.agreementChecked}
-          >
-            Continue
-          </Button>
-        </Form>
-      </Card>
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                variant="primary"
+                className="donate-submit-btn w-100"
+                disabled={!formData.agreementChecked}
+                size="lg"
+              >
+                <FaChartLine className="me-2" />
+                Continue to Review
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+      </div>
 
       <ConfirmDonationModal
         show={showConfirmModal}

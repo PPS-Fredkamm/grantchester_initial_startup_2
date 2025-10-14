@@ -2,11 +2,11 @@ import { Container, Row, Col, Button, Image } from "react-bootstrap";
 
 export default function UniversityHero() {
   const scrollToBenefits = () => {
-    const benefitsSection = document.getElementById('university-benefits');
+    const benefitsSection = document.getElementById("university-benefits");
     if (benefitsSection) {
-      benefitsSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      benefitsSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     }
   };

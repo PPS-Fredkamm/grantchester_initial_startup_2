@@ -30,8 +30,8 @@ export default function DonorFeatures() {
               <Card.Body>
                 <Card.Title>Impact Tracking</Card.Title>
                 <Card.Text>
-                  Monitor the progress of projects you've supported with
-                  regular updates and detailed impact reports.
+                  Monitor the progress of projects you've supported with regular
+                  updates and detailed impact reports.
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -41,8 +41,8 @@ export default function DonorFeatures() {
               <Card.Body>
                 <Card.Title>Secure Payments</Card.Title>
                 <Card.Text>
-                  All donations are processed through secure, encrypted
-                  payment systems with fraud protection and data security.
+                  All donations are processed through secure, encrypted payment
+                  systems with fraud protection and data security.
                 </Card.Text>
               </Card.Body>
             </Card>

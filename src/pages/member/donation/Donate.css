@@ -1,31 +1,400 @@
-.info-icon {
-  margin-left: 6px;  
-  color: #0c2340;     
-  cursor: pointer;
-  display: inline-flex;
+/* ==========================================================================
+   DONATION PAGE LAYOUT
+   ========================================================================== */
+
+.donation-page-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 2rem 0;
+}
+
+.donation-card {
+  max-width: 800px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.donation-header {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  padding: 2rem;
+  text-align: center;
+}
+
+.donation-header-content {
+  color: white;
+}
+
+.donation-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.tooltip {
-  font-size: 0.875rem;        
-  padding: 6px 10px;          
-  border-radius: 6px;         
-  max-width: 260px;           
+.donation-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+  font-weight: 300;
 }
 
-.tooltip-inner {
-  text-align: start !important;  
-  color: #fff;                  
-  padding: 8px 12px;            
+.donation-body {
+  padding: 2.5rem;
+  background-color: #ffffff;
 }
 
-.readonly-input {
-  background-color: #e6e6e6;
-  pointer-events: none;
-  cursor: not-allowed;
+/* ==========================================================================
+   FORM FIELDS
+   ========================================================================== */
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.field-label {
+  display: block;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
 .required-asterisk {
-  color: red;
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 1.1em;
   margin-left: 2px;
+}
+
+.field-label .info-icon {
+  margin-left: 8px;
+  color: var(--primary-blue);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.field-label .info-icon:hover {
+  color: var(--secondary-blue);
+}
+
+.input-group-modern {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-right: none;
+  border-radius: 12px 0 0 12px;
+  z-index: 2;
+}
+
+.input-icon {
+  color: var(--primary-blue);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px 12px 50px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  height: 50px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(75, 155, 231, 0.1);
+  background-color: #fff;
+  animation: pulse 0.3s ease-in-out;
+}
+
+.form-input:hover {
+  border-color: #ced4da;
+}
+
+.file-input {
+  cursor: pointer;
+}
+
+.file-input::-webkit-file-upload-button {
+  display: none;
+}
+
+.textarea-input {
+  height: 80px !important;
+  padding-top: 12px;
+  resize: none;
+}
+
+.readonly-input {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+}
+
+.readonly-input:focus {
+  border-color: #e9ecef !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   TOTAL VALUE DISPLAY
+   ========================================================================== */
+
+.total-value-display {
+  margin: 1.5rem 0;
+}
+
+.total-value-card {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: 2px solid var(--primary-blue);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.total-value-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.total-value-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.total-icon {
+  margin-right: 0.5rem;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 1.2rem;
+}
+
+.total-value-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+/* ==========================================================================
+   CONTACT INFO SECTION
+   ========================================================================== */
+
+.contact-info-section {
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 2px solid #e9ecef;
+}
+
+.contact-info-title {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   AGREEMENT SECTION
+   ========================================================================== */
+
+.agreement-section {
+  background-color: #fff3cd;
+  border: 2px solid #ffeaa7;
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.modern-checkbox {
+  margin: 0;
+}
+
+.agreement-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  accent-color: var(--primary-blue);
+}
+
+.agreement-label {
+  font-weight: 500;
+  color: #495057;
+  line-height: 1.5;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* ==========================================================================
+   SUBMIT BUTTON
+   ========================================================================== */
+
+.donate-submit-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  height: 60px;
+}
+
+.donate-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(75, 155, 231, 0.3);
+  background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+}
+
+.donate-submit-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   TOOLTIPS
+   ========================================================================== */
+
+.tooltip {
+  font-size: 0.875rem;
+  padding: 6px 10px;
+  border-radius: 8px;
+  max-width: 300px;
+}
+
+.tooltip-inner {
+  text-align: start !important;
+  color: #fff;
+  padding: 10px 14px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .donation-page-container {
+    padding: 1rem 0;
+  }
+  
+  .donation-header {
+    padding: 1.5rem;
+  }
+  
+  .donation-title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .donation-body {
+    padding: 1.5rem;
+  }
+  
+  .total-value-amount {
+    font-size: 1.5rem;
+  }
+  
+  .form-input {
+    height: 45px;
+    padding-left: 45px;
+  }
+  
+  .donate-submit-btn {
+    height: 50px;
+    font-size: 1rem;
+  }
+  
+  .input-icon-wrapper {
+    width: 45px;
+  }
+}
+
+@media (max-width: 576px) {
+  .donation-card {
+    margin: 0 1rem;
+  }
+  
+  .donation-header {
+    padding: 1rem;
+  }
+  
+  .donation-body {
+    padding: 1rem;
+  }
+  
+  .contact-info-section,
+  .agreement-section {
+    padding: 1rem;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(75, 155, 231, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(75, 155, 231, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(75, 155, 231, 0.1);
+  }
 }

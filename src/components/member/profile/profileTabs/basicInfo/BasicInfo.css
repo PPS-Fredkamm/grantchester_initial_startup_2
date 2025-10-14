@@ -1,0 +1,156 @@
+/* ==========================================================================
+   BASIC INFO COMPONENT STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   FORM ELEMENTS
+   ========================================================================== */
+
+.form-label {
+  display: flex;
+  text-align: start;
+}
+
+/* ==========================================================================
+   ACCORDION STYLING
+   ========================================================================== */
+
+/* Main accordion container */
+.profile-accordion .accordion-item {
+  border: 1px solid #e9ecef;
+  border-radius: 12px !important;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.profile-accordion .accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom accordion header styling */
+.custom-accordion-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-bottom: 1px solid #e9ecef;
+  padding: 1.25rem 1.5rem;
+}
+
+.custom-accordion-header .accordion-button {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.custom-accordion-header .accordion-button:focus {
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+/* Accordion body styling */
+.accordion-body {
+  background-color: #ffffff;
+  padding: 1.5rem;
+}
+
+/* Accordion behavior overrides */
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   FORM CONTROLS
+   ========================================================================== */
+
+/* Disabled form controls */
+.form-control-disabled {
+  background-color: #f8f9fa !important;
+  border: 1px solid #e9ecef !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+}
+
+/* Floating label form controls */
+.floating-label .form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  transition: all 0.2s ease;
+}
+
+.floating-label .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* Standard form controls */
+.form-control:focus,
+.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* Form select styling */
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  transition: all 0.2s ease;
+}
+
+.form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* ==========================================================================
+   BUTTON STYLING
+   ========================================================================== */
+
+/* Base button enhancements */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* Primary button hover effects */
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+/* Outline primary button hover effects */
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+/* Accordion item animations */
+.accordion-item {
+  transition: all 0.3s ease;
+}
+
+/* Accordion button animations */
+.accordion-button {
+  transition: all 0.2s ease;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .custom-accordion-header {
+    padding: 1rem;
+  }
+
+  .accordion-body {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,267 @@
+/* ========================================
+   PROFILE INFO FORM STYLES
+   ======================================== */
+
+/* ========================================
+   CONTAINER & LAYOUT
+   ======================================== */
+.profile-info-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* ========================================
+   CARD STRUCTURE
+   ======================================== */
+.profile-info-card {
+  width: 100%;
+  max-width: 800px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* ========================================
+   HEADER SECTION
+   ======================================== */
+.profile-info-header {
+  background: linear-gradient(135deg, var(--primary-blue, #667eea) 0%, var(--secondary-blue, #764ba2) 100%);
+  border: none;
+  padding: 2rem 2rem 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.profile-info-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.profile-info-title .icon {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info-subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* ========================================
+   BODY SECTION
+   ======================================== */
+.profile-info-body {
+  padding: 2rem;
+}
+
+/* ========================================
+   FORM SECTIONS
+   ======================================== */
+.form-section {
+  margin-bottom: .5rem;
+  padding-bottom: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-blue, #667eea);
+}
+
+/* ========================================
+   FORM INPUTS
+   ======================================== */
+.modern-input {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+}
+
+.modern-input:focus {
+  border-color: var(--primary-blue, #667eea);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background-color: #ffffff;
+  outline: none;
+}
+
+.modern-select {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+}
+
+.modern-select:focus {
+  border-color: var(--primary-blue, #667eea);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  background-color: #ffffff;
+  outline: none;
+}
+
+/* ========================================
+   AGREEMENT SECTION
+   ======================================== */
+.agreement-section {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 2px solid #e9ecef;
+}
+
+.modern-checkbox {
+  margin: 0;
+}
+
+.modern-checkbox .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+  accent-color: var(--primary-blue, #667eea);
+  border-radius: 6px;
+}
+
+.modern-checkbox .form-check-label {
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* ========================================
+   SUBMIT BUTTON
+   ======================================== */
+.profile-submit-btn {
+  background: linear-gradient(135deg, var(--primary-blue, #667eea) 0%, var(--secondary-blue, #764ba2) 100%);
+  border: none;
+  border-radius: 12px;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.profile-submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+.profile-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   FORM VALIDATION
+   ======================================== */
+.was-validated .form-control:invalid {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.was-validated .form-control:valid {
+  border-color: #198754;
+  box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.1);
+}
+
+.invalid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.valid-feedback {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #198754;
+  font-weight: 500;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+@media (max-width: 768px) {
+  .profile-info-wrapper {
+    padding: 0;
+  }
+  
+  .profile-info-header {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+  
+  .profile-info-body {
+    padding: 1.5rem;
+  }
+  
+  .profile-info-title {
+    font-size: 1.5rem;
+  }
+  
+  .form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-info-wrapper {
+    padding: 0;
+  }
+  
+  .profile-info-header {
+    padding: 1rem;
+  }
+  
+  .profile-info-body {
+    padding: 1rem;
+  }
+  
+  .profile-info-title {
+    font-size: 1.25rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .agreement-section {
+    padding: 1rem;
+  }
+}

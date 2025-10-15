@@ -8,7 +8,7 @@ import {
   InputGroup,
   Modal,
 } from "react-bootstrap";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaUserPlus } from "react-icons/fa";
 
 import { useDispatch } from "react-redux";
 import { register } from "../../../redux/slices/authSlice";
@@ -69,28 +69,38 @@ export default function Signup() {
 
       <Container className="register-container">
         <div className="register-wrapper">
-          <Card className="register-card shadow">
-            <Card.Body>
-              <h3 className="text-center mb-4">Create Account</h3>
+          <Card className="register-card">
+            <Card.Header className="register-header">
+              <h3 className="register-title">
+                <div className="icon">
+                  <FaUserPlus />
+                </div>
+                Join Us Today
+              </h3>
+              <p className="register-subtitle">Create your account to get started</p>
+            </Card.Header>
+            <Card.Body className="register-body">
               <Form onSubmit={handleSignup}>
-                <Form.Group controlId="formUsername" className="mb-3">
+                <Form.Group className="form-group">
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     type="text"
                     ref={usernameRef}
-                    placeholder="Enter username"
+                    placeholder="Choose a username"
                     onChange={(e) => setUsername(e.target.value)}
+                    className="modern-input"
                     required
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formPassword" className="mb-3">
+                <Form.Group className="form-group">
                   <Form.Label>Password</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type={showPassword ? "text" : "password"}
-                      placeholder="Enter password"
+                      placeholder="Create a password"
                       onChange={(e) => setPassword(e.target.value)}
+                      className="modern-input"
                       required
                     />
                     <Button
@@ -103,13 +113,14 @@ export default function Signup() {
                   </InputGroup>
                 </Form.Group>
 
-                <Form.Group controlId="formConfirmPassword" className="mb-4">
+                <Form.Group className="form-group">
                   <Form.Label>Confirm Password</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type={showConfirmPassword ? "text" : "password"}
-                      placeholder="Confirm password"
+                      placeholder="Confirm your password"
                       onChange={(e) => setConfirmPassword(e.target.value)}
+                      className="modern-input"
                       required
                     />
                     <Button
@@ -124,17 +135,19 @@ export default function Signup() {
                   </InputGroup>
                 </Form.Group>
 
-                <Button type="submit" className="signup-button w-100">
-                  Register
+                <Button type="submit" className="signup-button">
+                  Create Account
                 </Button>
               </Form>
 
-              <Form.Text className="text-center d-block mt-3">
-                Already have an account?{" "}
-                <Link to="/login" className="auth-link">
-                  Sign In
-                </Link>
-              </Form.Text>
+              <div className="login-link-section">
+                <p className="login-text">
+                  Already have an account?{" "}
+                  <Link to="/login" className="auth-link">
+                    Sign in here
+                  </Link>
+                </p>
+              </div>
             </Card.Body>
           </Card>
         </div>

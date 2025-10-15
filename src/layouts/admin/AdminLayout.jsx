@@ -31,6 +31,9 @@ const ViewUniversityPage = lazy(() =>
 const PendingUniversityPage = lazy(() =>
   import("../../pages/admin/university/PendingUniversityPage")
 );
+const RipsPlaygroundPage = lazy(() =>
+  import("../../pages/admin/rip/RipsPlaygroundPage")
+);
 
 export default function AdminLayout() {
   const { option } = useParams();
@@ -63,6 +66,9 @@ export default function AdminLayout() {
       break;
     case "users":
       content = <ViewUsersPage />;
+      break;
+    case "rips-playground":
+      content = <RipsPlaygroundPage />;
       break;
     default:
       content = <NotFound />;

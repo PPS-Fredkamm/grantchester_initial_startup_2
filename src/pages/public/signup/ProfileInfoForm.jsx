@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Form, Button, Card, Col, Row } from "react-bootstrap";
+import { Form, Button, Card, Col, Row, FloatingLabel } from "react-bootstrap";
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
 
 import * as ACELocation from "../../../managers/ApiClient-Location";
 import * as ACM from "../../../managers/ApiClientMethods";
 import * as BLM from "../../../managers/BusinessLayerMethods";
+
+import "./ProfileInfoForm.css";
 
 export default function ProfileInfoForm({ onSuccess }) {
   const profileCDO = useSelector((state) => state.auth.profileCDO);
@@ -122,208 +125,255 @@ export default function ProfileInfoForm({ onSuccess }) {
 
   return (
     <div className="profile-info-wrapper">
-      <Card className="profile-card shadow">
-        <Card.Body>
-          <h4 className="text-center mb-4">Profile Information</h4>
-
+      <Card className="profile-info-card">
+        <Card.Header className="profile-info-header">
+          <h3 className="profile-info-title">
+            <div className="icon">
+              <FaUser />
+            </div>
+            Complete Your Profile
+          </h3>
+          <p className="profile-info-subtitle">Please provide your personal information to continue</p>
+        </Card.Header>
+        <Card.Body className="profile-info-body">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="firstName">
-                <Form.Label>
-                  First Name <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                />
-                <Form.Control.Feedback type="invalid">
-                  This field must be filled.
-                </Form.Control.Feedback>
-              </Form.Group>
+            {/* Personal Information Section */}
+            <div className="form-section">
+              <h6 className="section-title">
+                <FaUser className="me-2" />
+                Personal Information
+              </h6>
+              
+              <Row className="mb-4">
+                <Col md={4}>
+                  <FloatingLabel controlId="firstName" label="First Name *" className="mb-3">
+                    <Form.Control
+                      required
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      placeholder="Enter first name"
+                      className="modern-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      This field must be filled.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
 
-              <Form.Group as={Col} md="4" controlId="middleName">
-                <Form.Label>Middle Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="middleName"
-                  value={formData.middleName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
+                <Col md={4}>
+                  <FloatingLabel controlId="middleName" label="Middle Name (Optional)" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      name="middleName"
+                      value={formData.middleName}
+                      onChange={handleChange}
+                      placeholder="Enter middle name"
+                      className="modern-input"
+                    />
+                  </FloatingLabel>
+                </Col>
 
-              <Form.Group as={Col} md="4" controlId="lastName">
-                <Form.Label>
-                  Last Name <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Control.Feedback type="invalid">
-                This field must be filled.
-              </Form.Control.Feedback>
-            </Row>
+                <Col md={4}>
+                  <FloatingLabel controlId="lastName" label="Last Name *" className="mb-3">
+                    <Form.Control
+                      required
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      placeholder="Enter last name"
+                      className="modern-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      This field must be filled.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
+              </Row>
+            </div>
 
-            <Row className="mb-3">
-              <Form.Group as={Col} md="6" controlId="email">
-                <Form.Label>
-                  Email <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please enter a valid email address.
-                </Form.Control.Feedback>
-              </Form.Group>
+            {/* Contact Information Section */}
+            <div className="form-section">
+              <h6 className="section-title">
+                <FaEnvelope className="me-2" />
+                Contact Information
+              </h6>
+              
+              <Row className="mb-4">
+                <Col md={6}>
+                  <FloatingLabel controlId="email" label="Email Address *" className="mb-3">
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter email address"
+                      className="modern-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please enter a valid email address.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
 
-              <Form.Group as={Col} md="6" controlId="phoneNumber">
-                <Form.Label>
-                  Phone Number <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Control
-                  type="tel"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  required
-                  pattern="^[0-9]{7,15}$"
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please enter a valid phone number.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
+                <Col md={6}>
+                  <FloatingLabel controlId="phoneNumber" label="Phone Number *" className="mb-3">
+                    <Form.Control
+                      type="tel"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      required
+                      pattern="^[0-9]{7,15}$"
+                      placeholder="Enter phone number"
+                      className="modern-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      Please enter a valid phone number.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
+              </Row>
+            </div>
 
-            <Row className="mb-3">
-              <Form.Group as={Col} md="6" controlId="address1">
-                <Form.Label>
-                  Address 1 <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="address1"
-                  value={formData.address1}
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  This field must be filled.
-                </Form.Control.Feedback>
-              </Form.Group>
+            {/* Address Information Section */}
+            <div className="form-section">
+              <h6 className="section-title">
+                <FaMapMarkerAlt className="me-2" />
+                Address Information
+              </h6>
+              
+              <Row className="mb-4">
+                <Col md={6}>
+                  <FloatingLabel controlId="address1" label="Address Line 1 *" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      name="address1"
+                      value={formData.address1}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter address line 1"
+                      className="modern-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      This field must be filled.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
 
-              <Form.Group as={Col} md="6" controlId="address2">
-                <Form.Label>Address 2</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="address2"
-                  value={formData.address2}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Row>
+                <Col md={6}>
+                  <FloatingLabel controlId="address2" label="Address Line 2 (Optional)" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      name="address2"
+                      value={formData.address2}
+                      onChange={handleChange}
+                      placeholder="Enter address line 2"
+                      className="modern-input"
+                    />
+                  </FloatingLabel>
+                </Col>
+              </Row>
 
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="cityName">
-                <Form.Label>
-                  City <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="cityName"
-                  value={formData.cityName}
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  This field must be filled.
-                </Form.Control.Feedback>
-              </Form.Group>
+              <Row className="mb-4">
+                <Col md={4}>
+                  <FloatingLabel controlId="cityName" label="City *" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      name="cityName"
+                      value={formData.cityName}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter city"
+                      className="modern-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      This field must be filled.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
 
-              <Form.Group as={Col} md="4" controlId="stateListItem">
-                <Form.Label>
-                  State <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Select
-                  name="stateListItem"
-                  value={formData.stateListItem}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select a state</option>
-                  {statesDDL.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Please select a state.
-                </Form.Control.Feedback>
-              </Form.Group>
+                <Col md={4}>
+                  <FloatingLabel controlId="stateListItem" label="State *" className="mb-3">
+                    <Form.Select
+                      name="stateListItem"
+                      value={formData.stateListItem}
+                      onChange={handleChange}
+                      required
+                      className="modern-select"
+                    >
+                      <option value="">Select a state</option>
+                      {statesDDL.map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      Please select a state.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
 
-              <Form.Group as={Col} md="4" controlId="postalCode">
-                <Form.Label>
-                  Postal Code <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="postalCode"
-                  value={formData.postalCode}
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  This field must be filled.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
+                <Col md={4}>
+                  <FloatingLabel controlId="postalCode" label="Postal Code *" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      name="postalCode"
+                      value={formData.postalCode}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter postal code"
+                      className="modern-input"
+                    />
+                    <Form.Control.Feedback type="invalid">
+                      This field must be filled.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
+              </Row>
 
-            <Row className="mb-3">
-              <Form.Group as={Col} md="6" controlId="countryListItem">
-                <Form.Label>
-                  Country <span className="required-asterisk">*</span>
-                </Form.Label>
-                <Form.Select
-                  name="countryListItem"
-                  value={formData.countryListItem}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Select a country</option>
-                  {countriesDDL.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </Form.Select>
-                <Form.Control.Feedback type="invalid">
-                  Please select a country.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
+              <Row className="mb-4">
+                <Col md={6}>
+                  <FloatingLabel controlId="countryListItem" label="Country *" className="mb-3">
+                    <Form.Select
+                      name="countryListItem"
+                      value={formData.countryListItem}
+                      onChange={handleChange}
+                      required
+                      className="modern-select"
+                    >
+                      <option value="">Select a country</option>
+                      {countriesDDL.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </Form.Select>
+                    <Form.Control.Feedback type="invalid">
+                      Please select a country.
+                    </Form.Control.Feedback>
+                  </FloatingLabel>
+                </Col>
+              </Row>
+            </div>
 
-            <Form.Group className="mb-3" controlId="terms">
+            {/* Terms Agreement */}
+            <div className="agreement-section">
               <Form.Check
                 required
-                label="Agree to terms and conditions"
+                id="terms"
+                label="I agree to the terms and conditions"
                 feedback="You must agree before submitting."
                 feedbackType="invalid"
+                className="modern-checkbox"
               />
-            </Form.Group>
+            </div>
 
-            <Button type="submit" className="signup-button w-100 mb-2">
+            <Button type="submit" className="profile-submit-btn">
               Save & Continue
             </Button>
           </Form>

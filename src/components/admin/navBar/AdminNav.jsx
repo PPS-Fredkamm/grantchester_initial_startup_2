@@ -39,6 +39,8 @@ export default function AdminNav() {
           { path: "view-universities", label: "View all Universities" },
         ],
       },
+
+      { path: "Rips-Playground", label: "Rips Playground" },
     ],
   };
 

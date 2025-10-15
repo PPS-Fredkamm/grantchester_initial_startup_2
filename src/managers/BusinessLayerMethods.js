@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { store } from "../redux/store";
 import { clearAuthState, setToken, setUser, setProfile, setRoles } from "../redux/slices/authSlice";
 
@@ -204,64 +203,6 @@ export async function ResetPassword() {
 }
 
 // ========================================
-//  UpdateImageFile
-// ========================================
-
-export async function UpdateImageFile(tmpImageFile) {
-  var flag = false;
-  var apiResult, id;
-  var tmpProfileCDO;
-
-  try {
-    const profileCDO = useSelector((state) => state.auth.profileCDO);
-    
-    tmpProfileCDO = JSON.parse(JSON.stringify(profileCDO));
-
-    // ----------------------------------------
-    //  (1) If the profile has no imageID then create a new one
-    // ----------------------------------------
-
-    if (tmpProfileCDO.imageID === 0) {
-      apiResult = await ACEImage.CreateImageFileAsync();
-      id = ACM.getApiResultData(apiResult);
-      if (id > 0) {
-        tmpProfileCDO.imageID = id;
-        apiResult = ACEImage.GetImageFileAsync(id);
-        tmpProfileCDO.imageFile = ACM.getApiResultData(apiResult);
-      } else {
-        console.error("CreateImageFile failed");
-        return false;
-      }
-    }
-
-    // ----------------------------------------
-    //  (2) Update the image file
-    // ----------------------------------------
-
-    tmpProfileCDO.imageFile.name = tmpImageFile.name;
-    tmpProfileCDO.imageFile.contentType = tmpImageFile.contentType;
-    tmpProfileCDO.imageFile.data = tmpImageFile.data;
-    tmpProfileCDO.imageFile.length = tmpImageFile.length;
-
-    // ----------------------------------------
-    //  (3) Update the profileCDO
-    // ----------------------------------------
-
-    apiResult = await apiClient.UpdateProfileCDOAsync(tmpProfileCDO);
-    flag = ACM.getApiResultData(apiResult);
-    if (flag) {
-      store.dispatch(setProfile(tmpProfileCDO));
-      flag = true;
-    }
-  } catch (error) {
-    console.error("Error in UpdateImageFile:", error);
-    flag = false;
-  }
-
-  return flag;
-}
-
-// ========================================
 //  UpdateProfileCDO
 // ========================================
 
@@ -277,65 +218,6 @@ export async function UpdateProfileCDO(tmpProfileCDO) {
     }
   } catch (error) {
     console.error("Error in UpdateProfileCDO:", error);
-    flag = false;
-  }
-
-  return flag;
-}
-
-// ========================================
-//  UpdateAddressCDO
-// ========================================
-
-export async function UpdateAddressCDO(tmpAddressCDO) {
-  var flag = false;
-  var apiResult;
-  var id;
-  var tmpProfileCDO;
-  
-  try {
-    const profileCDO = useSelector((state) => state.auth.profileCDO);
-    
-    tmpProfileCDO = JSON.parse(JSON.stringify(profileCDO));
-
-    // ----------------------------------------
-    //  (1) If no address exists, create one
-    // ----------------------------------------
-
-    if (profileCDO.addressID === 0) {
-      apiResult = await ACELocation.CreateAddressAsync();
-      id = ACM.getApiResultData(apiResult);
-      if (id > 0) {
-        tmpProfileCDO.addressID = id;
-      }
-    }
-
-    // ----------------------------------------
-    // 2. Merge tmpAddressCDO into current address
-    // ----------------------------------------
-
-    tmpProfileCDO.addressCDO.id = id;
-    tmpProfileCDO.addressCDO.addressLine1 = tmpAddressCDO.addressLine1;
-    tmpProfileCDO.addressCDO.addressLine2 = tmpAddressCDO.addressLine2;
-    tmpProfileCDO.addressCDO.addressLine3 = tmpAddressCDO.addressLine3;
-    tmpProfileCDO.addressCDO.cityName = tmpAddressCDO.cityName;
-    tmpProfileCDO.addressCDO.postalCode = tmpAddressCDO.postalCode;
-    tmpProfileCDO.addressCDO.stateID = tmpAddressCDO.stateID;
-    tmpProfileCDO.addressCDO.state = tmpAddressCDO.state;
-    tmpProfileCDO.addressCDO.countryID = tmpAddressCDO.countryID;
-    tmpProfileCDO.addressCDO.country = tmpAddressCDO.country;
-
-    // ----------------------------------------
-    //  (3) Update the profileCDO
-    // ----------------------------------------
-
-    apiResult = await apiClient.UpdateProfileCDOAsync(tmpProfileCDO);
-    flag = ACM.getApiResultData(apiResult);
-    if (flag) {
-      store.dispatch(setProfile(tmpProfileCDO));
-    }
-  } catch (error) {
-    console.error("Error in UpdateAddress:", error);
     flag = false;
   }
 

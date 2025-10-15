@@ -10,6 +10,7 @@ import * as BLM from "../../../../../managers/BusinessLayerMethods";
 import ContactInfo from "./ContactInfo";
 import AddressInfo from "./AddressInfo";
 
+import "../../Profile.css";
 import "./BasicInfo.css";
 
 export default function BasicInfo() {
@@ -129,21 +130,21 @@ export default function BasicInfo() {
           <Button
             variant="outline-primary"
             onClick={() => setEditMode(true)}
-            className="px-4"
+            className="profile-edit-btn"
           >
             <FiEdit3 className="me-2" />
-            Edit Profile
+            Edit
           </Button>
         ) : (
           <div className="d-flex gap-2">
-            <Button variant="primary" onClick={handleSave} className="px-4">
+            <Button variant="primary" onClick={handleSave} className="profile-save-btn">
               <FiSave className="me-2" />
               Save Changes
             </Button>
             <Button
               variant="outline-secondary"
               onClick={handleCancel}
-              className="px-3"
+              className="profile-cancel-btn"
             >
               <FiX className="me-2" />
               Cancel

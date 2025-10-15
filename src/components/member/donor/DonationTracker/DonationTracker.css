@@ -8,6 +8,26 @@
   border-radius: 16px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  max-width: 95vw;
+}
+
+/* Responsive Modal Width */
+@media (min-width: 768px) {
+  .tracker-modal .modal-dialog {
+    max-width: 900px;
+  }
+}
+
+@media (min-width: 992px) {
+  .tracker-modal .modal-dialog {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tracker-modal .modal-dialog {
+    max-width: 1100px;
+  }
 }
 
 /* Modal Header - Gradient Background */
@@ -50,6 +70,35 @@
 }
 
 /* ========================================
+   RESPONSIVE LAYOUT SYSTEM
+   ======================================== */
+
+/* Main Content Container - 2 Column Layout */
+.donation-tracker-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* Desktop and Large Tablet - 2 Column Layout with Equal Heights */
+@media (min-width: 992px) {
+  .donation-tracker-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
+
+/* Tablet - 2 Column Layout with Equal Heights */
+@media (min-width: 768px) and (max-width: 991px) {
+  .donation-tracker-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+}
+
+/* ========================================
    CONTENT SECTIONS & CARDS
    ======================================== */
 
@@ -61,6 +110,90 @@
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 1px solid #e9ecef;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Equal height sections for 2-column layout */
+@media (min-width: 768px) {
+  .donation-section {
+    height: 100%;
+    min-height: 500px;
+    margin-bottom: 0;
+  }
+  
+  /* Reduce financial column height for better balance */
+  .financial-column {
+    min-height: 450px;
+  }
+}
+
+/* Column-specific styling */
+.overview-column {
+  position: relative;
+}
+
+/* Better spacing distribution in overview column */
+@media (min-width: 768px) {
+  .overview-column {
+    justify-content: space-between;
+  }
+  
+  .overview-column .mb-4 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .overview-column .info-grid {
+    margin-bottom: 0;
+    margin-top: auto;
+  }
+}
+
+.overview-column::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1.25rem;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #e9ecef 20%, #e9ecef 80%, transparent);
+}
+
+/* Hide the divider line on mobile and single column layouts */
+@media (max-width: 767px) {
+  .overview-column::after {
+    display: none;
+  }
+}
+
+.financial-column {
+  position: relative;
+}
+
+/* Better content distribution in financial column */
+@media (min-width: 768px) {
+  .financial-column {
+    justify-content: flex-start;
+  }
+  
+  .financial-column .financial-grid {
+    flex-grow: 1;
+  }
+  
+  .financial-column .note-section {
+    margin-top: auto;
+    margin-bottom: 0;
+  }
+}
+
+/* Enhanced visual hierarchy for financial section */
+.financial-column h6 {
+  background: linear-gradient(135deg, #198754, #20c997);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #198754;
 }
 
 /* Section Headings with Blue Accent */
@@ -96,6 +229,14 @@
   margin-bottom: 1.5rem;
 }
 
+/* Optimize info grid for wider modal */
+@media (min-width: 768px) {
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
 /* Individual Info Items */
 .info-item {
   background: #f8f9fa;
@@ -103,6 +244,19 @@
   border-radius: 8px;
   border-left: 3px solid var(--primary-blue);
   transition: all 0.2s ease;
+}
+
+/* Enhanced spacing for info items in equal height layout */
+@media (min-width: 768px) {
+  .info-item {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .info-item {
+    padding: 1.5rem;
+  }
 }
 
 .info-item:hover {
@@ -142,6 +296,16 @@
   gap: 0.5rem;
 }
 
+/* Enhanced status badge section spacing */
+@media (min-width: 768px) {
+  .overview-column .mb-4:has(.status-badge) {
+    padding: 1.5rem;
+    background: rgba(108, 117, 125, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(108, 117, 125, 0.1);
+  }
+}
+
 .status-badge::before {
   content: '';
   width: 8px;
@@ -156,25 +320,27 @@
   50% { opacity: 0.5; }
 }
 
-/* Progress Stepper Container */
-.status-section {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #e9ecef;
+/* Enhanced spacing for progress tracker in overview column */
+@media (min-width: 768px) {
+  .overview-column .mb-4:has(.react-stepper-horizontal) {
+    margin-bottom: 3rem !important;
+    padding: 1.5rem;
+    background: rgba(75, 155, 231, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(75, 155, 231, 0.1);
+  }
 }
 
 /* Stepper Component Styling */
-.status-section .react-stepper-horizontal {
+.react-stepper-horizontal {
   padding: 0;
 }
 
-.status-section .react-stepper-horizontal .react-stepper-horizontal-item {
+.react-stepper-horizontal .react-stepper-horizontal-item {
   padding: 0 0.5rem;
 }
 
-.status-section .react-stepper-horizontal .react-stepper-horizontal-item-title {
+.react-stepper-horizontal .react-stepper-horizontal-item-title {
   font-size: 0.8rem;
   font-weight: 500;
   color: #6c757d;
@@ -183,12 +349,12 @@
   line-height: 1.3;
 }
 
-.status-section .react-stepper-horizontal .react-stepper-horizontal-item-title.active {
+.react-stepper-horizontal .react-stepper-horizontal-item-title.active {
   color: var(--primary-blue);
   font-weight: 600;
 }
 
-.status-section .react-stepper-horizontal .react-stepper-horizontal-item-title.completed {
+.react-stepper-horizontal .react-stepper-horizontal-item-title.completed {
   color: #198754;
   font-weight: 600;
 }
@@ -197,12 +363,25 @@
    FINANCIAL DETAILS GRID
    ======================================== */
 
-/* Financial Grid Container */
+/* Financial Grid Container - 4 rows single column layout */
 .financial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.25rem;
   margin-top: 1rem;
+}
+
+/* Maintain single column layout across all screen sizes */
+@media (min-width: 768px) {
+  .financial-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .financial-grid {
+    gap: 1.75rem;
+  }
 }
 
 /* Financial Item Cards */
@@ -214,6 +393,19 @@
   border: 2px solid #e9ecef;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Enhanced spacing for financial items in equal height layout */
+@media (min-width: 768px) {
+  .financial-item {
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .financial-item {
+    padding: 2rem 1.5rem;
+  }
 }
 
 .financial-item:hover {
@@ -314,14 +506,33 @@
    RESPONSIVE DESIGN
    ======================================== */
 
-/* Tablet & Small Desktop (≤768px) */
-@media (max-width: 768px) {
+/* Large Desktop (≥1200px) - Enhanced spacing */
+@media (min-width: 1200px) {
+  .tracker-modal .modal-body {
+    padding: 2.5rem;
+  }
+  
+  .donation-tracker-content {
+    gap: 3rem;
+  }
+  
+  .donation-section {
+    padding: 2rem;
+  }
+}
+
+/* Tablet & Small Desktop (≤768px) - Single Column */
+@media (max-width: 767px) {
   .tracker-modal .modal-body {
     padding: 1rem;
   }
   
   .tracker-modal .modal-header {
     padding: 1rem;
+  }
+  
+  .donation-tracker-content {
+    gap: 1.5rem;
   }
   
   .info-grid {
@@ -345,13 +556,17 @@
     font-size: 1rem;
   }
   
-  .status-section .react-stepper-horizontal .react-stepper-horizontal-item-title {
+  .react-stepper-horizontal .react-stepper-horizontal-item-title {
     font-size: 0.7rem;
   }
 }
 
 /* Mobile (≤480px) */
 @media (max-width: 480px) {
+  .donation-tracker-content {
+    gap: 1rem;
+  }
+  
   .financial-grid {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -369,7 +584,7 @@
     font-size: 0.95rem;
   }
   
-  .status-section .react-stepper-horizontal .react-stepper-horizontal-item-title {
+  .react-stepper-horizontal .react-stepper-horizontal-item-title {
     font-size: 0.65rem;
   }
 }

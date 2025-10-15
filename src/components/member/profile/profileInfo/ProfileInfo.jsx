@@ -9,14 +9,16 @@ import {
   FaUniversity,
   FaTags,
   FaBuilding,
+  FaUser,
 } from "react-icons/fa";
+import { FiEdit3, FiSave, FiX } from "react-icons/fi";
 
 import * as ACM from "../../../../managers/ApiClientMethods";
-import * as ACO from "../../../../managers/ApiClientObjects";
 import * as BLM from "../../../../managers/BusinessLayerMethods";
 
 import ProfilePlaceholder from "../../../../assets/Images/profilePlaceholder.jpg";
 
+import "../Profile.css";
 import "./ProfileInfo.css";
 
 export default function ProfileInfo() {
@@ -77,20 +79,20 @@ export default function ProfileInfo() {
 
   async function handleFileLoad(e) {
     var flag;
-    var tmpImageFile;
+    var tmpProfileCDO;
 
     try {
       let arrayBuf = e.target.result;
       let file = fileRef.current;
 
-      tmpImageFile = new ACO.ImageFile();
+      tmpProfileCDO = JSON.parse(JSON.stringify(profileCDO));
 
-      tmpImageFile.name = file.name;
-      tmpImageFile.contentType = file.type;
-      tmpImageFile.data = ACM.arrayBufferToBase64(arrayBuf);
-      tmpImageFile.length = arrayBuf.byteLength;
+      tmpProfileCDO.imageFile.name = file.name;
+      tmpProfileCDO.imageFile.contentType = file.type;
+      tmpProfileCDO.imageFile.data = ACM.arrayBufferToBase64(arrayBuf);
+      tmpProfileCDO.imageFile.length = arrayBuf.byteLength;
 
-      flag = await BLM.UpdateImageFile(tmpImageFile);
+      flag = await BLM.UpdateProfileCDO(tmpProfileCDO);
       if (!flag) {
         console.error("Image update failed");
       }
@@ -129,159 +131,215 @@ export default function ProfileInfo() {
   };
 
   // ========================================
-  // 
+  //
   // ========================================
 
   return (
-    <Card className="shadow p-4">
-      <OverlayTrigger placement="bottom" overlay={<Tooltip>Edit</Tooltip>}>
-        <div className="avatar-wrapper mb-3" onClick={handleImageClick}>
-          <Image src={previewImage} roundedCircle className="profile-avatar" />
-          <div className="icon-overlay">
-            <FaCamera />
-          </div>
-        </div>
-      </OverlayTrigger>
-
-      {/* Hidden file input */}
-      <input
-        type="file"
-        accept="image/*"
-        style={{ display: "none" }}
-        ref={inputRef}
-        onChange={handleFileChange}
-      />
-
-      <div className="text-start">
-        <h4 className="mb-1">{userDTO?.username || "Unknown User"}</h4>
-        <p className="text-muted mb-2">
-          {profileCDO?.email || "email@example.com"}
-        </p>
-
-        {!editMode ? (
-          <>
-            {profileData.bio && (
-              <p className="text-muted mb-1 d-flex align-items-center">
-                <strong className="ms-1">{profileData.bio}</strong>
-              </p>
-            )}
-            {profileData.company && (
-              <p className="text-muted mb-1 d-flex align-items-center">
-                <FaBuilding className="me-2" />I work for:{" "}
-                <strong className="ms-1">{profileData.company}</strong>
-              </p>
-            )}
-            {profileData.alumni && (
-              <p className="text-muted mb-1 d-flex align-items-center">
-                <FaGraduationCap className="me-2" />
-                Alumni of:{" "}
-                <strong className="ms-1">{profileData.alumni}</strong>
-              </p>
-            )}
-            {profileData.universities && (
-              <p className="text-muted mb-1 d-flex align-items-center">
-                <FaUniversity className="me-2" />
-                Interested Universities:{" "}
-                <strong className="ms-1">{profileData.universities}</strong>
-              </p>
-            )}
-            {profileData.interests && (
-              <p className="text-muted mb-3 d-flex align-items-center">
-                <FaTags className="me-2" />
-                Interests:{" "}
-                <strong className="ms-1">{profileData.interests}</strong>
-              </p>
-            )}
-
-            <Button
-              variant="outline-primary"
-              className="w-100"
-              onClick={handleEdit}
-            >
-              Edit Profile
-            </Button>
-          </>
-        ) : (
-          <div>
-            <Form.Group className="mb-3">
-              <Form.Label>Bio</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                name="bio"
-                value={profileData.bio}
-                onChange={handleChange}
-                placeholder="Add a bio"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <FaBuilding className="me-1" /> Company
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="company"
-                value={profileData.company}
-                onChange={handleChange}
-                placeholder="The company you work for"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <FaGraduationCap className="me-1" /> Alumni (College/University)
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="alumni"
-                value={profileData.alumni}
-                onChange={handleChange}
-                placeholder="University you graduated from"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <FaUniversity className="me-1" /> Interested Universities
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="universities"
-                value={profileData.universities}
-                onChange={handleChange}
-                placeholder="Universities you are interested in"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3">
-              <Form.Label>
-                <FaTags className="me-1" /> Industry Interests
-              </Form.Label>
-              <Form.Control
-                type="text"
-                name="interests"
-                value={profileData.interests}
-                onChange={handleChange}
-                placeholder="Your industry interests"
-              />
-            </Form.Group>
-
-            <div className="d-flex gap-2">
-              <Button variant="primary" className="w-50" onClick={handleSave}>
-                Save
-              </Button>
-              <Button
-                variant="outline-secondary"
-                className="w-50"
-                onClick={handleCancel}
-              >
-                Cancel
-              </Button>
+    <div className="profile-info-container">
+      <Card className="profile-info-card">
+        {/* Body Section */}
+        <Card.Body className="profile-info-body">
+          {/* Profile Header */}
+          <div className="profile-header-section">
+            <OverlayTrigger placement="bottom" overlay={<Tooltip>Click to change photo</Tooltip>}>
+              <div className="avatar-wrapper" onClick={handleImageClick}>
+                <Image src={previewImage} roundedCircle className="profile-avatar" />
+                <div className="icon-overlay">
+                  <FaCamera />
+                </div>
+              </div>
+            </OverlayTrigger>
+            
+            <div className="profile-header-info">
+              <h4 className="profile-name">{userDTO?.username || "Unknown User"}</h4>
+              <p className="profile-email">{profileCDO?.email || "email@example.com"}</p>
             </div>
           </div>
-        )}
-      </div>
-    </Card>
+
+          {/* Hidden file input */}
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={inputRef}
+            onChange={handleFileChange}
+          />
+          {!editMode ? (
+            <>
+              {/* View Mode */}
+              <div className="profile-info-section">
+                {profileData.bio && (
+                  <div className="info-item">
+                    <div className="info-icon">
+                      <FaUser />
+                    </div>
+                    <div className="info-content">
+                      <h6 className="info-label">Bio</h6>
+                      <p className="info-text">{profileData.bio}</p>
+                    </div>
+                  </div>
+                )}
+                
+                {profileData.company && (
+                  <div className="info-item">
+                    <div className="info-icon">
+                      <FaBuilding />
+                    </div>
+                    <div className="info-content">
+                      <h6 className="info-label">Company</h6>
+                      <p className="info-text">{profileData.company}</p>
+                    </div>
+                  </div>
+                )}
+                
+                {profileData.alumni && (
+                  <div className="info-item">
+                    <div className="info-icon">
+                      <FaGraduationCap />
+                    </div>
+                    <div className="info-content">
+                      <h6 className="info-label">Alumni</h6>
+                      <p className="info-text">{profileData.alumni}</p>
+                    </div>
+                  </div>
+                )}
+                
+                {profileData.universities && (
+                  <div className="info-item">
+                    <div className="info-icon">
+                      <FaUniversity />
+                    </div>
+                    <div className="info-content">
+                      <h6 className="info-label">Interested Universities</h6>
+                      <p className="info-text">{profileData.universities}</p>
+                    </div>
+                  </div>
+                )}
+                
+                {profileData.interests && (
+                  <div className="info-item">
+                    <div className="info-icon">
+                      <FaTags />
+                    </div>
+                    <div className="info-content">
+                      <h6 className="info-label">Industry Interests</h6>
+                      <p className="info-text">{profileData.interests}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Empty state message */}
+                {!profileData.bio && !profileData.company && !profileData.alumni && 
+                 !profileData.universities && !profileData.interests && (
+                  <div className="empty-state">
+                    <p className="empty-state-text">Complete your profile to showcase your background and interests.</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Edit Button */}
+              <div className="profile-actions">
+                <Button
+                  variant="outline-primary"
+                  className="profile-edit-btn"
+                  onClick={handleEdit}
+                >
+                  <FiEdit3 className="me-2" />
+                  Edit
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Edit Mode */}
+              <div className="profile-edit-section">
+                <Form.Group className="profile-form-group">
+                  <Form.Label className="profile-form-label">
+                    <FaUser className="profile-label-icon" /> Bio
+                  </Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    name="bio"
+                    value={profileData.bio}
+                    onChange={handleChange}
+                    placeholder="Tell us about yourself..."
+                    className="profile-form-control"
+                  />
+                </Form.Group>
+
+                <Form.Group className="profile-form-group">
+                  <Form.Label className="profile-form-label">
+                    <FaBuilding className="profile-label-icon" /> Company
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="company"
+                    value={profileData.company}
+                    onChange={handleChange}
+                    placeholder="Where do you work?"
+                    className="profile-form-control"
+                  />
+                </Form.Group>
+
+                <Form.Group className="profile-form-group">
+                  <Form.Label className="profile-form-label">
+                    <FaGraduationCap className="profile-label-icon" /> Alumni
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="alumni"
+                    value={profileData.alumni}
+                    onChange={handleChange}
+                    placeholder="University you graduated from"
+                    className="profile-form-control"
+                  />
+                </Form.Group>
+
+                <Form.Group className="profile-form-group">
+                  <Form.Label className="profile-form-label">
+                    <FaUniversity className="profile-label-icon" /> Interested Universities
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="universities"
+                    value={profileData.universities}
+                    onChange={handleChange}
+                    placeholder="Universities you're interested in"
+                    className="profile-form-control"
+                  />
+                </Form.Group>
+
+                <Form.Group className="profile-form-group">
+                  <Form.Label className="profile-form-label">
+                    <FaTags className="profile-label-icon" /> Industry Interests
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="interests"
+                    value={profileData.interests}
+                    onChange={handleChange}
+                    placeholder="Your professional interests"
+                    className="profile-form-control"
+                  />
+                </Form.Group>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="profile-edit-actions">
+                <Button variant="primary" className="profile-save-btn" onClick={handleSave}>
+                  <FiSave className="me-2" />
+                  Save Changes
+                </Button>
+                <Button variant="outline-secondary" className="profile-cancel-btn" onClick={handleCancel}>
+                  <FiX className="me-2" />
+                  Cancel
+                </Button>
+              </div>
+            </>
+          )}
+        </Card.Body>
+      </Card>
+    </div>
   );
 }

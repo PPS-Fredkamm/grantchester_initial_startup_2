@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Button, Container, Card, InputGroup } from "react-bootstrap";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaSignInAlt } from "react-icons/fa";
 
 import { useDispatch } from "react-redux";
 import { login } from "../../../redux/slices/authSlice";
@@ -61,30 +61,40 @@ export default function Login() {
 
       <Container className="login-container">
         <div className="login-wrapper">
-          <Card className="login-card shadow">
-            <Card.Body>
-              <h3 className="text-center mb-4">Sign In</h3>
+          <Card className="login-card">
+            <Card.Header className="login-header">
+              <h3 className="login-title">
+                <div className="icon">
+                  <FaSignInAlt />
+                </div>
+                Welcome Back
+              </h3>
+              <p className="login-subtitle">Sign in to your account to continue</p>
+            </Card.Header>
+            <Card.Body className="login-body">
               <Form onSubmit={handleLogin}>
-                <Form.Group controlId="formUsername" className="mb-3">
+                <Form.Group className="form-group">
                   <Form.Label>Username</Form.Label>
                   <Form.Control
                     ref={usernameRef}
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Enter username"
+                    placeholder="Enter your username"
+                    className="modern-input"
                     required
                   />
                 </Form.Group>
 
-                <Form.Group controlId="formPassword" className="mb-3">
+                <Form.Group className="form-group">
                   <Form.Label>Password</Form.Label>
                   <InputGroup>
                     <Form.Control
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Password"
+                      placeholder="Enter your password"
+                      className="modern-input"
                       required
                     />
                     <Button
@@ -98,30 +108,33 @@ export default function Login() {
                   </InputGroup>
                 </Form.Group>
 
-                <Form.Text className="text-center d-block m-3">
+                <div className="forgot-password-section">
                   <span
                     role="button"
                     className="forgot-password-link"
                     onClick={() => setShowForgotPassword(true)}
                   >
-                    Forgot password?
+                    Forgot your password?
                   </span>
-                </Form.Text>
+                </div>
 
                 <Button
                   variant="primary"
                   type="submit"
-                  className="w-100 login-button"
+                  className="login-button"
                 >
                   Sign In
                 </Button>
               </Form>
 
-              <Form.Text className="text-center d-block mt-3">
-                <Link to="/signup" className="auth-link">
-                  Create an account
-                </Link>
-              </Form.Text>
+              <div className="signup-link-section">
+                <p className="signup-text">
+                  Don't have an account?{" "}
+                  <Link to="/signup" className="auth-link">
+                    Create one now
+                  </Link>
+                </p>
+              </div>
             </Card.Body>
           </Card>
         </div>

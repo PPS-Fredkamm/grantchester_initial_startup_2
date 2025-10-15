@@ -3,15 +3,6 @@
    ========================================================================== */
 
 /* ==========================================================================
-   FORM ELEMENTS
-   ========================================================================== */
-
-.form-label {
-  display: flex;
-  text-align: start;
-}
-
-/* ==========================================================================
    ACCORDION STYLING
    ========================================================================== */
 
@@ -81,50 +72,8 @@
 }
 
 .floating-label .form-control:focus {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
-}
-
-/* Standard form controls */
-.form-control:focus,
-.form-select:focus {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
-}
-
-/* Form select styling */
-.form-select {
-  border-radius: 8px;
-  border: 1px solid #ced4da;
-  transition: all 0.2s ease;
-}
-
-.form-select:focus {
-  border-color: #0d6efd;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
-}
-
-/* ==========================================================================
-   BUTTON STYLING
-   ========================================================================== */
-
-/* Base button enhancements */
-.btn {
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-/* Primary button hover effects */
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
-}
-
-/* Outline primary button hover effects */
-.btn-outline-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 0.2rem rgba(75, 155, 231, 0.15);
 }
 
 /* ==========================================================================

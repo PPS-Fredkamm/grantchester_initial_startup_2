@@ -1,51 +1,31 @@
-/* ========================================
-   MODAL STRUCTURE & LAYOUT
-   ======================================== */
+/* Donation Tracker Modal - Essential Styles Only */
 
-/* Main Modal Container */
 .tracker-modal .modal-content {
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.16) !important;
   max-width: 95vw;
+  max-height: 95vh;
 }
 
-/* Responsive Modal Width */
-@media (min-width: 768px) {
-  .tracker-modal .modal-dialog {
-    max-width: 900px;
-  }
+.tracker-modal .modal-dialog {
+  max-width: 900px;
 }
 
-@media (min-width: 992px) {
-  .tracker-modal .modal-dialog {
-    max-width: 1000px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .tracker-modal .modal-dialog {
-    max-width: 1100px;
-  }
-}
-
-/* Modal Header - Gradient Background */
 .tracker-modal .modal-header {
   background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
   color: white;
   border: none;
   padding: 1.5rem 2rem;
+  border-radius: 12px 12px 0 0 !important;
 }
 
-/* Modal Title */
 .tracker-modal .modal-title {
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0;
 }
 
-/* Close Button */
 .tracker-modal .btn-close {
   filter: invert(1);
   opacity: 0.8;
@@ -55,235 +35,41 @@
   opacity: 1;
 }
 
-/* Modal Body */
 .tracker-modal .modal-body {
   padding: 2rem;
   background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-radius: 0 0 12px 12px !important;
 }
 
-/* Modal Footer */
-.tracker-modal .modal-footer {
-  background: white;
-  border: none;
-  padding: 1.5rem 2rem;
-  border-top: 1px solid #e9ecef;
-}
-
-/* ========================================
-   RESPONSIVE LAYOUT SYSTEM
-   ======================================== */
-
-/* Main Content Container - 2 Column Layout */
-.donation-tracker-content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-/* Desktop and Large Tablet - 2 Column Layout with Equal Heights */
-@media (min-width: 992px) {
-  .donation-tracker-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    align-items: start;
-  }
-}
-
-/* Tablet - 2 Column Layout with Equal Heights */
-@media (min-width: 768px) and (max-width: 991px) {
-  .donation-tracker-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: start;
-  }
-}
-
-/* ========================================
-   CONTENT SECTIONS & CARDS
-   ======================================== */
-
-/* Overview Section Cards */
-.donation-section {
+/* Progress Section */
+.progress-section {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e9ecef;
-  height: fit-content;
+}
+
+.progress-header {
   display: flex;
-  flex-direction: column;
-}
-
-/* Equal height sections for 2-column layout */
-@media (min-width: 768px) {
-  .donation-section {
-    height: 100%;
-    min-height: 500px;
-    margin-bottom: 0;
-  }
-  
-  /* Reduce financial column height for better balance */
-  .financial-column {
-    min-height: 450px;
-  }
-}
-
-/* Column-specific styling */
-.overview-column {
-  position: relative;
-}
-
-/* Better spacing distribution in overview column */
-@media (min-width: 768px) {
-  .overview-column {
-    justify-content: space-between;
-  }
-  
-  .overview-column .mb-4 {
-    margin-bottom: 2rem !important;
-  }
-  
-  .overview-column .info-grid {
-    margin-bottom: 0;
-    margin-top: auto;
-  }
-}
-
-.overview-column::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -1.25rem;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #e9ecef 20%, #e9ecef 80%, transparent);
-}
-
-/* Hide the divider line on mobile and single column layouts */
-@media (max-width: 767px) {
-  .overview-column::after {
-    display: none;
-  }
-}
-
-.financial-column {
-  position: relative;
-}
-
-/* Better content distribution in financial column */
-@media (min-width: 768px) {
-  .financial-column {
-    justify-content: flex-start;
-  }
-  
-  .financial-column .financial-grid {
-    flex-grow: 1;
-  }
-  
-  .financial-column .note-section {
-    margin-top: auto;
-    margin-bottom: 0;
-  }
-}
-
-/* Enhanced visual hierarchy for financial section */
-.financial-column h6 {
-  background: linear-gradient(135deg, #198754, #20c997);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: #198754;
-}
-
-/* Section Headings with Blue Accent */
-.donation-section h6 {
-  font-size: 0.875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--primary-blue);
-  margin-bottom: 1rem;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.donation-section h6::before {
-  content: '';
-  width: 4px;
-  height: 16px;
-  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-  border-radius: 2px;
-}
-
-/* ========================================
-   INFO GRID LAYOUT
-   ======================================== */
-
-/* Info Grid Container */
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
   margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f8f9fa;
 }
 
-/* Optimize info grid for wider modal */
-@media (min-width: 768px) {
-  .info-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-}
-
-/* Individual Info Items */
-.info-item {
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-  border-left: 3px solid var(--primary-blue);
-  transition: all 0.2s ease;
-}
-
-/* Enhanced spacing for info items in equal height layout */
-@media (min-width: 768px) {
-  .info-item {
-    padding: 1.25rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .info-item {
-    padding: 1.5rem;
-  }
-}
-
-.info-item:hover {
-  background: #e9ecef;
-  transform: translateY(-1px);
-}
-
-.info-item strong {
-  display: block;
-  font-size: 0.75rem;
+.progress-header h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #6c757d;
-  margin-bottom: 0.25rem;
 }
 
-.info-item span {
-  font-size: 0.95rem;
-  color: #333;
-  font-weight: 500;
-}
-
-/* ========================================
-   STATUS BADGE & PROGRESS TRACKER
-   ======================================== */
-
-/* Status Badge with Pulsing Animation */
 .status-badge {
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -291,62 +77,19 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
 }
 
-/* Enhanced status badge section spacing */
-@media (min-width: 768px) {
-  .overview-column .mb-4:has(.status-badge) {
-    padding: 1.5rem;
-    background: rgba(108, 117, 125, 0.02);
-    border-radius: 12px;
-    border: 1px solid rgba(108, 117, 125, 0.1);
-  }
-}
-
-.status-badge::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-/* Enhanced spacing for progress tracker in overview column */
-@media (min-width: 768px) {
-  .overview-column .mb-4:has(.react-stepper-horizontal) {
-    margin-bottom: 3rem !important;
-    padding: 1.5rem;
-    background: rgba(75, 155, 231, 0.02);
-    border-radius: 12px;
-    border: 1px solid rgba(75, 155, 231, 0.1);
-  }
-}
-
-/* Stepper Component Styling */
+/* Stepper */
 .react-stepper-horizontal {
   padding: 0;
 }
 
-.react-stepper-horizontal .react-stepper-horizontal-item {
-  padding: 0 0.5rem;
-}
-
 .react-stepper-horizontal .react-stepper-horizontal-item-title {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: #6c757d;
   text-align: center;
   margin-top: 0.5rem;
-  line-height: 1.3;
 }
 
 .react-stepper-horizontal .react-stepper-horizontal-item-title.active {
@@ -359,90 +102,112 @@
   font-weight: 600;
 }
 
-/* ========================================
-   FINANCIAL DETAILS GRID
-   ======================================== */
-
-/* Financial Grid Container - 4 rows single column layout */
-.financial-grid {
+/* Details Section */
+.details-section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
-  margin-top: 1rem;
+  gap: 1.5rem;
+  flex: 1;
 }
 
-/* Maintain single column layout across all screen sizes */
 @media (min-width: 768px) {
-  .financial-grid {
-    gap: 1.5rem;
+  .details-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
   }
 }
 
-@media (min-width: 992px) {
-  .financial-grid {
-    gap: 1.75rem;
+/* Donation Sections */
+.donation-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.donation-section h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  flex: 1;
+}
+
+@media (min-width: 480px) {
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Financial Item Cards */
+.info-item {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--primary-blue);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-item strong {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.info-item span {
+  font-size: 0.95rem;
+  color: #343a40;
+  font-weight: 500;
+}
+
+/* Financial Grid */
+.financial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  flex: 1;
+}
+
 .financial-item {
   background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
+  padding: 1.25rem;
+  border-radius: 8px;
   text-align: center;
   border: 2px solid #e9ecef;
-  transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* Enhanced spacing for financial items in equal height layout */
-@media (min-width: 768px) {
-  .financial-item {
-    padding: 1.75rem 1.5rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .financial-item {
-    padding: 2rem 1.5rem;
-  }
-}
-
-.financial-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(75, 155, 231, 0.15);
-  border-color: var(--primary-blue);
-}
-
-/* Financial Item Labels */
 .financial-item strong {
-  display: block;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: #495057;
+  letter-spacing: 0.5px;
+  color: #6c757d;
   margin-bottom: 0.75rem;
   font-weight: 600;
-  position: relative;
 }
 
-.financial-item strong::after {
-  content: '';
-  position: absolute;
-  bottom: -0.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30px;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
-}
-
-/* Financial Values */
 .financial-item .value {
-  font-size: 1.3rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: var(--primary-blue);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.25rem;
 }
 
@@ -450,16 +215,11 @@
   font-size: 1.1rem;
   color: #198754;
   font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* ========================================
-   NOTE SECTION & ADDITIONAL CONTENT
-   ======================================== */
-
-/* Note Section Styling */
+/* Note Section */
 .note-section {
-  background: #fff3cd;
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
   border: 1px solid #ffeaa7;
   border-radius: 8px;
   padding: 1rem;
@@ -469,142 +229,38 @@
 .note-section strong {
   color: #856404;
   font-size: 0.875rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .note-section p {
   color: #856404;
-  margin: 0.5rem 0 0 0;
+  margin: 0;
   font-style: italic;
+  font-size: 0.875rem;
 }
 
-/* ========================================
-   FOOTER BUTTONS
-   ======================================== */
-
-/* Footer Button Base Styling */
-.tracker-modal .modal-footer .btn {
-  padding: 0.75rem 2rem;
-  border-radius: 8px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.2s ease;
-}
-
-/* Secondary Button Styling */
-.tracker-modal .modal-footer .btn-secondary {
-  background: #6c757d;
-  border: none;
-}
-
-.tracker-modal .modal-footer .btn-secondary:hover {
-  background: #5a6268;
-  transform: translateY(-1px);
-}
-
-/* ========================================
-   RESPONSIVE DESIGN
-   ======================================== */
-
-/* Large Desktop (≥1200px) - Enhanced spacing */
-@media (min-width: 1200px) {
-  .tracker-modal .modal-body {
-    padding: 2.5rem;
-  }
-  
-  .donation-tracker-content {
-    gap: 3rem;
-  }
-  
-  .donation-section {
-    padding: 2rem;
-  }
-}
-
-/* Tablet & Small Desktop (≤768px) - Single Column */
+/* Mobile Responsive */
 @media (max-width: 767px) {
   .tracker-modal .modal-body {
     padding: 1rem;
-  }
-  
-  .tracker-modal .modal-header {
-    padding: 1rem;
-  }
-  
-  .donation-tracker-content {
-    gap: 1.5rem;
-  }
-  
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .financial-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
   }
   
-  .financial-item {
-    padding: 1.25rem;
-  }
-  
-  .financial-item .value {
-    font-size: 1.2rem;
-  }
-  
-  .financial-item .currency {
-    font-size: 1rem;
-  }
-  
-  .react-stepper-horizontal .react-stepper-horizontal-item-title {
-    font-size: 0.7rem;
-  }
-}
-
-/* Mobile (≤480px) */
-@media (max-width: 480px) {
-  .donation-tracker-content {
-    gap: 1rem;
-  }
-  
-  .financial-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-  
-  .financial-item {
+  .progress-section,
+  .donation-section {
     padding: 1rem;
   }
   
-  .financial-item .value {
-    font-size: 1.1rem;
+  .progress-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
   }
   
-  .financial-item .currency {
-    font-size: 0.95rem;
-  }
-  
-  .react-stepper-horizontal .react-stepper-horizontal-item-title {
-    font-size: 0.65rem;
-  }
-}
-
-/* ========================================
-   ANIMATIONS
-   ======================================== */
-
-/* Modal Slide-in Animation */
-.tracker-modal .modal-content {
-  animation: modalSlideIn 0.3s ease-out;
-}
-
-@keyframes modalSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+  .info-grid,
+  .financial-grid {
+    grid-template-columns: 1fr;
   }
 }

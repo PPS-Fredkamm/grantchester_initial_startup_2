@@ -3,77 +3,78 @@
    ========================================================================== */
 
 .confirm-donation-modal .modal-dialog {
-  max-width: 900px;
+  max-width: 800px;
 }
 
 .confirm-modal-header {
   background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
   border: none;
-  padding: 2rem;
+  padding: 1.25rem;
   color: white;
 }
 
 .confirm-header-content {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
   width: 100%;
 }
 
 .confirm-icon {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   color: #fff;
   flex-shrink: 0;
 }
 
 .confirm-title {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   color: white;
 }
 
 .confirm-subtitle {
-  font-size: 1rem;
+  font-size: 0.9rem;
   opacity: 0.9;
   margin-bottom: 0;
   font-weight: 300;
 }
 
 .confirm-modal-body {
-  padding: 2rem;
+  padding: 1.25rem;
   background-color: #f8f9fa;
 }
 
 .donation-summary {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
-.summary-card {
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  height: 100%;
+.summary-item {
+  display: flex;
+  align-items: center;
   background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 0.875rem;
+  transition: all 0.3s ease;
+  min-height: 60px;
 }
 
-.summary-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+.summary-item:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(75, 155, 231, 0.1);
 }
 
-.summary-card.total-card {
+.summary-item.total-item {
   background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
   color: white;
+  border-color: var(--primary-blue);
 }
 
 .summary-icon {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
 }
 
 .company-icon {
@@ -100,85 +101,92 @@
   color: #6f42c1;
 }
 
+.summary-content {
+  flex: 1;
+  min-width: 0;
+}
+
 .summary-label {
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #6c757d;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-.total-card .summary-label {
+.total-item .summary-label {
   color: rgba(255, 255, 255, 0.8);
 }
 
 .summary-value {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #495057;
   margin-bottom: 0;
   word-break: break-word;
+  line-height: 1.2;
 }
 
-.total-card .summary-value {
+.total-item .summary-value {
   color: white;
 }
 
 .total-value {
-  font-size: 1.3rem !important;
+  font-size: 1.1rem !important;
   font-weight: 800 !important;
 }
 
 .legal-warning {
   background: linear-gradient(135deg, #fff3cd, #ffeaa7);
   border: 2px solid #ffc107;
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin-top: 1rem;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0.75rem;
 }
 
 .warning-content {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .warning-icon {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: #856404;
   flex-shrink: 0;
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
 }
 
 .warning-title {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #856404;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .warning-text {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: #856404;
   margin-bottom: 0;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .confirm-modal-footer {
   border: none;
-  padding: 1.5rem 2rem;
+  padding: 1rem 1.25rem;
   background-color: white;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .cancel-btn {
   border: 2px solid #6c757d;
   color: #6c757d;
   background: transparent;
-  border-radius: 12px;
-  padding: 0.75rem 2rem;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
   font-weight: 600;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
@@ -189,18 +197,19 @@
 }
 
 .confirm-btn {
-  background: linear-gradient(135deg, #dc3545, #c82333);
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
   border: none;
-  border-radius: 12px;
-  padding: 0.75rem 2rem;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
   font-weight: 600;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
 .confirm-btn:hover {
-  background: linear-gradient(135deg, #c82333, #dc3545);
+  background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+  box-shadow: 0 6px 20px rgba(75, 155, 231, 0.3);
 }
 
 /* ==========================================================================
@@ -214,7 +223,7 @@
   }
   
   .confirm-modal-header {
-    padding: 1.5rem;
+    padding: 1rem;
   }
   
   .confirm-header-content {
@@ -224,31 +233,38 @@
   }
   
   .confirm-icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   
   .confirm-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   
   .confirm-modal-body {
-    padding: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .summary-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.75rem;
   }
   
   .summary-icon {
-    font-size: 1.5rem;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
   }
   
   .summary-value {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   
   .total-value {
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
   }
   
   .confirm-modal-footer {
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1rem;
     flex-direction: column;
   }
   
@@ -261,15 +277,15 @@
 
 @media (max-width: 576px) {
   .confirm-modal-header {
-    padding: 1rem;
+    padding: 0.75rem;
   }
   
   .confirm-modal-body {
-    padding: 1rem;
+    padding: 0.75rem;
   }
   
   .legal-warning {
-    padding: 1rem;
+    padding: 0.75rem;
   }
   
   .warning-content {
@@ -300,26 +316,4 @@
 
 .confirm-donation-modal .modal-content {
   animation: slideInDown 0.4s ease-out;
-}
-
-.summary-card {
-  animation: fadeInUp 0.5s ease-out;
-}
-
-.summary-card:nth-child(1) { animation-delay: 0.1s; }
-.summary-card:nth-child(2) { animation-delay: 0.2s; }
-.summary-card:nth-child(3) { animation-delay: 0.3s; }
-.summary-card:nth-child(4) { animation-delay: 0.4s; }
-.summary-card:nth-child(5) { animation-delay: 0.5s; }
-.summary-card:nth-child(6) { animation-delay: 0.6s; }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

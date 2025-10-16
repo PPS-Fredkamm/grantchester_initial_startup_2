@@ -23,71 +23,71 @@ export default function ConfirmDonationModal({ show, onClose, onSubmit, formData
         <div className="donation-summary">
           <Row className="g-3">
             <Col md={6}>
-              <Card className="summary-card">
-                <Card.Body className="text-center">
-                  <FaBuilding className="summary-icon company-icon" />
+              <div className="summary-item">
+                <FaBuilding className="summary-icon company-icon" />
+                <div className="summary-content">
                   <h6 className="summary-label">Company/Organization</h6>
                   <p className="summary-value">{formData.companyName}</p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
             <Col md={6}>
-              <Card className="summary-card">
-                <Card.Body className="text-center">
-                  <FaUniversity className="summary-icon recipient-icon" />
+              <div className="summary-item">
+                <FaUniversity className="summary-icon recipient-icon" />
+                <div className="summary-content">
                   <h6 className="summary-label">Recipient University</h6>
                   <p className="summary-value">{formData.recipient}</p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
           </Row>
           
           <Row className="g-3 mt-2">
             <Col md={4}>
-              <Card className="summary-card">
-                <Card.Body className="text-center">
-                  <FaChartLine className="summary-icon shares-icon" />
-                  <h6 className="summary-label">Number of Shares</h6>
+              <div className="summary-item">
+                <FaChartLine className="summary-icon shares-icon" />
+                <div className="summary-content">
+                  <h6 className="summary-label">Number of Units</h6>
                   <p className="summary-value">{formData.units}</p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
             <Col md={4}>
-              <Card className="summary-card">
-                <Card.Body className="text-center">
-                  <FaDollarSign className="summary-icon valuation-icon" />
-                  <h6 className="summary-label">Valuation Per Share</h6>
+              <div className="summary-item">
+                <FaDollarSign className="summary-icon valuation-icon" />
+                <div className="summary-content">
+                  <h6 className="summary-label">Valuation Per Unit</h6>
                   <p className="summary-value">
                     ${Number(formData.valuation).toLocaleString("en-US", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
                   </p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
             <Col md={4}>
-              <Card className="summary-card total-card">
-                <Card.Body className="text-center">
-                  <FaDollarSign className="summary-icon total-icon" />
+              <div className="summary-item total-item">
+                <FaDollarSign className="summary-icon total-icon" />
+                <div className="summary-content">
                   <h6 className="summary-label">Total Value</h6>
                   <p className="summary-value total-value">
                     ${Number(formData.totalValue).toLocaleString("en-US")}
                   </p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
           </Row>
           
           <Row className="g-3 mt-2">
             <Col md={12}>
-              <Card className="summary-card">
-                <Card.Body className="text-center">
-                  <FaCalendarAlt className="summary-icon date-icon" />
+              <div className="summary-item">
+                <FaCalendarAlt className="summary-icon date-icon" />
+                <div className="summary-content">
                   <h6 className="summary-label">Donation Date</h6>
                   <p className="summary-value">{formData.donationDate}</p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
           </Row>
         </div>

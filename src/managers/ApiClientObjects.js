@@ -55,7 +55,7 @@ export function AddressCDO() {
 export function Company() {
   this.id = 0;
   this.isEnabled = false;
-  this.isVerifed = false;
+  this.isVerified = false;
   this.createdDate = new Date().toISOString();
   this.modifiedDate = new Date().toISOString();
   this.name = "";
@@ -88,7 +88,7 @@ export function Country() {
   this.name = "";
   this.abbreviation = "";
   this.capital = "";
-  this.lattitude = 0;
+  this.latitude = 0;
   this.longitude = 0;
 }
 
@@ -239,7 +239,7 @@ export function State() {
   this.capital = "";
   this.timezones = "";
   this.ianaTimezones = "";
-  this.lattitude = 0;
+  this.latitude = 0;
   this.longitude = 0;
 }
 

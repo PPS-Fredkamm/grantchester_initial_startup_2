@@ -138,84 +138,137 @@ export default function DonationPage() {
           </Card.Header>
           <Card.Body className="donation-body">
             <Form onSubmit={handleContinue} className="donation-form">
-              {/* Company Name */}
-              <div className="form-field mb-4">
-                <Form.Label className="field-label">Company or Organization <span className="required-asterisk">*</span></Form.Label>
-                <div className="input-group-modern">
-                  <span className="input-icon-wrapper">
-                    <FaBuilding className="input-icon" />
-                  </span>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter the company or organization name"
-                    value={formData.companyName}
-                    onChange={(e) => updateForm("companyName", e.target.value)}
-                    onBlur={(e) => updateForm("companyName", e.target.value.trim())}
-                    required
-                    autoComplete="organization"
-                    inputMode="text"
-                    title="Please enter a valid company/organization name."
-                    className="form-input"
-                  />
-                </div>
-              </div>
-
-              {/* Recipient */}
-              <div className="form-field mb-4">
-                <Form.Label className="field-label">Recipient (University) <span className="required-asterisk">*</span></Form.Label>
-                <div className="input-group-modern">
-                  <span className="input-icon-wrapper">
-                    <FaUniversity className="input-icon" />
-                  </span>
-                  <Form.Select
-                    value={formData.recipient}
-                    onChange={(e) => updateForm("recipient", e.target.value)}
-                    required={formData.recipient !== "other"}
-                    className="form-input"
-                  >
-                    <option value="">Select a university...</option>
-                    {universities.map((uni, index) => (
-                      <option
-                        key={index}
-                        value={uni.toLowerCase() === "other" ? "other" : uni}
-                      >
-                        {uni}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </div>
-              </div>
-              
-              {formData.recipient === "other" && (
-                <div className="form-field mb-4">
-                  <Form.Label className="field-label">University Name <span className="required-asterisk">*</span></Form.Label>
-                  <div className="input-group-modern">
-                    <span className="input-icon-wrapper">
-                      <FaUniversity className="input-icon" />
-                    </span>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter the university name"
-                      value={formData.otherUniversity}
-                      onChange={(e) => updateForm("otherUniversity", e.target.value)}
-                      required
-                      title="Please enter a valid university name."
-                      className="form-input"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Units and Valuation Row */}
-              <Row className="mb-4">
+              {/* Company Name and Recipient Row */}
+              <Row className="mb-3">
                 <Col md={6}>
                   <div className="form-field">
-                    <Form.Label className="field-label">Number of Shares <span className="required-asterisk">*</span></Form.Label>
+                    <Form.Label className="field-label">
+                      Company or Organization <span className="required-asterisk">*</span>
+                      <OverlayTrigger
+                        placement="right"
+                        overlay={
+                          <Tooltip id="tooltip-company">
+                            Enter the full legal name of the company or organization<br />owning the private stock being donated.
+                          </Tooltip>
+                        }
+                      >
+                        <FaCircleInfo className="info-icon" />
+                      </OverlayTrigger>
+                    </Form.Label>
+                    <div className="input-group-modern">
+                      <span className="input-icon-wrapper">
+                        <FaBuilding className="input-icon" />
+                      </span>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter the company or organization name"
+                        value={formData.companyName}
+                        onChange={(e) => updateForm("companyName", e.target.value)}
+                        onBlur={(e) => updateForm("companyName", e.target.value.trim())}
+                        required
+                        autoComplete="organization"
+                        inputMode="text"
+                        title="Please enter a valid company/organization name."
+                        className="form-input"
+                      />
+                    </div>
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <div className="form-field">
+                    <Form.Label className="field-label">
+                      Recipient (University) <span className="required-asterisk">*</span>
+                      <OverlayTrigger
+                        placement="right"
+                        overlay={
+                          <Tooltip id="tooltip-recipient">
+                            Select the university that will receive your donation.<br /><br />
+                            Choose from our partner universities or select "Other"<br />for institutions not listed.
+                          </Tooltip>
+                        }
+                      >
+                        <FaCircleInfo className="info-icon" />
+                      </OverlayTrigger>
+                    </Form.Label>
+                    <div className="input-group-modern">
+                      <span className="input-icon-wrapper">
+                        <FaUniversity className="input-icon" />
+                      </span>
+                      <Form.Select
+                        value={formData.recipient}
+                        onChange={(e) => updateForm("recipient", e.target.value)}
+                        required={formData.recipient !== "other"}
+                        className="form-input"
+                      >
+                        <option value="">Select a university...</option>
+                        {universities.map((uni, index) => (
+                          <option
+                            key={index}
+                            value={uni.toLowerCase() === "other" ? "other" : uni}
+                          >
+                            {uni}
+                          </option>
+                        ))}
+                      </Form.Select>
+                    </div>
+                    {formData.recipient === "other" && (
+                      <div className="form-field mt-2">
+                        <Form.Label className="field-label">
+                          University Name <span className="required-asterisk">*</span>
+                          <OverlayTrigger
+                            placement="right"
+                            overlay={
+                              <Tooltip id="tooltip-other-university">
+                                Enter the complete legal name of the university<br />that will receive your donation.
+                              </Tooltip>
+                            }
+                          >
+                            <FaCircleInfo className="info-icon" />
+                          </OverlayTrigger>
+                        </Form.Label>
+                        <div className="input-group-modern">
+                          <span className="input-icon-wrapper">
+                            <FaUniversity className="input-icon" />
+                          </span>
+                          <Form.Control
+                            type="text"
+                            placeholder="Enter the university name"
+                            value={formData.otherUniversity}
+                            onChange={(e) => updateForm("otherUniversity", e.target.value)}
+                            required
+                            title="Please enter a valid university name."
+                            className="form-input"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Col>
+              </Row>
+
+              {/* Units and Valuation Row */}
+              <Row className="mb-3">
+                <Col md={6}>
+                  <div className="form-field">
+                    <Form.Label className="field-label">
+                      Number of Units <span className="required-asterisk">*</span>
+                      <OverlayTrigger
+                        placement="right"
+                        overlay={
+                          <Tooltip id="tooltip-units">
+                            Enter the total number of units/shares you are donating.<br /><br />
+                            This should be a whole number (no decimals).
+                          </Tooltip>
+                        }
+                      >
+                        <FaCircleInfo className="info-icon" />
+                      </OverlayTrigger>
+                    </Form.Label>
                     <Form.Control
                       type="number"
                       value={formData.units}
                       onChange={(e) => updateForm("units", e.target.value)}
-                      placeholder="Enter number of shares"
+                      placeholder="Enter number of units"
                       required
                       min="1"
                       className="form-input"
@@ -224,7 +277,20 @@ export default function DonationPage() {
                 </Col>
                 <Col md={6}>
                   <div className="form-field">
-                    <Form.Label className="field-label">Valuation Per Share (USD) <span className="required-asterisk">*</span></Form.Label>
+                    <Form.Label className="field-label">
+                      Valuation Per Unit (USD) <span className="required-asterisk">*</span>
+                      <OverlayTrigger
+                        placement="right"
+                        overlay={
+                          <Tooltip id="tooltip-valuation">
+                            Enter the fair market value per unit/share in USD.<br /><br />
+                            This should reflect the current market price or valuation.
+                          </Tooltip>
+                        }
+                      >
+                        <FaCircleInfo className="info-icon" />
+                      </OverlayTrigger>
+                    </Form.Label>
                     <div className="input-group-modern">
                       <span className="input-icon-wrapper">
                         <FaDollarSign className="input-icon" />
@@ -246,23 +312,25 @@ export default function DonationPage() {
 
 
               {/* Total Value Display */}
-              <div className="total-value-display mb-4">
+              <div className="total-value-display mb-3">
                 <div className="total-value-card">
-                  <div className="total-value-header">
-                    <FaChartLine className="total-icon" />
-                    <span>Total Donation Value</span>
-                  </div>
-                  <div className="total-value-amount">
-                    ${Number(formData.totalValue).toLocaleString("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
+                  <div className="total-value-content">
+                    <div className="total-value-label">
+                      <FaChartLine className="me-2" />
+                      Total Donation Value
+                    </div>
+                    <div className="total-value-amount">
+                      ${Number(formData.totalValue).toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Date and File Upload Row */}
-              <Row className="mb-4">
+              <Row className="mb-3">
                 <Col md={6}>
                   <div className="form-field">
                     <Form.Label className="field-label">
@@ -325,8 +393,20 @@ export default function DonationPage() {
               </Row>
 
               {/* Note */}
-              <div className="form-field mb-4">
-                <Form.Label className="field-label">Message (Optional)</Form.Label>
+              <div className="form-field mb-3">
+                <Form.Label className="field-label">
+                  Message (Optional)
+                  <OverlayTrigger
+                    placement="right"
+                    overlay={
+                      <Tooltip id="tooltip-message">
+                        Add any additional notes or instructions for the university<br />regarding your donation.
+                      </Tooltip>
+                    }
+                  >
+                    <FaCircleInfo className="info-icon" />
+                  </OverlayTrigger>
+                </Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
@@ -340,7 +420,7 @@ export default function DonationPage() {
 
 
               {/* Contact Info */}
-              <div className="contact-info-section mb-4">
+              <div className="contact-info-section mb-3">
                 <h6 className="contact-info-title">
                   <FaEnvelope className="me-2" />
                   Contact Information
@@ -410,7 +490,7 @@ export default function DonationPage() {
               </div>
 
               {/* Agreement */}
-              <div className="agreement-section mb-4">
+              <div className="agreement-section mb-3">
                 <Form.Check id="agreementCheck" className="modern-checkbox">
                   <Form.Check.Input
                     type="checkbox"

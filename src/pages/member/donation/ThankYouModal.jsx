@@ -25,88 +25,80 @@ export default function ThankYouModal({ show, onClose }) {
       
       <Modal.Body className="thank-you-body">
         <div className="status-section">
-          <Card className="status-card">
-            <Card.Body className="text-center">
-              <FaClock className="status-icon" />
-              <h5 className="status-title">Donation Submitted</h5>
+          <div className="status-item">
+            <FaClock className="status-icon" />
+            <div className="status-content">
+              <h6 className="status-title">Donation Submitted</h6>
               <p className="status-text">
                 Your donation has been submitted and is now pending. Please allow
                 <strong className="highlight-text"> 3-5 business days</strong> for processing.
               </p>
-            </Card.Body>
-          </Card>
+            </div>
+          </div>
         </div>
         
         <div className="next-steps">
           <h6 className="next-steps-title">What Happens Next?</h6>
-          <Row className="g-3">
+          <Row className="g-2">
             <Col md={6}>
-              <Card className="step-card">
-                <Card.Body className="text-center">
-                  <div className="step-number">1</div>
+              <div className="step-item">
+                <div className="step-number">1</div>
+                <div className="step-content">
                   <h6 className="step-title">Review Process</h6>
                   <p className="step-description">
                     Our team will review your donation details and documentation.
                   </p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
             <Col md={6}>
-              <Card className="step-card">
-                <Card.Body className="text-center">
-                  <div className="step-number">2</div>
+              <div className="step-item">
+                <div className="step-number">2</div>
+                <div className="step-content">
                   <h6 className="step-title">Contact & Documentation</h6>
                   <p className="step-description">
                     A representative will contact you to complete required paperwork.
                   </p>
-                </Card.Body>
-              </Card>
+                </div>
+              </div>
             </Col>
           </Row>
         </div>
         
         <div className="contact-section">
           <h6 className="contact-title">Need Help? Contact Our Team</h6>
-          <div className="contact-cards-grid">
-            <Card className="contact-person-card">
-              <Card.Body className="text-center">
-                <div className="contact-avatar">
-                  <FaUser className="contact-avatar-icon" />
-                </div>
+          <div className="contact-grid">
+            <div className="contact-person">
+              <div className="contact-avatar">
+                <FaUser className="contact-avatar-icon" />
+              </div>
+              <div className="contact-details">
                 <h6 className="contact-name">Steve Siddal</h6>
                 <p className="contact-role">Donation Coordinator</p>
-              </Card.Body>
-            </Card>
+              </div>
+            </div>
             
-            <Card className="contact-info-card">
-              <Card.Body>
-                <div className="contact-methods">
-                  <div className="contact-method">
-                    <div className="contact-method-icon">
-                      <FaPhone />
-                    </div>
-                    <div className="contact-method-content">
-                      <span className="contact-method-label">Phone</span>
-                      <a href="tel:555-123-4567" className="contact-method-value">
-                        (555) 123-4567
-                      </a>
-                    </div>
-                  </div>
-                  
-                  <div className="contact-method">
-                    <div className="contact-method-icon">
-                      <FaEnvelope />
-                    </div>
-                    <div className="contact-method-content">
-                      <span className="contact-method-label">Email</span>
-                      <a href="mailto:ssiddal@grantchestergroup.com" className="contact-method-value email-value">
-                        ssiddal@grantchestergroup.com
-                      </a>
-                    </div>
-                  </div>
+            <div className="contact-methods">
+              <div className="contact-method">
+                <FaPhone className="contact-method-icon" />
+                <div className="contact-method-content">
+                  <span className="contact-method-label">Phone</span>
+                  <a href="tel:555-123-4567" className="contact-method-value">
+                    (555) 123-4567
+                  </a>
                 </div>
-              </Card.Body>
-            </Card>
+              </div>
+              
+              <div className="contact-method">
+                <FaEnvelope className="contact-method-icon" />
+                <div className="contact-method-content">
+                  <span className="contact-method-label">Email</span>
+                  <a href="mailto:ssiddal@grantchestergroup.com" className="contact-method-value email-value">
+                    ssiddal@grantchestergroup.com
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Modal.Body>

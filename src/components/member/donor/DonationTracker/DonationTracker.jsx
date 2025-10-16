@@ -77,58 +77,38 @@ export default function DonationTracker({ show, onHide, donation }) {
       </Modal.Header>
 
       <Modal.Body>
-        {/* === Main Content Container with Responsive Grid === */}
-        <div className="donation-tracker-content">
-          {/* === Left Column: Overview === */}
-          <div className="donation-section overview-column">
-            <h6>Overview</h6>
+        {/* === Top Row: Progress Tracker === */}
+        <div className="progress-section">
+          <div className="progress-header">
+            <h6>Progress Tracker</h6>
+            <Badge
+              className="status-badge"
+              bg={getVariant(currentStage)}
+              text={currentStage === "Waiting approval" ? "dark" : "light"}
+            >
+              {currentStage}
+            </Badge>
+          </div>
+          <Stepper
+            steps={stages.map((stage) => ({ title: stage }))}
+            activeStep={currentIdx}
+            activeColor="#4b9be7"
+            completeColor="#198754"
+            defaultColor="#dee2e6"
+            activeTitleColor="#4b9be7"
+            completeTitleColor="#198754"
+            defaultTitleColor="#6c757d"
+            size={28}
+            circleFontSize={12}
+            barStyle="solid"
+          />
+        </div>
 
-            {/* Status Badge */}
-            <div className="mb-4">
-              <strong style={{ fontSize: "0.875rem", color: "#6c757d" }}>
-                Current Status:
-              </strong>
-              <div className="mt-2">
-                <Badge
-                  className="status-badge"
-                  bg={getVariant(currentStage)}
-                  text={currentStage === "Waiting approval" ? "dark" : "light"}
-                >
-                  {currentStage}
-                </Badge>
-              </div>
-            </div>
-
-            {/* Progress Tracker */}
-            <div className="mb-4">
-              <h6
-                style={{
-                  marginBottom: "1rem",
-                  color: "var(--primary-blue)",
-                  fontSize: "0.875rem",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.5px",
-                }}
-              >
-                Progress Tracker
-              </h6>
-              <Stepper
-                steps={stages.map((stage) => ({ title: stage }))}
-                activeStep={currentIdx}
-                activeColor="#4b9be7"
-                completeColor="#198754"
-                defaultColor="#dee2e6"
-                activeTitleColor="#4b9be7"
-                completeTitleColor="#198754"
-                defaultTitleColor="#6c757d"
-                size={36}
-                circleFontSize={18}
-                barStyle="solid"
-              />
-            </div>
-
-            {/* Info Grid */}
+        {/* === Bottom Row: Two Column Layout === */}
+        <div className="details-section">
+          {/* === Left Column: Donation Information === */}
+          <div className="donation-section info-column">
+            <h6>Donation Information</h6>
             <div className="info-grid">
               <div className="info-item">
                 <strong>Donation ID</strong>
@@ -147,12 +127,17 @@ export default function DonationTracker({ show, onHide, donation }) {
                 <span>{dateSubmitted}</span>
               </div>
             </div>
+            {note && (
+              <div className="note-section">
+                <strong>Additional Note</strong>
+                <p>{note}</p>
+              </div>
+            )}
           </div>
 
           {/* === Right Column: Financial Details === */}
           <div className="donation-section financial-column">
             <h6>Financial Details</h6>
-
             <div className="financial-grid">
               <div className="financial-item">
                 <strong>Units Donated</strong>
@@ -160,7 +145,9 @@ export default function DonationTracker({ show, onHide, donation }) {
               </div>
               <div className="financial-item">
                 <strong>Valuation per Share</strong>
-                <div className="currency">{formatCurrency(initialValuation)}</div>
+                <div className="currency">
+                  {formatCurrency(initialValuation)}
+                </div>
               </div>
               <div className="financial-item">
                 <strong>Total Value</strong>
@@ -171,22 +158,9 @@ export default function DonationTracker({ show, onHide, donation }) {
                 <div className="value">{valuationDate}</div>
               </div>
             </div>
-
-            {/* Note Section */}
-            {note && (
-              <div className="note-section">
-                <strong>Additional Note</strong>
-                <p>{note}</p>
-              </div>
-            )}
           </div>
         </div>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Close
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 }

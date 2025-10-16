@@ -10,7 +10,7 @@ import * as ACM from './ApiClientMethods';
 //  GetCompanyUser
 // ========================================
 
-export async function GetCompanyUserAsync(coponayID, userID) {
+export async function GetCompanyUserAsync(companyID, userID) {
   const apiRoute = 'company-user';
   const apiMethod = 'GET';
   // ----------------------------------------
@@ -19,8 +19,8 @@ export async function GetCompanyUserAsync(coponayID, userID) {
   // ----------------------------------------
   try {
     params = {};
-    params['companyID'] = id;
-    params['userID'] = id;
+    params['companyID'] = companyID;
+    params['userID'] = userID;
     url = ACM.generateFetchUrl(apiRoute, params);
     options = ACM.generateFetchOptions(apiMethod, null);
     response = await fetch(url, options);

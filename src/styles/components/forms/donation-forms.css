@@ -1,0 +1,221 @@
+/* ==========================================================================
+   DONATION FORM STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   FORM FIELDS
+   ========================================================================== */
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.field-label {
+  display: block;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.required-asterisk {
+  color: #dc3545;
+  font-weight: 700;
+  font-size: 1.1em;
+  margin-left: 2px;
+}
+
+.field-label .info-icon {
+  margin-left: 8px;
+  color: var(--primary-blue);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s ease;
+}
+
+.field-label .info-icon:hover {
+  color: var(--secondary-blue);
+}
+
+/* ==========================================================================
+   INPUT GROUPS
+   ========================================================================== */
+
+.input-group-modern {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  border: 2px solid var(--border-color-light);
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  z-index: 2;
+}
+
+.input-icon {
+  color: var(--primary-blue);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   FORM INPUTS
+   ========================================================================== */
+
+.form-input {
+  width: 100%;
+  padding: 10px 14px 10px 45px;
+  border: 2px solid var(--border-color-light);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #495057;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  height: 44px;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(75, 155, 231, 0.1);
+  background-color: #fff;
+  animation: pulse 0.3s ease-in-out;
+}
+
+.form-input:hover {
+  border-color: #ced4da;
+}
+
+.file-input {
+  cursor: pointer;
+}
+
+.file-input::-webkit-file-upload-button {
+  display: none;
+}
+
+.textarea-input {
+  height: 65px !important;
+  padding-top: 10px;
+  resize: none;
+}
+
+.readonly-input {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  cursor: not-allowed;
+}
+
+.readonly-input:focus {
+  border-color: var(--border-color-light) !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   CONTACT INFO SECTION
+   ========================================================================== */
+
+.contact-info-section {
+  background-color: var(--tertiary-background-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 2px solid var(--border-color-light);
+}
+
+.contact-info-title {
+  color: #495057;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   AGREEMENT SECTION
+   ========================================================================== */
+
+.agreement-section {
+  background-color: #fff3cd;
+  border: 2px solid #ffeaa7;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.modern-checkbox {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.agreement-checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  margin-top: 2px;
+  accent-color: var(--primary-blue);
+  flex-shrink: 0;
+}
+
+.agreement-label {
+  font-weight: 500;
+  color: #495057;
+  line-height: 1.5;
+  cursor: pointer;
+  margin: 0;
+  flex: 1;
+}
+
+/* ==========================================================================
+   TOOLTIPS - MOVED TO: src/styles/utils/tooltips.css
+   ========================================================================== */
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (min-width: 1200px) {
+  .form-field {
+    margin-bottom: 0.875rem;
+  }
+  
+  .contact-info-section,
+  .agreement-section {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-input {
+    height: 45px;
+    padding-left: 45px;
+  }
+  
+  .input-icon-wrapper {
+    width: 45px;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-info-section,
+  .agreement-section {
+    padding: 1rem;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS - MOVED TO: src/styles/utils/animations.css
+   ========================================================================== */

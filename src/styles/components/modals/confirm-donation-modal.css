@@ -1,0 +1,289 @@
+/* ==========================================================================
+   CONFIRM DONATION MODAL STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   MODAL CONTAINER
+   ========================================================================== */
+
+.confirm-donation-modal .modal-dialog {
+  max-width: 800px;
+}
+
+.confirm-modal-header {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  padding: 1.25rem;
+  color: white;
+}
+
+.confirm-header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.confirm-icon {
+  font-size: 1.75rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.confirm-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  color: white;
+}
+
+.confirm-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+.confirm-modal-body {
+  padding: 1.25rem;
+  background-color: #f8f9fa;
+}
+
+/* ==========================================================================
+   DONATION SUMMARY
+   ========================================================================== */
+
+.donation-summary {
+  margin-bottom: 1rem;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid var(--border-color-light);
+  border-radius: 10px;
+  padding: 0.875rem;
+  transition: all 0.3s ease;
+  min-height: 60px;
+}
+
+.summary-item:hover {
+  border-color: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(75, 155, 231, 0.1);
+}
+
+.summary-item.total-item {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+.summary-icon {
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.company-icon {
+  color: #28a745;
+}
+
+.recipient-icon {
+  color: #007bff;
+}
+
+.shares-icon {
+  color: #ffc107;
+}
+
+.valuation-icon {
+  color: #17a2b8;
+}
+
+.total-icon {
+  color: white;
+}
+
+.date-icon {
+  color: #6f42c1;
+}
+
+.summary-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6c757d;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.total-item .summary-label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.summary-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #495057;
+  margin-bottom: 0;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+.total-item .summary-value {
+  color: white;
+}
+
+.total-value {
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+}
+
+/* ==========================================================================
+   LEGAL WARNING
+   ========================================================================== */
+
+.legal-warning {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  border: 2px solid #ffc107;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0.75rem;
+}
+
+.warning-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.warning-icon {
+  font-size: 1.25rem;
+  color: #856404;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.warning-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 0.25rem;
+}
+
+.warning-text {
+  font-size: 0.85rem;
+  color: #856404;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   MODAL FOOTER
+   ========================================================================== */
+
+.confirm-modal-footer {
+  border: none;
+  padding: 1rem 1.25rem;
+  background-color: white;
+  gap: 0.75rem;
+}
+
+/* Button styles moved to: src/styles/components/buttons/modal-buttons.css */
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .confirm-donation-modal .modal-dialog {
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .confirm-modal-header {
+    padding: 1rem;
+  }
+  
+  .confirm-header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .confirm-icon {
+    font-size: 1.5rem;
+  }
+  
+  .confirm-title {
+    font-size: 1.25rem;
+  }
+  
+  .confirm-modal-body {
+    padding: 1rem;
+  }
+  
+  .summary-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 0.75rem;
+  }
+  
+  .summary-icon {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .summary-value {
+    font-size: 0.9rem;
+  }
+  
+  .total-value {
+    font-size: 1rem !important;
+  }
+  
+  .confirm-modal-footer {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+  }
+  
+  /* Button responsive styles moved to: src/styles/components/buttons/modal-buttons.css */
+}
+
+@media (max-width: 576px) {
+  .confirm-modal-header {
+    padding: 0.75rem;
+  }
+  
+  .confirm-modal-body {
+    padding: 0.75rem;
+  }
+  
+  .legal-warning {
+    padding: 0.75rem;
+  }
+  
+  .warning-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .warning-icon {
+    margin-top: 0;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS - MOVED TO: src/styles/components/modals/modal-animations.css
+   ========================================================================== */
+
+.confirm-donation-modal .modal-content {
+  animation: slideInDown 0.4s ease-out;
+}

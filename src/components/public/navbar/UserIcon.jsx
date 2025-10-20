@@ -104,13 +104,7 @@ export default function UserIcon() {
                   {companies.length > 0 ? (
                     companies.map((c, i) => (
                       <a key={i} className="dropdown-item" href={c.link}>
-                        {c.name}{" "}
-                        <span
-                          className="text-muted"
-                          style={{ fontSize: "0.8rem" }}
-                        >
-                          ({c.role})
-                        </span>
+                        {c.name} <span className="text-muted">({c.role})</span>
                       </a>
                     ))
                   ) : (
@@ -130,13 +124,7 @@ export default function UserIcon() {
                   {universities.length > 0 ? (
                     universities.map((u, i) => (
                       <a key={i} className="dropdown-item" href={u.link}>
-                        {u.name}{" "}
-                        <span
-                          className="text-muted"
-                          style={{ fontSize: "0.8rem" }}
-                        >
-                          ({u.role})
-                        </span>
+                        {u.name} <span className="text-muted">({u.role})</span>
                       </a>
                     ))
                   ) : (
@@ -152,7 +140,9 @@ export default function UserIcon() {
 
             {/* Admin link (only for site admins) */}
             {roles && roles.includes("Admin") && (
-              <NavDropdown.Item href="/admin/dashboard">Admin Dashboard</NavDropdown.Item>
+              <NavDropdown.Item href="/admin/dashboard">
+                Admin Dashboard
+              </NavDropdown.Item>
             )}
             {/* Footer */}
             <NavDropdown.Item onClick={handleLogout}>Sign Out</NavDropdown.Item>

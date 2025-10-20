@@ -1,7 +1,7 @@
 import { Modal, Button, Card, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { FaCheckCircle, FaClock, FaUser, FaPhone, FaEnvelope, FaHome } from "react-icons/fa";
-import "./ThankYouModal.css";
+/* CSS moved to: src/styles/components/modals/thank-you-modal.css */
 
 export default function ThankYouModal({ show, onClose }) {
   const navigate = useNavigate();

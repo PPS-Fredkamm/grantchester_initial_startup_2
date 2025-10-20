@@ -1,0 +1,45 @@
+/* ==========================================================================
+   SHARED STATUS STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   STATUS PILL STYLES
+   ========================================================================== */
+
+.status-pill {
+  padding: 0.3rem 0.75rem;
+  border-radius: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.status-waiting {
+  background-color: #e4bb2a;
+  color: #ffffff;
+}
+
+.status-verifying {
+  background-color: var(--primary-blue);
+  color: #ffffff;
+}
+
+.status-completed {
+  background-color: #8dc843;
+  color: #ffffff;
+}
+
+.status-submitted {
+  background-color: #b8b8b8;
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   RESPONSIVE STATUS PILLS
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .status-pill {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+}

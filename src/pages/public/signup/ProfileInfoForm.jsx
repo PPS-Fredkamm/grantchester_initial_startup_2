@@ -7,7 +7,7 @@ import * as ACELocation from "../../../managers/ApiClient-Location";
 import * as ACM from "../../../managers/ApiClientMethods";
 import * as BLM from "../../../managers/BusinessLayerMethods";
 
-import "./ProfileInfoForm.css";
+/* CSS for this file is located in the profile-forms.css file */
 
 export default function ProfileInfoForm({ onSuccess }) {
   const profileCDO = useSelector((state) => state.auth.profileCDO);

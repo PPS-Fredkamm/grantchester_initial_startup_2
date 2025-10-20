@@ -1,6 +1,6 @@
 import { Modal, Button, Card, Row, Col } from "react-bootstrap";
 import { FaCheckCircle, FaBuilding, FaUniversity, FaChartLine, FaCalendarAlt, FaDollarSign, FaExclamationTriangle } from "react-icons/fa";
-import "./ConfirmDonation.css";
+/* CSS moved to: src/styles/components/modals/confirm-donation-modal.css */
 
 export default function ConfirmDonationModal({ show, onClose, onSubmit, formData }) {
   function handleConfirm() {

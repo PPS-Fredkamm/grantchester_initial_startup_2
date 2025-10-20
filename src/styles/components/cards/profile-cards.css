@@ -1,0 +1,111 @@
+/* ==========================================================================
+   PROFILE CARDS - ALL PROFILE-RELATED CARD STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   PROFILE INFO CARD (MAIN PROFILE DISPLAY)
+   ========================================================================== */
+
+.profile-info-card {
+  width: 100%;
+  max-width: 800px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.profile-info-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.profile-info-body {
+  padding: 2rem;
+  background-color: var(--primary-light-color);
+}
+
+/* ==========================================================================
+   PROFILE CARD (GENERAL PROFILE CARD)
+   ========================================================================== */
+
+.profile-card {
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-color: var(--primary-light-color);
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================================================================
+   PROFILE CARD IN DROPDOWN (USER DROPDOWN)
+   ========================================================================== */
+
+.profile-card {
+  padding: 1rem;
+  background-color: var(--primary-light-color);
+  text-align: center;
+}
+
+.profile-card-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dee2e6;
+  margin-bottom: 0.5rem;
+}
+
+.profile-card-info strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.profile-card-info .text-muted {
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   PROFILE INFO CARD (PROFILE INFO COMPONENT)
+   ========================================================================== */
+
+.profile-info-card {
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid var(--border-color-light) !important;
+  border-radius: var(--border-radius-lg) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  overflow: hidden;
+  background: var(--primary-light-color) !important;
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-info-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.profile-info-body {
+  padding: 2rem;
+  background-color: var(--primary-light-color);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .profile-info-body {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-info-body {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,62 @@
+/* ==========================================================================
+   BANNER COMPONENT STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   BASE BANNER STYLES - ALL BANNERS
+   ========================================================================== */
+
+/* Container Properties */
+.banner-container,
+.admin-banner-container,
+.public-banner-container {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 8rem;
+}
+
+/* Text Properties */
+.banner-container p,
+.admin-banner-container p,
+.public-banner-container p {
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* ==========================================================================
+   BANNER BACKGROUNDS
+   ========================================================================== */
+
+/* Blue Gradient - Public & Member Banners */
+.public-banner-container,
+.banner-container {
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+}
+
+/* Red Gradient - Admin Banner */
+.admin-banner-container {
+  background: linear-gradient(
+    to right,
+    var(--admin-red),
+    var(--admin-light-red)
+  );
+}
+
+/* ==========================================================================
+   BANNER-SPECIFIC OVERRIDES
+   ========================================================================== */
+
+/* Public Banner - Centered & Bold */
+.public-banner-container {
+  justify-content: center;
+  text-align: center;
+}
+
+.public-banner-container p {
+  font-weight: 750;
+}

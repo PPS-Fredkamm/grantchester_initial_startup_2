@@ -2,7 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 import NewReqBanner from '../../../components/member/company/NewReqBanner/NewReqBanner';
 import CompanyInfoCard from '../../../components/member/company/CompanyInfo/CompanyInfoCard';
-import ProfileCTA from '../../../components/member/donor/DonorCTA/DonorCTA';
+import ProfileCTA from '../../../components/member/donor/dashboard/DonorCTA';
 import CompanyNewRequest from '../../../components/member/company/CompanyNewRequest/CompanyNewRequest';
 import CompanyRequest from '../../../components/member/company/CompanyRequestHistory/CompanyRequest';
 

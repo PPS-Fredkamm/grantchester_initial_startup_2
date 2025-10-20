@@ -1,5 +1,5 @@
 // import BannerCarousel from '../../components/home/Carousel/BannerCarousel';
-import SubBanner from '../../../components/public/home/SubBanner/SubBanner';
+import PublicBanner from '../../../components/public/banner/PublicBanner';
 import WebBanner from '../../../components/public/home/WebBanner/WebBanner';
 import SecondaryBanner from '../../../components/public/home/SecondaryBanner/SecondaryBanner';
 import LogoScroller from '../../../components/public/home/LogoScroller/LogoScroller';
@@ -12,14 +12,12 @@ import Drexel1 from '../../../assets/images/LogoScrollerImages/drexel.jpg';
 import Yale1 from '../../../assets/images/LogoScrollerImages/yale.png';
 import USC1 from '../../../assets/images/LogoScrollerImages/USC.png';
 
-import './Home.css';
-
 export default function Home() {
   const logoList = [Dartmouth, Yale, USC, Drexel, Dartmouth1, Yale1, USC1, Drexel1];
   
   return (
     <>
-      <SubBanner />
+      <PublicBanner />
       <WebBanner />
       <LogoScroller logos={logoList} speed={25} />
       <SecondaryBanner />

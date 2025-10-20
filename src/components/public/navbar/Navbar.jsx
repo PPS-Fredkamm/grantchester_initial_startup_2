@@ -13,8 +13,6 @@ import MobileUserDropdown from './MobileUserDropdown';
 
 import GrantchesterImage from '../../../assets/images/grantchester.png';
 
-import './Navbar.css';
-
 function CustomNavbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 

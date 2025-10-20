@@ -16,7 +16,7 @@ import { register } from "../../../redux/slices/authSlice";
 import AlertToast from "../../../components/userInterface/alerts/AlertToast";
 import ProfileInfoForm from "./ProfileInfoForm";
 
-import "./Signup.css";
+/* CSS for this file is located in the auth-forms.css file */
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -77,7 +77,9 @@ export default function Signup() {
                 </div>
                 Join Us Today
               </h3>
-              <p className="register-subtitle">Create your account to get started</p>
+              <p className="register-subtitle">
+                Create your account to get started
+              </p>
             </Card.Header>
             <Card.Body className="register-body">
               <Form onSubmit={handleSignup}>

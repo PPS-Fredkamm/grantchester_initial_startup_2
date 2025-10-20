@@ -1,0 +1,57 @@
+/* ==========================================================================
+   SECURITY SETTINGS COMPONENT STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   SECURITY TAB LAYOUT
+   ========================================================================== */
+
+.security-settings-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.security-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.security-header h4 {
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.security-header p {
+  color: #6c757d;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   SECURITY CARDS GRID - MOVED TO: src/styles/components/cards/security-cards.css
+   ========================================================================== */
+
+/* ==========================================================================
+   SECURITY CARD CONTENT - MOVED TO: src/styles/components/cards/security-cards.css
+   ========================================================================== */
+
+/* ==========================================================================
+   STYLES MOVED TO OTHER FILES
+   ========================================================================== */
+
+/* Security button styles moved to: src/styles/components/buttons.css */
+/* Modal styles moved to: src/styles/components/modals/ */
+/* Animations moved to: src/styles/components/modals/modal-animations.css */
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .security-settings-container {
+    padding: 1rem;
+  }
+
+  /* Security card responsive styles moved to: src/styles/components/cards/security-cards.css */
+}

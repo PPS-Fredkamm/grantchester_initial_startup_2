@@ -1,0 +1,133 @@
+/* ==========================================================================
+   SECURITY CARDS - SECURITY SETTINGS CARD STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   SECURITY CARDS GRID
+   ========================================================================== */
+
+.security-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   SECURITY CARD BASE
+   ========================================================================== */
+
+.security-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.6s ease forwards;
+}
+
+.security-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-blue),
+    var(--secondary-blue, #6610f2)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.security-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-color: #dee2e6;
+}
+
+.security-card:hover::before {
+  opacity: 1;
+}
+
+.security-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.security-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* ==========================================================================
+   SECURITY CARD CONTENT
+   ========================================================================== */
+
+.security-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.security-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.security-card-icon.password {
+  background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.security-card-icon.delete {
+  background: linear-gradient(135deg, #dc3545, #e74c3c);
+}
+
+.security-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.security-card-description {
+  color: #6c757d;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .security-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .security-card {
+    padding: 1.5rem;
+  }
+
+  .security-card-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .security-card-icon {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}

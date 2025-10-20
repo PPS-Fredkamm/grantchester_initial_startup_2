@@ -5,7 +5,8 @@ import {
   FiAlertTriangle,
   FiInfo,
 } from "react-icons/fi";
-import "./AlertToast.css";
+
+/* CSS for this file is located in the alerts.css file */
 
 export default function AlertToast({
   show,

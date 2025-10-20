@@ -1,5 +1,4 @@
-// CSS for this banner is coming from the MemberBanner.css file
-import "./AdminBanner.css";
+// CSS for this banner is coming from styles/components/banners.css
 
 export default function AdminBanner() {
   let greeting = `System Admin Interface`;

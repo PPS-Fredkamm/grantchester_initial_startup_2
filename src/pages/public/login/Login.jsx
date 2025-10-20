@@ -8,7 +8,7 @@ import { login } from "../../../redux/slices/authSlice";
 import AlertToast from "../../../components/userInterface/alerts/AlertToast";
 import ForgotPasswordModal from "./ForgotPassword";
 
-import "./Login.css";
+// CSS for this file and forgot password modal is located in the auth-forms.css file
 
 export default function Login() {
   const [username, setUsername] = useState("");

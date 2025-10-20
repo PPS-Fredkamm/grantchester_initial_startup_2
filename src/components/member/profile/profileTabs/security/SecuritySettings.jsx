@@ -4,7 +4,8 @@ import { FiShield, FiLock, FiTrash2 } from "react-icons/fi";
 
 import ChangePasswordModal from "./ChangePasswordModal";
 import DeleteAccountModal from "./DeleteAccountModal";
-import "./SecuritySettings.css";
+
+// CSS now imported via styles/index.css
 
 export default function SecuritySettings() {
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);

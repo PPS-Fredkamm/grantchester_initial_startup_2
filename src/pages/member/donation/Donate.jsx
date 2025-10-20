@@ -3,14 +3,21 @@ import {
   Card,
   Button,
   Form,
-  InputGroup,
   Tooltip,
   OverlayTrigger,
   Row,
   Col,
-  FloatingLabel,
 } from "react-bootstrap";
-import { FaDollarSign, FaBuilding, FaUniversity, FaChartLine, FaCalendarAlt, FaFileAlt, FaEnvelope, FaPhone } from "react-icons/fa";
+import {
+  FaDollarSign,
+  FaBuilding,
+  FaUniversity,
+  FaChartLine,
+  FaCalendarAlt,
+  FaFileAlt,
+  FaEnvelope,
+  FaPhone,
+} from "react-icons/fa";
 import { FaCircleInfo } from "react-icons/fa6";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -19,7 +26,7 @@ import { submitDonationForm } from "../../../redux/slices/donationSlice";
 import ConfirmDonationModal from "./ConfirmDonation";
 import ThankYouModal from "./ThankYouModal";
 
-import "./Donate.css";
+/* CSS moved to: src/styles/pages/donation.css, src/styles/components/forms/donation-forms.css, src/styles/components/cards/donation-cards.css, src/styles/components/buttons/donation-buttons.css */
 
 export default function DonationPage() {
   const dispatch = useDispatch();
@@ -132,7 +139,8 @@ export default function DonationPage() {
                 Send a Private Stock Donation
               </h2>
               <p className="donation-subtitle">
-                Complete the form below to initiate your private stock donation to a university
+                Complete the form below to initiate your private stock donation
+                to a university
               </p>
             </div>
           </Card.Header>
@@ -143,12 +151,16 @@ export default function DonationPage() {
                 <Col md={6}>
                   <div className="form-field">
                     <Form.Label className="field-label">
-                      Company or Organization <span className="required-asterisk">*</span>
+                      Company or Organization{" "}
+                      <span className="required-asterisk">*</span>
                       <OverlayTrigger
                         placement="right"
                         overlay={
                           <Tooltip id="tooltip-company">
-                            Enter the full legal name of the company or organization<br />owning the private stock being donated.
+                            Enter the full legal name of the company or
+                            organization
+                            <br />
+                            owning the private stock being donated.
                           </Tooltip>
                         }
                       >
@@ -163,8 +175,12 @@ export default function DonationPage() {
                         type="text"
                         placeholder="Enter the company or organization name"
                         value={formData.companyName}
-                        onChange={(e) => updateForm("companyName", e.target.value)}
-                        onBlur={(e) => updateForm("companyName", e.target.value.trim())}
+                        onChange={(e) =>
+                          updateForm("companyName", e.target.value)
+                        }
+                        onBlur={(e) =>
+                          updateForm("companyName", e.target.value.trim())
+                        }
                         required
                         autoComplete="organization"
                         inputMode="text"
@@ -177,13 +193,20 @@ export default function DonationPage() {
                 <Col md={6}>
                   <div className="form-field">
                     <Form.Label className="field-label">
-                      Recipient (University) <span className="required-asterisk">*</span>
+                      Recipient (University){" "}
+                      <span className="required-asterisk">*</span>
                       <OverlayTrigger
                         placement="right"
                         overlay={
                           <Tooltip id="tooltip-recipient">
-                            Select the university that will receive your donation.<br /><br />
-                            Choose from our partner universities or select "Other"<br />for institutions not listed.
+                            Select the university that will receive your
+                            donation.
+                            <br />
+                            <br />
+                            Choose from our partner universities or select
+                            "Other"
+                            <br />
+                            for institutions not listed.
                           </Tooltip>
                         }
                       >
@@ -196,7 +219,9 @@ export default function DonationPage() {
                       </span>
                       <Form.Select
                         value={formData.recipient}
-                        onChange={(e) => updateForm("recipient", e.target.value)}
+                        onChange={(e) =>
+                          updateForm("recipient", e.target.value)
+                        }
                         required={formData.recipient !== "other"}
                         className="form-input"
                       >
@@ -204,7 +229,9 @@ export default function DonationPage() {
                         {universities.map((uni, index) => (
                           <option
                             key={index}
-                            value={uni.toLowerCase() === "other" ? "other" : uni}
+                            value={
+                              uni.toLowerCase() === "other" ? "other" : uni
+                            }
                           >
                             {uni}
                           </option>
@@ -214,12 +241,15 @@ export default function DonationPage() {
                     {formData.recipient === "other" && (
                       <div className="form-field mt-2">
                         <Form.Label className="field-label">
-                          University Name <span className="required-asterisk">*</span>
+                          University Name{" "}
+                          <span className="required-asterisk">*</span>
                           <OverlayTrigger
                             placement="right"
                             overlay={
                               <Tooltip id="tooltip-other-university">
-                                Enter the complete legal name of the university<br />that will receive your donation.
+                                Enter the complete legal name of the university
+                                <br />
+                                that will receive your donation.
                               </Tooltip>
                             }
                           >
@@ -234,7 +264,9 @@ export default function DonationPage() {
                             type="text"
                             placeholder="Enter the university name"
                             value={formData.otherUniversity}
-                            onChange={(e) => updateForm("otherUniversity", e.target.value)}
+                            onChange={(e) =>
+                              updateForm("otherUniversity", e.target.value)
+                            }
                             required
                             title="Please enter a valid university name."
                             className="form-input"
@@ -251,12 +283,16 @@ export default function DonationPage() {
                 <Col md={6}>
                   <div className="form-field">
                     <Form.Label className="field-label">
-                      Number of Units <span className="required-asterisk">*</span>
+                      Number of Units{" "}
+                      <span className="required-asterisk">*</span>
                       <OverlayTrigger
                         placement="right"
                         overlay={
                           <Tooltip id="tooltip-units">
-                            Enter the total number of units/shares you are donating.<br /><br />
+                            Enter the total number of units/shares you are
+                            donating.
+                            <br />
+                            <br />
                             This should be a whole number (no decimals).
                           </Tooltip>
                         }
@@ -278,13 +314,17 @@ export default function DonationPage() {
                 <Col md={6}>
                   <div className="form-field">
                     <Form.Label className="field-label">
-                      Valuation Per Unit (USD) <span className="required-asterisk">*</span>
+                      Valuation Per Unit (USD){" "}
+                      <span className="required-asterisk">*</span>
                       <OverlayTrigger
                         placement="right"
                         overlay={
                           <Tooltip id="tooltip-valuation">
-                            Enter the fair market value per unit/share in USD.<br /><br />
-                            This should reflect the current market price or valuation.
+                            Enter the fair market value per unit/share in USD.
+                            <br />
+                            <br />
+                            This should reflect the current market price or
+                            valuation.
                           </Tooltip>
                         }
                       >
@@ -298,7 +338,9 @@ export default function DonationPage() {
                       <Form.Control
                         type="number"
                         value={formData.valuation}
-                        onChange={(e) => updateForm("valuation", e.target.value)}
+                        onChange={(e) =>
+                          updateForm("valuation", e.target.value)
+                        }
                         placeholder="0.00"
                         required
                         min="10.00"
@@ -310,7 +352,6 @@ export default function DonationPage() {
                 </Col>
               </Row>
 
-
               {/* Total Value Display */}
               <div className="total-value-display mb-3">
                 <div className="total-value-card">
@@ -320,7 +361,8 @@ export default function DonationPage() {
                       Total Donation Value
                     </div>
                     <div className="total-value-amount">
-                      ${Number(formData.totalValue).toLocaleString("en-US", {
+                      $
+                      {Number(formData.totalValue).toLocaleString("en-US", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
@@ -339,7 +381,8 @@ export default function DonationPage() {
                         placement="right"
                         overlay={
                           <Tooltip id="tooltip-date">
-                            You may choose today's date or a future date for tax purposes.
+                            You may choose today's date or a future date for tax
+                            purposes.
                           </Tooltip>
                         }
                       >
@@ -353,7 +396,9 @@ export default function DonationPage() {
                       <Form.Control
                         type="date"
                         value={formData.donationDate}
-                        onChange={(e) => updateForm("donationDate", e.target.value)}
+                        onChange={(e) =>
+                          updateForm("donationDate", e.target.value)
+                        }
                         min={new Date().toISOString().split("T")[0]}
                         required
                         className="form-input"
@@ -369,8 +414,11 @@ export default function DonationPage() {
                         placement="right"
                         overlay={
                           <Tooltip id="tooltip-file">
-                            Upload supporting documents for your donation.<br /><br />
-                            Examples: Valuation statement, bill of sale, legal note.
+                            Upload supporting documents for your donation.
+                            <br />
+                            <br />
+                            Examples: Valuation statement, bill of sale, legal
+                            note.
                           </Tooltip>
                         }
                       >
@@ -400,7 +448,10 @@ export default function DonationPage() {
                     placement="right"
                     overlay={
                       <Tooltip id="tooltip-message">
-                        Add any additional notes or instructions for the university<br />regarding your donation.
+                        Add any additional notes or instructions for the
+                        university
+                        <br />
+                        regarding your donation.
                       </Tooltip>
                     }
                   >
@@ -414,10 +465,8 @@ export default function DonationPage() {
                   onChange={(e) => updateForm("note", e.target.value)}
                   placeholder="Add a note for the university"
                   className="form-input textarea-input"
-                  style={{ height: '80px' }}
                 />
               </div>
-
 
               {/* Contact Info */}
               <div className="contact-info-section mb-3">
@@ -434,7 +483,9 @@ export default function DonationPage() {
                           placement="right"
                           overlay={
                             <Tooltip id="tooltip-email">
-                              This email will be used for all communications.<br /><br />
+                              This email will be used for all communications.
+                              <br />
+                              <br />
                               You can update it in your profile settings.
                             </Tooltip>
                           }
@@ -464,7 +515,9 @@ export default function DonationPage() {
                           placement="right"
                           overlay={
                             <Tooltip id="tooltip-phone">
-                              This number will be used for all communications.<br /><br />
+                              This number will be used for all communications.
+                              <br />
+                              <br />
                               You can update it in your profile settings.
                             </Tooltip>
                           }
@@ -502,7 +555,9 @@ export default function DonationPage() {
                     className="agreement-checkbox"
                   />
                   <Form.Check.Label className="agreement-label">
-                    I confirm that I am authorized to make this private stock donation on behalf of the company/organization listed above and understand this action is legally binding.
+                    I confirm that I am authorized to make this private stock
+                    donation on behalf of the company/organization listed above
+                    and understand this action is legally binding.
                   </Form.Check.Label>
                 </Form.Check>
               </div>

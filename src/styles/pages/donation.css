@@ -1,0 +1,26 @@
+/* ==========================================================================
+   DONATION PAGE LAYOUT
+   ========================================================================== */
+
+.donation-page-container {
+  min-height: 100vh;
+  background-color: var(--primary-background-color);
+  padding: 1rem 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .donation-page-container {
+    padding: 1rem 0;
+  }
+}
+
+/* ==========================================================================
+   NOTES
+   ========================================================================== */
+
+/* Card styles: src/styles/components/cards/donation-cards.css */
+/* Animations: src/styles/utils/animations.css */

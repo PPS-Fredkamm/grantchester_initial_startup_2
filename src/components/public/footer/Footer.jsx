@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import "./Footer.css";
+
+/* CSS for this file is located in the footer.css file */
 
 function Footer() {
   const version = useSelector((state) => state.app.version);

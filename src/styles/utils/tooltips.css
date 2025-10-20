@@ -1,0 +1,75 @@
+/* ==========================================================================
+   UNIVERSAL TOOLTIP STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   BOOTSTRAP TOOLTIP OVERRIDES
+   ========================================================================== */
+
+.tooltip {
+  font-size: 0.875rem;
+  padding: 6px 10px;
+  border-radius: var(--border-radius-sm);
+  max-width: 300px;
+}
+
+.tooltip-inner {
+  text-align: start !important;
+  color: #fff;
+  padding: 10px 14px;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   TOOLTIP ARROW STYLES
+   ========================================================================== */
+
+.tooltip .tooltip-arrow {
+  border-color: rgba(0, 0, 0, 0.9) transparent;
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow {
+  border-top-color: rgba(0, 0, 0, 0.9);
+}
+
+.tooltip.bs-tooltip-bottom .tooltip-arrow {
+  border-bottom-color: rgba(0, 0, 0, 0.9);
+}
+
+.tooltip.bs-tooltip-start .tooltip-arrow {
+  border-left-color: rgba(0, 0, 0, 0.9);
+}
+
+.tooltip.bs-tooltip-end .tooltip-arrow {
+  border-right-color: rgba(0, 0, 0, 0.9);
+}
+
+/* ==========================================================================
+   RESPONSIVE TOOLTIP STYLES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .tooltip {
+    font-size: 0.8rem;
+    max-width: 250px;
+  }
+  
+  .tooltip-inner {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .tooltip {
+    font-size: 0.75rem;
+    max-width: 200px;
+  }
+  
+  .tooltip-inner {
+    padding: 6px 10px;
+  }
+}

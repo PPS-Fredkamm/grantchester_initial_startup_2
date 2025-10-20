@@ -1,0 +1,33 @@
+/* ==========================================================================
+   DONOR PENDING CARD STYLES
+   ========================================================================== */
+
+
+/* ==========================================================================
+   CELL + ICON FORMATTING
+   ========================================================================== */
+
+.pending-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pending-icon {
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   STATUS PILL STYLES - MOVED TO: src/styles/components/shared/status-styles.css
+   ========================================================================== */
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  /* Status pill responsive styles moved to: src/styles/components/shared/status-styles.css */
+}

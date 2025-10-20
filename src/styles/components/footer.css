@@ -1,0 +1,59 @@
+/* ==========================================================================
+   FOOTER COMPONENT STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   FOOTER BASE STYLES
+   ========================================================================== */
+
+.footer {
+  background-color: var(--secondary-background-color);
+  border-top: 1px solid #dee2e6;
+  font-size: 0.8rem;
+  margin-top: auto;
+  padding: 0.75rem 0;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   FOOTER CONTENT LAYOUT
+   ========================================================================== */
+
+.footer-content {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+/* ==========================================================================
+   FOOTER TEXT STYLES
+   ========================================================================== */
+
+.footer-copyright {
+  color: #495057;
+}
+
+.footer-version {
+  color: #6c757d;
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE FOOTER STYLES
+   ========================================================================== */
+
+/* Mobile devices */
+@media (max-width: 768px) {
+  .footer {
+    font-size: 0.75rem;
+    padding: 0.6rem 0;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: center;
+  }
+}

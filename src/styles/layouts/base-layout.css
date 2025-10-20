@@ -1,0 +1,61 @@
+/* ==========================================================================
+   BASE LAYOUT PATTERNS - COMMON ACROSS ALL LAYOUTS
+   ========================================================================== */
+
+/* Common layout padding - applies to all layouts */
+.admin-layout,
+.member-layout,
+.marketing-layout {
+  padding: 0 7rem;
+}
+
+/* Common outlet container */
+.outlet-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-background-color);
+  padding-top: 6.3rem;
+  flex: 1;
+}
+
+/* ==========================================================================
+   DASHBOARD LAYOUTS - COMMON PATTERNS
+   ========================================================================== */
+
+/* Dashboard containers - admin, member, and all dashboard types */
+.admin-dashboard,
+.donor-dashboard,
+.university-dashboard,
+.company-dashboard,
+.profile-page {
+  background-color: var(--primary-background-color);
+}
+
+/* Dashboard content - consistent padding across all dashboards */
+.admin-content,
+.donor-content,
+.university-content,
+.company-content,
+.profile-content {
+  padding-top: 1.5rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS - COMMON ACROSS ALL LAYOUTS
+   ========================================================================== */
+
+@media (max-width: 1199px) {
+  .admin-layout,
+  .member-layout,
+  .marketing-layout {
+    padding: 1rem 4rem;
+  }
+}
+
+@media (max-width: 764px) {
+  .admin-layout,
+  .member-layout,
+  .marketing-layout {
+    padding: 1rem;
+  }
+}

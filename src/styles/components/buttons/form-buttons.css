@@ -1,0 +1,43 @@
+/* ==========================================================================
+   FORM BUTTONS - PRIMARY BUTTONS USED ACROSS ALL FORMS
+   ========================================================================== */
+
+/* ==========================================================================
+   PRIMARY FORM BUTTONS
+   ========================================================================== */
+
+.form-button,
+.login-button,
+.signup-button,
+.profile-submit-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue, #667eea) 0%,
+    var(--secondary-blue, #764ba2) 100%
+  );
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.form-button:hover,
+.login-button:hover,
+.signup-button:hover,
+.profile-submit-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+.form-button:active,
+.login-button:active,
+.signup-button:active,
+.profile-submit-btn:active {
+  transform: translateY(0);
+}

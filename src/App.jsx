@@ -8,13 +8,13 @@ import AdminAuthentication from "./components/auth/AdminAuthentication.jsx";
 
 import NotFound from "./pages/public/notFound/NotFound.jsx";
 import ErrorHandler from "./pages/ErrorHandler/ErrorHandler.jsx";
-import MainLayout from "./layouts/main/MainLayout.jsx";
-import MemberLayout from "./layouts/member/MemberLayout.jsx";
-import AdminLayout from "./layouts/admin/AdminLayout.jsx";
-import MarketingLayout from "./layouts/marketing/MarketingLayout.jsx";
+import MainLayout from "./layouts/MainLayout.jsx";
+import MemberLayout from "./layouts/MemberLayout.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
+import MarketingLayout from "./layouts/MarketingLayout.jsx";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "./styles/index.css";
 
 // Lazy-loaded route components
 const Home = lazy(() => import("./pages/public/home/Home.jsx"));

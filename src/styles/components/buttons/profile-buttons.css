@@ -1,0 +1,57 @@
+/* ==========================================================================
+   PROFILE BUTTONS - PROFILE PAGE SPECIFIC BUTTONS
+   ========================================================================== */
+
+/* ==========================================================================
+   PROFILE ACTION BUTTONS
+   ========================================================================== */
+
+.profile-edit-btn {
+  border: 1px solid var(--primary-blue);
+  border-radius: var(--border-radius-sm);
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  color: var(--primary-blue);
+}
+
+.profile-edit-btn:hover {
+  background-color: var(--primary-blue);
+  color: white;
+  border-color: var(--primary-blue);
+}
+
+.profile-save-btn {
+  background-color: var(--primary-blue);
+  border: 1px solid var(--primary-blue);
+  border-radius: var(--border-radius-sm);
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.profile-save-btn:hover {
+  background-color: #0b5ed7;
+  border-color: #0b5ed7;
+}
+
+.profile-cancel-btn {
+  border: 1px solid #6c757d;
+  border-radius: var(--border-radius-sm);
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #6c757d;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.profile-cancel-btn:hover {
+  border-color: #5c636a;
+  background-color: #f8f9fa;
+  color: #5c636a;
+}

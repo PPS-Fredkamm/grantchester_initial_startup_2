@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import "./MemberBanner.css";
+// CSS for this banner is coming from styles/components/banners.css
 
 export default function MemberBanner() {
   const { type } = useParams();

@@ -1,0 +1,68 @@
+/* ==========================================================================
+   BASE ELEMENT STYLES - HTML, BODY, AND CORE ELEMENTS
+   ========================================================================== */
+
+/* ==========================================================================
+   HTML AND BODY
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+/* ==========================================================================
+   BOOTSTRAP OVERRIDES
+   ========================================================================== */
+
+/* Button enhancements */
+.btn {
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.2);
+}
+
+/* Form control enhancements */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 0.2rem rgba(75, 155, 231, 0.15);
+}
+
+.form-select {
+  border-radius: var(--border-radius-sm);
+  border: 1px solid #ced4da;
+  transition: all 0.2s ease;
+}
+
+.floating-label .form-control {
+  border-radius: var(--border-radius-sm);
+  border: 1px solid #ced4da;
+  transition: all 0.2s ease;
+}
+
+.floating-label .form-control:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 0.2rem rgba(75, 155, 231, 0.15);
+}

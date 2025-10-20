@@ -1,0 +1,73 @@
+/* ==========================================================================
+   ACCORDION COMPONENT STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   BASE ACCORDION STYLES
+   ========================================================================== */
+
+.accordion-item {
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--border-radius-md) !important;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   ACCORDION HEADER
+   ========================================================================== */
+
+.accordion-header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--border-color-light);
+  padding: 1.25rem 1.5rem;
+}
+
+.accordion-header .accordion-button {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  color: #2c3e50;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.accordion-header .accordion-button:focus {
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   ACCORDION BODY
+   ========================================================================== */
+
+.accordion-body {
+  background-color: #ffffff;
+  padding: 1.5rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .accordion-header {
+    padding: 1rem;
+  }
+
+  .accordion-body {
+    padding: 1rem;
+  }
+}

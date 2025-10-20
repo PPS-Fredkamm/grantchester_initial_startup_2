@@ -10,8 +10,7 @@ import * as BLM from "../../../../../managers/BusinessLayerMethods";
 import ContactInfo from "./ContactInfo";
 import AddressInfo from "./AddressInfo";
 
-import "../../Profile.css";
-import "./BasicInfo.css";
+// CSS now imported via styles/index.css
 
 export default function BasicInfo() {
   const profileCDO = useSelector((state) => state.auth.profileCDO);

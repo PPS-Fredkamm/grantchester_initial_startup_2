@@ -1,0 +1,133 @@
+/* ==========================================================================
+   MODAL BUTTONS - BUTTONS USED IN MODALS
+   ========================================================================== */
+
+/* ==========================================================================
+   MODAL PRIMARY BUTTONS
+   ========================================================================== */
+
+/* Modal primary buttons - same as form buttons */
+.modal .btn-primary,
+.change-password-modal .btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue, #667eea) 0%,
+    var(--secondary-blue, #764ba2) 100%
+  );
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.modal .btn-primary:hover,
+.change-password-modal .btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.2);
+}
+
+.modal .btn-primary:active,
+.change-password-modal .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   MODAL CANCEL BUTTONS
+   ========================================================================== */
+
+/* Modal cancel buttons - same as profile cancel buttons */
+.modal .btn-outline-secondary,
+.change-password-modal .btn-outline-secondary {
+  border: 1px solid #6c757d;
+  border-radius: var(--border-radius-sm);
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #6c757d;
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.modal .btn-outline-secondary:hover,
+.change-password-modal .btn-outline-secondary:hover {
+  border-color: #5c636a;
+  background-color: #f8f9fa;
+  color: #5c636a;
+}
+
+/* ==========================================================================
+   MODAL ACTION BUTTONS
+   ========================================================================== */
+
+.cancel-btn {
+  border: 2px solid #6c757d;
+  color: #6c757d;
+  background: transparent;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #6c757d;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(75, 155, 231, 0.3);
+}
+
+.close-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  min-width: 180px;
+}
+
+.close-btn:hover {
+  background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(75, 155, 231, 0.3);
+}
+
+/* ==========================================================================
+   RESPONSIVE MODAL BUTTONS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .cancel-btn,
+  .confirm-btn {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .close-btn {
+    width: 100%;
+    min-width: auto;
+  }
+}

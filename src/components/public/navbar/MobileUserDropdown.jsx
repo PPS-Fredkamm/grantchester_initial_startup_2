@@ -92,13 +92,7 @@ export default function MobileUserDropdown({ onClose }) {
                       className="dropdown-item ps-3"
                       onClick={onClose}
                     >
-                      {c.name}{" "}
-                      <span
-                        className="text-muted"
-                        style={{ fontSize: "0.8rem" }}
-                      >
-                        ({c.role})
-                      </span>
+                      {c.name} <span className="text-muted">({c.role})</span>
                     </a>
                   ))
                 ) : (
@@ -127,13 +121,7 @@ export default function MobileUserDropdown({ onClose }) {
                       className="dropdown-item ps-3"
                       onClick={onClose}
                     >
-                      {u.name}{" "}
-                      <span
-                        className="text-muted"
-                        style={{ fontSize: "0.8rem" }}
-                      >
-                        ({u.role})
-                      </span>
+                      {u.name} <span className="text-muted">({u.role})</span>
                     </a>
                   ))
                 ) : (
@@ -152,11 +140,7 @@ export default function MobileUserDropdown({ onClose }) {
           </Accordion>
 
           {/* Footer */}
-          <div
-            className="dropdown-item mt-2"
-            onClick={handleLogout}
-            style={{ cursor: "pointer" }}
-          >
+          <div className="dropdown-item mt-2" onClick={handleLogout}>
             Sign Out
           </div>
         </div>

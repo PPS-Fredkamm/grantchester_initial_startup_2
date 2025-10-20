@@ -1,0 +1,219 @@
+/* ==========================================================================
+   PROFILE FORMS
+   ========================================================================== */
+
+/* ==========================================================================
+   PROFILE CONTAINER
+   ========================================================================== */
+
+.profile-info-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* ==========================================================================
+   PROFILE CARD - MOVED TO: src/styles/components/cards/profile-cards.css
+   ========================================================================== */
+
+/* ==========================================================================
+   PROFILE HEADER
+   ========================================================================== */
+
+.profile-info-header {
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue, #667eea) 0%,
+    var(--secondary-blue, #764ba2) 100%
+  );
+  border: none;
+  padding: 2rem 2rem 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.profile-info-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.profile-info-title .icon {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-lg);
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info-subtitle {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   PROFILE BODY
+   ========================================================================== */
+
+.profile-info-body {
+  padding: 2rem;
+}
+
+/* ==========================================================================
+   PROFILE FORM SECTIONS
+   ========================================================================== */
+
+.form-section {
+  margin-bottom: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-blue, #667eea);
+}
+
+/* ==========================================================================
+   AGREEMENT SECTION
+   ========================================================================== */
+
+.agreement-section {
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 2px solid var(--border-color-light);
+}
+
+.modern-checkbox {
+  margin: 0;
+}
+
+.modern-checkbox .form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.75rem;
+  accent-color: var(--primary-blue, #667eea);
+  border-radius: 6px;
+}
+
+.modern-checkbox .form-check-label {
+  font-weight: 500;
+  color: #374151;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   PROFILE FORM STYLES
+   ========================================================================== */
+
+.profile-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.profile-form-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.profile-label-icon {
+  color: var(--primary-blue);
+  font-size: 1rem;
+}
+
+.profile-form-control {
+  border: 2px solid #e5e7eb;
+  border-radius: var(--border-radius-lg);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+}
+
+.profile-form-control:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  outline: none;
+}
+
+.profile-form-control::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .profile-info-wrapper {
+    padding: 0;
+  }
+
+  .profile-info-header {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+
+  .profile-info-body {
+    padding: 1.5rem;
+  }
+
+  .profile-info-title {
+    font-size: 1.5rem;
+  }
+
+  .form-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .profile-info-wrapper {
+    padding: 0;
+  }
+
+  .profile-info-header {
+    padding: 1rem;
+  }
+
+  .profile-info-body {
+    padding: 1rem;
+  }
+
+  .profile-info-title {
+    font-size: 1.25rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .agreement-section {
+    padding: 1rem;
+  }
+}

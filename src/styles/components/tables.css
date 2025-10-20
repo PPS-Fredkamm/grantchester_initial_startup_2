@@ -1,0 +1,53 @@
+/* ==========================================================================
+   TABLE COMPONENTS
+   ========================================================================== */
+
+/* ==========================================================================
+   UNIVERSAL TABLE SCROLL BEHAVIOR
+   ========================================================================== */
+
+.scrollable-table {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  border-radius: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ==========================================================================
+   UNIVERSAL TABLE DEFAULTS
+   ========================================================================== */
+
+.scrollable-table table {
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.scrollable-table th,
+.scrollable-table td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.scrollable-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE TABLE TWEAKS
+   ========================================================================== */
+
+/* Medium devices */
+@media (max-width: 992px) {
+  .scrollable-table table {
+    min-width: 800px;
+  }
+}
+
+/* Small devices */
+@media (max-width: 600px) {
+  .scrollable-table table {
+    min-width: 700px;
+  }
+}

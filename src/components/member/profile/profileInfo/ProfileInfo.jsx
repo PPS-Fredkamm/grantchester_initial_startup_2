@@ -18,8 +18,7 @@ import * as BLM from "../../../../managers/BusinessLayerMethods";
 
 import ProfilePlaceholder from "../../../../assets/Images/profilePlaceholder.jpg";
 
-import "../Profile.css";
-import "./ProfileInfo.css";
+// CSS now imported via styles/index.css
 
 export default function ProfileInfo() {
   // Redux state

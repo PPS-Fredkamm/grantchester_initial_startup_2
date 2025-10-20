@@ -1,0 +1,24 @@
+/* ==========================================================================
+   NAVIGATION BUTTONS - NAVBAR AND NAVIGATION-SPECIFIC BUTTONS
+   ========================================================================== */
+
+/* ==========================================================================
+   DONATE BUTTON
+   ========================================================================== */
+
+.donate-button {
+  font-weight: 600;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: white;
+  border: none !important;
+}
+
+.donate-heart-icon {
+  color: white;
+  font-size: 0.7rem;
+  margin-right: 0.5rem;
+}

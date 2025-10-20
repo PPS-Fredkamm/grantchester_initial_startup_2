@@ -6,7 +6,7 @@ import BasicInfo from "../../../components/member/profile/profileTabs/basicInfo/
 import NotiPreferences from "../../../components/member/profile/profileTabs/NotiPreferences";
 import SecuritySettings from "../../../components/member/profile/profileTabs/security/SecuritySettings";
 
-import "./Profile.css";
+// CSS now imported via styles/index.css
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("basic");

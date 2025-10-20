@@ -1,0 +1,97 @@
+/* ==========================================================================
+   NAVBAR COMPONENT - MAIN CONTAINER
+   ========================================================================== */
+
+/* Navbar containers */
+.navbar-container,
+.marketing-navbar-container {
+  background-color: var(--primary-light-color);
+}
+
+/* Navbar content layout */
+.nav-content,
+.marketing-nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 3rem;
+}
+
+/* Navbar images */
+.nav-image,
+.marketing-nav-image {
+  display: inline-block;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+/* ==========================================================================
+   NAVIGATION MENU STYLES
+   ========================================================================== */
+
+/* Common nav link styles */
+.nav-menu .nav-link,
+.marketing-nav-menu .nav-link {
+  margin: 0 3rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+/* ==========================================================================
+   LAYOUT-SPECIFIC FOR THE SUB NAVIGATION STYLES - ADMIN, MEMBER, AND MARKETING
+   ========================================================================== */
+
+/* Common navigation styles for all layouts */
+.admin-nav,
+.member-nav,
+.marketing-nav {
+  border-bottom: solid 2px #dee2e6;
+}
+
+/* Layout-specific nav links */
+.admin-nav .nav-link,
+.member-nav .nav-link,
+.marketing-nav .nav-link {
+  color: black;
+  margin-right: 1.5rem;
+}
+
+/* Layout-specific active link colors */
+.admin-nav .nav-link.active {
+  color: var(--admin-red);
+  font-weight: 500;
+}
+
+.member-nav .nav-link.active,
+.marketing-nav .nav-link.active {
+  color: #3182ce !important;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   RESPONSIVE NAVBAR
+   ========================================================================== */
+
+@media (max-width: 1500px) {
+  .nav-menu .nav-link,
+  .marketing-nav-menu .nav-link {
+    margin: 0rem;
+  }
+
+  .nav-content,
+  .marketing-nav-content {
+    padding-right: 0rem;
+  }
+}
+
+@media (max-width: 764px) {
+  .admin-nav,
+  .member-nav,
+  .marketing-nav {
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,63 @@
+/* ==========================================================================
+   DONOR INFO CARD STYLES
+   ========================================================================== */
+
+.donor-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.donor-menu-icon {
+  font-size: 1.5rem;
+  color: #6c757d;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.donor-menu-link:hover .donor-menu-icon {
+  color: var(--primary-blue);
+}
+
+.field-row {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 1.25rem;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.field-row span {
+  background-color: var(--primary-blue);
+  color: white;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.field-row input {
+  border: none;
+  border-left: 1px solid #ced4da;
+  border-radius: 0;
+  flex: 1;
+  padding-left: 0.75rem;
+  opacity: 60%;
+}
+
+.donor-donate-button {
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  border: none !important;
+}
+
+.donor-donate-button span {
+  margin-right: 0.5rem;
+  font-weight: 500;
+}

@@ -5,7 +5,7 @@ import Image from 'react-bootstrap/Image';
 import NavMenu from './NavMenu';
 import GrantchesterImage from '../../../assets/images/grantchester.png';
 
-import './MarketingNav.css';
+/* CSS for this file is located in the marketing-nav.css file */
 
 export default function MarketingNav() {
 

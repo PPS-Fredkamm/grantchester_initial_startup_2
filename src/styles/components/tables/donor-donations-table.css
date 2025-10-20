@@ -1,0 +1,108 @@
+/* ==========================================================================
+   DONOR DONATIONS TABLE STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   HEADER (TITLE + DROPDOWN)
+   ========================================================================== */
+
+.donations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.donations-header .dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10rem;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  opacity: 0.8;
+  border: 1px solid #dee2e6;
+}
+
+/* ==========================================================================
+   TABLE STYLING
+   ========================================================================== */
+
+.donations-table {
+  min-width: 900px; /* Set min width to trigger scroll when needed */
+  border-collapse: collapse;
+}
+
+.donations-table th,
+.donations-table td {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* Row striping */
+.donations-table.table-striped > tbody > tr:nth-of-type(odd) > td {
+  background-color: var(--light-blue-background) !important;
+}
+
+/* Remove bottom border on final row */
+.donations-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Ensure inline alignment for icons or inline elements */
+.donations-table td span {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   STATUS PILL STYLES - MOVED TO: src/styles/components/shared/status-styles.css
+   ========================================================================== */
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* Small devices (max-width: 600px) */
+@media (max-width: 600px) {
+  .donations-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .donations-header .dropdown-toggle {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .donations-table {
+    min-width: 700px; /* Slightly smaller table for narrow view */
+  }
+}
+
+/* Medium devices (max-width: 992px) */
+@media (max-width: 992px) {
+  .donations-header .dropdown-toggle {
+    width: 8rem;
+  }
+
+  .donations-table {
+    min-width: 800px;
+  }
+
+  .donations-table-wrapper {
+    border-radius: 6px;
+  }
+}
+
+/* Large devices (max-width: 1200px) */
+@media (max-width: 1200px) {
+  .donations-header .dropdown-toggle {
+    width: 9rem;
+  }
+
+  .donations-table {
+    min-width: 850px;
+  }
+}

@@ -1,0 +1,199 @@
+/* ==========================================================================
+   DELETE ACCOUNT MODAL STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   MODAL CONTAINER
+   ========================================================================== */
+
+.delete-account-modal .modal-content {
+  border: none;
+  border-radius: var(--border-radius-xl);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: modalSlideIn 0.3s ease forwards;
+}
+
+/* ==========================================================================
+   MODAL HEADER
+   ========================================================================== */
+
+.delete-account-modal .modal-header {
+  background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+  border-bottom: 1px solid #fecaca;
+  padding: 1.5rem;
+}
+
+.delete-account-modal .modal-title {
+  font-weight: 600;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   MODAL BODY
+   ========================================================================== */
+
+.delete-account-modal .modal-body {
+  padding: 2rem;
+  background: #ffffff;
+}
+
+.delete-account-modal .modal-body p {
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   FORM CONTROLS
+   ========================================================================== */
+
+.delete-account-modal .form-control {
+  border: 2px solid #e5e7eb;
+  border-radius: var(--border-radius-md);
+  padding: 0.875rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+.delete-account-modal .form-control:focus {
+  border-color: #f87171;
+  box-shadow: 0 0 0 0.2rem rgba(248, 113, 113, 0.15);
+}
+
+/* ==========================================================================
+   STAR RATING
+   ========================================================================== */
+
+.delete-account-modal .star-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 0.5rem;
+}
+
+.delete-account-modal .star-rating .star {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 28px;
+  color: #e5e7eb;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.delete-account-modal .star-rating .star:hover {
+  transform: scale(1.1);
+  color: #fbbf24;
+}
+
+.delete-account-modal .star-rating .star.active {
+  color: #f59e0b;
+  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.3));
+}
+
+/* ==========================================================================
+   WARNING TEXT
+   ========================================================================== */
+
+.delete-account-modal .text-danger {
+  background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+  border: 2px solid #fecaca;
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #dc2626;
+  text-align: center;
+}
+
+/* ==========================================================================
+   MODAL FOOTER
+   ========================================================================== */
+
+.delete-account-modal .modal-footer {
+  background: #fafafa;
+  border-top: 1px solid #e5e7eb;
+  padding: 1.5rem 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.delete-account-modal .btn {
+  border-radius: var(--border-radius-md);
+  padding: 0.875rem 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.delete-account-modal .btn-secondary {
+  background: #6b7280;
+  border: 2px solid #6b7280;
+  color: white;
+}
+
+.delete-account-modal .btn-secondary:hover {
+  background: #4b5563;
+  border-color: #4b5563;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 114, 128, 0.3);
+}
+
+.delete-account-modal .btn-danger {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  border: 2px solid #dc2626;
+  color: white;
+}
+
+.delete-account-modal .btn-danger:hover {
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  border-color: #b91c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+}
+
+.delete-account-modal .btn-danger:disabled {
+  background: #d1d5db;
+  border-color: #d1d5db;
+  color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+
+/* Animation moved to modal-animations.css */
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .delete-account-modal .modal-body {
+    padding: 1.5rem;
+  }
+
+  .delete-account-modal .modal-footer {
+    padding: 1rem 1.5rem;
+    flex-direction: column;
+  }
+
+  .delete-account-modal .btn {
+    width: 100%;
+  }
+
+  .delete-account-modal .star-rating {
+    justify-content: center;
+  }
+}

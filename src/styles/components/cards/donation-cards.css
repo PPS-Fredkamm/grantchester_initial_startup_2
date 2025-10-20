@@ -1,0 +1,142 @@
+/* ==========================================================================
+   DONATION CARD COMPONENTS
+   ========================================================================== */
+
+.donation-card {
+  max-width: 900px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.donation-header {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.donation-header-content {
+  color: white;
+}
+
+.donation-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donation-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 0;
+  font-weight: 300;
+}
+
+.donation-body {
+  padding: 1.75rem;
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
+   TOTAL VALUE CARD
+   ========================================================================== */
+
+.total-value-display {
+  margin: 0.75rem 0;
+}
+
+.total-value-card {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: 2px solid var(--primary-blue);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.total-value-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.total-value-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.25rem;
+}
+
+.total-value-label {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.total-value-amount {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS
+   ========================================================================== */
+
+@media (min-width: 1200px) {
+  .donation-card {
+    max-width: 1000px;
+  }
+  
+  .donation-body {
+    padding: 1.5rem;
+  }
+  
+  .donation-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .donation-header {
+    padding: 1.5rem;
+  }
+  
+  .donation-title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .donation-body {
+    padding: 1.5rem;
+  }
+  
+  .total-value-amount {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .donation-card {
+    margin: 0 1rem;
+  }
+  
+  .donation-header {
+    padding: 1rem;
+  }
+  
+  .donation-body {
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,160 @@
+/* ==========================================================================
+   USER ICON COMPONENT STYLES
+   ========================================================================== */
+
+.user-email {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.user-role {
+  font-size: 0.75rem;
+  color: #6c757d;
+  white-space: nowrap;
+  margin-top: -2px;
+}
+
+/* ==========================================================================
+   PROFILE DROPDOWN MENU - USER-SPECIFIC OVERRIDES
+   ========================================================================== */
+
+/* Override universal dropdown styles for profile dropdown */
+.profile-dropdown .dropdown-menu {
+  width: 300px;
+  padding: 0;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transform: none;
+}
+
+/* ==========================================================================
+   PROFILE CARD LAYOUT - MOVED TO: src/styles/components/cards/profile-cards.css
+   ========================================================================== */
+
+/* ==========================================================================
+   PROFILE DROPDOWN ITEMS - USER-SPECIFIC OVERRIDES
+   ========================================================================== */
+
+/* Profile dropdown item styles - inherits universal hover effects */
+.profile-dropdown .dropdown-item {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   USER ICON ACCORDION STYLES
+   ========================================================================== */
+
+.usericon-accordion .accordion-item {
+  border: 0;
+}
+
+.usericon-accordion .accordion-button {
+  background: transparent;
+  padding: 0.6rem 1rem;
+  font-weight: 500;
+  color: #000;
+  box-shadow: none;
+}
+
+.usericon-accordion .accordion-button:not(.collapsed) {
+  background: transparent;
+  color: #000;
+}
+
+.usericon-accordion .accordion-body {
+  padding: 0.25rem 0 0.5rem 0;
+}
+
+/* Accordion dropdown items - override universal dropdown styles */
+.usericon-accordion .dropdown-item {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-left: 3px solid transparent;
+  transform: none;
+  background: transparent;
+  color: #333;
+  transition: all 0.2s ease;
+  border-radius: 0;
+  text-decoration: none;
+  display: block;
+  position: relative;
+}
+
+.usericon-accordion .dropdown-item:hover {
+  background: linear-gradient(90deg, rgba(75, 155, 231, 0.08), rgba(75, 200, 231, 0.05));
+  border-left-color: var(--primary-blue);
+  color: var(--primary-blue);
+  transform: translateX(4px);
+  text-decoration: none;
+}
+
+/* Override universal accordion styles for user dropdown */
+.usericon-accordion .accordion-item {
+  border: none;
+  background: transparent;
+  border-radius: 0;
+  margin-bottom: 0;
+  box-shadow: none;
+  overflow: visible;
+  transition: none;
+}
+
+.usericon-accordion .accordion-header {
+  background: transparent;
+  border: none;
+  border-bottom: none;
+  padding: 0;
+}
+
+.usericon-accordion .accordion-button {
+  background: transparent !important;
+  border: none !important;
+  padding: 0.75rem 1rem !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.usericon-accordion .accordion-button:not(.collapsed) {
+  background: transparent;
+  color: #333;
+  box-shadow: none;
+}
+
+.usericon-accordion .accordion-button:focus {
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.usericon-accordion .accordion-button::after {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+  transition: transform 0.2s ease;
+}
+
+.usericon-accordion .accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   ORGANIZATION ACTION STYLES
+   ========================================================================== */
+
+.dropdown-menu .org-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 1.25rem;
+}
+
+.dropdown-menu .org-action .org-action-icon {
+  font-size: 1rem;
+  color: var(--primary-blue);
+}

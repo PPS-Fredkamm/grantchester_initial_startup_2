@@ -1,0 +1,44 @@
+/* ==========================================================================
+   DONATION BUTTON STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   DONATION SUBMIT BUTTON
+   ========================================================================== */
+
+.donate-submit-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  border: none;
+  border-radius: 10px;
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  height: 52px;
+}
+
+.donate-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(75, 155, 231, 0.3);
+  background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+}
+
+.donate-submit-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .donate-submit-btn {
+    height: 50px;
+    font-size: 1rem;
+  }
+}

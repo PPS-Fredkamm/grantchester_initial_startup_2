@@ -52,7 +52,7 @@ export default function ForgotPassword({ show, onClose }) {
 
         <Modal.Body>
           <Form onSubmit={handleReset}>
-            <Form.Group className="mb-3">
+            <Form.Group className="form-group">
               <Form.Label>Email Address</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
@@ -63,12 +63,13 @@ export default function ForgotPassword({ show, onClose }) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
+                  className="modern-input"
                   required
                 />
               </InputGroup>
             </Form.Group>
 
-            <Button variant="primary" type="submit" className="w-100">
+            <Button type="submit" className="form-button">
               Send Reset Instructions
             </Button>
           </Form>

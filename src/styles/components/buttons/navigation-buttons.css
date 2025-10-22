@@ -13,12 +13,12 @@
     var(--primary-blue),
     var(--secondary-blue)
   );
-  color: white;
+  color: var(--primary-light-color);
   border: none !important;
 }
 
 .donate-heart-icon {
-  color: white;
+  color: var(--primary-light-color);
   font-size: 0.7rem;
   margin-right: 0.5rem;
 }

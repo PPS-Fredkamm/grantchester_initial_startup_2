@@ -19,7 +19,7 @@
 
 .profile-edit-btn:hover {
   background-color: var(--primary-blue);
-  color: white;
+  color: var(--primary-light-color);
   border-color: var(--primary-blue);
 }
 
@@ -31,7 +31,7 @@
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.2s ease;
-  color: white;
+  color: var(--primary-light-color);
 }
 
 .profile-save-btn:hover {
@@ -52,6 +52,6 @@
 
 .profile-cancel-btn:hover {
   border-color: #5c636a;
-  background-color: #f8f9fa;
+  background-color: var(--secondary-background-color);
   color: #5c636a;
 }

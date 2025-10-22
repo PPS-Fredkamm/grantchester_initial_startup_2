@@ -15,22 +15,22 @@
 
 .status-waiting {
   background-color: #e4bb2a;
-  color: #ffffff;
+  color: var(--primary-light-color);
 }
 
 .status-verifying {
   background-color: var(--primary-blue);
-  color: #ffffff;
+  color: var(--primary-light-color);
 }
 
 .status-completed {
   background-color: #8dc843;
-  color: #ffffff;
+  color: var(--primary-light-color);
 }
 
 .status-submitted {
   background-color: #b8b8b8;
-  color: #ffffff;
+  color: var(--primary-light-color);
 }
 
 /* ==========================================================================

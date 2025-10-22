@@ -5,20 +5,20 @@
 /* ==========================================================================
    BASE STYLES - FOUNDATION
    ========================================================================== */
-@import './base/variables.css';
-@import './base/base.css';
+@import "./base/variables.css";
+@import "./base/base.css";
 
 /* ==========================================================================
    UTILITIES - REUSABLE STYLES
    ========================================================================== */
-@import './utils/animations.css';
-@import './utils/status-styles.css';
-@import './utils/tooltips.css';
+@import "./utils/animations.css";
+@import "./utils/status-styles.css";
+@import "./utils/tooltips.css";
 
 /* ==========================================================================
    LAYOUTS - PAGE STRUCTURE
    ========================================================================== */
-@import './layouts/base-layout.css';
+@import "./layouts/base-layout.css";
 /* @import './layouts/marketing-layout.css'; */
 
 /* ==========================================================================
@@ -26,61 +26,62 @@
    ========================================================================== */
 
 /* Core Components */
-@import './components/alerts.css';
-@import './components/banners.css';
-@import './components/footer.css';
-@import './components/tables.css';
-@import './components/accordion.css';
+@import "./components/alerts.css";
+@import "./components/banners.css";
+@import "./components/footer.css";
+@import "./components/accordion.css";
 
 /* Table Components */
-@import './components/tables/donor-donations-table.css';
+@import "./components/tables/base-tables.css";
+@import "./components/tables/donor-donations-table.css";
 
 /* Button Components */
-@import './components/buttons/form-buttons.css';
-@import './components/buttons/navigation-buttons.css';
-@import './components/buttons/utility-buttons.css';
-@import './components/buttons/profile-buttons.css';
-@import './components/buttons/modal-buttons.css';
-@import './components/buttons/security-buttons.css';
-@import './components/buttons/donation-buttons.css';
+@import "./components/buttons/form-buttons.css";
+@import "./components/buttons/navigation-buttons.css";
+@import "./components/buttons/utility-buttons.css";
+@import "./components/buttons/profile-buttons.css";
+@import "./components/buttons/modal-buttons.css";
+@import "./components/buttons/security-buttons.css";
+@import "./components/buttons/donation-buttons.css";
 
 /* Card Components */
-@import './components/cards/auth-cards.css';
-@import './components/cards/profile-cards.css';
-@import './components/cards/security-cards.css';
-@import './components/cards/donation-cards.css';
-@import './components/cards/donor-cta-card.css';
-@import './components/cards/donor-info-card.css';
-@import './components/cards/donor-pending-card.css';
-@import './components/cards/donor-stats-card.css';
+@import "./components/cards/auth-cards.css";
+@import "./components/cards/profile-cards.css";
+@import "./components/cards/security-cards.css";
+@import "./components/cards/donation-cards.css";
+@import "./components/cards/donor-cta-card.css";
+@import "./components/cards/donor-info-card.css";
+@import "./components/cards/donor-pending-card.css";
+@import "./components/cards/donor-stats-card.css";
 
 /* Form Components */
-@import './components/forms/base-forms.css';
-@import './components/forms/auth-forms.css';
-@import './components/forms/profile-forms.css';
-@import './components/forms/donation-forms.css';
-@import './components/forms/form-utilities.css';
+@import "./components/forms/base-forms.css";
+@import "./components/forms/auth-forms.css";
+@import "./components/forms/profile-forms.css";
+@import "./components/forms/donation-forms.css";
+@import "./components/forms/form-utilities.css";
 
 /* Modal Components */
-@import './components/modals/change-password-modal.css';
-@import './components/modals/delete-account-modal.css';
-@import './components/modals/confirm-donation-modal.css';
-@import './components/modals/thank-you-modal.css';
-@import './components/modals/donor-tracker-modal.css';
+@import "./components/modals/change-password-modal.css";
+@import "./components/modals/delete-account-modal.css";
+@import "./components/modals/donor-tracker-modal.css";
+@import "./components/modals/donation-step-modal.css";
+@import "./components/modals/progress-indicator.css";
+@import "./components/modals/confirmation-modal.css";
+@import "./components/modals/thank-you-modal.css";
 
 /* Navigation Components */
-@import './components/navigation/main-nav.css';
-@import './components/navigation/dropdowns.css';
-@import './components/navigation/user-dropdown.css';
-@import './components/navigation/mobile-dropdown.css';
+@import "./components/navigation/main-nav.css";
+@import "./components/navigation/dropdowns.css";
+@import "./components/navigation/user-dropdown.css";
+@import "./components/navigation/mobile-dropdown.css";
 
 /* Profile Components */
-@import './components/profile/profile-info.css';
-@import './components/profile/security-settings.css';
+@import "./components/profile/profile-info.css";
+@import "./components/profile/security-settings.css";
 
 /* ==========================================================================
    PAGES - PAGE-SPECIFIC STYLES
    ========================================================================== */
-@import './pages/profile.css';
-@import './pages/donation.css';
-
+@import "./pages/profile.css";
+@import "./pages/donation.css";

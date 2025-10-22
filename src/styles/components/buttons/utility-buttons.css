@@ -7,7 +7,7 @@
    ========================================================================== */
 
 .password-toggle-button {
-  background-color: var(--tertiary-background-color);
+  background-color: var(--secondary-background-color);
   border: 2px solid #e5e7eb;
   border-left: none;
   border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;

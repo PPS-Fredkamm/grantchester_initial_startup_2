@@ -1,0 +1,210 @@
+/* ==========================================================================
+   CONFIRMATION COMPONENTS
+   ========================================================================== */
+
+/* ==========================================================================
+   DONATION SUMMARY
+   ========================================================================== */
+
+.donation-summary {
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 0;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.summary-item {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color-light);
+  gap: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.summary-item:hover {
+  background-color: var(--secondary-background-color);
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item.total-item {
+  background: linear-gradient(135deg, var(--secondary-background-color) 0%, #e9ecef 100%);
+  border-top: 3px solid var(--primary-blue);
+  border-bottom: none;
+  margin: 0;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.summary-item.total-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+}
+
+.summary-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--secondary-background-color), #e9ecef);
+  border: 1px solid var(--border-color-light);
+  flex-shrink: 0;
+}
+
+.summary-icon .company-icon,
+.summary-icon .recipient-icon,
+.summary-icon .shares-icon,
+.summary-icon .valuation-icon,
+.summary-icon .date-icon {
+  color: #28a745;
+  font-size: 1.2rem;
+}
+
+.summary-icon .total-icon {
+  color: var(--primary-blue);
+  font-size: 1.3rem;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.summary-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6c757d;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.summary-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #212529;
+  margin: 0;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.summary-item.total-item .summary-value {
+  color: var(--primary-blue);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.summary-item .btn {
+  background: transparent;
+  border: 1px solid #dee2e6;
+  color: #6c757d;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  min-width: 80px;
+  text-align: center;
+}
+
+.summary-item .btn:hover {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: var(--primary-light-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(75, 155, 231, 0.15);
+}
+
+.summary-item .btn:active,
+.summary-item .btn:focus {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: var(--primary-light-color);
+  box-shadow: 0 0 0 3px rgba(75, 155, 231, 0.15);
+  outline: none;
+}
+
+/* ==========================================================================
+   LEGAL WARNING
+   ========================================================================== */
+
+.legal-warning {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 1px solid #ffc107;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.1);
+}
+
+.warning-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.warning-icon {
+  color: #856404;
+  font-size: 1.25rem;
+  margin-top: 0.125rem;
+  flex-shrink: 0;
+}
+
+.warning-text {
+  flex: 1;
+}
+
+.warning-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #856404;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.warning-description {
+  font-size: 0.875rem;
+  color: #856404;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.confirmation-actions {
+  text-align: center;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 576px) {
+  .legal-warning {
+    padding: 0.75rem;
+  }
+  
+  .warning-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .warning-icon {
+    margin-top: 0;
+  }
+}

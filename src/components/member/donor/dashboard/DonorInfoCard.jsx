@@ -4,31 +4,13 @@ import { PiPulse } from "react-icons/pi";
 import { MdSmartphone } from "react-icons/md";
 
 import { useSelector } from "react-redux";
+import { formatPhone } from "../../../../utils/formatPhone";
 
 /* CSS moved to: src/styles/components/cards/donor-info-card.css */
-
-// Placeholder user object — replace this with data from context or fetch
-// const user = {
-//   name: 'John Doe',
-//   role: 'Donor',
-//   email: 'johndoe@gmail.com',
-//   phone: '(908)-000-0111',
-// };
 
 export default function DonorInfoCard() {
   const roles = useSelector((state) => state.auth.roles);
   const profileCDO = useSelector((state) => state.auth.profileCDO);
-
-  function formatPhone(num) {
-    if (!num) return "";
-    const cleaned = num.replace(/\D/g, ""); // strip non-digits
-    if (cleaned.length === 10) {
-      return `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(
-        6
-      )}`;
-    }
-    return num; // fallback if not 10 digits
-  }
 
   return (
     <Card className="shadow mb-4">

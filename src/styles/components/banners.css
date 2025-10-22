@@ -20,7 +20,7 @@
 .admin-banner-container p,
 .public-banner-container p {
   font-size: 1.25rem;
-  color: #ffffff;
+  color: var(--primary-light-color);
   margin: 0;
 }
 

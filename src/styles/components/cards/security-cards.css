@@ -18,7 +18,7 @@
    ========================================================================== */
 
 .security-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  background: linear-gradient(135deg, #ffffff 0%, var(--secondary-background-color) 100%);
   border: 1px solid var(--border-color-light);
   border-radius: var(--border-radius-lg);
   padding: 2rem;
@@ -82,7 +82,7 @@
   justify-content: center;
   margin-right: 1rem;
   font-size: 1.5rem;
-  color: white;
+  color: var(--primary-light-color);
 }
 
 .security-card-icon.password {

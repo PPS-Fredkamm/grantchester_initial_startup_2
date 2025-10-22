@@ -42,3 +42,49 @@
     font-size: 1rem;
   }
 }
+
+/* ==========================================================================
+   CONTACT ACTION BUTTONS
+   ========================================================================== */
+
+.contact-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  min-height: 44px;
+  text-align: center;
+  width: 100%;
+}
+
+.contact-action-btn.phone-btn {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: var(--primary-light-color);
+  border-color: #28a745;
+}
+
+.contact-action-btn.phone-btn:hover {
+  background: linear-gradient(135deg, #218838, #1ea085);
+  color: var(--primary-light-color);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(40, 167, 69, 0.3);
+}
+
+.contact-action-btn.email-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  color: var(--primary-light-color);
+  border-color: var(--primary-blue);
+}
+
+.contact-action-btn.email-btn:hover {
+  background: linear-gradient(135deg, #3a8bdb, #3bb5d4);
+  color: var(--primary-light-color);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(75, 155, 231, 0.3);
+}

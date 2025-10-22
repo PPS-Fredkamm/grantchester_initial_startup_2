@@ -15,7 +15,7 @@
 
 .tooltip-inner {
   text-align: start !important;
-  color: #fff;
+  color: var(--primary-light-color);
   padding: 10px 14px;
   background-color: rgba(0, 0, 0, 0.9);
   border-radius: var(--border-radius-sm);

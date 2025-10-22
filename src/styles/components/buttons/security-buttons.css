@@ -44,7 +44,7 @@
 
 .security-button.password {
   background: linear-gradient(135deg, #28a745, #20c997);
-  color: white;
+  color: var(--primary-light-color);
 }
 
 .security-button.password:hover {
@@ -55,7 +55,7 @@
 
 .security-button.delete {
   background: linear-gradient(135deg, #dc3545, #e74c3c);
-  color: white;
+  color: var(--primary-light-color);
 }
 
 .security-button.delete:hover {

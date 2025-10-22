@@ -77,7 +77,7 @@ export default function UserIcon() {
             className="profile-dropdown"
           >
             {/* Profile Card Header */}
-            <div className="profile-card">
+            <div className="user-dropdown-card">
               <Image
                 src={profileImage}
                 className="profile-card-img"

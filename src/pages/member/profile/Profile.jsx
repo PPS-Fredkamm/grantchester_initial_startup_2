@@ -22,7 +22,7 @@ export default function ProfilePage() {
 
           {/* Right Column */}
           <Col xs={12} lg={12} xl={8}>
-            <Card className="profile-card shadow">
+            <Card className="profile-page-card shadow">
               <Card.Body>
                 <Tabs
                   activeKey={activeTab}

@@ -1,0 +1,117 @@
+/* ==========================================================================
+   PROGRESS INDICATOR STYLES
+   ========================================================================== */
+
+/* ==========================================================================
+   PROGRESS CONTAINER
+   ========================================================================== */
+
+.progress-indicator {
+  background-color: var(--secondary-background-color);
+  border-radius: var(--border-radius-sm);
+  padding: 1rem;
+  border: 1px solid var(--border-color-light);
+  position: relative;
+  z-index: 1;
+}
+
+.progress-indicator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.progress-step-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.progress-percentage {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  background-color: rgba(75, 155, 231, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-radius-xs);
+}
+
+/* ==========================================================================
+   PROGRESS BAR
+   ========================================================================== */
+
+.progress-bar-container {
+  position: relative;
+  height: 8px;
+  background-color: var(--border-color-light);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+  border-radius: 4px;
+  transition: width 0.5s ease-in-out;
+  position: relative;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .progress-indicator {
+    padding: 0.75rem;
+  }
+  
+  .progress-step-label {
+    font-size: 0.85rem;
+  }
+  
+  .progress-percentage {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .progress-bar-container {
+    height: 6px;
+  }
+}
+
+@media (max-width: 576px) {
+  .progress-indicator {
+    padding: 0.5rem;
+  }
+  
+  .progress-indicator-header {
+    margin-bottom: 0.5rem;
+  }
+  
+  .progress-step-label {
+    font-size: 0.8rem;
+  }
+  
+  .progress-percentage {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.3rem;
+  }
+}

@@ -26,12 +26,12 @@
   border: 1px solid #ced4da;
   border-radius: 6px;
   overflow: hidden;
-  background-color: #fff;
+  background-color: var(--primary-light-color);
 }
 
 .field-row span {
   background-color: var(--primary-blue);
-  color: white;
+  color: var(--primary-light-color);
   width: 44px;
   display: flex;
   align-items: center;

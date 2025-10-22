@@ -3,18 +3,168 @@
    ========================================================================== */
 
 .donation-page-container {
-  min-height: 100vh;
   background-color: var(--primary-background-color);
   padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   DONATION INTRO CONTENT
+   ========================================================================== */
+
+.donation-body .donation-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.donation-intro h4 {
+  color: #495057;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.donation-intro p {
+  color: #6c757d;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 500px;
+  margin: 0 auto 1rem;
+}
+
+/* ==========================================================================
+   DONATION FEATURES
+   ========================================================================== */
+.feature-item {
+  text-align: center;
+  padding: 1rem 0.75rem;
+  background-color: var(--secondary-background-color);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color-light);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.feature-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(75, 155, 231, 0.15);
+  border-color: var(--primary-blue);
+}
+
+.feature-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  color: var(--primary-light-color);
+}
+
+.feature-item h6 {
+  font-weight: 700;
+  color: #495057;
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.feature-item p {
+  color: #6c757d;
+  margin-bottom: 0;
+  font-size: 0.8rem;
 }
 
 /* ==========================================================================
    RESPONSIVE BREAKPOINTS
    ========================================================================== */
 
+@media (min-width: 1200px) {
+  .donation-intro h4 {
+    font-size: 1.75rem;
+  }
+
+  .donation-intro p {
+    font-size: 1.1rem;
+  }
+
+  .feature-icon {
+    width: 55px;
+    height: 55px;
+  }
+}
+
 @media (max-width: 768px) {
   .donation-page-container {
-    padding: 1rem 0;
+    padding: 0.5rem 0;
+    align-items: flex-start;
+    padding-top: 1rem;
+  }
+
+  .donation-body .donation-intro {
+    padding: 1.25rem 0 !important;
+  }
+
+  .donation-intro h4 {
+    font-size: 1.4rem;
+  }
+
+  .donation-intro p {
+    font-size: 0.95rem;
+  }
+
+  .feature-item {
+    padding: 1rem 0.75rem;
+  }
+
+  .feature-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .donation-page-container {
+    padding: 0.25rem 0;
+    align-items: flex-start;
+    padding-top: 0.5rem;
+  }
+
+  .donation-body .donation-intro {
+    padding: 1rem 0 !important;
+  }
+
+  .donation-intro h4 {
+    font-size: 1.25rem;
+  }
+
+  .donation-intro p {
+    font-size: 0.9rem;
+  }
+
+  .feature-item {
+    padding: 0.875rem 0.5rem;
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .feature-item h6 {
+    font-size: 0.9rem;
+  }
+
+  .feature-item p {
+    font-size: 0.75rem;
   }
 }
 

@@ -30,7 +30,7 @@
   border: none;
   padding: 2rem 2rem 1.5rem;
   text-align: center;
-  color: white;
+  color: var(--primary-light-color);
 }
 
 .profile-info-title {
@@ -41,7 +41,7 @@
   font-size: 1.75rem;
   font-weight: 600;
   margin: 0;
-  color: white;
+  color: var(--primary-light-color);
 }
 
 .profile-info-title .icon {
@@ -93,7 +93,7 @@
    ========================================================================== */
 
 .agreement-section {
-  background-color: #f8f9fa;
+  background-color: var(--secondary-background-color);
   border-radius: var(--border-radius-lg);
   padding: 1.5rem;
   margin-bottom: 2rem;

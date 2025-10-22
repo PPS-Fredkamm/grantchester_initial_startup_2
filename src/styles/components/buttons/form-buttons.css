@@ -20,7 +20,7 @@
   padding: 0.875rem 2rem;
   font-size: 1rem;
   font-weight: 600;
-  color: white;
+  color: var(--primary-light-color);
   width: 100%;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);

@@ -1,5 +1,6 @@
 import { Accordion, Row, Col, FloatingLabel, Form } from "react-bootstrap";
 import { FiUser } from "react-icons/fi";
+import { formatPhone } from "../../../../../utils/formatPhone";
 
 export default function ContactInfo({ formData, editMode, handleChange }) {
   return (
@@ -78,7 +79,7 @@ export default function ContactInfo({ formData, editMode, handleChange }) {
               <Form.Control
                 type="tel"
                 name="phoneNumber"
-                value={formData.phoneNumber}
+                value={editMode ? formData.phoneNumber : formatPhone(formData.phoneNumber)}
                 onChange={handleChange}
                 disabled={!editMode}
                 placeholder="Enter phone number"

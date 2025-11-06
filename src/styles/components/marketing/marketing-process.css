@@ -1,0 +1,140 @@
+/* ==========================================================================
+   MARKETING PROCESS SECTIONS
+   Scoped to marketing pages to prevent conflicts
+   ========================================================================== */
+
+/* ==========================================================================
+   PROCESS IMAGE
+   ========================================================================== */
+
+/* Base Process Image */
+.for-donors-page .process-image,
+.for-universities-page .process-image,
+.how-it-works-page .process-image {
+  border-radius: 12px;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* University Page - Custom Image Positioning */
+.for-universities-page .process-image {
+  object-fit: cover;
+  object-position: top right;
+  max-height: 500px;
+}
+
+/* ==========================================================================
+   PROCESS CONTENT
+   ========================================================================== */
+
+/* Process Title */
+.for-donors-page .process-title,
+.for-universities-page .process-title,
+.how-it-works-page .process-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Process Text */
+.for-donors-page .process-text,
+.for-universities-page .process-text,
+.how-it-works-page .process-text {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   PROCESS STEPS (for step-by-step process sections)
+   ========================================================================== */
+
+/* Process Steps Container */
+.for-donors-page .process-steps,
+.for-universities-page .process-steps,
+.how-it-works-page .process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Individual Process Step */
+.for-donors-page .process-step,
+.for-universities-page .process-step,
+.how-it-works-page .process-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Step Number */
+.for-donors-page .step-number,
+.for-universities-page .step-number,
+.how-it-works-page .step-number {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+/* Step Content Heading */
+.for-donors-page .step-content h5,
+.for-universities-page .step-content h5,
+.how-it-works-page .step-content h5 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 1.15rem;
+}
+
+/* Step Content Paragraph */
+.for-donors-page .step-content p,
+.for-universities-page .step-content p,
+.how-it-works-page .step-content p {
+  color: #666;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .for-donors-page .process-title,
+  .for-universities-page .process-title,
+  .how-it-works-page .process-title {
+    font-size: 1.75rem;
+  }
+
+  .for-donors-page .process-step,
+  .for-universities-page .process-step,
+  .how-it-works-page .process-step {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .for-donors-page .step-number,
+  .for-universities-page .step-number,
+  .how-it-works-page .step-number {
+    margin-bottom: 0.5rem;
+  }
+}

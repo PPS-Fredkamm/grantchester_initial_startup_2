@@ -1,25 +1,44 @@
 .secondary-banner {
-  padding: 2rem;
-  background-color: #f8f9fa;
+  padding: 3rem 1rem;
+  background-color: #f8fafc;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
 
+
+
 .section-heading {
-  font-size: 4rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #1a1a1a;
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin: 0 0 .5rem 0;
+  color: #0b1324;
+  line-height: 1.2;
 }
 
 .section-subtext {
-  font-size: 2rem;
+  font-size: 1.125rem;
   font-weight: 400;
-  color: #555;
-  line-height: 1.6;
+  color: #334155;
+  line-height: 1.7;
+  max-width: 46rem;
 }
+
+.media-wrap {
+  position: relative;
+}
+
+
 
 .section-image {
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 16px;
   object-fit: cover;
-  max-height: 350px;
+  max-height: 360px;
+  box-shadow: 0 12px 32px rgba(2, 8, 23, 0.12);
+}
+
+@media (min-width: 768px) {
+  .secondary-banner { padding: 3.5rem 1.25rem; }
+  .section-heading { font-size: 2.75rem; }
+  .section-subtext { font-size: 1.125rem; }
 }

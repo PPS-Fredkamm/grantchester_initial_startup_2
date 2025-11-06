@@ -1,0 +1,112 @@
+/* ==========================================================================
+   MARKETING BUTTONS
+   Scoped to marketing pages to prevent conflicts
+   ========================================================================== */
+
+/* ==========================================================================
+   PRIMARY GRADIENT BUTTON
+   ========================================================================== */
+
+/* Base Styles */
+.for-donors-page .btn-primary-gradient,
+.for-universities-page .btn-primary-gradient,
+.how-it-works-page .btn-primary-gradient {
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: #fff;
+  border: none;
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(75, 155, 231, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+  text-shadow: none;
+}
+
+/* Hover State */
+.for-donors-page .btn-primary-gradient:hover,
+.for-universities-page .btn-primary-gradient:hover,
+.how-it-works-page .btn-primary-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(75, 155, 231, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* ==========================================================================
+   OUTLINE LIGHT BUTTON (for hero sections)
+   ========================================================================== */
+
+/* Base Styles */
+.for-donors-page .btn-outline-light,
+.for-universities-page .btn-outline-light,
+.how-it-works-page .btn-outline-light {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  padding: 0.85rem 2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover State */
+.for-donors-page .btn-outline-light:hover,
+.for-universities-page .btn-outline-light:hover,
+.how-it-works-page .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #fff;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* ==========================================================================
+   CTA SECTION BUTTON OVERRIDES
+   ========================================================================== */
+
+/* Primary Gradient in CTA */
+.for-donors-page .cta-section .btn-primary-gradient,
+.for-universities-page .cta-section .btn-primary-gradient,
+.how-it-works-page .cta-section .btn-primary-gradient {
+  background: #fff;
+  color: var(--primary-blue);
+  border: 2px solid #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.for-donors-page .cta-section .btn-primary-gradient:hover,
+.for-universities-page .cta-section .btn-primary-gradient:hover,
+.how-it-works-page .cta-section .btn-primary-gradient:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--primary-blue);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Outline Light in CTA */
+.for-donors-page .cta-section .btn-outline-light,
+.for-universities-page .cta-section .btn-outline-light,
+.how-it-works-page .cta-section .btn-outline-light {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.for-donors-page .cta-section .btn-outline-light:hover,
+.for-universities-page .cta-section .btn-outline-light:hover,
+.how-it-works-page .cta-section .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}

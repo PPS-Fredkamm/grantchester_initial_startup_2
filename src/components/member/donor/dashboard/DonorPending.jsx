@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Table, OverlayTrigger, Tooltip, Spinner } from "react-bootstrap";
 import { GoDotFill } from "react-icons/go";
-import { FiMoreHorizontal } from "react-icons/fi";
+import { FiMoreHorizontal, FiClock } from "react-icons/fi";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDonations } from "../../../../redux/slices/donationSlice";
 import { formatDate } from "../../../../utils/formatDate";
@@ -49,85 +49,80 @@ export default function DonorPendingDonations() {
     <>
       <Card className="shadow mt-4">
         <Card.Body>
-          <div className="scrollable-table">
-            <Table className="pending-table" responsive={false}>
-              <thead>
-                <tr>
-                  <th style={{ width: "20%" }}>Donation</th>
-                  <th style={{ width: "20%" }}>Date</th>
-                  <th style={{ width: "30%" }}>University</th>
-                  <th style={{ width: "20%" }}>Status</th>
-                  <th style={{ width: "10%" }}></th>
-                </tr>
-              </thead>
-              <tbody>
-                {loading ? (
+          <div className="pending-header">
+            <div className="pending-title-section">
+              <FiClock className="pending-title-icon" />
+              <Card.Title>Pending Donations</Card.Title>
+            </div>
+          </div>
+
+          {loading ? (
+            <div className="text-center py-4">
+              <Spinner animation="border" variant="primary" size="sm" /> Loading
+              donations...
+            </div>
+          ) : error ? (
+            <div className="text-danger text-center py-3">{error}</div>
+          ) : (
+            <div className="scrollable-table">
+              <Table className="pending-table" responsive={false} striped>
+                <thead>
                   <tr>
-                    <td colSpan={5} className="text-center py-4">
-                      <Spinner animation="border" variant="primary" size="sm" />{" "}
-                      Loading donations...
-                    </td>
+                    <th>Donation ID</th>
+                    <th>Date</th>
+                    <th>University</th>
+                    <th>Status</th>
+                    <th></th>
                   </tr>
-                ) : error ? (
-                  <tr>
-                    <td colSpan={5} className="text-danger text-center py-3">
-                      {error}
-                    </td>
-                  </tr>
-                ) : pendingOrders.length > 0 ? (
-                  pendingOrders.map((d, idx) => (
-                    <tr key={d.donationID || `donation-${idx}`}>
-                      <td>
-                        <span className="pending-cell">
-                          <GoDotFill color="#4B9DE7" />#{d.id}
-                        </span>
-                      </td>
-                      <td>
-                        <span className="pending-cell">
-                          {formatDate(d.donationDate)}
-                        </span>
-                      </td>
-                      <td>
-                        <span className="pending-cell">
-                          {d.universityCDO?.name}
-                        </span>
-                      </td>
-                      <td>
-                        <span
-                          className={`pending-cell status-pill ${getStatusClass(
-                            d.donationStatus?.name || ""
-                          )}`}
-                        >
-                          {d.donationStatus?.name || "Unknown"}
-                        </span>
-                      </td>
-                      <td>
-                        <OverlayTrigger
-                          placement="top"
-                          overlay={<Tooltip>More Info</Tooltip>}
-                        >
+                </thead>
+                <tbody>
+                  {pendingOrders.length > 0 ? (
+                    pendingOrders.map((d, idx) => (
+                      <tr key={d.donationID || `donation-${idx}`}>
+                        <td>
+                          <div className="pending-donation-id">
+                            <GoDotFill className="donation-indicator" />#
+                            {d.donationID || d.id}
+                          </div>
+                        </td>
+                        <td>{formatDate(d.donationDate)}</td>
+                        <td>{d.universityCDO?.name || "N/A"}</td>
+                        <td>
                           <span
-                            className="pending-icon-wrapper"
-                            role="button"
-                            tabIndex={0}
-                            onClick={() => handleOpenTracker(d)}
+                            className={`status-pill ${getStatusClass(
+                              d.donationStatus?.name || ""
+                            )}`}
                           >
-                            <FiMoreHorizontal className="pending-icon" />
+                            {d.donationStatus?.name || "Unknown"}
                           </span>
-                        </OverlayTrigger>
+                        </td>
+                        <td>
+                          <OverlayTrigger
+                            placement="top"
+                            overlay={<Tooltip>View Details</Tooltip>}
+                          >
+                            <button
+                              className="pending-action-btn"
+                              onClick={() => handleOpenTracker(d)}
+                              aria-label="View donation details"
+                            >
+                              <FiMoreHorizontal />
+                            </button>
+                          </OverlayTrigger>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="5" className="text-center py-4">
+                        No pending donations
                       </td>
                     </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan={5} className="pt-3 text-center">
-                      No pending donations
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </Table>
-          </div>
+                  )}
+                </tbody>
+              </Table>
+            </div>
+          )}
         </Card.Body>
       </Card>
 

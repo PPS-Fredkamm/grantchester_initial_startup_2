@@ -1,9 +1,9 @@
 /**
  * DONATION MODAL - MAIN ORCHESTRATOR
- * 
+ *
  * This is the main component that orchestrates the entire donation process.
  * It manages the step-by-step flow, form data, validation, and submission.
- * 
+ *
  * How it works:
  * 1. Manages 8 steps of the donation process
  * 2. Tracks current step and form data
@@ -159,7 +159,7 @@ export default function DonationModal({ show, onClose }) {
   // ==========================================================================
   // NAVIGATION FUNCTIONS - Handle step navigation
   // ==========================================================================
-  
+
   // Handle "Next" button - validate current step before proceeding
   const handleNext = () => {
     if (validateStep(currentStep)) {

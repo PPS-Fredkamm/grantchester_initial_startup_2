@@ -10,19 +10,18 @@ function SecondaryBanner() {
         <Row className="align-items-center">
           <Col md={6}>
             <div className="secondary-text">
-              <h2 className="section-heading">Empowering Your Alumni Community</h2>
-              <p className="section-subtext">
-                AlumBiz connects graduates, fosters collaboration, and unlocks exclusive resources
-                to help your alumni grow professionally and personally.
-              </p>
+              <h2 className="section-heading">Our Values</h2>
+              <p className="section-subtext">The Grantchester AlumBiz Stock Grant Program is redefining the future of University advancement. By integrating cutting-edge enterprise technology with a mission-driven partnership approach, AlumBiz empowers Universities to cultivate enduring alumni relationships, drive diversified giving, and strengthen institutional sustainability. Together, Grantchester and its University partners are creating a new paradigm for philanthropy - one built on technology, transparency, and trust.</p>
             </div>
           </Col>
           <Col md={6}>
-            <img
-              src={sectionImage}
-              alt="Alumni Collaboration"
-              className="section-image"
-            />
+            <div className="media-wrap">
+              <img
+                src={sectionImage}
+                alt="Alumni Collaboration"
+                className="section-image"
+              />
+            </div>
           </Col>
         </Row>
       </Container>

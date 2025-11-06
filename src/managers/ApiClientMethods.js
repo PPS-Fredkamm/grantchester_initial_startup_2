@@ -135,8 +135,11 @@ export function generateFetchUrl(path, params) {
 
   switch (env) {
     case "azure": {
-      baseUri =
-        "https://customdataservicesapi20240309210451.azurewebsites.net/api/";
+      baseUri = "https://alumbizsgpapi-d9cxhpd8gmhadec5.eastus-01.azurewebsites.net/api/";
+      break;
+    }
+    case "cds": {
+      baseUri = "https://customdataservicesapi20240309210451.azurewebsites.net/api/";
       break;
     }
     case "dev": {

@@ -24,16 +24,13 @@ const MarketingHome = lazy(() =>
 const Login = lazy(() => import("./pages/public/login/Login.jsx"));
 const Signup = lazy(() => import("./pages/public/signup/Signup.jsx"));
 const HowItWorks = lazy(() =>
-  import("./pages/public/howItWorks/HowItWorks.jsx")
-);
-const MarketingHowItWorks = lazy(() =>
-  import("./pages/marketing/how-it-works/HowItWorks.jsx")
+  import("./pages/public/how-it-works/HowItWorks.jsx")
 );
 const ForUniversities = lazy(() =>
-  import("./pages/marketing/how-it-works/forUniversities/ForUniversities.jsx")
+  import("./pages/public/how-it-works/ForUniversities.jsx")
 );
 const ForDonors = lazy(() =>
-  import("./pages/marketing/how-it-works/forDonors/ForDonors.jsx")
+  import("./pages/public/how-it-works/ForDonors.jsx")
 );
 const UnderConstruction = lazy(() =>
   import("./components/userInterface/placeholder/UnderConstruction.jsx")
@@ -58,7 +55,7 @@ export default function App() {
             errorElement={<ErrorHandler />}
           >
             <Route index element={<MarketingHome />} />
-            <Route path="how-it-works" element={<MarketingHowItWorks />} />
+            <Route path="how-it-works" element={<HowItWorks />} />
             <Route path="for-universities" element={<ForUniversities />} />
             <Route path="for-donors" element={<ForDonors />} />
             <Route path="page1" element={<UnderConstruction title="page1" />} />
@@ -92,11 +89,13 @@ export default function App() {
           >
             <Route index element={<Home />} />
             <Route path="how-it-works" element={<HowItWorks />} />
+            <Route path="for-universities" element={<ForUniversities />} />
+            <Route path="for-donors" element={<ForDonors />} />
             <Route
               path="partners"
               element={<UnderConstruction title="Partners Page" />}
             />
-            <Route path="FAQ" element={<FAQPage title="FAQ Page" />} />
+            <Route path="faq" element={<FAQPage title="FAQ Page" />} />
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
 

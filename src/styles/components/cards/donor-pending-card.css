@@ -2,32 +2,127 @@
    DONOR PENDING CARD STYLES
    ========================================================================== */
 
-
 /* ==========================================================================
-   CELL + ICON FORMATTING
+   HEADER SECTION
    ========================================================================== */
 
-.pending-cell {
-  display: inline-flex;
+.pending-header {
+  margin-bottom: 1.25rem;
+}
+
+.pending-title-section {
+  display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.75rem;
+}
+
+.pending-title-icon {
+  font-size: 1.5rem;
+  color: var(--primary-blue);
+}
+
+/* ==========================================================================
+   TABLE STYLING
+   ========================================================================== */
+
+.pending-table {
+  border-collapse: collapse;
+}
+
+.pending-table th,
+.pending-table td {
+  padding: 0.5rem 0.75rem;
+  vertical-align: middle;
+  font-weight: 400;
+}
+
+.pending-table th {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Row striping */
+.pending-table.table-striped > tbody > tr:nth-of-type(odd) > td {
+  background-color: var(--light-blue-background) !important;
+}
+
+/* Remove bottom border on final row */
+.pending-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   DONATION ID DISPLAY
+   ========================================================================== */
+
+.pending-donation-id {
+  display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.pending-icon {
-  font-size: 1.5rem;
-  color: #6c757d;
-  cursor: pointer;
+.donation-indicator {
+  color: var(--primary-blue);
+  font-size: 0.75rem;
 }
 
 /* ==========================================================================
-   STATUS PILL STYLES - MOVED TO: src/styles/components/shared/status-styles.css
+   ACTION BUTTON
+   ========================================================================== */
+
+.pending-action-btn {
+  background: none;
+  border: none;
+  color: #6c757d;
+  font-size: 1.125rem;
+  cursor: pointer;
+  padding: 0.25rem 0.375rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pending-action-btn:hover {
+  background-color: #f8f9fa;
+  color: var(--primary-blue);
+}
+
+.pending-action-btn:focus {
+  outline: 2px solid var(--primary-blue);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   STATUS PILL STYLES - MOVED TO: src/styles/utils/status-styles.css
    ========================================================================== */
 
 /* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
-@media (max-width: 600px) {
-  /* Status pill responsive styles moved to: src/styles/components/shared/status-styles.css */
+@media (max-width: 768px) {
+  .pending-title-section {
+    gap: 0.5rem;
+  }
+
+  .pending-title-icon {
+    font-size: 1.25rem;
+  }
+
+  .pending-table th,
+  .pending-table td {
+    padding: 0.5rem 0.375rem;
+    font-size: 0.8rem;
+  }
+
+  .pending-action-btn {
+    font-size: 1rem;
+    padding: 0.2rem;
+  }
 }

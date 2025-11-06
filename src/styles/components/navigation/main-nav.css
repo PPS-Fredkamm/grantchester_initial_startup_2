@@ -6,6 +6,8 @@
 .navbar-container,
 .marketing-navbar-container {
   background-color: var(--primary-light-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 /* Navbar content layout */
@@ -30,15 +32,38 @@
    NAVIGATION MENU STYLES
    ========================================================================== */
 
+/* Nav menu container - use gap for even spacing */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
 /* Common nav link styles */
 .nav-menu .nav-link,
 .marketing-nav-menu .nav-link {
-  margin: 0 3rem;
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.05rem;
   color: #333;
-  transition: color 0.2s ease;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  position: relative;
+}
+
+/* Nav link hover effects - simple color transition */
+.nav-menu .nav-link:hover {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+/* Ensure dropdown trigger matches nav link styling */
+.nav-menu .dropdown-trigger {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  color: #333;
+  transition: color 0.3s ease;
 }
 
 /* ==========================================================================
@@ -77,6 +102,10 @@
    ========================================================================== */
 
 @media (max-width: 1500px) {
+  .nav-menu {
+    gap: 2rem;
+  }
+
   .nav-menu .nav-link,
   .marketing-nav-menu .nav-link {
     margin: 0rem;
@@ -85,6 +114,18 @@
   .nav-content,
   .marketing-nav-content {
     padding-right: 0rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-menu {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-menu {
+    gap: 1.25rem;
   }
 }
 

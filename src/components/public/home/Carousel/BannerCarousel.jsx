@@ -1,8 +1,8 @@
 // imports images from image section under assets. 
 import Carousel from 'react-bootstrap/Carousel';
-import Hiring from '../../../assets/images/hiring.jpg';
-import Startup from '../../../assets/images/startup.jpg';
-import Contract from '../../../assets/images/contract.jpg';
+import Hiring from '../../../assets/images/carousel/hiring.jpg';
+import Startup from '../../../assets/images/carousel/startup.jpg';
+import Contract from '../../../assets/images/carousel/contract.jpg';
 
 import './BannerCarousel.css';
 

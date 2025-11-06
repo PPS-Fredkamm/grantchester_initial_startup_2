@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Card, Table, Spinner } from "react-bootstrap";
-
+import { FiFileText } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDonations } from "../../../../redux/slices/donationSlice";
 import { formatDate } from "../../../../utils/formatDate";
 import { formatCurrency, formatNumber } from "../../../../utils/formatNumber";
-
 import DonationsDropdown from "./DonationsDropdown";
 
 /* CSS moved to: src/styles/components/tables/donor-donations-table.css */
@@ -48,7 +47,10 @@ export default function DonorDonations() {
     <Card className="shadow mt-4 mb-4">
       <Card.Body>
         <div className="donations-header">
-          <Card.Title>My Donations</Card.Title>
+          <div className="donations-title-section">
+            <FiFileText className="donations-title-icon" />
+            <Card.Title>My Donations</Card.Title>
+          </div>
           <DonationsDropdown value={filter} onChange={setFilter} />
         </div>
 
@@ -63,43 +65,64 @@ export default function DonorDonations() {
           <div className="scrollable-table">
             <Table responsive={false} striped className="donations-table">
               <thead>
-                <tr className="text-nowrap">
-                  <th style={{ width: "8%" }}>Donation ID</th>
-                  <th style={{ width: "12%" }}>Date</th>
-                  <th style={{ width: "25%" }} className="truncate">
-                    University
-                  </th>
-                  <th style={{ width: "10%" }}>Units</th>
-                  <th style={{ width: "15%" }}>Value per Unit</th>
-                  <th style={{ width: "10%" }}>Status</th>
+                <tr>
+                  <th>Donation</th>
+                  <th>Date</th>
+                  <th>University</th>
+                  <th>Amount</th>
+                  <th>Status</th>
                 </tr>
               </thead>
 
               <tbody>
                 {filteredDonations.length > 0 ? (
-                  filteredDonations.map((d, idx) => (
-                    <tr key={d.donationID || `donation-${idx}`}>
-                      <td>#{d.donationID}</td>
-                      <td>{formatDate(d.donationDate)}</td>
-                      <td className="truncate truncate-university">
-                        {d.universityCDO?.name || "N/A"}
-                      </td>
-                      <td>{formatNumber(d.units) || "0"}</td>
-                      <td>{formatCurrency(d.currentValuation) || "$0.00"}</td>
-                      <td>
-                        <span
-                          className={`status-pill ${getStatusClass(
-                            d.donationStatus?.name || ""
-                          )}`}
-                        >
-                          {d.donationStatus?.name || "Unknown"}
-                        </span>
-                      </td>
-                    </tr>
-                  ))
+                  filteredDonations.map((d, idx) => {
+                    const units = Number(d.units) || 0;
+                    const perUnit = Number(d.initialValuation) || 0;
+                    const totalValue = units * perUnit;
+                    return (
+                      <tr key={d.donationID || `donation-${idx}`}>
+                        <td>
+                          <span className="donation-cell">
+                            #{d.donationID || d.id}
+                          </span>
+                        </td>
+                        <td>
+                          <span className="donation-cell">
+                            {formatDate(d.donationDate)}
+                          </span>
+                        </td>
+                        <td>
+                          <span className="donation-cell">
+                            {d.universityCDO?.name || "N/A"}
+                          </span>
+                        </td>
+                        <td>
+                          <div className="donation-amount">
+                            <div className="amount-value">
+                              {formatCurrency(totalValue)}
+                            </div>
+                            <div className="amount-details">
+                              {formatNumber(d.units)} units ×{" "}
+                              {formatCurrency(d.currentValuation)}
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <span
+                            className={`status-pill ${getStatusClass(
+                              d.donationStatus?.name || ""
+                            )}`}
+                          >
+                            {d.donationStatus?.name || "Unknown"}
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })
                 ) : (
                   <tr>
-                    <td colSpan="6" className="text-center py-3">
+                    <td colSpan="5" className="text-center py-3">
                       No donations match this filter.
                     </td>
                   </tr>

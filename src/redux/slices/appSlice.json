@@ -1,5 +1,5 @@
 {
-  "apiEnvironment": "dev",
+  "apiEnvironment": "azure",
   "authors": ["Fred Kamm", "Drew Senour", "Richard L Van Winkle"],
   "description": "AlumBiz Prototype Client",
   "documentTitle": "AlumBiz",
@@ -7,6 +7,6 @@
   "projectCodename": "Project Acheron LV-426",
   "releaseDate": "May 13, 2025",
   "sequence": 0,
-  "version": "2025.010.14.1401",
-  "viewMode": "marketing"
+  "version": "2025.11.06.1500",
+  "viewMode": "marketingx"
 }

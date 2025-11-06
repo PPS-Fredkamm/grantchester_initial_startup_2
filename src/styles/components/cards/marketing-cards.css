@@ -1,0 +1,89 @@
+/* ==========================================================================
+   MARKETING CARDS
+   Scoped to marketing pages to prevent conflicts
+   ========================================================================== */
+
+/* ==========================================================================
+   BENEFIT & FEATURE CARDS
+   ========================================================================== */
+
+/* Base Card Styles */
+.for-donors-page .benefit-card,
+.for-universities-page .benefit-card,
+.how-it-works-page .benefit-card,
+.for-donors-page .feature-card,
+.for-universities-page .feature-card,
+.how-it-works-page .feature-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+  background: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+/* Card Hover State */
+.for-donors-page .benefit-card:hover,
+.for-universities-page .benefit-card:hover,
+.how-it-works-page .benefit-card:hover,
+.for-donors-page .feature-card:hover,
+.for-universities-page .feature-card:hover,
+.how-it-works-page .feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+}
+
+/* Card Title */
+.for-donors-page .benefit-card .card-title,
+.for-universities-page .benefit-card .card-title,
+.how-it-works-page .benefit-card .card-title,
+.for-donors-page .feature-card .card-title,
+.for-universities-page .feature-card .card-title,
+.how-it-works-page .feature-card .card-title {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #333;
+  font-size: 1.25rem;
+}
+
+/* Card Text */
+.for-donors-page .benefit-card .card-text,
+.for-universities-page .benefit-card .card-text,
+.how-it-works-page .benefit-card .card-text,
+.for-donors-page .feature-card .card-text,
+.for-universities-page .feature-card .card-text,
+.how-it-works-page .feature-card .card-text {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   BENEFIT ICON (for icon-based benefit cards)
+   ========================================================================== */
+
+/* Icon Container */
+.for-donors-page .benefit-icon,
+.for-universities-page .benefit-icon,
+.how-it-works-page .benefit-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Icon SVG */
+.for-donors-page .benefit-icon svg,
+.for-universities-page .benefit-icon svg,
+.how-it-works-page .benefit-icon svg {
+  color: var(--primary-blue);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* Icon Hover State */
+.for-donors-page .benefit-card:hover .benefit-icon svg,
+.for-universities-page .benefit-card:hover .benefit-icon svg,
+.how-it-works-page .benefit-card:hover .benefit-icon svg {
+  color: var(--secondary-blue);
+  transform: scale(1.1);
+}

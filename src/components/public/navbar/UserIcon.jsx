@@ -5,7 +5,7 @@ import Image from "react-bootstrap/Image";
 import Accordion from "react-bootstrap/Accordion";
 import { FiPlusCircle } from "react-icons/fi";
 
-import ProfilePlaceholder from "../../../assets/Images/profilePlaceholder.jpg";
+import ProfilePlaceholder from "../../../assets/images/placeholder/profilePlaceholder.jpg";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/slices/authSlice";

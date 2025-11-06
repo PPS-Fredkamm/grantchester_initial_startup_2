@@ -16,7 +16,7 @@ import { FiEdit3, FiSave, FiX } from "react-icons/fi";
 import * as ACM from "../../../../managers/ApiClientMethods";
 import * as BLM from "../../../../managers/BusinessLayerMethods";
 
-import ProfilePlaceholder from "../../../../assets/Images/profilePlaceholder.jpg";
+import ProfilePlaceholder from "../../../../assets/images/placeholder/profilePlaceholder.jpg";
 
 // CSS now imported via styles/index.css
 

@@ -1,9 +1,9 @@
 /**
  * THANK YOU STEP - Step 8 of the donation process (Final step)
- * 
+ *
  * This is the final step shown after successful donation submission.
  * It provides confirmation, next steps, and contact information.
- * 
+ *
  * Features:
  * - Success confirmation with large checkmark
  * - Status information about processing time
@@ -12,7 +12,14 @@
  * - Return to dashboard button
  */
 
-import { Row, Col, Container, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Container,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   FaCheckCircle,
@@ -24,8 +31,8 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 
-export default function ThankYouStep({ 
-  onClose // Function to close modal and return to dashboard
+export default function ThankYouStep({
+  onClose, // Function to close modal and return to dashboard
 }) {
   return (
     <div className="step-content">
@@ -120,15 +127,27 @@ export default function ThankYouStep({
                   className="contact-action-btn phone-btn"
                 >
                   <FaPhone className="me-2" />
-                  Call (555) 123-4567
+                  Call (620) 314-3321
                 </a>
-                <a
-                  href="mailto:ssiddal@grantchestergroup.com"
-                  className="contact-action-btn email-btn"
+                <OverlayTrigger
+                  placement="top"
+                  overlay={
+                    <Tooltip
+                      id="tooltip-email-steve"
+                      className="tooltip-nowrap"
+                    >
+                      ssiddal@grantchestergroup.com
+                    </Tooltip>
+                  }
                 >
-                  <FaEnvelope className="me-2" />
-                  Email Steve
-                </a>
+                  <a
+                    href="mailto:ssiddal@grantchestergroup.com"
+                    className="contact-action-btn email-btn"
+                  >
+                    <FaEnvelope className="me-2" />
+                    Email Steve
+                  </a>
+                </OverlayTrigger>
               </div>
             </div>
           </Col>

@@ -140,7 +140,7 @@ const ConfirmationStep = ({
             <div className="summary-content">
               <div className="summary-label">Donation Date</div>
               <div className="summary-value">
-                {new Date(formData.donationDate).toLocaleDateString("en-US", {
+                {new Date(formData.donationDate + 'T00:00:00').toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",

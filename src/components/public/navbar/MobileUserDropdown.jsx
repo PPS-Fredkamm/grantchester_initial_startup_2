@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FiChevronDown, FiPlusCircle } from "react-icons/fi";
 import { Image, Accordion } from "react-bootstrap";
 
-import ProfilePlaceholder from "../../../assets/Images/profilePlaceholder.jpg";
+import ProfilePlaceholder from "../../../assets/images/placeholder/profilePlaceholder.jpg";
 
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/slices/authSlice";

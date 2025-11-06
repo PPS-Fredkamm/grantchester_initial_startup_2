@@ -43,6 +43,7 @@
 @import "./components/buttons/modal-buttons.css";
 @import "./components/buttons/security-buttons.css";
 @import "./components/buttons/donation-buttons.css";
+@import "./components/buttons/marketing-buttons.css";
 
 /* Card Components */
 @import "./components/cards/auth-cards.css";
@@ -53,6 +54,7 @@
 @import "./components/cards/donor-info-card.css";
 @import "./components/cards/donor-pending-card.css";
 @import "./components/cards/donor-stats-card.css";
+@import "./components/cards/marketing-cards.css";
 
 /* Form Components */
 @import "./components/forms/base-forms.css";
@@ -79,6 +81,11 @@
 /* Profile Components */
 @import "./components/profile/profile-info.css";
 @import "./components/profile/security-settings.css";
+
+/* Marketing Components */
+@import "./components/marketing/marketing-hero.css";
+@import "./components/marketing/marketing-process.css";
+@import "./components/marketing/marketing-sections.css";
 
 /* ==========================================================================
    PAGES - PAGE-SPECIFIC STYLES

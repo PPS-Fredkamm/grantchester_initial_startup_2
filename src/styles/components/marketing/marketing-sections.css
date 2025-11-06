@@ -1,0 +1,307 @@
+/* ==========================================================================
+   MARKETING SECTIONS
+   Scoped to marketing pages to prevent conflicts
+   ========================================================================== */
+
+/* ==========================================================================
+   SECTION CONTAINERS
+   ========================================================================== */
+
+/* Benefits, Features & Overview Sections */
+.for-donors-page .benefits-section,
+.for-universities-page .benefits-section,
+.how-it-works-page .benefits-section,
+.for-donors-page .features-section,
+.for-universities-page .features-section,
+.how-it-works-page .features-section,
+.for-donors-page .overview-section,
+.for-universities-page .overview-section,
+.how-it-works-page .overview-section {
+  padding: 5rem 0;
+  background: #f8f9fa;
+}
+
+/* Process Section */
+.for-donors-page .process-section,
+.for-universities-page .process-section,
+.how-it-works-page .process-section {
+  padding: 5rem 0;
+  background: #fff;
+}
+
+/* ==========================================================================
+   SECTION TYPOGRAPHY
+   ========================================================================== */
+
+/* Section Title */
+.for-donors-page .section-title,
+.for-universities-page .section-title,
+.how-it-works-page .section-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--primary-blue, #667eea);
+}
+
+/* Section Subtitle */
+.for-donors-page .section-subtitle,
+.for-universities-page .section-subtitle,
+.how-it-works-page .section-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   BENEFITS CONTENT (for benefits section with image)
+   ========================================================================== */
+
+/* Benefits Image */
+.for-donors-page .benefits-image,
+.for-universities-page .benefits-image,
+.how-it-works-page .benefits-image {
+  border-radius: 12px;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Benefits Content */
+.for-donors-page .benefits-content,
+.for-universities-page .benefits-content,
+.how-it-works-page .benefits-content {
+  padding: 0 1rem;
+}
+
+/* Benefits Title */
+.for-donors-page .benefits-title,
+.for-universities-page .benefits-title,
+.how-it-works-page .benefits-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Benefits Text */
+.for-donors-page .benefits-text,
+.for-universities-page .benefits-text,
+.how-it-works-page .benefits-text {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   BENEFITS LIST
+   ========================================================================== */
+
+/* Benefits List */
+.for-donors-page .benefits-list,
+.for-universities-page .benefits-list,
+.how-it-works-page .benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.for-donors-page .benefits-list li,
+.for-universities-page .benefits-list li,
+.how-it-works-page .benefits-list li {
+  padding: 0.75rem 0;
+  position: relative;
+  padding-left: 2rem;
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.for-donors-page .benefits-list li::before,
+.for-universities-page .benefits-list li::before,
+.how-it-works-page .benefits-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary-blue);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   PROCESS ICON (numbered circles in cards)
+   ========================================================================== */
+
+.for-donors-page .process-icon,
+.for-universities-page .process-icon,
+.how-it-works-page .process-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(
+    to right,
+    var(--primary-blue),
+    var(--secondary-blue)
+  );
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 1rem auto;
+}
+
+/* ==========================================================================
+   VIDEO SECTION
+   ========================================================================== */
+
+/* Video Section Container - Reduced top padding for closer spacing to navbar */
+.how-it-works-page .video-section {
+  padding: 3rem 0;
+}
+
+/* Video Wrapper - Responsive 16:9 aspect ratio */
+.how-it-works-page .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+}
+
+/* Video Iframe */
+.how-it-works-page .video-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ==========================================================================
+   CTA SECTION
+   ========================================================================== */
+
+/* CTA Container */
+.for-donors-page .cta-section,
+.for-universities-page .cta-section,
+.how-it-works-page .cta-section {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+  color: #fff;
+}
+
+/* CTA Title */
+.for-donors-page .cta-title,
+.for-universities-page .cta-title,
+.how-it-works-page .cta-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+/* CTA Text */
+.for-donors-page .cta-text,
+.for-universities-page .cta-text,
+.how-it-works-page .cta-text {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+/* CTA Buttons Container */
+.for-donors-page .cta-buttons,
+.for-universities-page .cta-buttons,
+.how-it-works-page .cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* CTA Buttons */
+.for-donors-page .cta-buttons .btn,
+.for-universities-page .cta-buttons .btn,
+.how-it-works-page .cta-buttons .btn {
+  margin: 0;
+  font-size: 1.1rem;
+  padding: 0.85rem 2rem;
+  min-width: 180px;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .for-donors-page .section-title,
+  .for-universities-page .section-title,
+  .how-it-works-page .section-title {
+    font-size: 2rem;
+  }
+
+  .for-donors-page .benefits-title,
+  .for-universities-page .benefits-title,
+  .how-it-works-page .benefits-title {
+    font-size: 1.75rem;
+  }
+
+  .for-donors-page .cta-title,
+  .for-universities-page .cta-title,
+  .how-it-works-page .cta-title {
+    font-size: 2rem;
+  }
+
+  .for-donors-page .cta-buttons,
+  .for-universities-page .cta-buttons,
+  .how-it-works-page .cta-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .for-donors-page .cta-buttons .btn,
+  .for-universities-page .cta-buttons .btn,
+  .how-it-works-page .cta-buttons .btn {
+    width: 100%;
+    margin: 0;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .for-donors-page .benefits-section,
+  .for-universities-page .benefits-section,
+  .how-it-works-page .benefits-section,
+  .for-donors-page .features-section,
+  .for-universities-page .features-section,
+  .how-it-works-page .features-section,
+  .for-donors-page .overview-section,
+  .for-universities-page .overview-section,
+  .how-it-works-page .overview-section,
+  .for-donors-page .process-section,
+  .for-universities-page .process-section,
+  .how-it-works-page .process-section,
+  .for-donors-page .cta-section,
+  .for-universities-page .cta-section,
+  .how-it-works-page .cta-section {
+    padding: 3rem 0;
+  }
+
+  .how-it-works-page .video-section {
+    padding: 1.5rem 0 3rem 0;
+  }
+}

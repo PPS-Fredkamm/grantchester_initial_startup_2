@@ -9,7 +9,7 @@ import {
 
 import { useSelector } from "react-redux";
 
-import HomeBanner from "../../../../assets/images/HomeBanner2.png";
+import HomeBanner from "../../../../assets/images/HomePageBanner.jpg";
 import "./WebBanner.css";
 
 export default function WebBanner() {
